@@ -40,6 +40,20 @@ namespace RyujiEv3
         return static_cast<uint8>(fgetc(m_spp));
     }
 
+    bool CBluetooth::read(uint8& data)
+    {
+        uint8 readData = read();
+
+        if(readData == EOF)
+        {
+            return false;
+        }
+
+        data = readData;
+
+        return true;
+    }
+
     bool CBluetooth::write(uint8 data)
     {
         if(!isConnected())

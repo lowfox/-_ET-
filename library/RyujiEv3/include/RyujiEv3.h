@@ -15,3 +15,5 @@
 
 // ポート
 #include "RyujiEv3Port.h"
+
+using namespace RyujiEv3;

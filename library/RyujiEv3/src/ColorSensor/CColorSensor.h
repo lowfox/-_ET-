@@ -15,5 +15,9 @@ namespace RyujiEv3
 		bool init(SensorPort port);
 
 		uint8 getReflect()override;
+
+		RGB getRGB()override;
+
+		ReadColor getColor()override;
 	};
 }

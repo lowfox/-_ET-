@@ -19,6 +19,8 @@ namespace RyujiEv3
 
         uint8 read()override;
 
+        bool read(uint8& data)override;
+ 
         bool write(uint8 data)override;
 
         uint32 writeString(const char* format,...)override;

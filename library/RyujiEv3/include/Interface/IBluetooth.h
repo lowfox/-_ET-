@@ -26,6 +26,15 @@ namespace RyujiEv3
         virtual uint8 read() = 0;
 
         ///
+		/// @fn bool read(uint8& data)
+		/// @brief 受信データを1バイト読み込む
+        /// @param data 読み込み先
+		/// @retval true 成功
+        /// @retval false 失敗
+		///
+		virtual bool read(uint8& data) = 0;
+
+        ///
 		/// @fn bool write(uint8 data)
 		/// @brief データを送信する
         /// @param data 送信するデータ
