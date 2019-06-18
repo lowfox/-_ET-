@@ -1,30 +1,26 @@
 #include <Interface/IBluetooth.h>
 #include <stdio.h>
 
-namespace RyujiEv3
-{
-    class CBluetooth : public IBluetooth
-    {
-    private:
+namespace RyujiEv3 {
+class CBluetooth : public IBluetooth {
+ private:
+  FILE* m_spp = nullptr;
 
-        FILE* m_spp = nullptr;
+ public:
+  CBluetooth();
 
-    public:
+  ~CBluetooth() override;
 
-        CBluetooth();
+  bool init();
 
-        ~CBluetooth()override;
+  uint8 read() override;
 
-        bool init();
+  bool read(uint8& data) override;
 
-        uint8 read()override;
+  bool write(uint8 data) override;
 
-        bool read(uint8& data)override;
- 
-        bool write(uint8 data)override;
+  uint32 writeString(const char* format, ...) override;
 
-        uint32 writeString(const char* format,...)override;
-
-        bool isConnected()override;
-    };
-}
+  bool isConnected() override;
+};
+}  // namespace RyujiEv3

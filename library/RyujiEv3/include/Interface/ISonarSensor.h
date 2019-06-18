@@ -5,22 +5,19 @@
 #pragma once
 #include "RyujiEv3Forward.h"
 
-namespace RyujiEv3
-{
-	///
-	/// @brief SonarSensor Interface
-	///
-	class ISonarSensor
-	{
-	public:
+namespace RyujiEv3 {
+///
+/// @brief SonarSensor Interface
+///
+class ISonarSensor {
+ public:
+  virtual ~ISonarSensor() {}
 
-		virtual ~ISonarSensor(){}
-		
-		///
-		/// @fn int16 getDistance()
-		/// @brief 距離を測定する
-		/// @return int16 距離[cm]
-		///
-		virtual int16 getDistance() = 0;
-	};
-}
+  ///
+  /// @fn int16 getDistance()
+  /// @brief 距離を測定する
+  /// @return int16 距離[cm]
+  ///
+  virtual int16 getDistance() = 0;
+};
+}  // namespace RyujiEv3

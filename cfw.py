@@ -15,7 +15,12 @@ import subprocess
 
 cpp_list = glob.glob('./**/*.cpp', recursive=True)
 header_list = glob.glob('./**/*.h', recursive=True)
-for cpp, header in zip(cpp_list, header_list):
-	cmd = "clang-format -style=file -i {}"
+cmd = "clang-format -style=file -i {}"
+
+for cpp in cpp_list:
+	print(cmd.format(cpp))
 	subprocess.call(cmd.format(cpp), shell=True)
+
+for header in header_list:
+	print(cmd.format(header))
 	subprocess.call(cmd.format(header), shell=True)

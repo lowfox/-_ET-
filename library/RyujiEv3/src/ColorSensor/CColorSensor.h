@@ -2,22 +2,18 @@
 #include "Interface/IColorSensor.h"
 #include "RyujiEv3Port.h"
 
-namespace RyujiEv3
-{
-	class CColorSensor :public IColorSensor
-	{
-	private:
+namespace RyujiEv3 {
+class CColorSensor : public IColorSensor {
+ private:
+  SensorPort port;
 
-		SensorPort port;
+ public:
+  bool init(SensorPort port);
 
-	public:
+  uint8 getReflect() override;
 
-		bool init(SensorPort port);
+  RGB getRGB() override;
 
-		uint8 getReflect()override;
-
-		RGB getRGB()override;
-
-		ReadColor getColor()override;
-	};
-}
+  ReadColor getColor() override;
+};
+}  // namespace RyujiEv3

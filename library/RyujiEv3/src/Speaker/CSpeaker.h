@@ -2,32 +2,28 @@
 #include <Interface/ISpeaker.h>
 #include <ev3api.h>
 
-namespace RyujiEv3
-{
-	class CSpeaker : public ISpeaker
-	{
-	private:
+namespace RyujiEv3 {
+class CSpeaker : public ISpeaker {
+ private:
+  uint8 m_volume = 0;
 
-		uint8 m_volume = 0;
+  memfile_t m_wavefile;
 
-		memfile_t m_wavefile;
+  bool m_fileplay = false;
 
-		bool m_fileplay = false;
+ public:
+  CSpeaker();
 
-	public:
+  ~CSpeaker() override;
 
-		CSpeaker();
+  bool setVolume(uint8 volume) override;
 
-		~CSpeaker()override;
+  uint8 getVolume() override;
 
-		bool setVolume(uint8 volume)override;
+  bool playFile(const char* path, int32 duration);
 
-		uint8 getVolume()override;
+  bool playTone(uint16 frequency, int32 duration) override;
 
-		bool playFile(const char* path, int32 duration);
-
-		bool playTone(uint16 frequency, int32 duration)override;
-
-		bool stop()override;
-	};
-}
+  bool stop() override;
+};
+}  // namespace RyujiEv3

@@ -2,28 +2,24 @@
 #include "Interface/IGyroSensor.h"
 #include "RyujiEv3Port.h"
 
-namespace RyujiEv3
-{
-	class CGyroSensor :public IGyroSensor
-	{
-	private:
+namespace RyujiEv3 {
+class CGyroSensor : public IGyroSensor {
+ private:
+  SensorPort port;
 
-		SensorPort port;
+  int32 m_offset = 0;
 
-		int32 m_offset = 0;
+ public:
+  bool init(SensorPort port);
 
-	public:
+  void setOffset(int32 offset) override;
 
-		bool init(SensorPort port);
+  int32 getOffset() override;
 
-		void setOffset(int32 offset)override;
+  int16 getAngle() override;
 
-		int32 getOffset()override;
+  int16 getRate() override;
 
-		int16 getAngle()override;
-
-		int16 getRate()override;
-
-		bool reset()override;
-	};
-}
+  bool reset() override;
+};
+}  // namespace RyujiEv3

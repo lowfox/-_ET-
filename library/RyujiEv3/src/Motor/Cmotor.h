@@ -1,28 +1,24 @@
 #pragma once
 #include <Interface/IMotor.h>
 #include <RyujiEv3Port.h>
-namespace RyujiEv3
-{
-	class CMotor :public IMotor
-	{
-	private:
+namespace RyujiEv3 {
+class CMotor : public IMotor {
+ private:
+  MotorPort port;
 
-		MotorPort port;
+ public:
+  bool init(MotorPort port);
 
-	public:
+  int32 getCounts() override;
 
-		bool init(MotorPort port);
+  int32 getPWM() override;
 
-		int32 getCounts()override;
+  bool resetCounts() override;
 
-		int32 getPWM()override;
+  bool setCounts(int32 degree, int32 speed, bool blocking = false) override;
 
-		bool resetCounts()override;
+  bool setPWM(int32 power) override;
 
-		bool setCounts(int32 degree,int32 speed, bool blocking = false)override;
-
-		bool setPWM(int32 power)override;
-
-		bool stop(bool brake = false)override;
-	};
-}
+  bool stop(bool brake = false) override;
+};
+}  // namespace RyujiEv3
