@@ -1,4 +1,4 @@
-/// 
+///
 /// @file RyujiEv3Interface.h
 ///
 /// @brief 各種インターフェース
