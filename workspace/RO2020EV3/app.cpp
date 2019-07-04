@@ -10,7 +10,7 @@
 // main Task
 void main_task(intptr_t unused)
 {
-	// API,ƒ~ƒhƒ‹ƒEƒFƒA ‰Šú‰»
+	// API,ï¿½~ï¿½hï¿½ï¿½ï¿½Eï¿½Fï¿½A ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	if (!System::Init(ROBOCON_PORT))
 	{
 		System::Exit();
@@ -18,25 +18,25 @@ void main_task(intptr_t unused)
 		return;
 	}
 	
-	// BluetoothTask‹N“®
+	// BluetoothTaskï¿½Nï¿½ï¿½
 	act_tsk(BT_TASK);
 
-	// RoboconTask‹N“®
+	// RoboconTaskï¿½Nï¿½ï¿½
 	act_tsk(ROBOCON_TASK);
 
-	// ’†‰›‚Ìƒ{ƒ^ƒ“‚ğ‰Ÿ‚·‚Æ‹­§I—¹
+	// ï¿½ï¿½ï¿½ï¿½ï¿½Ìƒ{ï¿½^ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ‹ï¿½ï¿½ï¿½ï¿½Iï¿½ï¿½
 	while (!ev3_button_is_pressed(ENTER_BUTTON))
 	{
 		tslp_tsk(100);
 	}
 
-	// BluetoothTask‹­§I—¹
+	// BluetoothTaskï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½ï¿½
 	ter_tsk(BT_TASK);
 
-	// RoboconTask‹­§I—¹
+	// RoboconTaskï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½ï¿½
 	ter_tsk(ROBOCON_TASK);
 
-	// API,ƒ~ƒhƒ‹ƒEƒFƒA I—¹ˆ—
+	// API,ï¿½~ï¿½hï¿½ï¿½ï¿½Eï¿½Fï¿½A ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	System::Exit();
 
 }
@@ -60,7 +60,7 @@ void robocon_task(intptr_t exinf)
 
 	EV3_LOG_INFO("robocon_task End");
 
-	// ©ƒ^ƒXƒN‚ğI—¹
+	// ï¿½ï¿½ï¿½^ï¿½Xï¿½Nï¿½ï¿½ï¿½Iï¿½ï¿½
 	ext_tsk();
 }
 
@@ -76,6 +76,8 @@ void bt_task(intptr_t unused)
 
 	EV3_LOG_INFO("bt_task End");
 
-	// ©ƒ^ƒXƒN‚ğI—¹
+	// ï¿½ï¿½ï¿½^ï¿½Xï¿½Nï¿½ï¿½ï¿½Iï¿½ï¿½
 	ext_tsk();
+
+// clang-format off
 }]

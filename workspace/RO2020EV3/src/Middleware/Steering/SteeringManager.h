@@ -1,6 +1,6 @@
 #pragma once
 #include <RyujiEv3.h>
-#include <Array>
+#include <array>
 #include "ISteering.h"
 #include <Steering.h>
 
