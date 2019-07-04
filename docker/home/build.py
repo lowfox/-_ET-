@@ -37,3 +37,5 @@ subprocess.call("make app=RO2020EV3", shell=True)
 if not os.path.exists("/gateway/production"):
     os.mkdir("/gateway/production")
 subprocess.call("mv /hrp2/sdk/workspace/app /gateway/production/" + name, shell=True)
+subprocess.call("mv /hrp2/sdk/common/library/RyujiEv3 /gateway/library/RyujiEv3", shell=True)
+subprocess.call("mv /hrp2/sdk/workspace/RO2020EV3 /gateway/workspace/RO2020EV3", shell=True)
