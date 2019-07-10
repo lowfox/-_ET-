@@ -12,7 +12,7 @@ namespace Detect
 		const float gray = (traceColor.black + traceColor.white) / 2.0f;
 
 		// ÂŒŸ’m
-		if ((rgb.r + rgb.g) < rgb.b)
+		if ((traceColor.blue.b * 0.7) < rgb.b && (rgb.r + rgb.g) * 0.6 < rgb.b)
 		{
 			return ReadColor::BLUE;
 		}
