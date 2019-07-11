@@ -1,9 +1,9 @@
 // LineTrace.h
-
+#pragma once
 // includeファイル
 #include <Drive.h>
 #include <array>
-#include "Enum.h"
+#include "MapStateDefinition.h"
 
 //クラス定義
 //クラス名  :LineTrace
@@ -14,7 +14,8 @@ class LineTrace {
  public:
   LineTrace();   //コンストラクタ
   ~LineTrace();  //デストラクタ
-  int lineTraceDrive(MapState runState);  //マップ状況に合わせて最適なPID値をセット
+  int lineTraceDrive(
+      MapState runState);  //マップ状況に合わせて最適なPID値をセット
 
  private:
   //各種PID格納配列(順番はMapState(enum)に準拠)
