@@ -20,7 +20,11 @@ SceneManager.o\
 LineTraceScene.o\
 LookupScene.o\
 GarageScene.o\
-SeesawScene.o
+SeesawScene.o\
+LineTrace.o\
+ColorDetection.o\
+MapStateControl.o\
+DistanceMeasure.o
 
 SRCLANG := c++
 
