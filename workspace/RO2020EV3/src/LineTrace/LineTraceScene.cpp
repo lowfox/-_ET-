@@ -28,16 +28,16 @@ bool LineTraceScene::run()
 
   //テストコードここから********************************************
   //テスト用引数とその期待値一覧
-        /*
-        std::array<Test, CASE_MAX> testCase = {
-            {-1, -1},       {Straight, 0},   {SmallRightTurn, 0},
-            {SmallLeftTurn, 0}, {LargeRightTurn, 0}, {LargeLeftTurn, 0},
-            {Goal, 0},      {StateEnd, -1},  {7, -1}};
-        */
- Test testCase[CASE_MAX] = {
-            {(MapState)-1, -1}, {Straight, 0},       {SmallRightTurn, 0},
- {SmallLeftTurn, 0}, {LargeRightTurn, 0}, {LargeLeftTurn, 0},
- {Goal, 0},          {StateEnd, -1},      {(MapState)7, -1}};
+        
+std::array<Test, CASE_MAX> testCase = {{{(MapState)-1, -1},
+                                        {Straight, 0},
+                                        {SmallRightTurn, 0},
+                                        {SmallLeftTurn, 0},
+                                        {LargeRightTurn, 0},
+                                        {LargeLeftTurn, 0},
+                                        {Goal, 0},
+                                        {StateEnd, -1},
+                                        {(MapState)7, -1}}};
 
   // LineTraceクラス生成
   LineTrace lineTrace;
