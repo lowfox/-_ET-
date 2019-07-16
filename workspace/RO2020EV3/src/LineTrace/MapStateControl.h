@@ -39,23 +39,39 @@ class MapStateControl {
 
   //Lコースの走行手順
   const std::array<DriveState, STATE_MAX> m_stateLeft = {
-      {0.0f, Straight},       {0.0f, LargeLeftTurn},
-      {0.0f, Straight},       {0.0f, LargeLeftTurn},
-      {0.0f, Straight},       {0.0f, SmallLeftTurn},
-      {0.0f, SmallRightTurn}, {0.0f, Straight},
-      {0.0f, LargeRightTurn}, {0.0f, Straight},
-      {0.0f, LargeRightTurn}, {0.0f, Straight},
-      {0.0f, SmallRightTurn}, {0.0f, SmallLeftTurn},
-      {0.0f, Straight},       {0.0f, Goal}};
+      {{0.0f, Straight},
+       {0.0f, LargeLeftTurn},
+       {0.0f, Straight},
+       {0.0f, LargeLeftTurn},
+       {0.0f, Straight},
+       {0.0f, SmallLeftTurn},
+       {0.0f, SmallRightTurn},
+       {0.0f, Straight},
+       {0.0f, LargeRightTurn},
+       {0.0f, Straight},
+       {0.0f, LargeRightTurn},
+       {0.0f, Straight},
+       {0.0f, SmallRightTurn},
+       {0.0f, SmallLeftTurn},
+       {0.0f, Straight},
+       {0.0f, Goal}}};
 
   //Rコースの走行手順
   const std::array<DriveState, STATE_MAX> m_stateRight = {
-      {0.0f, Straight},      {0.0f, LargeRightTurn},
-      {0.0f, Straight},      {0.0f, LargeRightTurn},
-      {0.0f, Straight},      {0.0f, SmallRightTurn},
-      {0.0f, SmallLeftTurn}, {0.0f, Straight},
-      {0.0f, LargeLeftTurn}, {0.0f, Straight},
-      {0.0f, LargeLeftTurn}, {0.0f, Straight},
-      {0.0f, SmallLeftTurn}, {0.0f, SmallRightTurn},
-      {0.0f, Straight},      {0.0f, Goal}};
+      {{0.0f, Straight},
+       {0.0f, LargeRightTurn},
+       {0.0f, Straight},
+       {0.0f, LargeRightTurn},
+       {0.0f, Straight},
+       {0.0f, SmallRightTurn},
+       {0.0f, SmallLeftTurn},
+       {0.0f, Straight},
+       {0.0f, LargeLeftTurn},
+       {0.0f, Straight},
+       {0.0f, LargeLeftTurn},
+       {0.0f, Straight},
+       {0.0f, SmallLeftTurn},
+       {0.0f, SmallRightTurn},
+       {0.0f, Straight},
+       {0.0f, Goal}}};
 };
