@@ -35,8 +35,8 @@ MapState MapStateControl::drivePosition() {
     return m_stateRight[nowState].State;
 
   } else {
-    return -1;
+    return (MapState)-1;
   }
 }
 
-int MapStateControl::errorCorrection() {}
+int MapStateControl::errorCorrection() { return 0; }
