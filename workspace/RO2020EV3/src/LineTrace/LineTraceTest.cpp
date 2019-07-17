@@ -1,10 +1,15 @@
 //LineTraceTest.cpp
+//LineTraceSceneにそのまま張り付ければ使用可能
 #include <Config.h>
 #include "LineTraceScene.h"
 
 //テストコード*****************************************
 #define CASE_MAX 9  //テストケースの最大数
+#define ERROR -1
+#define SUCCESSFUL 0
+
 #include <Logger.h>
+#include <iostream>
 #include "LineTrace.h"
 //テストケース格納構造体定義
 struct Test {
@@ -23,21 +28,21 @@ bool LineTraceScene::run() {
   //テストコードStart******************************************
   //テスト用引数とその期待値一覧
 
-  std::array<Test, CASE_MAX> testCase = {{{(MapState)-1, -1},
-                                          {Straight, 0},
-                                          {SmallRightTurn, 0},
-                                          {SmallLeftTurn, 0},
-                                          {LargeRightTurn, 0},
-                                          {LargeLeftTurn, 0},
-                                          {Goal, 0},
-                                          {StateEnd, -1},
-                                          {(MapState)7, -1}}};
+  std::array<Test, CASE_MAX> testCase = {{{(MapState)-1, ERROR},
+                                          {Straight, SUCCESSFUL},
+                                          {SmallRightTurn, SUCCESSFUL},
+                                          {SmallLeftTurn, SUCCESSFUL},
+                                          {LargeRightTurn, SUCCESSFUL},
+                                          {LargeLeftTurn, SUCCESSFUL},
+                                          {Goal, SUCCESSFUL},
+                                          {StateEnd, ERROR},
+                                          {(MapState)7, ERROR}}};
 
   // LineTraceクラス生成
   LineTrace lineTrace;
   int result = 0;
 
-  for (int cnt = 0; cnt < CASE_MAX; cnt++) {
+  for (auto cnt = std::begin(testCase); cnt <= std::end(testCase);cnt++){
     result = lineTrace.lineTraceDrive(testCase[cnt].state);
     //実際の戻り値が期待した戻り値と不一致だった場合
     if (result != testCase[cnt].trueResult) {
