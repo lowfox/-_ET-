@@ -1,6 +1,10 @@
 // MapStateControl.cpp
+
 // includeファイル
 #include "MapStateControl.h"
+
+// 定数定義
+#define ERROR -1
 
 MapStateControl::MapStateControl()
 {
@@ -35,7 +39,7 @@ MapState MapStateControl::drivePosition() {
     return m_stateRight[nowState].State;
 
   } else {
-    return (MapState)-1;
+    return (MapState)ERROR;
   }
 }
 
