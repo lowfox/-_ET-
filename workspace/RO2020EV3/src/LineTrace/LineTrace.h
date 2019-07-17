@@ -14,8 +14,14 @@ class LineTrace {
  public:
   LineTrace();   //コンストラクタ
   ~LineTrace();  //デストラクタ
+
+ //関数名   :lineTraceDrive
+ //機能名   :PIDセット
+ //機能概要 :マップ状況に合わせて最適なPID値をセット
+ //引数     :MapState runState  :現在の走行状態(enumで0～StateEndまでの範囲)
+ //戻り値   :int                :正常終了 = 0 : 異常終了 = -1
   int lineTraceDrive(
-      MapState runState);  //マップ状況に合わせて最適なPID値をセット
+      MapState runState);
 
  private:
   //各種PID格納配列(順番はMapState(enum)に準拠)
