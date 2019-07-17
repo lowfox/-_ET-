@@ -30,7 +30,12 @@ class MapStateControl {
  public:
   MapStateControl();          //コンストラクタ
   ~MapStateControl();         //デストラクタ
-  MapState drivePosition();   //走行位置判断
+  //関数名   :drivePosition
+  //機能名   :走行位置判断
+  //機能概要 :走行距離から走行状態(直線、右カーブ等)を判断する
+  //引数     :無し
+  //戻り値   :MapState        :走行状態
+  MapState drivePosition();
 
  private:
   int errorCorrection();      //実際の走行状態とマップステータスの誤差検知
@@ -39,39 +44,39 @@ class MapStateControl {
 
   //Lコースの走行手順
   const std::array<DriveState, STATE_MAX> m_stateLeft = {
-      {{0.0f, Straight},
-       {0.0f, LargeLeftTurn},
-       {0.0f, Straight},
-       {0.0f, LargeLeftTurn},
-       {0.0f, Straight},
-       {0.0f, SmallLeftTurn},
-       {0.0f, SmallRightTurn},
-       {0.0f, Straight},
-       {0.0f, LargeRightTurn},
-       {0.0f, Straight},
-       {0.0f, LargeRightTurn},
-       {0.0f, Straight},
-       {0.0f, SmallRightTurn},
-       {0.0f, SmallLeftTurn},
-       {0.0f, Straight},
-       {0.0f, Goal}}};
+      {{0.0f, Straight},//(仮)
+       {0.0f, LargeLeftTurn},//(仮)
+       {0.0f, Straight},//(仮)
+       {0.0f, LargeLeftTurn},//(仮)
+       {0.0f, Straight},//(仮)
+       {0.0f, SmallLeftTurn},//(仮)
+       {0.0f, SmallRightTurn},//(仮)
+       {0.0f, Straight},//(仮)
+       {0.0f, LargeRightTurn},//(仮)
+       {0.0f, Straight},//(仮)
+       {0.0f, LargeRightTurn},//(仮)
+       {0.0f, Straight},//(仮)
+       {0.0f, SmallRightTurn},//(仮)
+       {0.0f, SmallLeftTurn},//(仮)
+       {0.0f, Straight},//(仮)
+       {0.0f, Goal}}};//(仮)
 
   //Rコースの走行手順
   const std::array<DriveState, STATE_MAX> m_stateRight = {
-      {{0.0f, Straight},
-       {0.0f, LargeRightTurn},
-       {0.0f, Straight},
-       {0.0f, LargeRightTurn},
-       {0.0f, Straight},
-       {0.0f, SmallRightTurn},
-       {0.0f, SmallLeftTurn},
-       {0.0f, Straight},
-       {0.0f, LargeLeftTurn},
-       {0.0f, Straight},
-       {0.0f, LargeLeftTurn},
-       {0.0f, Straight},
-       {0.0f, SmallLeftTurn},
-       {0.0f, SmallRightTurn},
-       {0.0f, Straight},
-       {0.0f, Goal}}};
+      {{0.0f, Straight},//(仮)
+       {0.0f, LargeRightTurn},//(仮)
+       {0.0f, Straight},//(仮)
+       {0.0f, LargeRightTurn},//(仮)
+       {0.0f, Straight},//(仮)
+       {0.0f, SmallRightTurn},//(仮)
+       {0.0f, SmallLeftTurn},//(仮)
+       {0.0f, Straight},//(仮)
+       {0.0f, LargeLeftTurn},//(仮)
+       {0.0f, Straight},//(仮)
+       {0.0f, LargeLeftTurn},//(仮)
+       {0.0f, Straight},//(仮)
+       {0.0f, SmallLeftTurn},//(仮)
+       {0.0f, SmallRightTurn},//(仮)
+       {0.0f, Straight},//(仮)
+       {0.0f, Goal}}};//(仮)
 };
