@@ -14,11 +14,7 @@ bool ColorDetection::getBlueColor() {
   checkBlue = RyujiEv3Engine::GetColorSensor()->getColor();
 
   //取得した色が青ならtrueを、そうでないならfalseをリターンする。
-  if (checkBlue == ReadColor::BLUE) {
-    return true;
-  } else {
-    return false;
-  }
+  return checkBlue == ReadColor::BLUE ? true : false;
 }
 
 bool ColorDetection::getBlackColor() {
@@ -28,9 +24,5 @@ bool ColorDetection::getBlackColor() {
   checkBlack = RyujiEv3Engine::GetColorSensor()->getColor();
 
   //取得した色が黒ならtrueを、そうでないならfalseをリターンする。
-  if (checkBlack == ReadColor::BLACK) {
-    return true;
-  } else {
-    return false;
-  }
+  return checkBlack == ReadColor::BLACK ? true : false;
 }
