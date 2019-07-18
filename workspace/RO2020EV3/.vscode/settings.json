@@ -1,0 +1,7 @@
+{
+    "C_Cpp.dimInactiveRegions": false,
+    "files.associations": {
+        "xlocale": "cpp",
+        "array": "cpp"
+    }
+}
