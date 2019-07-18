@@ -1,8 +1,8 @@
 ﻿#include "TailControl.h"
 #include <stdexcept>
-bool TailControl::Angle(int32 target_val)
+bool TailControl::Angle(int32 target_val,int32 speed)
 {
-    if(!RyujiEv3Engine::GetTailMotor()->setCounts(target_val,30,true))
+    if(!RyujiEv3Engine::GetTailMotor()->setCounts(target_val,speed,true))
     {
         return false;
     }
@@ -17,25 +17,34 @@ bool TailControl::StageAngle(int32 target_val)
 
     if(target_val == MIN_TARGET)
     {
-    RyujiEv3Engine::GetTailMotor()->setCounts(-5,1,true);
+    if(!RyujiEv3Engine::GetTailMotor()->setCounts(-5,1,true)){
+        return false;
+    }
+
     tslp_tsk(250);
     diff_val = RyujiEv3Engine::GetTailMotor()->getCounts();
     diff_val = 75 - diff_val;
 
-    if(diff_val >= 2){
-    diff_val += 1;
+    if(diff_val >= ANGLE_ADJUST_1){
+    diff_val += ANGLE_ADJUST_VAL_1;
     }
 
-    RyujiEv3Engine::GetTailMotor()->setCounts(-9 + diff_val,1,true);
+    if(!RyujiEv3Engine::GetTailMotor()->setCounts(-9 + diff_val,1,true)){
+        return false;
+    }
+
     tslp_tsk(250);
     diff_val = RyujiEv3Engine::GetTailMotor()->getCounts();
     diff_val = 66 - diff_val;
 
-    if(diff_val >= 3 ){
-    diff_val += 2;
+    if(diff_val >= ANGLE_ADJUST_2 ){
+    diff_val += ANGLE_ADJUST_VAL_2;
     }
 
-    RyujiEv3Engine::GetTailMotor()->setCounts(-13 + diff_val,1,true);
+    if(!RyujiEv3Engine::GetTailMotor()->setCounts(-13 + diff_val,1,true)){
+        return false;
+    }
+
     tslp_tsk(500);
     return true;
     }
@@ -45,30 +54,52 @@ bool TailControl::StageAngle(int32 target_val)
     {
     diff_val = (66-diff_val);
     Drive::SetDriveMode(DriveMode::Nomal);
-    Drive::Drive(-90,0);
+
+    if(!Drive::Drive(-90)){
+        return false;
+    }
+
     while(Steering::GetDistance() - now_dist > -10 ){}
-    RyujiEv3Engine::GetTailMotor()->setCounts(diff_val,100,true);
+    if(!RyujiEv3Engine::GetTailMotor()->setCounts(diff_val,100,true)){
+        return false;
+    }
+
     Drive::Stop();
     tslp_tsk(1000);
 
     now_dist = Steering::GetDistance();
     diff_val = RyujiEv3Engine::GetTailMotor()->getCounts();
     diff_val = (71-diff_val);
-    Drive::Drive(-50,0);
+    
+    if(!Drive::Drive(-50)){
+        return false;
+    }
+
     while(Steering::GetDistance() - now_dist > -10 ){}
-    RyujiEv3Engine::GetTailMotor()->setCounts(diff_val,100,true);
+
+    if(!RyujiEv3Engine::GetTailMotor()->setCounts(diff_val,100,true)){
+        return false;
+    }
+
     Drive::Stop();
     tslp_tsk(1000);
   
     now_dist = Steering::GetDistance();
     diff_val = RyujiEv3Engine::GetTailMotor()->getCounts();
     diff_val = (80-diff_val);
-    if(diff_val <= 2){
+    if(diff_val <= MAX_TARGET_BOUNDARY){
         return true;
     }
-    Drive::Drive(-5,0);
+    
+    if(!Drive::Drive(-5)){
+        return false;
+    }
+
     while(Steering::GetDistance() - now_dist > -10 ){}
-    RyujiEv3Engine::GetTailMotor()->setCounts(diff_val,20,true);
+    if(!RyujiEv3Engine::GetTailMotor()->setCounts(diff_val,20,true)){
+        return false;
+    }
+
     Drive::Stop();
     tslp_tsk(1000);
     return true;

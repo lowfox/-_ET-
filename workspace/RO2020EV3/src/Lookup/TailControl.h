@@ -11,6 +11,11 @@
 
 #define MIN_TARGET  53
 #define MAX_TARGET  80
+#define MAX_TARGET_BOUNDARY 2
+#define ANGLE_ADJUST_1 2
+#define ANGLE_ADJUST_2 3
+#define ANGLE_ADJUST_VAL_1 1
+#define ANGLE_ADJUST_VAL_2 2
 
 class TailControl
 {
@@ -21,7 +26,7 @@ public:
 	/// @retval true  成功
 	/// @retval false 失敗
 	///   
-	bool Angle(int32 target_val);
+	bool Angle(int32 target_val,int32 speed = 30);
 
 	///
 	/// @fn bool StageAngle(int32 target_val)

@@ -24,12 +24,12 @@ bool Phase1::run()
         return false;
     }  
 
-    auto tracecolor=Drive::ColorCalibrate::GetTraceColor(80);
+    auto tracecolor=Drive::ColorCalibrate::GetTraceColor(MAX_TARGET);
     Drive::LineTrace::SetTraceColor(tracecolor);
     Drive::SetDriveMode(DriveMode::LineTrace);
     //Drive::SetDriveMode(DriveMode::Nomal); //テスト用(後でLineTraceに変更)
 
-    if(!Drive::Drive(5,0))
+    if(!Drive::Drive(5))
     {
         return false;
     }                   

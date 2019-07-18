@@ -40,9 +40,6 @@ bool Phase2::run()
 
         if(!t_ctrl.StageAngle(MAX_TARGET))
         {
-            EV3_LOG("LookUpStart");
-            EV3_LOG_DEBUG("SonarDistance %d[cm]",RyujiEv3Engine::GetSonarSensor()->getDistance());
-            EV3_LOG_ERROR("Kokemashita...");
             return false;
         }
 
@@ -52,13 +49,13 @@ bool Phase2::run()
         SonarControl::GetInstance()->SonarRun();
 
 
-        auto tracecolor=Drive::ColorCalibrate::GetTraceColor(80);
+        auto tracecolor=Drive::ColorCalibrate::GetTraceColor(MAX_TARGET);
         Drive::LineTrace::SetTraceColor(tracecolor);
         Drive::SetDriveMode(DriveMode::LineTrace);
         // (テスト用後で上のコード追加)    
 
         // 前進指示       
-        if(!Drive::Drive(5,0))
+        if(!Drive::Drive(5))
         {
             return false;
         }

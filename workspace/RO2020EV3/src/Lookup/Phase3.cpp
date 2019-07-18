@@ -21,10 +21,10 @@ bool Phase3::run()
     }
 
     //　元の位置に戻る処理
-    if(!RyujiEv3Engine::GetLeftMotor()->setCounts(108,1,false))
-    {
+    if(RyujiEv3Engine::GetLeftMotor()->setCounts(108,1,false) == true){
         return false;
     }
+
     if(!RyujiEv3Engine::GetRightMotor()->setCounts(-108,1,true))
     {
         return false;
@@ -36,8 +36,7 @@ bool Phase3::run()
     }
 
     // 出来なかった場合は元の位置に戻す
-    if(!RyujiEv3Engine::GetLeftMotor()->setCounts(-108,1,false))
-    {
+    if(RyujiEv3Engine::GetLeftMotor()->setCounts(-108,1,false) == true){
         return false;
     }
 

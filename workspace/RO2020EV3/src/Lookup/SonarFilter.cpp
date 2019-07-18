@@ -9,7 +9,7 @@ int16 SonarFilter::GetAvg()
 
     for(auto i=0;i<3;i++){
        if(this->GetInstance()->avg_datas[i] == 0){
-          return 99;
+          return OUT_OF_RANGE;
        }
     }
 

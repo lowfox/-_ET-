@@ -7,7 +7,7 @@ bool MotorControl::CompareVal()
     Drive::LineTrace::SetTraceColor(tracecolor);
     Drive::SetDriveMode(DriveMode::LineTrace);
     //Drive::SetDriveMode(DriveMode::Nomal); //テスト用(後でLineTraceに変更)
-    if(!Drive::Drive(5,0))
+    if(!Drive::Drive(5))
     {
         return false;
     }

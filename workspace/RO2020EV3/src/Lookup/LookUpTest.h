@@ -1,4 +1,5 @@
 #pragma once
+#ifdef __LOOKUP_DEBUG__
 #include"TailControl.h"
 #include "MotorControl.h"
 #include "SonarControl.h"
@@ -70,5 +71,5 @@ public:
 
        void assertEquals(bool result,bool retval);
 };
-
+#endif
 

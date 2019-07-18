@@ -7,7 +7,6 @@
 #include <Config.h>
 #include "src/Lookup/SonarFilter.h"
 
-
 // main Task
 void main_task(intptr_t unused)
 {

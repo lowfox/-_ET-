@@ -1,4 +1,5 @@
 #include "LookUpTest.h"
+#ifdef __LOOKUP_DEBUG__
 
 LookUpTest::LookUpTest()
 {
@@ -216,5 +217,4 @@ if(result != retval)
 }
     return;
 }
-
-
+#endif

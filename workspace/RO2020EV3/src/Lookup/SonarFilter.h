@@ -9,7 +9,7 @@
 
 #define MIN_SONER 5
 #define MAX_SONER 30
-
+#define OUT_OF_RANGE 99
 
 class SonarFilter
 {
