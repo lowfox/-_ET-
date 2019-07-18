@@ -4,24 +4,23 @@
 
 namespace Detect
 {
-	ReadColor GetColor(float blueCorr, float rgbCorr)
+	ReadColor GetColor()
 	{
 		const RGB rgb = RyujiEv3Engine::GetColorSensor()->getRGB();
 		const TraceColor traceColor = DriveEngine::GetDrive()->getLineTraceDrive()->getTraceColor();
 
 		const float gray = (traceColor.black + traceColor.white) / 2.0f;
 
-		/// é’è‰²æ¤œçŸ¥
-		if ((traceColor.blue.b * blueCorr) < rgb.b && (rgb.r + rgb.g) * rgbCorr < rgb.b)
+		// ÂŒŸ’m
+		if ((rgb.r + rgb.g) < rgb.b)
 		{
 			return ReadColor::BLUE;
 		}
-		/// ç™½æ¤œçŸ¥
+		// ”’ŒŸ’m
 		else if ((rgb.r + rgb.g + rgb.b) / 3 > gray)
 		{
 			return ReadColor::WHITE;
 		}
-		/// é»’æ¤œçŸ¥
 		else
 		{
 			return ReadColor::BLACK;

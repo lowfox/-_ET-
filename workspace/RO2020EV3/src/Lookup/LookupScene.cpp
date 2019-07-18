@@ -1,5 +1,5 @@
 #include "LookupScene.h"
-
+#include "TestData.h"
 LookupScene::LookupScene(ISceneChanger* sceneChanger) : IScene(sceneChanger)
 {
 }
@@ -11,9 +11,19 @@ bool LookupScene::init()
 
 bool LookupScene::run()
 {
+	MasterControl m_ctrl;
+
+//#define __LOOKUP_DEBUG__
+#ifdef __LOOKUP_DEBUG__
+
+
+#endif
+
 	// LookupCode
-
-
-	//Žó‚¯“n‚µŽž‚ÉŒÄ‚Ô
+	if(!m_ctrl.LookUp())
+	{
+		return false;
+	}
+	//ï¿½ó‚¯“nï¿½ï¿½ï¿½ï¿½ï¿½ÉŒÄ‚ï¿½
 	return change(SceneID::Garage);
 }

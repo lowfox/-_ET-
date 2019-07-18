@@ -48,7 +48,7 @@ struct TraceColor
 	float white;
 
 	///ÂF
-	RGB blue;
+	float blue;
 };
 
 namespace Drive 

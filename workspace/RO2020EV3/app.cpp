@@ -5,12 +5,13 @@
 #include <Logger.h>
 #include <SceneManager.h>
 #include <Config.h>
+#include "src/Lookup/SonarFilter.h"
 
 
 // main Task
 void main_task(intptr_t unused)
 {
-	// API,�~�h���E�F�A ������
+	// API,?~?h???E?F?A ??????
 	if (!System::Init(ROBOCON_PORT))
 	{
 		System::Exit();
@@ -18,25 +19,25 @@ void main_task(intptr_t unused)
 		return;
 	}
 	
-	// BluetoothTask�N��
+	// BluetoothTask?N??
 	act_tsk(BT_TASK);
 
-	// RoboconTask�N��
+	// RoboconTask?N??
 	act_tsk(ROBOCON_TASK);
 
-	// �����̃{�^���������Ƌ����I��
+	// ??????{?^??????????????I??
 	while (!ev3_button_is_pressed(ENTER_BUTTON))
 	{
 		tslp_tsk(100);
 	}
 
-	// BluetoothTask�����I��
+	// BluetoothTask?????I??
 	ter_tsk(BT_TASK);
 
-	// RoboconTask�����I��
+	// RoboconTask?????I??
 	ter_tsk(ROBOCON_TASK);
 
-	// API,�~�h���E�F�A �I������
+	// API,?~?h???E?F?A ?I??????
 	System::Exit();
 
 }
@@ -60,7 +61,15 @@ void robocon_task(intptr_t exinf)
 
 	EV3_LOG_INFO("robocon_task End");
 
-	// ���^�X�N���I��
+    /// ソナーセンサーでの値の取得
+	//SonarFilter sonarfilter;
+	
+	//if(sonarfilter.GetAvg < 30)
+	//{
+		/// 配列に格納する
+	//}
+
+	// ???^?X?N???I??
 	ext_tsk();
 }
 
@@ -76,8 +85,8 @@ void bt_task(intptr_t unused)
 
 	EV3_LOG_INFO("bt_task End");
 
-	// ���^�X�N���I��
+	// ???^?X?N???I??
 	ext_tsk();
 
 // clang-format off
-}]
+}
