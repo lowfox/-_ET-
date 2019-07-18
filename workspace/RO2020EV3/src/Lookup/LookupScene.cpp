@@ -13,12 +13,6 @@ bool LookupScene::run()
 {
 	MasterControl m_ctrl;
 
-//#define __LOOKUP_DEBUG__
-#ifdef __LOOKUP_DEBUG__
-
-
-#endif
-
 	// LookupCode
 	if(!m_ctrl.LookUp())
 	{
