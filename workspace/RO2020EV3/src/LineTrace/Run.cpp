@@ -32,9 +32,6 @@ void Run::driveStart() {
 		//‘–só‘Ôæ“¾
 		m_runState = control.drivePosition();
 
-		//‘–só‘ÔC³
-//		control.errorCorrection();
-
 		//‘–só‘Ô‚ÅPID‚ğØ‚è‘Ö‚¦‚é
 		trace.lineTraceDrive(m_runState);
 
