@@ -20,7 +20,18 @@ SceneManager.o\
 LineTraceScene.o\
 LookupScene.o\
 GarageScene.o\
-SeesawScene.o
+SeesawScene.o\
+MasterControl.o\
+Phase1.o\
+Phase2.o\
+Phase3.o\
+SonarControl.o\
+SonarFilter.o\
+TailControl.o\
+EmergencyControl.o\
+MotorControl.o\
+LookUpTest.o\
+
 
 SRCLANG := c++
 
