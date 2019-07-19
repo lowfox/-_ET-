@@ -9,7 +9,7 @@ void StartDash::tailOperation() {
 
 	auto* tail = RyujiEv3Engine::GetTailMotor();
 
-	//K”ö‚ğã‚°‚é
+	//‚µ‚Á‚Û‚ğã‚°‚é
 	tail->setCounts(0, 50);
 }
 
