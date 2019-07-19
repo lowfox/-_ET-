@@ -2,18 +2,13 @@
 #include "Run.h"
 #include <Drive.h>
 
-auto* tail = RyujiEv3Engine::GetTailMotor();
-auto* touch = RyujiEv3Engine::GetTouchSensor();
-auto* speaker = RyujiEv3Engine::GetSpeaker();
-auto* lcd = RyujiEv3Engine::GetLCD();
-auto* Bluetooth = RyujiEv3Engine::GetBluetooth();
-
-
 Standby::Standby() {}
 
 Standby::~Standby() {}
 
 void Standby::traceMain() {
+	auto* Bluetooth = RyujiEv3Engine::GetBluetooth();
+
 	setup();
 
 	while (1) {
@@ -25,6 +20,8 @@ void Standby::traceMain() {
 }
 
 void Standby::setup() {
+	auto* tail = RyujiEv3Engine::GetTailMotor();
+
 	//尻尾角度のリセット
 	tail->resetCounts();//尻尾を上にあげきった状態で実行
 
@@ -52,6 +49,10 @@ void Standby::setup() {
 }
 
 void Standby::Calibration(int Deg) {
+	auto* touch = RyujiEv3Engine::GetTouchSensor();
+	auto* speaker = RyujiEv3Engine::GetSpeaker();
+	auto* lcd = RyujiEv3Engine::GetLCD();
+
 	TraceColor countColor;
 
 	//黒
@@ -84,6 +85,8 @@ void Standby::Calibration(int Deg) {
 }
 
 bool Standby::bluetoothDetection() {
+	auto* Bluetooth = RyujiEv3Engine::GetBluetooth();
+
 	unsigned int tooth = 1;
 
 	//Bluetooth信号、受け取ったらtrueをリターン
@@ -95,6 +98,7 @@ bool Standby::bluetoothDetection() {
 }
 
 bool Standby::buttonDetection() {
+	auto* touch = RyujiEv3Engine::GetTouchSensor();
 
 	//Button、押されたらtrueをリターン
 	do {
