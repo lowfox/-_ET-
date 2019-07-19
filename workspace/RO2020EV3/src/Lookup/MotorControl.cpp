@@ -3,10 +3,11 @@
 
 bool MotorControl::CompareVal()
 {
-    auto tracecolor=Drive::ColorCalibrate::GetTraceColor(53);
+    auto tracecolor=Drive::ColorCalibrate::GetTraceColor(55);
     Drive::LineTrace::SetTraceColor(tracecolor);
     Drive::SetDriveMode(DriveMode::LineTrace);
     //Drive::SetDriveMode(DriveMode::Nomal); //テスト用(後でLineTraceに変更)
+    
     if(!Drive::Drive(5))
     {
         return false;
@@ -43,7 +44,7 @@ void MotorControl::SetOffset()
 
     if(SonarControl::GetInstance()->GetAvg() != 99){
         offset_val = SonarControl::GetInstance()->GetAvg();
-        this->offset_val += 150;   // this->offset_val = 150;
+        this->offset_val += Threshold; 
         #ifdef __LOOKUP_DEBUG__
         EV3_LOG_DEBUG("SetOffset %d[mm]",offset_val);
         #endif

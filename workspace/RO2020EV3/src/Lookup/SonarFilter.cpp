@@ -14,11 +14,11 @@ int16 SonarFilter::GetAvg()
     }
 
     // 平均値を返す
-    for(auto i=0;i < 3;i++){
+    for(auto i=0;i <3;i++){
       avg_val += this->GetInstance()->avg_datas[i];
     }
 
-    return avg_val;
+    return avg_val/3;
 }
 
 bool SonarFilter::FilterInput()
