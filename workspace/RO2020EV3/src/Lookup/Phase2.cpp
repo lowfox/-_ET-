@@ -21,13 +21,19 @@ bool Phase2::run()
         m_ctrl.UpPassCnt();
 
         if(m_ctrl.GetPassCount() >= 5){
-            break;
+            return true;
         }
 
-         if(!Drive::Rotate())
-         {
-             return false;
-         }
+
+        if(!t_ctrl.StageAngle(MAX_TARGET))
+        {
+            return false;
+        }
+
+        if(!Drive::Rotate())
+        {
+           return false;
+        }
         // テスト用コード「Drive::Stopまで」(後でRotate()に変更)
         //RyujiEv3Engine::GetLeftMotor()->setCounts(324,30,false);
         //RyujiEv3Engine::GetRightMotor()->setCounts(-324,30,true);
@@ -38,16 +44,12 @@ bool Phase2::run()
         }
         tslp_tsk(500);
 
-        if(!t_ctrl.StageAngle(MAX_TARGET))
-        {
-            return false;
-        }
-
         // 超音波データリセット 
         SonarFilter::GetInstance()->RestartData();
+
         // 超音波非同期スタート 
         SonarControl::GetInstance()->SonarRun();
-
+        tslp_tsk(1500);
 
         auto tracecolor=Drive::ColorCalibrate::GetTraceColor(MAX_TARGET);
         Drive::LineTrace::SetTraceColor(tracecolor);
@@ -75,7 +77,7 @@ bool Phase2::run()
         if(!t_ctrl.StageAngle(MIN_TARGET))
         {
             return false;
-        }   
+        }
     }
 
     return true;
