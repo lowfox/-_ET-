@@ -42,7 +42,7 @@ void Run::driveStart() {
   Drive::Drive(m_lowSpeed);
 
   // ƒ‰ƒCƒ“‚ª•F‚É‚È‚Á‚½‚ç“ïŠ‚Öˆø‚«“n‚µ
-  while (color.getBlackColor())
+  while (!color.getBlackColor())
     ;
   /* “ïŠˆø‚«“n‚µ */
 }
