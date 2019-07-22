@@ -12,9 +12,6 @@ public:
 	void driveStart();
 
 private:
-	bool m_blueDetection;
-
-	bool m_blackDetection;
 
 	MapState m_runState;
 
