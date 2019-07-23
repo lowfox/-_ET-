@@ -1,32 +1,37 @@
 #pragma once
 #include <RyujiEv3.h>
+#include <vector>
 
-#define NomalDeg 90
-#define LookUp_1Deg 80
-#define LookUp_2Deg 62
-#define Seesaw_1Deg 65
-#define Seesaw_2Deg 70
-#define Seesaw_3Deg 75
+constexpr int32 NomalDeg    = 90;
+constexpr int32 LookUp_1Deg = 80;
+constexpr int32 LookUp_2Deg = 62;
+constexpr int32 Seesaw_1Deg = 65;
+constexpr int32 Seesaw_2Deg = 70;
+constexpr int32 Seesaw_3Deg = 75;
+
+#define LINETRACE_BLUETOOTH_START
 
 //ライントレーススタンバイ
-class Standby
-{
-public:
-	Standby();
-	~Standby();
+class Standby {
+ private:
+  const std::vector<int32> m_tailDegrees = {NomalDeg,    LookUp_1Deg,
+                                            LookUp_2Deg, Seesaw_1Deg,
+                                            Seesaw_2Deg, Seesaw_3Deg};
 
-	void traceMain();
+ public:
+  Standby();
+  ~Standby();
 
-	void setup();
+  void traceMain();
 
-private:
-	void Calibration(int);
+  void setup();
 
-	bool buttonDetection();
+ private:
+  void Calibration(int32 degree);
 
-	bool bluetoothDetection();
+  bool buttonDetection();
 
-	void runStart();
+  bool bluetoothDetection();
 
+  void runStart();
 };
-
