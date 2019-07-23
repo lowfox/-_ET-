@@ -6,7 +6,7 @@ StartDash::~StartDash() {}
 
 
 void StartDash::tailOperation() {
-	// ‚µ‚Á‚Û‚ğ‚ ‚°‚é
+	// ã—ã£ã½ã‚’ã‚ã’ã‚‹
 	RyujiEv3Engine::GetTailMotor()->setCounts(0, 50);
 }
 
