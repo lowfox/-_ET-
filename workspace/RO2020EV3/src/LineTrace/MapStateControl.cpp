@@ -1,5 +1,4 @@
 // MapStateControl.cpp
-
 // includeファイル
 #include "MapStateControl.h"
 
@@ -25,15 +24,15 @@ MapState MapStateControl::drivePosition() {
 
   //コースがLかRによって処理を切り替え(設定されていなければエラー終了)
   if (COURSE_MODE == LEFT_COURSE) {
-    //現在の距離が現在の規定距離を超えたら配列の添え字をインクリメント
-    if (milage > m_stateLeft[nowState].Distance) {
+    //現在の距離が現在の規定距離を超え、ゴール(STATE_END)を超えていなければ配列の添え字をインクリメント
+    if (milage > m_stateLeft[nowState].Distance && milage <= STATE_END) {
       ++nowState;
     }
     return m_stateLeft[nowState].State;
 
   } else if (COURSE_MODE == RIGHT_COURSE) {
     
-    if (milage > m_stateRight[nowState].Distance) {
+    if (milage > m_stateRight[nowState].Distance && milage <= STATE_END) {
       ++nowState;
     }
     return m_stateRight[nowState].State;
