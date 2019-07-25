@@ -1,7 +1,8 @@
-//LineTraceTest.cpp
-//LineTraceSceneにそのまま張り付ければ使用可能
 #include <Config.h>
 #include "LineTraceScene.h"
+
+// LineTraceTest.cpp
+// LineTraceSceneにそのまま張り付ければ使用可能
 
 //テストコード*****************************************
 #define CASE_MAX 9  //テストケースの最大数
@@ -9,7 +10,6 @@
 #define SUCCESSFUL 0
 
 #include <Logger.h>
-#include <iostream>
 #include "LineTrace.h"
 //テストケース格納構造体定義
 struct Test {
@@ -41,14 +41,14 @@ bool LineTraceScene::run() {
   // LineTraceクラス生成
   LineTrace lineTrace;
   int result = 0;
-
-  for (auto cnt = std::begin(testCase); cnt <= std::end(testCase);cnt++){
-    result = lineTrace.lineTraceDrive(testCase[cnt].state);
+  int loopCnt = 0;
+  for (auto& cnt : testCase) {
+    result = lineTrace.lineTraceDrive(testCase[loopCnt].state);
     //実際の戻り値が期待した戻り値と不一致だった場合
-    if (result != testCase[cnt].trueResult) {
-      EV3_LOG_ERROR("Cnt = %d is error\n", cnt);
+    if (result != testCase[loopCnt].trueResult) {
+      EV3_LOG_ERROR("Cnt = %d is error\n", loopCnt);
     } else {
-      EV3_LOG("Cnt = %d is OK\n", cnt);
+      EV3_LOG("Cnt = %d is OK\n", loopCnt);
     }
   }
   EV3_LOG("End\n");
