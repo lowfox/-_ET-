@@ -1,6 +1,11 @@
 #include "Standby.h"
 #include <Drive.h>
 #include "Run.h"
+#include <Logger.h>                               //Takeuchi
+
+//追加変更その他ざっくり by Takeuchi
+//ログを吐くように追加
+//キャリブレーション時、毎回尻尾位置をリセットするように変更
 
 Standby::Standby() {}
 
@@ -8,31 +13,55 @@ Standby::~Standby() {}
 
 void Standby::traceMain() {
   auto* Bluetooth = RyujiEv3Engine::GetBluetooth();
-
+  EV3_LOG("SetUp Start\n");                       //Takeuchi
   setup();
-
+  EV3_LOG("SetUp End\n");                         //Takeuchi
 #if defined LINETRACE_BLUETOOTH_START
   while (!bluetoothDetection())
     ;
 #else
+  EV3_LOG("ButtonDetection Start\n");             //Takeuchi
   while (!buttonDetection())
     ;
+  EV3_LOG("ButtonDetection End\n");               //Takeuchi
 #endif
-
+  EV3_LOG("Run Start\n");                         //Takeuchi
   runStart();
+  EV3_LOG("End\n");                               //Takeuchi
 }
 
 void Standby::setup() {
   auto* tail = RyujiEv3Engine::GetTailMotor();
   constexpr int32 TAIL_SPEED = 70;	//しっぽモータ回転速度
 
+  int cnt = 0;                                      //Takeuchi
+  int32 degReset = 0;                               //Takeuchi(尻尾角度を一番上に戻すための角度)
+
   //尻尾角度のリセット
   tail->resetCounts();  //尻尾を上にあげきった状態で実行
 
   for (const auto& itr : m_tailDegrees) {
-    tail->setCounts(itr, TAIL_SPEED, true);
+    //tail->setCounts(itr, TAIL_SPEED, true);         //Old
+
+    //尻尾角度のリセット                                Takeuchi Old
+    /*
+    if (cnt != 0) {                                   //Takeuchi
+      degReset = 0;                                   //Takeuchi
+      degReset -= m_tailDegrees[cnt];                 //Takeuchi
+      tail->setCounts(itr, degReset, true);           //Takeuchi
+    }*/
+
+    tail->setCounts(itr, m_tailDegrees[cnt], true);   //Takeuchi(m_tailDegreesに格納されている各角度を順次呼び出し)
     Calibration(itr);
+
+    //Takeuchi(尻尾動かした分だけ元に戻す)
+    degReset = 0;                                   //Takeuchi
+    degReset -= m_tailDegrees[cnt];                 //Takeuchi
+    tail->setCounts(itr, degReset, true);           //Takeuchi
+
+    ++cnt;                                          //Takeuchi
   }
+  tail->setCounts(90, 50, true);                   //Takeuchi(尻尾をスタート前の待機ポジションに(角度90°は適当))
 }
 
 void Standby::Calibration(int32 degree) {
@@ -43,7 +72,7 @@ void Standby::Calibration(int32 degree) {
   TraceColor countColor;
 
   //黒
-  lcd->drawString(0, 0, "GetColor : Bkack : %d", degree);
+  lcd->drawString(0, 0, "GetColor : Black : %d", degree);//Takeuchi(綴り訂正)
 
   do {
     touch->update();
@@ -64,13 +93,15 @@ void Standby::Calibration(int32 degree) {
   speaker->playTone(600, 1);
 
   //青
-  lcd->drawString(0, 0, "GetColor : Bkack : %d", degree);
+  lcd->drawString(0, 0, "GetColor : Blue : %d", degree);//Takeuchi(綴り訂正)
   do {
     touch->update();
   } while (!touch->clicked());
   countColor.blue = Drive::ColorCalibrate::RGBAverage1Sec();
   speaker->playTone(600, 1);
 
+
+  EV3_LOG("degree = %d\nAdd Trace Color black = %f\nAdd Trace Color blue = %f\nAdd Trace Color white = %f\n", degree, countColor.black, countColor.blue, countColor.white);//Takeuchi
   Drive::ColorCalibrate::AddTraceColor(degree, countColor);
 }
 
