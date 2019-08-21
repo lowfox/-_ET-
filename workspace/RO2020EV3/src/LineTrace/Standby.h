@@ -9,7 +9,7 @@ constexpr int32 Seesaw_1Deg = 65;
 constexpr int32 Seesaw_2Deg = 70;
 constexpr int32 Seesaw_3Deg = 75;
 
-#define LINETRACE_BLUETOOTH_START
+//#define LINETRACE_BLUETOOTH_START
 
 //ライントレーススタンバイ
 class Standby {
