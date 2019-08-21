@@ -7,7 +7,7 @@
 
 //定数定義
 #define STATE_MAX 16              //走行状態変移の最大数
-#define STATE_END 150.1f          // GOALまでの距離//仮
+#define STATE_END 9632.1f         // GOALまでの距離//仮
 #define LEFT_COURSE 0
 #define RIGHT_COURSE 1
 #define COURSE_MODE LEFT_COURSE   //走行コース設定
@@ -45,39 +45,39 @@ class MapStateControl {
 
   //Lコースの走行手順
   const std::array<DriveState, STATE_MAX> m_stateLeft = {
-      {{10.0f, Straight},//(仮)
-       {20.0f, LargeLeftTurn},//(仮)
-       {30.0f, Straight},//(仮)
-       {40.0f, LargeLeftTurn},//(仮)
-       {50.0f, Straight},//(仮)
-       {60.0f, SmallLeftTurn},//(仮)
-       {70.0f, SmallRightTurn},//(仮)
-       {80.0f, Straight},//(仮)
-       {90.0f, LargeRightTurn},//(仮)
-       {100.0f, Straight},//(仮)
-       {110.0f, LargeRightTurn},//(仮)
-       {120.0f, Straight},//(仮)
-       {130.0f, SmallRightTurn},//(仮)
-       {140.0f, SmallLeftTurn},//(仮)
-       {150.0f, Straight},//(仮)
-       {150.1f, Goal}}};//(仮)
+      {{1070.0f, Straight},//(仮)
+       {1690.0f, LargeLeftTurn},//(仮)
+       {2286.0f, Straight},//(仮)
+       {3042.0f, LargeLeftTurn},//(仮)
+       {3172.0f, Straight},//(仮)
+       {3838.0f, SmallLeftTurn},//(仮)
+       {1316.0f, SmallRightTurn},//(仮)
+       {5154.0f, Straight},//(仮)
+       {5954.0f, LargeRightTurn},//(仮)
+       {6864.0f, Straight},//(仮)
+       {7500.0f, LargeRightTurn},//(仮)
+       {7660.0f, Straight},//(仮)
+       {8042.0f, SmallRightTurn},//(仮)
+       {9452.0f, SmallLeftTurn},//(仮)
+       {9632.0f, Straight},//(仮)
+       {9632.1f, Goal}}};//(仮)
 
   //Rコースの走行手順
   const std::array<DriveState, STATE_MAX> m_stateRight = {
-      {{10.0f, Straight},//(仮)
-       {20.0f, LargeRightTurn},//(仮)
-       {30.0f, Straight},//(仮)
-       {40.0f, LargeRightTurn},//(仮)
-       {50.0f, Straight},//(仮)
-       {60.0f, SmallRightTurn},//(仮)
-       {70.0f, SmallLeftTurn},//(仮)
-       {80.0f, Straight},//(仮)
-       {90.0f, LargeLeftTurn},//(仮)
-       {100.0f, Straight},//(仮)
-       {110.0f, LargeLeftTurn},//(仮)
-       {120.0f, Straight},//(仮)
-       {130.0f, SmallLeftTurn},//(仮)
-       {140.0f, SmallRightTurn},//(仮)
-       {150.0f, Straight},//(仮)
-       {150.1f, Goal}}};//(仮)
+      {{1070.0f, Straight},//(仮)
+       {1690.0f, LargeRightTurn},//(仮)
+       {2286.0f, Straight},//(仮)
+       {3042.0f, LargeRightTurn},//(仮)
+       {3172.0f, Straight},//(仮)
+       {3838.0f, SmallRightTurn},//(仮)
+       {1316.0f, SmallLeftTurn},//(仮)
+       {5154.0f, Straight},//(仮)
+       {5954.0f, LargeLeftTurn},//(仮)
+       {6864.0f, Straight},//(仮)
+       {7500.0f, LargeLeftTurn},//(仮)
+       {7660.0f, Straight},//(仮)
+       {8042.0f, SmallLeftTurn},//(仮)
+       {9452.0f, SmallRightTurn},//(仮)
+       {9632.0f, Straight},//(仮)
+       {9632.1f, Goal}}};//(仮)
 };
