@@ -6,6 +6,7 @@
 #include "MapStateControl.h"
 #include "StartDash.h"
 #include <Logger.h>//Takeuchi
+#include "ev3api.h"//Takeuchi
 Run::Run() {}
 
 Run::~Run() {}
@@ -21,7 +22,7 @@ void Run::driveStart() {
 
   //SetTraceColor追加//Takeuchi
   TraceColor traceColor;                      //Takeuchi
-  traceColor = Drive::ColorCalibrate::GetTraceColor(90);    //Takeuchi(Nomal Degreeが最初に登録されているので0番目に登録されたトレースカラーを呼び出し)
+  traceColor = Drive::ColorCalibrate::GetTraceColor(90);    //Takeuchi(Nomal Degree(90°)で登録されたトレースカラーを呼び出し)
   Drive::LineTrace::SetTraceColor(traceColor);//Takeuchi
 
   //トレースカラーがセットされてるかの確認//Takeuchi
@@ -38,7 +39,27 @@ void Run::driveStart() {
 
   //走行
   //Drive::Drive(100);                       //old
-  Drive::Drive(50);                           //Takeuchi(試験走行用に走行速度を50%に)
+
+  //Takeuhi(最大100%まで徐々に速度を上げていく(スタート時の暴走を防ぐための試み))
+
+  Drive::Drive(10);                        //Takeuchi
+  Drive::LineTrace::SetPID({ 1.0f, 0.0f, 1.0f });//PIDセットTakeuchi
+  dly_tsk(4000);                          //Takeuchi4000ms待機
+
+  Drive::Drive(25);                        //Takeuchi
+  Drive::LineTrace::SetPID({ 0.5f, 0.0f, 0.3f });//PIDセットTakeuchi
+  dly_tsk(2000);                          //Takeuchi2000ms待機
+
+  Drive::Drive(50);                        //Takeuchi
+  Drive::LineTrace::SetPID({ 0.2f, 0.0f, 0.1f });//PIDセットTakeuchi
+  dly_tsk(2000);                          //Takeuchi2000ms待機
+
+  Drive::Drive(75);                        //Takeuchi
+  Drive::LineTrace::SetPID({ 0.05f, 0.0f, 0.025f });//PIDセットTakeuchi
+  dly_tsk(2000);                          //Takeuchi2000ms待機
+
+  Drive::Drive(100);                        //Takeuchi
+
 
   do {
     //走行状態取得
