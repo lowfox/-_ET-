@@ -2,31 +2,32 @@
 #include "../Logger/CLogger.h"
 
 bool MotorControl::CompareVal()
-{
-    auto tracecolor=Drive::ColorCalibrate::GetTraceColor(55);
-    Drive::LineTrace::SetTraceColor(tracecolor);
-    Drive::SetDriveMode(DriveMode::LineTrace);
-    //Drive::SetDriveMode(DriveMode::Nomal); //テスト用(後でLineTraceに変更)
-    
-    if(!Drive::Drive(5))
+{   
+    #ifdef __LOOKUP_DEBUG__
+    if(20 <= (this->start_val + this->offset_val))
     {
         return false;
     }
-    while(Steering::GetDistance() <= (this->start_val + this->offset_val)){}
-
-    if(!Drive::Stop())
+    #else
+    if(Steering::GetDistance() <= (this->start_val + this->offset_val))
     {
         return false;
     }
-    
+    #endif
     return true;
 }
-
+#ifdef __LOOKUP_DEBUG__
+    void MotorControl::StbCompareVal(float start , int16 offset)
+    {
+        this->start_val = start;
+        this->offset_val = offset;
+    }
+#endif 
 
 void MotorControl::SetStartDistance()
 {
     #ifdef __LOOKUP_DEBUG__
-    EV3_LOG_DEBUG("StartDistance %d[mm]",start_val);
+    EV3_LOG_DEBUG("StartDistance %f[mm]",this->start_val);
     #else
     this->start_val=Steering::GetDistance();
     #endif
@@ -41,12 +42,11 @@ void MotorControl::StbSetStartDistance(float distance)
 
 void MotorControl::SetOffset()
 {
-
     if(SonarControl::GetInstance()->GetAvg() != 99){
-        offset_val = SonarControl::GetInstance()->GetAvg();
-        this->offset_val += Threshold; 
+        this->offset_val = SonarControl::GetInstance()->GetAvg();
+        this->offset_val +=THRESHOLD; 
         #ifdef __LOOKUP_DEBUG__
-        EV3_LOG_DEBUG("SetOffset %d[mm]",offset_val);
+        EV3_LOG_DEBUG("SetOffset %d + %d = %d[mm]",SonarControl::GetInstance()->GetAvg(),THRESHOLD,this->offset_val);
         #endif
     }
         #ifdef __LOOKUP_DEBUG__
@@ -59,9 +59,15 @@ void MotorControl::UpPassCnt()
 {
     this->pass_count +=1;
     #ifdef __LOOKUP_DEBUG__
-    EV3_LOG_DEBUG("StartDistance %d[mm]",pass_count);
+    EV3_LOG_DEBUG("pass_count %d回",pass_count);
     #endif
 }
+#ifdef __LOOKUP_DEBUG__
+void MotorControl::StbSetUpPassCnt(int8_t pass)
+{
+    this->pass_count = pass;
+}
+#endif
 
 int8_t MotorControl::GetPassCount()
 {

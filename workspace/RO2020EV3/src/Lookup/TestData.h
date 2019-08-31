@@ -1,3 +1,6 @@
+#include "Debug.h"
+
+#ifdef __LOOKUP_DEBUG__
 #include <RyujiEv3.h>
 #include <array>
 
@@ -8,8 +11,8 @@ struct SonarDistanceTest
 };
 
 struct SonarCompareTest
-{
-       int16 stop_distance = 0;
+{      
+       std::array<int16, 3> stop_distance  {0, 0, 0};
        bool  stop_distance_retval = false;
 };
 
@@ -21,8 +24,15 @@ struct SonarInputTest
 
 struct TailTest
 {   
-       int32 angles = 0;
-       bool  angles_retval = false;
+       std::array<int32, 2> counts {0, 0};
+       bool  counts_retval = false;
+};
+ 
+struct MotorCompareTest
+{
+       float start = 0;
+       int16 offset = 0;
+       bool compare_retval = false;
 };
 
 struct EmergencyLineTest
@@ -43,5 +53,5 @@ struct EmergencyRightTurnTest
        bool  right_turn_deg_retval = false;
 };
 
-
+#endif
 

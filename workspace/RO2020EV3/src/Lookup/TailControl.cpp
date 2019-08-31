@@ -2,12 +2,33 @@
 #include <stdexcept>
 bool TailControl::Angle(int32 target_val,int32 speed)
 {
+    #ifdef __LOOKUP_DEBUG__
+    if(!StbAngle(target_val,speed))
+    {
+        return false;
+    }
+    #else
     if(!RyujiEv3Engine::GetTailMotor()->setCounts(target_val,speed,true))
+    {
+        return false;
+    }
+    #endif
+    return true;
+}
+
+#ifdef __LOOKUP_DEBUG__
+bool TailControl::StbAngle(int32 target_val,int32 speed)
+{
+    if(target_val != MAX_TARGET && target_val != MIN_TARGET){
+        return false;
+    }
+    if(speed < 0)
     {
         return false;
     }
     return true;
 }
+#endif
 
 bool TailControl::StageAngle(int32 target_val)
 {
@@ -104,5 +125,6 @@ bool TailControl::StageAngle(int32 target_val)
     tslp_tsk(1000);
     return true;
     }
+    
     return false;
 }
