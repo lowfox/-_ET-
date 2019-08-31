@@ -124,7 +124,8 @@ bool Standby::bluetoothDetection() {
 
 bool Standby::buttonDetection() {
   auto* touch = RyujiEv3Engine::GetTouchSensor();
-
+  auto* lcd = RyujiEv3Engine::GetLCD();//Takeuchi
+  lcd->drawString(0, 0, "Plese Push Botton");//Takeuchi
   // ButtonA‰Ÿ‚³‚ê‚½‚çtrue‚ğƒŠƒ^[ƒ“
   do {
     touch->update();
