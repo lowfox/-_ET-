@@ -51,8 +51,14 @@ bool Phase2::run()
         */
        
         // テスト用コード「Drive::Stopまで」(後でRotate()に変更)
-        RyujiEv3Engine::GetLeftMotor()->setCounts(355,30,false);
-        RyujiEv3Engine::GetRightMotor()->setCounts(-355,30,true);
+        RyujiEv3Engine::GetLeftMotor()->setCounts(324,30,false);
+        RyujiEv3Engine::GetRightMotor()->setCounts(-324,30,true);
+
+        if(Drive::LineTrace::GetSide() == Side::Right)
+        {
+            Drive::LineTrace::SetSide(Side::Left);
+        }
+        Drive::LineTrace::SetSide(Side::Right);
 
         if(!Drive::Stop())
         {
