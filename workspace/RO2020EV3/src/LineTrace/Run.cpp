@@ -28,7 +28,7 @@ void Run::driveStart() {
   //トレースカラーがセットされてるかの確認//Takeuchi
   //セットしたはずのトレースカラー//Takeuchi
   EV3_LOG("Set Trace Color black = %f\nSet Trace Color blue = %f\nSet Trace Color white = %f\n", traceColor.black, traceColor.blue, traceColor.white);//Takeuchi
-  //実際にセットされているセットカアラー//Takeuchi
+  //実際にセットされているセットカラー//Takeuchi
   traceColor = Drive::LineTrace::GetTraceColor();//Takeuchi(現在セットされているトレースカラーを取得)//Takeuchi
   EV3_LOG("Now Trace Color black = %f\nNow Trace Color blue = %f\nNow Trace Color white = %f\n", traceColor.black, traceColor.blue, traceColor.white);//Takeuchi
 
@@ -44,22 +44,22 @@ void Run::driveStart() {
 
   Drive::Drive(10);                        //Takeuchi
   Drive::LineTrace::SetPID({ 1.0f, 0.0f, 1.0f });//PIDセットTakeuchi
-  dly_tsk(4000);                          //Takeuchi4000ms待機
+  dly_tsk(1000);                          //Takeuchi4000ms待機
 
   Drive::Drive(25);                        //Takeuchi
   Drive::LineTrace::SetPID({ 0.5f, 0.0f, 0.3f });//PIDセットTakeuchi
-  dly_tsk(2000);                          //Takeuchi2000ms待機
+  dly_tsk(500);                          //Takeuchi2000ms待機
 
   Drive::Drive(50);                        //Takeuchi
   Drive::LineTrace::SetPID({ 0.2f, 0.0f, 0.1f });//PIDセットTakeuchi
-  dly_tsk(2000);                          //Takeuchi2000ms待機
-
+  dly_tsk(250);                          //Takeuchi2000ms待機
+  /*
   Drive::Drive(75);                        //Takeuchi
   Drive::LineTrace::SetPID({ 0.05f, 0.0f, 0.025f });//PIDセットTakeuchi
-  dly_tsk(2000);                          //Takeuchi2000ms待機
-
-  Drive::Drive(100);                        //Takeuchi
-
+  dly_tsk(250);                          //Takeuchi2000ms待機
+  */
+  Drive::Drive(70);                        //Takeuchi(現状100では直線しか走れない。70ならとりあえず大小カーブいける)
+  
 
   do {
     //走行状態取得
@@ -69,6 +69,14 @@ void Run::driveStart() {
     trace.lineTraceDrive(m_runState);
 
   } while (m_runState != Goal);
+
+
+  float milage = 0.0f;          //累計距離
+  //累計距離取得
+  milage = DistanceMeasure::getDistance();
+  //Takeuchi ゴール時点での累計距離をログで表示
+  EV3_LOG("Goal now milage  = %f\n", milage);//Takeuchi
+
 
   // 青線検知
   while (!color.getBlueColor())
