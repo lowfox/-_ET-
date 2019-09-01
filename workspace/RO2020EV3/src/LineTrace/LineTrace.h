@@ -1,36 +1,36 @@
 // LineTrace.h
 #pragma once
-// includeƒtƒ@ƒCƒ‹
+// includeï¿½tï¿½@ï¿½Cï¿½ï¿½
 #include <Drive.h>
 #include <array>
 #include "MapStateDefinition.h"
 
-//ƒNƒ‰ƒX’è‹`
-//ƒNƒ‰ƒX–¼  :LineTrace
-//‹@”\–¼    :MW‚ÌLineTrace‚ÉPID’l‚ğƒZƒbƒg
-//‹@”\ŠT—v  :Šeó‹µ(ƒJ[ƒu“™)‚ÉÅ“K‰»‚³‚ê‚½PID’l‚ğƒZƒbƒg‚·‚é
+//ï¿½Nï¿½ï¿½ï¿½Xï¿½ï¿½`
+//ï¿½Nï¿½ï¿½ï¿½Xï¿½ï¿½  :LineTrace
+//ï¿½@ï¿½\ï¿½ï¿½    :MWï¿½ï¿½LineTraceï¿½ï¿½PIDï¿½lï¿½ï¿½ï¿½Zï¿½bï¿½g
+//ï¿½@ï¿½\ï¿½Tï¿½v  :ï¿½eï¿½ï¿½(ï¿½Jï¿½[ï¿½uï¿½ï¿½)ï¿½ÉÅ“Kï¿½ï¿½ï¿½ï¿½ï¿½ê‚½PIDï¿½lï¿½ï¿½ï¿½Zï¿½bï¿½gï¿½ï¿½ï¿½ï¿½
 
 class LineTrace {
  public:
-  LineTrace();   //ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-  ~LineTrace();  //ƒfƒXƒgƒ‰ƒNƒ^
+  LineTrace();   //ï¿½Rï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½Nï¿½^
+  ~LineTrace();  //ï¿½fï¿½Xï¿½gï¿½ï¿½ï¿½Nï¿½^
 
- //ŠÖ”–¼   :lineTraceDrive
- //‹@”\–¼   :PIDƒZƒbƒg
- //‹@”\ŠT—v :ƒ}ƒbƒvó‹µ‚É‡‚í‚¹‚ÄÅ“K‚ÈPID’l‚ğƒZƒbƒg
- //ˆø”     :MapState runState  :Œ»İ‚Ì‘–só‘Ô(enum‚Å0`StateEnd‚Ü‚Å‚Ì”ÍˆÍ)
- //–ß‚è’l   :int                :³íI—¹ = 0 : ˆÙíI—¹ = -1
+ //ï¿½Öï¿½ï¿½ï¿½   :lineTraceDrive
+ //ï¿½@ï¿½\ï¿½ï¿½   :PIDï¿½Zï¿½bï¿½g
+ //ï¿½@ï¿½\ï¿½Tï¿½v :ï¿½}ï¿½bï¿½vï¿½ó‹µ‚Éï¿½ï¿½í‚¹ï¿½ÄÅ“Kï¿½ï¿½PIDï¿½lï¿½ï¿½ï¿½Zï¿½bï¿½g
+ //ï¿½ï¿½ï¿½ï¿½     :MapState runState  :ï¿½ï¿½ï¿½İ‚Ì‘ï¿½ï¿½sï¿½ï¿½ï¿½(enumï¿½ï¿½0ï¿½`StateEndï¿½Ü‚Å‚Ì”Íˆï¿½)
+ //ï¿½ß‚ï¿½l   :int                :ï¿½ï¿½ï¿½ï¿½Iï¿½ï¿½ = 0 : ï¿½Ùï¿½Iï¿½ï¿½ = -1
   int lineTraceDrive(
       MapState runState);
 
  private:
-  //ŠeíPIDŠi”[”z—ñ(‡”Ô‚ÍMapState(enum)‚É€‹’)
+  //ï¿½eï¿½ï¿½PIDï¿½iï¿½[ï¿½zï¿½ï¿½(ï¿½ï¿½ï¿½Ô‚ï¿½MapState(enum)ï¿½Éï¿½ï¿½ï¿½)
   
   const std::array<PID, 5> m_PID = {{
-      {0.04f,0.0f,0.02f},  //’¼ü‘–s—pPID’l//(‰¼)
-      {0.04f,0.0f,0.02f},  //‰E¬‰ñ‚è—pPID’l//(‰¼)
-      {0.04f,0.0f,0.02f},  //¶¬‰ñ‚è—pPID’l//(‰¼)
-      {0.04f,0.0f,0.02f},  //‰E‘å‰ñ‚è—pPID’l//(‰¼)
-      {0.04f,0.0f,0.02f}   //¶‘å‰ñ‚è—pPID’l//(‰¼)
+      {0.05f, 0.0f, 0.025f},  //ç›´ç·šèµ°è¡Œç”¨PIDå€¤//(ä»®)
+      {0.7f,0.0f,0.6f},  //å³å°å›ã‚Šç”¨PIDå€¤//(ä»®)
+      {0.7f,0.0f,0.6f},  //å·¦å°å›ã‚Šç”¨PIDå€¤//(ä»®)
+      {0.7f,0.0f,0.6f},  //å³å¤§å›ã‚Šç”¨PIDå€¤//(ä»®)
+      {0.7f,0.0f,0.6f}   //å·¦å¤§å›ã‚Šç”¨PIDå€¤//(ä»®)
   }};
  };

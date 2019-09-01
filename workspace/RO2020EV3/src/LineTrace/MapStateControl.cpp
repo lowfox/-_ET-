@@ -1,8 +1,9 @@
 // MapStateControl.cpp
-// includeƒtƒ@ƒCƒ‹
+// includeï¿½tï¿½@ï¿½Cï¿½ï¿½
 #include "MapStateControl.h"
+#include <Logger.h>
 
-// ’è”’è‹`
+// ï¿½è”ï¿½ï¿½`
 #define ERROR -1
 
 MapStateControl::MapStateControl()
@@ -14,19 +15,24 @@ MapStateControl::~MapStateControl()
 }
 
 MapState MapStateControl::drivePosition() {
-  static int nowState = 0;      //Œ»Ý‚Ì‘–só‘Ô
-  float milage = 0.0f;          //—ÝŒv‹——£
+  static int nowState = 0;      //ï¿½ï¿½ï¿½Ý‚Ì‘ï¿½ï¿½sï¿½ï¿½ï¿½
+  float milage = 0.0f;          //ï¿½ÝŒvï¿½ï¿½ï¿½ï¿½
 
 
 
-  //—ÝŒv‹——£Žæ“¾
+  //ï¿½ÝŒvï¿½ï¿½ï¿½ï¿½ï¿½æ“¾
   milage = DistanceMeasure::getDistance();
 
-  //ƒR[ƒX‚ªL‚©R‚É‚æ‚Á‚Äˆ—‚ðØ‚è‘Ö‚¦(Ý’è‚³‚ê‚Ä‚¢‚È‚¯‚ê‚ÎƒGƒ‰[I—¹)
+  //ï¿½Rï¿½[ï¿½Xï¿½ï¿½Lï¿½ï¿½Rï¿½É‚ï¿½ï¿½ï¿½Äï¿½ï¿½ï¿½ï¿½ï¿½Ø‚ï¿½Ö‚ï¿½(ï¿½Ý’è‚³ï¿½ï¿½Ä‚ï¿½ï¿½È‚ï¿½ï¿½ï¿½ÎƒGï¿½ï¿½ï¿½[ï¿½Iï¿½ï¿½)
   if (COURSE_MODE == LEFT_COURSE) {
-    //Œ»Ý‚Ì‹——£‚ªŒ»Ý‚Ì‹K’è‹——£‚ð’´‚¦AƒS[ƒ‹(STATE_END)‚ð’´‚¦‚Ä‚¢‚È‚¯‚ê‚Î”z—ñ‚Ì“Y‚¦Žš‚ðƒCƒ“ƒNƒŠƒƒ“ƒg
+    //ï¿½ï¿½ï¿½Ý‚Ì‹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý‚Ì‹Kï¿½è‹—ï¿½ï¿½ï¿½ð’´‚ï¿½ï¿½Aï¿½Sï¿½[ï¿½ï¿½(STATE_END)ï¿½ð’´‚ï¿½ï¿½Ä‚ï¿½ï¿½È‚ï¿½ï¿½ï¿½Î”zï¿½ï¿½Ì“Yï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½Nï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½g
     if (milage > m_stateLeft[nowState].Distance && milage <= STATE_END) {
       ++nowState;
+
+      //èµ°è¡ŒçŠ¶æ…‹åˆ‡ã‚Šæ›¿ãˆæ™‚ã®è·é›¢ã‚’ãƒ­ã‚°ã«åã
+      EV3_LOG("State chenge nowState = %d\n Now milage  = %f\n", nowState, milage);//Takeuchi
+    
+    
     }
     return m_stateLeft[nowState].State;
 

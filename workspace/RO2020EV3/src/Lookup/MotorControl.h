@@ -7,7 +7,8 @@
 #include "SonarControl.h"
 #include <Drive.h>
 #include "Debug.h"
-#define THRESHOLD 175
+//#define THRESHOLD 175
+#define THRESHOLD 350
 
 class MotorControl
 {

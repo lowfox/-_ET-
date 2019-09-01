@@ -14,7 +14,7 @@ Standby::~Standby() {}
 void Standby::traceMain() {
   //auto* Bluetooth = RyujiEv3Engine::GetBluetooth();
   EV3_LOG("SetUp Start\n");                       //Takeuchi
-  setup();
+  setup();    // hs キャリブレーション
   EV3_LOG("SetUp End\n");                         //Takeuchi
 #if defined LINETRACE_BLUETOOTH_START
   while (!bluetoothDetection())
@@ -26,7 +26,7 @@ void Standby::traceMain() {
   EV3_LOG("ButtonDetection End\n");               //Takeuchi
 #endif
   EV3_LOG("Run Start\n");                         //Takeuchi
-  //runStart();
+  //runStart();    //hs ライントレース開始
   EV3_LOG("End\n");                               //Takeuchi
 }
 
@@ -126,7 +126,8 @@ bool Standby::bluetoothDetection() {
 
 bool Standby::buttonDetection() {
   auto* touch = RyujiEv3Engine::GetTouchSensor();
-
+  auto* lcd = RyujiEv3Engine::GetLCD();//Takeuchi
+  lcd->drawString(0, 0, "Plese Push Botton");//Takeuchi
   // Button�A�����ꂽ��true�����^�[��
   do {
     touch->update();

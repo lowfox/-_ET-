@@ -58,7 +58,7 @@ void Run::driveStart() {
   Drive::LineTrace::SetPID({ 0.05f, 0.0f, 0.025f });//PID�Z�b�gTakeuchi
   dly_tsk(2000);                          //Takeuchi2000ms�ҋ@
 
-  Drive::Drive(100);                        //Takeuchi
+  Drive::Drive(70);                        //Takeuchi
 
   do {
     //���s��Ԏ擾
@@ -78,5 +78,6 @@ void Run::driveStart() {
   // ���C�������F�ɂȂ������ֈ����n��
   while (!color.getBlackColor())
     ;
+
   /* ������n�� */
 }

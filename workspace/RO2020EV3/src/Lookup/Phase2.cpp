@@ -58,7 +58,9 @@ bool Phase2::run()
         {
             Drive::LineTrace::SetSide(Side::Left);
         }
-        Drive::LineTrace::SetSide(Side::Right);
+        else{
+            Drive::LineTrace::SetSide(Side::Right);
+        }
 
         if(!Drive::Stop())
         {
@@ -77,6 +79,7 @@ bool Phase2::run()
         tracecolor = Drive::ColorCalibrate::GetTraceColor(MAX_TARGET);
         Drive::SetDriveMode(DriveMode::LineTrace);
         Drive::LineTrace::SetTraceColor(tracecolor);
+        
         Drive::LineTrace::SetPID({ 0.5f, 0.0f, 0.3f });//PID�Z�b�gTakeuchi
         // (テスト用後で上のコード追加)    
 

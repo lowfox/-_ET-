@@ -15,7 +15,8 @@ constexpr int32 LookUp_2Deg = 55;
 class Standby {
  private:
   const std::vector<int32> m_tailDegrees = {NomalDeg,    LookUp_1Deg,
-                                            LookUp_2Deg, //, Seesaw_1Deg,
+                                            LookUp_2Deg,// Seesaw_1Deg,
+                                            //
                                             //Seesaw_2Deg, Seesaw_3Deg,
                                             NomalDeg};
 
