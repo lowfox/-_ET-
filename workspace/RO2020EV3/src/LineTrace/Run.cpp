@@ -50,15 +50,17 @@ void Run::driveStart() {
   Drive::LineTrace::SetPID({ 0.5f, 0.0f, 0.3f });//PIDセットTakeuchi
   dly_tsk(500);                          //Takeuchi2000ms待機
 
+  
   Drive::Drive(50);                        //Takeuchi
   Drive::LineTrace::SetPID({ 0.2f, 0.0f, 0.1f });//PIDセットTakeuchi
   dly_tsk(250);                          //Takeuchi2000ms待機
+ 
   /*
   Drive::Drive(75);                        //Takeuchi
   Drive::LineTrace::SetPID({ 0.05f, 0.0f, 0.025f });//PIDセットTakeuchi
   dly_tsk(250);                          //Takeuchi2000ms待機
   */
-  Drive::Drive(70);                        //Takeuchi(現状100では直線しか走れない。70ならとりあえず大小カーブいける)
+  Drive::Drive(50);                        //Takeuchi(現状100では直線しか走れない。70ならとりあえず大小カーブいける)
   
 
   do {
@@ -83,7 +85,7 @@ void Run::driveStart() {
     ;
   // 30%走行
   Drive::Drive(m_lowSpeed);
-
+  EV3_LOG("Im blue now");//Takeuchi
   // ラインが黒色になったら難所へ引き渡し
   while (!color.getBlackColor())
     ;
