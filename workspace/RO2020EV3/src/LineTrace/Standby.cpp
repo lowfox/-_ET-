@@ -61,7 +61,7 @@ void Standby::setup() {
 
     ++cnt;                                          //Takeuchi
   }
-  tail->setCounts(90, 50, true);                   //Takeuchi(尻尾をスタート前の待機ポジションに(角度90°は適当))
+  tail->setCounts(93, 50, true);                   //Takeuchi(尻尾をスタート前の待機ポジションに(角度90°は適当))
 }
 
 void Standby::Calibration(int32 degree) {
@@ -101,7 +101,7 @@ void Standby::Calibration(int32 degree) {
   speaker->playTone(600, 1);
 
 
-  EV3_LOG("degree = %d\nAdd Trace Color black = %f\nAdd Trace Color blue = %f\nAdd Trace Color white = %f\n", degree, countColor.black, countColor.blue, countColor.white);//Takeuchi
+  EV3_LOG("degree = %d\nAdd Trace Color black = %f\nAdd Trace Color blue = R%dG%dB%d\nAdd Trace Color white = %f\n", degree, countColor.black, countColor.blue.r, countColor.blue.g, countColor.blue.b,countColor.white);//Takeuchi
   Drive::ColorCalibrate::AddTraceColor(degree, countColor);
 }
 
