@@ -19,7 +19,7 @@ bool Phase2::run()
 
         Drive::SetDriveMode(DriveMode::LineTrace);
         Drive::LineTrace::SetTraceColor(traceColor);
-        Drive::LineTrace::SetPID({ 0.5f, 0.0f, 0.3f });//PID�Z�b�gTakeuchi
+        Drive::LineTrace::SetPID({ 0.5f, 0.0f, 0.3f });
 
         //Drive::SetDriveMode(DriveMode::Nomal); //テスト用(後でLineTraceに変更)
         if(!Drive::Drive(10))
@@ -85,7 +85,7 @@ bool Phase2::run()
         Drive::SetDriveMode(DriveMode::LineTrace);
         Drive::LineTrace::SetTraceColor(traceColor);
         
-        Drive::LineTrace::SetPID({ 0.5f, 0.0f, 0.3f });//PID�Z�b�gTakeuchi
+        Drive::LineTrace::SetPID({ 0.5f, 0.0f, 0.3f });
         // (テスト用後で上のコード追加)    
 
         // 前進指示       
