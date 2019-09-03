@@ -10,6 +10,7 @@
 
 Standby::Standby() {
   m_tailDegrees.push_back(NomalDeg);
+  constexpr int32 STANDARD_COUNT = 0;
 
   // L,R,各コースで必要な角度をキャリブレーションする
   switch (LINETRACE_NEXT_SCENE) {
@@ -26,6 +27,8 @@ Standby::Standby() {
       EV3_LOG_ERROR("okapeople");
       break;
   }
+
+  m_tailDegrees.push_back(STANDARD_COUNT);
 }
 
 Standby::~Standby() {}
@@ -51,14 +54,15 @@ void Standby::traceMain() {
 
 void Standby::setup() {
   auto* tail = RyujiEv3Engine::GetTailMotor();
-  constexpr int32 TAIL_SPEED = 50;	//しっぽモータ回転速度
-
+  constexpr int32 TAIL_SPEED = 50;		//しっぽモータ回転速度
+  constexpr int32 STANDBY_COUNT = 90;	//待機時のしっぽ角度
 
   //尻尾角度のリセット
   tail->resetCounts();  //尻尾を上にあげきった状態で実行
 
   int32 prevCount = 0;
 
+  // キャリブレーションする必要のある角度をすべて実行
   for (const auto& itr : m_tailDegrees) {
     tail->setCounts(itr - prevCount, TAIL_SPEED, true);
    
@@ -67,7 +71,8 @@ void Standby::setup() {
     prevCount = itr;
   }
 
-  tail->setCounts(90, 50, true);                   //Takeuchi(尻尾をスタート前の待機ポジションに(角度90°は適当))
+  // スタート待機状態にしっぽを設定
+  tail->setCounts(STANDBY_COUNT, TAIL_SPEED, true);
 }
 
 void Standby::Calibration(int32 degree) {
