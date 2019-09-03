@@ -70,7 +70,7 @@ bool SteeringManager::update()
 
 void SteeringManager::driveDistanceUpdate()
 {
-	constexpr float TIRE_DIAMETER = 50.0f;
+	constexpr float TIRE_DIAMETER = 100.5f;
 	constexpr float PI            = 3.1415926535f;
 
 	const float angleLeft       = RyujiEv3Engine::GetLeftMotor()->getCounts()  + m_leftCountOffset;
