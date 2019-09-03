@@ -1,11 +1,11 @@
-#include <Steering.h>
-#include "../DriveEngine/DriveEngine.h"
-#include "SteeringManager.h"
-#include "..//Drive/DriveManager.h"
-#include "../app.h"
+#include "../Middleware/DriveEngine/DriveEngine.h"
+#include "../Middleware/Steering/SteeringManager.h"
+#include "../Middleware/Drive/DriveManager.h"
+#include "../../app.h"
 #include "Steering_mock.h"
+//#include <Steering.h>
 
-namespace Steering
+namespace Steering_mock
 {
 	float GetDistance()
 	{
@@ -14,16 +14,19 @@ namespace Steering
 		switch (j)
 		{
 		case 1:
-			result = 0.0f;
+			return 0.0f;
 			break;
 		case 2:
-			result = 0.1f;
+			return 0.1f;
 			break;
 		case 3:
-			result = 0.2f;
+			return 0.2f;
 			break;
 		case 4:
-			result = 0.3f;
+			return 0.3f;
+			break;
+		default :
+			return 0.0f;
 			break;
 
 		}

@@ -1,11 +1,12 @@
-#include <Detect.h>
-#include "../Drive/DriveManager.h"
-#include "../DriveEngine/DriveEngine.h"
+#include "../Middleware/Drive/DriveManager.h"
+#include "../Middleware/DriveEngine/DriveEngine.h"
 #include <RyujiEv3.h>
+#include "Detect_mock.h"
+//#include <Detect.h>
 
 
 
-namespace Detect
+namespace Detect_mock
 {
 	ReadColor GetColor(float blueCorr, float rgbCorr)
 	{
@@ -21,7 +22,9 @@ namespace Detect
 		case 2:
 			return ReadColor::BLACK;
 			break;
+		default :
+			return ReadColor::NONE;
+			break;
 		}
-		
 	}
 }
