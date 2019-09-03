@@ -19,6 +19,12 @@
 
 class TailControl
 {
+
+private:
+	 #ifdef __LOOKUP_DEBUG__
+    bool StbAngle(int32 target_val,int32 speed = 30);
+	#endif
+	
 public:
 	///
     /// @fn bool Angle(int32 target_val)
@@ -27,6 +33,7 @@ public:
 	/// @retval false 失敗
 	///   
 	bool Angle(int32 target_val,int32 speed = 30);
+   
 
 	///
 	/// @fn bool StageAngle(int32 target_val)

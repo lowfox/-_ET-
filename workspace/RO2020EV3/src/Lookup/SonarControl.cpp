@@ -28,6 +28,7 @@ void SonarControl::SetAvg(int16 avg)
     this->GetInstance()->avg_data = avg;
     return;
 }
+
 #endif
 
 bool SonarControl::CheckAvg()

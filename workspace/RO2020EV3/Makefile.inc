@@ -30,8 +30,7 @@ SonarFilter.o\
 TailControl.o\
 EmergencyControl.o\
 MotorControl.o\
-LookUpTest.o\
-
+LookUpTest.o
 
 SRCLANG := c++
 

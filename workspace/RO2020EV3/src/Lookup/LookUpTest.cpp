@@ -1,4 +1,6 @@
 #include "LookUpTest.h"
+#include "Debug.h"
+
 #ifdef __LOOKUP_DEBUG__
 
 LookUpTest::LookUpTest()
@@ -18,18 +20,18 @@ LookUpTest::LookUpTest()
     sd_test[5].distance_retval = false;
 
     // sonar比較
-    sc_test[0].stop_distance = STOP_DISTANCE -1;
+    sc_test[0].stop_distance = {STOP_DISTANCE,STOP_DISTANCE,STOP_DISTANCE};
     sc_test[0].stop_distance_retval = true;
-    sc_test[1].stop_distance = STOP_DISTANCE;
+    sc_test[1].stop_distance = {STOP_DISTANCE-1,STOP_DISTANCE-1,STOP_DISTANCE-1};
     sc_test[1].stop_distance_retval = true;
-    sc_test[2].stop_distance = STOP_DISTANCE +1;
+    sc_test[2].stop_distance = {STOP_DISTANCE+1,STOP_DISTANCE+1,STOP_DISTANCE+1};
     sc_test[2].stop_distance_retval = false;
-    sc_test[3].stop_distance = 5;
+    sc_test[3].stop_distance = {MIN_SONER,MIN_SONER,MIN_SONER};
     sc_test[3].stop_distance_retval = true;
-    sc_test[4].stop_distance = 4;
-    sc_test[4].stop_distance_retval = false;
-    sc_test[5].stop_distance = 30;
-    sc_test[5].stop_distance_retval = false;
+    sc_test[4].stop_distance = {MIN_SONER-1,MIN_SONER-1,MIN_SONER-1};
+    sc_test[4].stop_distance_retval = true;
+    sc_test[5].stop_distance = {MIN_SONER+1,MIN_SONER+1,MIN_SONER+1};
+    sc_test[5].stop_distance_retval = true;
 
     // sonarinput
     si_test[0].input_data = STOP_DISTANCE;
@@ -48,18 +50,66 @@ LookUpTest::LookUpTest()
     si_test[6].input_data_retval = true;
 
     //tail
-    t_test[0].angles = MIN_TARGET -1;
-    t_test[0].angles_retval = false;
-    t_test[1].angles = MIN_TARGET;
-    t_test[1].angles_retval = true;
-    t_test[2].angles = MIN_TARGET +1;
-    t_test[2].angles_retval = false;
-    t_test[3].angles = MAX_TARGET -1;
-    t_test[3].angles_retval = false;
-    t_test[4].angles = MAX_TARGET;
-    t_test[4].angles_retval = true;
-    t_test[5].angles = MAX_TARGET +1;
-    t_test[5].angles_retval = false;
+    t_test[0].counts = {MIN_TARGET -1,1};
+    t_test[0].counts_retval = false;
+    t_test[1].counts = {MIN_TARGET -1,-1};
+    t_test[1].counts_retval = false;
+    t_test[2].counts = {MIN_TARGET,1};
+    t_test[2].counts_retval = true;
+    t_test[3].counts = {MIN_TARGET,-1};
+    t_test[3].counts_retval = false;
+    t_test[4].counts = {MIN_TARGET + 1,1};
+    t_test[4].counts_retval = false;
+    t_test[5].counts = {MIN_TARGET + 1,-1};
+    t_test[5].counts_retval = false;
+    t_test[6].counts = {MAX_TARGET -1,1};
+    t_test[6].counts_retval = false;
+    t_test[7].counts = {MAX_TARGET -1,-1};
+    t_test[7].counts_retval = false;
+    t_test[8].counts = {MAX_TARGET,1};
+    t_test[8].counts_retval = true;
+    t_test[9].counts = {MAX_TARGET,-1};
+    t_test[9].counts_retval = false;
+    t_test[10].counts = {MAX_TARGET + 1,1};
+    t_test[10].counts_retval = false;
+    t_test[11].counts = {MAX_TARGET + 1,-1};
+    t_test[11].counts_retval = false;
+
+    // Motordistance
+    mt_test[0] = 98;
+    mt_test[1] = 99;
+    mt_test[2] = 100;
+    mt_test[3] = -1;
+    mt_test[4] = 0;
+    mt_test[5] = 1;
+
+    // Motorcount
+    mc_test[0] = -1;
+    mc_test[1] = 0;
+    mc_test[2] = 1;
+    mc_test[3] = 5;
+    mc_test[4] = 10;
+    mc_test[5] = 15;
+
+    // MotorCompareVal
+    mcv_test[0].offset = 10;
+    mcv_test[0].start  = 9.9;
+    mcv_test[0].compare_retval = true;
+    mcv_test[1].offset = 10;
+    mcv_test[1].start  = 10.0;
+    mcv_test[1].compare_retval = false; 
+    mcv_test[2].offset = 10;
+    mcv_test[2].start  = 9.8;
+    mcv_test[2].compare_retval = false;
+    mcv_test[3].offset = 9;
+    mcv_test[3].start  = 10.0;
+    mcv_test[3].compare_retval = true;
+    mcv_test[4].offset = 10;
+    mcv_test[4].start  = 10.0;
+    mcv_test[4].compare_retval = false; 
+    mcv_test[5].offset = 11;
+    mcv_test[5].start  = 10.0;
+    mcv_test[5].compare_retval = false;
 
     // emergencyreflects
     el_test[0].reflects = MIN_REFLRCT-1;
@@ -96,6 +146,18 @@ LookUpTest::LookUpTest()
     er_test[3].right_turn_deg_retval = false;
 }
 
+void LookUpTest::TestSonarFilterGetAvg()
+{
+    for (auto i = 0; i < SONAR_DISTANCE; i++)
+    {
+        SonarFilter::GetInstance()->SetAvg(sd_test[i].distance[0],sd_test[i].distance[1],sd_test[i].distance[2]);
+        EV3_LOG_DEBUG("SonarDistance %d[cm]",SonarFilter::GetInstance()->GetAvg());
+    }
+
+    EV3_LOG_DEBUG("test1END");
+    return;
+}
+
 void LookUpTest::TestSonarFilterFilterInput()
 {
     for (auto i = 0; i < SONAR_DISTANCE; i++)
@@ -103,82 +165,102 @@ void LookUpTest::TestSonarFilterFilterInput()
         SonarFilter::GetInstance()->StbGetDistance(si_test[i].input_data);
         assertEquals(SonarFilter::GetInstance()->FilterInput(),si_test[i].input_data_retval);
     }
+    EV3_LOG_DEBUG("test2END");
     return;
-}
-
-void LookUpTest::TestSonarFilterGetAvg(){
-
-    for (auto i = 0; i < SONAR_DISTANCE; i++)
-    {
-        SonarFilter::GetInstance()->SetAvg(sd_test[i].distance[0],sd_test[i].distance[1],sd_test[i].distance[2]);
-        EV3_LOG_DEBUG("SonarDistance %d[cm]",SonarFilter::GetInstance()->GetAvg());
-    }
-    return;
-}
-
-void LookUpTest::TestTailAngleTest()
-{
-    for(auto i = 0; i< TAIL; i++)
-     {
-        assertEquals(tctrl.Angle(t_test[i].angles),t_test[i].angles_retval);
-     }
-}
-
-void LookUpTest::TestTailStageAngleTest()
-{ 
-    for(auto i = 0; i< TAIL; i++)
-     {
-        assertEquals(tctrl.Angle(t_test[i].angles),t_test[i].angles_retval);
-    }
 }
 
 void LookUpTest::TestSonarControlCheckAvg()
 {
       for (auto i = 0; i < SONAR_CHECK; i++)
     {
-    SonarControl::GetInstance()->SetAvg(sc_test[i].stop_distance);
+    SonarFilter::GetInstance()->SetAvg(sc_test[i].stop_distance[0],sc_test[i].stop_distance[1],sc_test[i].stop_distance[2]);
     assertEquals(SonarControl::GetInstance()->CheckAvg(),sc_test[i].stop_distance_retval);
     }
+    EV3_LOG_DEBUG("test3END");
 }
 
 void LookUpTest::TestSonarControlGetAvg()
-{      
+{   
+    
     for (auto i = 0; i < SONAR_GETAVG; i++)
     {
+        SonarControl::GetInstance()->SetAvg(i);
         EV3_LOG_DEBUG("SonarDistance %d[cm]",SonarControl::GetInstance()->GetAvg());
     }
+    EV3_LOG_DEBUG("test4(SonarEND)END");
+}
+
+void LookUpTest::TestTailAngle()
+{
+    for(auto i = 0; i< TAIL; i++)
+    {
+        assertEquals(tctrl.Angle(t_test[i].counts[0],t_test[i].counts[1]),t_test[i].counts_retval);
+    }
+    EV3_LOG_DEBUG("test5END");
+}
+
+void LookUpTest::TestTailStageAngle()
+{ 
+    for(auto i = 0; i< TAIL; i++)
+     {
+        assertEquals(tctrl.StageAngle(MIN_TARGET -1),false);
+        assertEquals(tctrl.StageAngle(MIN_TARGET),true);
+        assertEquals(tctrl.StageAngle(MIN_TARGET +1),false);
+
+        assertEquals(tctrl.StageAngle(MAX_TARGET -1),false);
+        assertEquals(tctrl.StageAngle(MAX_TARGET),true);
+        assertEquals(tctrl.StageAngle(MAX_TARGET +1),false);
+
+    }
+    EV3_LOG_DEBUG("test6(TailEND)END");
+    
 }
 
 void LookUpTest::TestMotorSetStartDistance()
 {
-    mctrl.StbSetStartDistance(100.00);
+    mctrl.StbSetStartDistance(10.0);
     mctrl.SetStartDistance();
-    mctrl.StbSetStartDistance(120.20);
+    mctrl.StbSetStartDistance(12.0);
     mctrl.SetStartDistance();
+    EV3_LOG_DEBUG("test7END");
 }
 
 void LookUpTest::TestMotorSetOffset()
 {
     for (auto i = 0; i < MOTOR; i++)
     {
+        SonarControl::GetInstance()->SetAvg(mt_test[i]);
         mctrl.SetOffset();
     }
+    EV3_LOG_DEBUG("test8END");
 }
 
 void LookUpTest::TestMotorCompareVal()
 {
-for (auto i = 0; i <MOTOR; i++)
-    {
-        mctrl.CompareVal();
-    }
+        mctrl.StbCompareVal(mcv_test[0].start,mcv_test[0].offset);
+        assertEquals(mctrl.CompareVal(),mcv_test[0].compare_retval);
+
+    EV3_LOG_DEBUG("test9END");
 }
 
-void LookUpTest::TestMotorGetPassCount()
+void LookUpTest::TestMotorUpPassCount()
 {
+    mctrl.StbSetUpPassCnt(0);
     for (auto i = 0; i < MOTOR; i++)
     {
         mctrl.UpPassCnt();
     }
+    EV3_LOG_DEBUG("test10END"); 
+}
+
+void LookUpTest::TestMotorGetPassCount()
+{
+     for (auto i = 0; i < MOTOR; i++)
+    {
+        mctrl.StbSetUpPassCnt(mc_test[i]);
+        mctrl.UpPassCnt();
+    }
+    EV3_LOG_DEBUG("test11(MotorEND)END"); 
 }
 
 void LookUpTest::TestEmergencyLeftTurn()
@@ -188,6 +270,7 @@ void LookUpTest::TestEmergencyLeftTurn()
         ectrl.StbLeftTurnAngle(elf_test[i].left_turn_deg[0],elf_test[i].left_turn_deg[1]);
         assertEquals(ectrl.LeftTurn(),elf_test[i].left_turn_deg_retval);
     }
+    EV3_LOG_DEBUG("test12END"); 
 }
 
 void LookUpTest::TestEmergencyRightTurn()
@@ -197,7 +280,7 @@ void LookUpTest::TestEmergencyRightTurn()
         ectrl.StbRightTurnAngle(er_test[i].right_turn_deg[0],er_test[i].right_turn_deg[1]);
         assertEquals(ectrl.LeftTurn(),er_test[i].right_turn_deg_retval);
     }
-
+    EV3_LOG_DEBUG("test13END"); 
 }
 
 void LookUpTest::TestEmergencyLineCheck()
@@ -207,6 +290,7 @@ void LookUpTest::TestEmergencyLineCheck()
         ectrl.StbGetColor(el_test[i].reflects);
         assertEquals(ectrl.LineCheck(),el_test[i].reflects_retval);
     }
+    EV3_LOG_DEBUG("test14END"); 
 }
 
 void LookUpTest::assertEquals(bool result,bool retval)

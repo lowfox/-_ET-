@@ -1,4 +1,6 @@
 #pragma once
+#include "Debug.h"
+
 #ifdef __LOOKUP_DEBUG__
 #include"TailControl.h"
 #include "MotorControl.h"
@@ -7,13 +9,12 @@
 #include "EmergencyControl.h"
 #include "../Logger/CLogger.h"
 #include "TestData.h"
-#include "Debug.h"
 
 #define SONAR_DISTANCE 6
 #define SONAR_GETAVG   6
 #define SONAR_CHECK    6
 #define SONAR_INPUT    6
-#define TAIL           6
+#define TAIL          12
 #define MOTOR          6
 #define EMERGENCY      6
 #define LEFTDEG        4
@@ -44,8 +45,13 @@ private:
 
        EmergencyRightTurnTest er_test[RIGHTDEG];
 
+       MotorCompareTest       mcv_test[MOTOR];
+
        std::array<int16, SONAR_CHECK> SonarCheckData;
        
+       int16                  mt_test[MOTOR];
+
+       int8                   mc_test[MOTOR];
 
 public:
   
@@ -54,8 +60,8 @@ public:
        void TestSonarFilterFilterInput();
        void TestSonarFilterGetAvg();
 
-       void TestTailAngleTest();
-       void TestTailStageAngleTest();
+       void TestTailAngle();
+       void TestTailStageAngle();
 
        void TestSonarControlCheckAvg();
        void TestSonarControlGetAvg();
@@ -63,6 +69,7 @@ public:
        void TestMotorSetStartDistance();
        void TestMotorSetOffset();
        void TestMotorCompareVal();
+       void TestMotorUpPassCount();
        void TestMotorGetPassCount();
 
        void TestEmergencyLineCheck();

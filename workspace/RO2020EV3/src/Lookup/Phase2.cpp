@@ -11,8 +11,25 @@ bool Phase2::run()
         // 閾値セット       
         m_ctrl.SetOffset();
 
-        // ゲートを通過処理       
-        if(!m_ctrl.CompareVal())
+        // ゲートを通過処理  
+        // 本番
+        //auto tracecolor = Drive::ColorCalibrate::GetTraceColor(55);
+        TraceColor traceColor;
+        traceColor = {6.6f, 23.0f, 0};
+
+        Drive::SetDriveMode(DriveMode::LineTrace);
+        Drive::LineTrace::SetTraceColor(traceColor);
+        Drive::LineTrace::SetPID({ 0.5f, 0.0f, 0.3f });
+
+        //Drive::SetDriveMode(DriveMode::Nomal); //テスト用(後でLineTraceに変更)
+        if(!Drive::Drive(10))
+        {
+            return false;
+        }
+     
+        while(!m_ctrl.CompareVal()){};
+
+        if(!Drive::Stop())
         {
             return false;
         }
@@ -30,18 +47,30 @@ bool Phase2::run()
             return false;
         }
 
-        if(!Drive::Rotate())
+        
+        /*if(!Drive::Rotate())
         {
            return false;
         }
+        */
+       
         // テスト用コード「Drive::Stopまで」(後でRotate()に変更)
-        //RyujiEv3Engine::GetLeftMotor()->setCounts(324,30,false);
-        //RyujiEv3Engine::GetRightMotor()->setCounts(-324,30,true);
+        RyujiEv3Engine::GetLeftMotor()->setCounts(324,30,false);
+        RyujiEv3Engine::GetRightMotor()->setCounts(-324,30,true);
+
+        if(Drive::LineTrace::GetSide() == Side::Right)
+        {
+            Drive::LineTrace::SetSide(Side::Left);
+        }
+        else{
+            Drive::LineTrace::SetSide(Side::Right);
+        }
 
         if(!Drive::Stop())
         {
             return false;
         }
+
         tslp_tsk(500);
 
         // 超音波データリセット 
@@ -51,13 +80,16 @@ bool Phase2::run()
         SonarControl::GetInstance()->SonarRun();
         tslp_tsk(1500);
 
-        auto tracecolor=Drive::ColorCalibrate::GetTraceColor(MAX_TARGET);
-        Drive::LineTrace::SetTraceColor(tracecolor);
+        //tracecolor = Drive::ColorCalibrate::GetTraceColor(MAX_TARGET);
+        traceColor = {6.3f, 78.3f, 0};
         Drive::SetDriveMode(DriveMode::LineTrace);
+        Drive::LineTrace::SetTraceColor(traceColor);
+        
+        Drive::LineTrace::SetPID({ 0.5f, 0.0f, 0.3f });
         // (テスト用後で上のコード追加)    
 
         // 前進指示       
-        if(!Drive::Drive(5))
+        if(!Drive::Drive(10))
         {
             return false;
         }

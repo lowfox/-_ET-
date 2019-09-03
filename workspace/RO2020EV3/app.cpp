@@ -60,15 +60,6 @@ void robocon_task(intptr_t exinf)
 
 	EV3_LOG_INFO("robocon_task End");
 
-    /// ソナーセンサーでの値の取得
-	//SonarFilter sonarfilter;
-	
-	//if(sonarfilter.GetAvg < 30)
-	//{
-		/// 配列に格納する
-	//}
-
-	// ???^?X?N???I??
 	ext_tsk();
 }
 

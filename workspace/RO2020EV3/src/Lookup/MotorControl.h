@@ -7,13 +7,14 @@
 #include "SonarControl.h"
 #include <Drive.h>
 #include "Debug.h"
-#define Threshold 175
+//#define THRESHOLD 175
+#define THRESHOLD 350
 
 class MotorControl
 {
 private:
 
-        float offset_val = 0;
+        int16 offset_val = 0;
 
         float start_val = 0;
 
@@ -27,6 +28,9 @@ public:
         /// @retval false 失敗
 	///   
         bool CompareVal();
+        #ifdef __LOOKUP_DEBUG__
+        void StbCompareVal(float start , int16 offset);
+        #endif 
 
         ///
         /// @fn void SetStartDistance()
@@ -50,7 +54,10 @@ public:
 	/// @brief 通過カウントアップ
 	///   
         void UpPassCnt();
-        
+        #ifdef __LOOKUP_DEBUG__
+        void StbSetUpPassCnt(int8_t pass);
+        #endif
+
         ///
   	/// @fn  int GetPassCount
 	/// @brief ゲート通過回数を返す

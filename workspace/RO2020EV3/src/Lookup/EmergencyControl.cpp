@@ -78,6 +78,7 @@ bool EmergencyControl::LineCheck()
   void EmergencyControl::StbGetColor(uint8 ireflect)
   {
     this->reflect = ireflect;
+    
     return;
   }
 

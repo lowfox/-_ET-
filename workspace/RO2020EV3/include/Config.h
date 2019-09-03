@@ -7,10 +7,10 @@
 #include <SceneManager.h>
 
 /// �ŏ��ɋN������V�[��
-constexpr SceneID START_SCENE_ID = SceneID::Lookup;
+constexpr SceneID START_SCENE_ID = SceneID::LineTrace;
 
 /// ���C���g���[�X�ǂ̎��ɌĂ΂��V�[��
-constexpr SceneID LINETRACE_NEXT_SCENE = SceneID::Garage;
+constexpr SceneID LINETRACE_NEXT_SCENE = SceneID::Lookup;
 
 /// EV3�̊e�Z���T�[,���[�^�[�̐ڑ��|�[�g
 constexpr PortData ROBOCON_PORT =
