@@ -27,7 +27,7 @@ class LineTrace {
   //各種PID格納配列(順番はMapState(enum)に準拠)
   
   const std::array<PID, 5> m_PID = {{
-      {0.05f, 0.0f, 0.025f},  //直線走行用PID値//(仮)
+      {0.7f,0.0f,0.6f},  //直線走行用PID値//(仮)
       {0.7f,0.0f,0.6f},  //右小回り用PID値//(仮)
       {0.7f,0.0f,0.6f},  //左小回り用PID値//(仮)
       {0.7f,0.0f,0.6f},  //右大回り用PID値//(仮)
