@@ -2,12 +2,31 @@
 #include <Drive.h>
 #include "Run.h"
 #include <Logger.h>                               //Takeuchi
+#include <Config.h>
 
 //追加変更その他ざっくり by Takeuchi
 //ログを吐くように追加
 //キャリブレーション時、毎回尻尾位置をリセットするように変更
 
-Standby::Standby() {}
+Standby::Standby() {
+  m_tailDegrees.push_back(NomalDeg);
+
+  // L,R,各コースで必要な角度をキャリブレーションする
+  switch (LINETRACE_NEXT_SCENE) {
+    case SceneID::Lookup:
+      m_tailDegrees.push_back(LookUp_1Deg);
+      m_tailDegrees.push_back(LookUp_2Deg);
+      break;
+    case SceneID::Seesaw:
+      m_tailDegrees.push_back(Seesaw_1Deg);
+      m_tailDegrees.push_back(Seesaw_2Deg);
+      m_tailDegrees.push_back(Seesaw_3Deg);
+      break;
+    default:
+      EV3_LOG_ERROR("okapeople");
+      break;
+  }
+}
 
 Standby::~Standby() {}
 
@@ -38,13 +57,16 @@ void Standby::setup() {
   //尻尾角度のリセット
   tail->resetCounts();  //尻尾を上にあげきった状態で実行
 
+  int32 prevCount = 0;
+
   for (const auto& itr : m_tailDegrees) {
-    tail->setCounts(itr, TAIL_SPEED, true);
+    tail->setCounts(itr - prevCount, TAIL_SPEED, true);
    
 	Calibration(itr);
 
-    tail->setCounts(-itr, TAIL_SPEED, true); 
+    prevCount = itr;
   }
+
   tail->setCounts(90, 50, true);                   //Takeuchi(尻尾をスタート前の待機ポジションに(角度90°は適当))
 }
 

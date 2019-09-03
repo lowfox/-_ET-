@@ -14,9 +14,7 @@ constexpr int32 Seesaw_3Deg = 75;
 //ライントレーススタンバイ
 class Standby {
  private:
-  const std::vector<int32> m_tailDegrees = {NomalDeg,    LookUp_1Deg,
-                                            LookUp_2Deg, Seesaw_1Deg,
-                                            Seesaw_2Deg, Seesaw_3Deg};
+  std::vector<int32> m_tailDegrees;
 
  public:
   Standby();
