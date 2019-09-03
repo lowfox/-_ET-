@@ -32,36 +32,20 @@ void Standby::traceMain() {
 
 void Standby::setup() {
   auto* tail = RyujiEv3Engine::GetTailMotor();
-  constexpr int32 TAIL_SPEED = 70;	//しっぽモータ回転速度
+  constexpr int32 TAIL_SPEED = 50;	//しっぽモータ回転速度
 
-  int cnt = 0;                                      //Takeuchi
-  int32 degReset = 0;                               //Takeuchi(尻尾角度を一番上に戻すための角度)
 
   //尻尾角度のリセット
   tail->resetCounts();  //尻尾を上にあげきった状態で実行
 
   for (const auto& itr : m_tailDegrees) {
-    //tail->setCounts(itr, TAIL_SPEED, true);         //Old
+    tail->setCounts(itr, TAIL_SPEED, true);
+   
+	Calibration(itr);
 
-    //尻尾角度のリセット                                Takeuchi Old
-    /*
-    if (cnt != 0) {                                   //Takeuchi
-      degReset = 0;                                   //Takeuchi
-      degReset -= m_tailDegrees[cnt];                 //Takeuchi
-      tail->setCounts(itr, degReset, true);           //Takeuchi
-    }*/
-
-    tail->setCounts(itr, m_tailDegrees[cnt], true);   //Takeuchi(m_tailDegreesに格納されている各角度を順次呼び出し)
-    Calibration(itr);
-
-    //Takeuchi(尻尾動かした分だけ元に戻す)
-    degReset = 0;                                   //Takeuchi
-    degReset -= m_tailDegrees[cnt];                 //Takeuchi
-    tail->setCounts(itr, degReset, true);           //Takeuchi
-
-    ++cnt;                                          //Takeuchi
+    tail->setCounts(-itr, TAIL_SPEED, true); 
   }
-  tail->setCounts(93, 50, true);                   //Takeuchi(尻尾をスタート前の待機ポジションに(角度90°は適当))
+  tail->setCounts(90, 50, true);                   //Takeuchi(尻尾をスタート前の待機ポジションに(角度90°は適当))
 }
 
 void Standby::Calibration(int32 degree) {
