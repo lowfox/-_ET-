@@ -67,27 +67,27 @@ void LineTraceDrive::update()
 {
 	const RGB rgb = RyujiEv3Engine::GetColorSensor()->getRGB();
 
-	// PID§Œä
-	// RGB‚ÌF‚Ì•½‹Ï‚ğæ“¾
+	// PID????
+	// RGB??F???????ï
 	const float rgbAverage = (static_cast<float>(rgb.r + rgb.g + rgb.b) / 3.0f);
 
 	m_integral += (rgbAverage + m_rgbAverageTemp / 2.0 * m_deltaTime);
 
 	loc_mtx(PID_MTX);
 
-	// P§Œä
+	// P????
 	const float p_control = m_pid.kp * (rgbAverage - m_gray) * (100.0f / static_cast<float>(m_traceColor.black - m_traceColor.white));
-	// I§Œä
+	// I????
 	const float i_control = m_pid.ki * m_integral * (100.0f / static_cast<float>(m_traceColor.black - m_traceColor.white));
-	// D§Œä
+	// D????
 	const float d_control = m_pid.kd * (rgbAverage - m_rgbAverageTemp) * (100.0f / static_cast<float>(m_traceColor.black - m_traceColor.white));
 
 	unl_mtx(PID_MTX);
 
-	// §Œä’l‚ğŠi”[
+	// ????l???i?[
 	m_turn = p_control + i_control + d_control;
 	
-	// ¡‰ñ‚ÌRGB‚ğæ“¾‚µ‚Ä‚¨‚­
+	// ?????RGB???ï???????
 	m_rgbAverageTemp = rgbAverage;
 
 	if (m_side == Side::Left) {
