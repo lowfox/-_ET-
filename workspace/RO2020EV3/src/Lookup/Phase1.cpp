@@ -25,10 +25,16 @@ bool Phase1::run()
     {
         return false;
     }  
+ 
+  TraceColor traceColor;
+  //RGB rgb = {0, 0, 0};
+  traceColor = {6.3f, 78.3f, 0};  //練習用
+  // 本番
+	//auto tracecolor = Drive::ColorCalibrate::GetTraceColor(MAX_TARGET);
 
-    auto tracecolor = Drive::ColorCalibrate::GetTraceColor(MAX_TARGET);
+
     Drive::SetDriveMode(DriveMode::LineTrace);
-    Drive::LineTrace::SetTraceColor(tracecolor);
+    Drive::LineTrace::SetTraceColor(traceColor);
     Drive::LineTrace::SetPID({ 0.5f, 0.0f, 0.3f });//PID�Z�b�gTakeuchi
     //Drive::SetDriveMode(DriveMode::Nomal); //テスト用(後でLineTraceに変更)
 

@@ -12,13 +12,17 @@ bool Phase2::run()
         m_ctrl.SetOffset();
 
         // ゲートを通過処理  
-        auto tracecolor = Drive::ColorCalibrate::GetTraceColor(55);
+        // 本番
+        //auto tracecolor = Drive::ColorCalibrate::GetTraceColor(55);
+        TraceColor traceColor;
+        traceColor = {6.6f, 23.0f, 0};
+
         Drive::SetDriveMode(DriveMode::LineTrace);
-        Drive::LineTrace::SetTraceColor(tracecolor);
+        Drive::LineTrace::SetTraceColor(traceColor);
         Drive::LineTrace::SetPID({ 0.5f, 0.0f, 0.3f });//PID�Z�b�gTakeuchi
 
         //Drive::SetDriveMode(DriveMode::Nomal); //テスト用(後でLineTraceに変更)
-        if(!Drive::Drive(5))
+        if(!Drive::Drive(10))
         {
             return false;
         }
@@ -76,15 +80,16 @@ bool Phase2::run()
         SonarControl::GetInstance()->SonarRun();
         tslp_tsk(1500);
 
-        tracecolor = Drive::ColorCalibrate::GetTraceColor(MAX_TARGET);
+        //tracecolor = Drive::ColorCalibrate::GetTraceColor(MAX_TARGET);
+        traceColor = {6.3f, 78.3f, 0};
         Drive::SetDriveMode(DriveMode::LineTrace);
-        Drive::LineTrace::SetTraceColor(tracecolor);
+        Drive::LineTrace::SetTraceColor(traceColor);
         
         Drive::LineTrace::SetPID({ 0.5f, 0.0f, 0.3f });//PID�Z�b�gTakeuchi
         // (テスト用後で上のコード追加)    
 
         // 前進指示       
-        if(!Drive::Drive(5))
+        if(!Drive::Drive(10))
         {
             return false;
         }

@@ -30,14 +30,7 @@ SonarFilter.o\
 TailControl.o\
 EmergencyControl.o\
 MotorControl.o\
-LookUpTest.o\
-ColorDetection.o\
-StartDash.o\
-Standby.o\
-Run.o\
-MapStateControl.o\
-LineTrace.o\
-DistanceMeasure.o
+LookUpTest.o
 
 SRCLANG := c++
 
