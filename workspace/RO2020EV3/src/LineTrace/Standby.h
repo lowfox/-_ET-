@@ -16,6 +16,10 @@ class Standby {
  private:
   std::vector<int32> m_tailDegrees;
 
+  const int32 TAIL_SPEED = 50;  //しっぽモータ回転速度
+
+  const int32 STANDBY_COUNT = 90;  //待機時のしっぽ角度
+
  public:
   Standby();
   ~Standby();
@@ -31,5 +35,5 @@ class Standby {
 
   bool bluetoothDetection();
 
-  void runStart();
+  bool runStart();
 };

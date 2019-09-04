@@ -31,19 +31,15 @@ Standby::Standby() {
 Standby::~Standby() {}
 
 void Standby::traceMain() {
-  auto* Bluetooth = RyujiEv3Engine::GetBluetooth();
   EV3_LOG("SetUp Start\n");  // Takeuchi
   setup();
   EV3_LOG("SetUp End\n");  // Takeuchi
-#if defined LINETRACE_BLUETOOTH_START
-  while (!bluetoothDetection())
-    ;
-#else
-  EV3_LOG("ButtonDetection Start\n");  // Takeuchi
-  while (!buttonDetection())
-    ;
-  EV3_LOG("ButtonDetection End\n");  // Takeuchi
-#endif
+
+  do {
+	  while (!bluetoothDetection() && !buttonDetection());
+  } while (!runStart());
+
+
   EV3_LOG("Run Start\n");  // Takeuchi
   runStart();
   EV3_LOG("End\n");  // Takeuchi
@@ -51,8 +47,6 @@ void Standby::traceMain() {
 
 void Standby::setup() {
   auto* tail                    = RyujiEv3Engine::GetTailMotor();
-  constexpr int32 TAIL_SPEED    = 50;  //しっぽモータ回転速度
-  constexpr int32 STANDBY_COUNT = 90;  //待機時のしっぽ角度
 
   //尻尾角度のリセット
   tail->resetCounts();  //尻尾を上にあげきった状態で実行
@@ -126,26 +120,24 @@ bool Standby::bluetoothDetection() {
   // スタート識別信号
   constexpr uint8 START_SIGNAL = '1';
 
-  // スタート信号受信まで待機
-  while (bluetooth->read() != START_SIGNAL)
-    ;
-
-  return true;
+  return bluetooth->read() == START_SIGNAL;
 }
 
 bool Standby::buttonDetection() {
   auto* touch = RyujiEv3Engine::GetTouchSensor();
-  auto* lcd   = RyujiEv3Engine::GetLCD();      // Takeuchi
-  lcd->drawString(0, 0, "Plese Push Botton");  // Takeuchi
-  // Button、押されたらtrueをリターン
-  do {
-    touch->update();
-  } while (!touch->clicked());
 
-  return true;
+  touch->update();
+
+  return touch->clicked();
 }
 
-void Standby::runStart() {
+bool Standby::runStart() {
   Run start;
-  while (!start.driveStart());
+
+  if (!start.driveStart()) {
+	  RyujiEv3Engine::GetTailMotor()->setCounts(STANDBY_COUNT, TAIL_SPEED, true);
+	  return false;
+  }
+
+  return true;
 }
