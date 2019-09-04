@@ -34,8 +34,8 @@ bool GarageScene::run()
 	garage_in garage;
 
 	garage.blue_line_total_range_calculation();
-	garage.check_up_to_garage_in();
 	garage.provision_range_calculation();
+	garage.check_up_to_garage_in();
 
 	return change(SceneID::End);
 }
@@ -48,6 +48,8 @@ void GarageScene::garage_in::blue_line_total_range_calculation()
 	RyujiEv3Engine::GetTailMotor()->setCounts(80, 50, true);      //Takeuchi(80度下げる、下げるスピード、とりあずtrue)
 #endif // test
 
+	RyujiEv3Engine::GetLeftMotor()->stop(true);
+	RyujiEv3Engine::GetRightMotor()->stop(true);
 
 	//走行モード設定
 	Drive::SetDriveMode(DriveMode::LineTrace);
@@ -56,37 +58,47 @@ void GarageScene::garage_in::blue_line_total_range_calculation()
 	TraceColor traceColor;                      //Takeuchi
 	
 	//traceColor = Drive::ColorCalibrate::GetTraceColor(80);    //Takeuchi(Nomal Degreeが最初に登録されているので0番目に登録されたトレースカラーを呼び出し)
-	traceColor = { 6.333, 78.333, {17,57,156} };
+	traceColor = { 6.3f, 70.12f, {0,0,128} };
 	Drive::LineTrace::SetTraceColor(traceColor);//Takeuchid
 
-	Drive::LineTrace::SetPID({ 0.5f, 0.0f, 0.2f }); 
+	Drive::LineTrace::SetPID({ 0.3f, 0.0f, 0.1f }); 
 
 	Drive::Drive(10);
 	
 	//青ラインに到達したか判断
-	Judgment = 0;
 	
-	while (Judgment == 0)
+	while ( 1 )
 	{
 		//走行開始
 		if (Detect::GetColor() == ReadColor::BLUE)
 		{
-			Judgment = 1;
+			/* ここで音を鳴らす */
+			traceColor = { 0f, 0f,{ 0,0,128 } };
+			Drive::LineTrace::SetTraceColor(traceColor);//Takeuchid
+			RyujiEv3Engine::GetSpeaker()->setVolume(100);
+			RyujiEv3Engine::GetSpeaker()->playTone(500, 500);
+		
+			break;
 		}
 	}
 
 	//最初の距離値の保存
 	Distance_initia = Steering::GetDistance();
 
-	//青ラインの総距離算出
-	Judgment = 0;
-	while (Judgment == 0) {
-		current_range_value = Steering::GetDistance();
-		measuring_range_value = current_range_value - Distance_initia;
+	//青→黒ラインへの変化を取る
+	while ( 1 ) {
 
 		if (Detect::GetColor() == ReadColor::BLACK)
 		{
-			Judgment = 1;
+			/* 青→黒へ変化した時、実距離と実機の距離差を求める */
+			current_range_value = Steering::GetDistance();
+			measuring_range_value = current_range_value - Distance_initia;
+			/* ここで音を鳴らす */
+			traceColor = { 6.3f, 70.12f,{ 0,0,128 } };
+			Drive::LineTrace::SetTraceColor(traceColor);//Takeuchid
+			RyujiEv3Engine::GetSpeaker()->setVolume(100);
+			RyujiEv3Engine::GetSpeaker()->playTone(500,500);
+			break;
 		}
 	}
 
@@ -105,8 +117,9 @@ void GarageScene::garage_in::provision_range_calculation()
 
 void GarageScene::garage_in::check_up_to_garage_in()
 {
+
+
 	//既定距離測定
-	Judgment = 0;
 	Distance_initia = Steering::GetDistance();
 	measuring_range_value = 0;
 
