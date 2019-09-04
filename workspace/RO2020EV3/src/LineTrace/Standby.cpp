@@ -147,5 +147,5 @@ bool Standby::buttonDetection() {
 
 void Standby::runStart() {
   Run start;
-  start.driveStart();
+  while (!start.driveStart());
 }

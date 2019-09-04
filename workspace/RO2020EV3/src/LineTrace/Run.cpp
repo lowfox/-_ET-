@@ -11,7 +11,7 @@ Run::Run() {}
 
 Run::~Run() {}
 
-void Run::driveStart() {
+bool Run::driveStart() {
   StartDash dash;
   MapStateControl control;
   LineTrace trace;
@@ -62,8 +62,15 @@ void Run::driveStart() {
   */
   Drive::Drive(50);                        //Takeuchi(現状100では直線しか走れない。70ならとりあえず大小カーブいける)
   
+  auto* touch = RyujiEv3Engine::GetTouchSensor();
 
   do {
+	touch->update();
+
+	if (touch->clicked()) {
+		return false;
+	}
+
     //走行状態取得
     m_runState = control.drivePosition();
 
@@ -90,4 +97,5 @@ void Run::driveStart() {
   while (!color.getBlackColor())
     ;
   /* 難所引き渡し */
+  return true;
 }
