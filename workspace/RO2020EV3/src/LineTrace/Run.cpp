@@ -37,37 +37,17 @@ bool Run::driveStart() {
   Steering::SetMode(SteeringMode::Balance);  //倒立モード
   dash.tailOperation();                      //尻尾上げ
 
-  //走行
-  //Drive::Drive(100);                       //old
+  Drive::Drive(50);
 
-  //Takeuhi(最大100%まで徐々に速度を上げていく(スタート時の暴走を防ぐための試み))
-
-  Drive::Drive(10);                        //Takeuchi
-  Drive::LineTrace::SetPID({ 1.0f, 0.0f, 1.0f });//PIDセットTakeuchi
-  dly_tsk(1000);                          //Takeuchi4000ms待機
-
-  Drive::Drive(25);                        //Takeuchi
-  Drive::LineTrace::SetPID({ 0.5f, 0.0f, 0.3f });//PIDセットTakeuchi
-  dly_tsk(500);                          //Takeuchi2000ms待機
-
-  
-  Drive::Drive(50);                        //Takeuchi
-  Drive::LineTrace::SetPID({ 0.2f, 0.0f, 0.1f });//PIDセットTakeuchi
-  dly_tsk(250);                          //Takeuchi2000ms待機
- 
-  /*
-  Drive::Drive(75);                        //Takeuchi
-  Drive::LineTrace::SetPID({ 0.05f, 0.0f, 0.025f });//PIDセットTakeuchi
-  dly_tsk(250);                          //Takeuchi2000ms待機
-  */
-  Drive::Drive(50);                        //Takeuchi(現状100では直線しか走れない。70ならとりあえず大小カーブいける)
-  
   auto* touch = RyujiEv3Engine::GetTouchSensor();
 
   do {
 	touch->update();
 
 	if (touch->clicked()) {
+		Steering::SetMode(SteeringMode::Nomal);
+		Drive::SetDriveMode(DriveMode::Nomal);
+		Drive::Stop();
 		return false;
 	}
 
