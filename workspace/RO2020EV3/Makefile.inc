@@ -24,7 +24,10 @@ SeesawScene.o\
 LineTrace.o\
 ColorDetection.o\
 MapStateControl.o\
-DistanceMeasure.o
+DistanceMeasure.o\
+Run.o\
+Standby.o\
+StartDash.o
 
 SRCLANG := c++
 
