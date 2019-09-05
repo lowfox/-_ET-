@@ -44,10 +44,12 @@ bool Run::driveStart() {
   do {
 	touch->update();
 
+	// ボタンクリックでリスタート
 	if (touch->clicked()) {
 		Steering::SetMode(SteeringMode::Nomal);
 		Drive::SetDriveMode(DriveMode::Nomal);
 		Drive::Stop();
+		Steering::ResetDistance();
 		return false;
 	}
 

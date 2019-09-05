@@ -36,11 +36,6 @@ void Standby::traceMain() {
   do {
 	  while (!bluetoothDetection() && !buttonDetection());
   } while (!runStart());
-
-
-  EV3_LOG("Run Start\n");  // Takeuchi
-  runStart();
-  EV3_LOG("End\n");  // Takeuchi
 }
 
 void Standby::setup() {
