@@ -15,6 +15,10 @@ namespace Steering
 	{
 		return DriveEngine::GetSteering()->driveDistance();
 	}
+	void ResetDistance()
+	{
+		DriveEngine::GetSteering()->resetDriveDistance();
+	}
 }
 
 // ステアリング周期ハンドラ
