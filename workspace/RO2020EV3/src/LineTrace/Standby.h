@@ -4,7 +4,7 @@
 
 constexpr int32 NomalDeg    = 90;
 constexpr int32 LookUp_1Deg = 80;
-constexpr int32 LookUp_2Deg = 62;
+constexpr int32 LookUp_2Deg = 55;
 constexpr int32 Seesaw_1Deg = 65;
 constexpr int32 Seesaw_2Deg = 70;
 constexpr int32 Seesaw_3Deg = 75;
