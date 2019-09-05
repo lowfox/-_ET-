@@ -45,39 +45,39 @@ class MapStateControl {
 
   //Lコースの走行手順
   const std::array<DriveState, STATE_MAX> m_stateLeft = {
-      {{1070.0f, Straight},//(仮)
-       {1690.0f, LargeLeftTurn},//(仮)
-       {2286.0f, Straight},//(仮)
-       {3042.0f, LargeLeftTurn},//(仮)
-       {3172.0f, Straight},//(仮)
-       {3838.0f, SmallLeftTurn},//(仮)
-       {1316.0f, SmallRightTurn},//(仮)
-       {5154.0f, Straight},//(仮)
-       {5954.0f, LargeRightTurn},//(仮)
-       {6864.0f, Straight},//(仮)
-       {7500.0f, LargeRightTurn},//(仮)
-       {7660.0f, Straight},//(仮)
-       {8042.0f, SmallRightTurn},//(仮)
-       {9452.0f, SmallLeftTurn},//(仮)
-       {9632.0f, Straight},//(仮)
-       {9632.1f, Goal}}};//(仮)
+      {{620.0f, Straight},
+       {1240.0f, LargeLeftTurn},
+       {1836.0f, Straight},
+       {2592.0f, LargeLeftTurn},
+       {2722.0f, Straight},
+       {3388.0f, SmallLeftTurn},
+       {4704.0f, SmallRightTurn},
+       {4894.0f, Straight},
+       {5694.0f, LargeRightTurn},
+       {6604.0f, Straight},
+       {7240.0f, LargeRightTurn},
+       {7400.0f, Straight},
+       {7782.0f, SmallRightTurn},
+       {9192.0f, SmallLeftTurn},
+       {9372.0f, Straight},
+       {9372.1f, Goal}}};
 
   //Rコースの走行手順
   const std::array<DriveState, STATE_MAX> m_stateRight = {
-      {{1070.0f, Straight},//(仮)
-       {1690.0f, LargeRightTurn},//(仮)
-       {2286.0f, Straight},//(仮)
-       {3042.0f, LargeRightTurn},//(仮)
-       {3172.0f, Straight},//(仮)
-       {3838.0f, SmallRightTurn},//(仮)
-       {1316.0f, SmallLeftTurn},//(仮)
-       {5154.0f, Straight},//(仮)
-       {5954.0f, LargeLeftTurn},//(仮)
-       {6864.0f, Straight},//(仮)
-       {7500.0f, LargeLeftTurn},//(仮)
-       {7660.0f, Straight},//(仮)
-       {8042.0f, SmallLeftTurn},//(仮)
-       {9452.0f, SmallRightTurn},//(仮)
-       {9632.0f, Straight},//(仮)
-       {9632.1f, Goal}}};//(仮)
+      {{620.0f, Straight},
+       {1240.0f, LargeRightTurn},
+       {1836.0f, Straight},
+       {2592.0f, LargeRightTurn},
+       {2722.0f, Straight},
+       {3388.0f, SmallRightTurn},
+       {4704.0f, SmallLeftTurn},
+       {4894.0f, Straight},
+       {5694.0f, LargeLeftTurn},
+       {6604.0f, Straight},
+       {7240.0f, LargeLeftTurn},
+       {7400.0f, Straight},
+       {7782.0f, SmallLeftTurn},
+       {9192.0f, SmallRightTurn},
+       {9372.0f, Straight},
+       {9372.1f, Goal}}};
 };
