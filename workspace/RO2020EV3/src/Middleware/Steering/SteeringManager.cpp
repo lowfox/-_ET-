@@ -62,6 +62,11 @@ float SteeringManager::driveDistance()
 	return m_driveDistance;
 }
 
+void SteeringManager::resetDriveDistance()
+{
+	m_driveDistance = 0.0f;
+}
+
 bool SteeringManager::update()
 {
 	driveDistanceUpdate();

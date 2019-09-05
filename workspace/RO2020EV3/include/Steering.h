@@ -32,4 +32,10 @@ namespace Steering
 	/// @return ‘–s‹——£[mm]
 	///
 	float GetDistance();
-}
+
+	///
+    /// @fn void resetDistance()
+    /// @brief ‘–s‹——£‚ğ0‚É‚·‚é
+    ///
+	void ResetDistance();
+ }
