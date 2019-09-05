@@ -37,5 +37,5 @@ namespace Steering
     /// @fn void resetDistance()
     /// @brief ‘–s‹——£‚ğ0‚É‚·‚é
     ///
-	void resetDistance();
+	void ResetDistance();
  }

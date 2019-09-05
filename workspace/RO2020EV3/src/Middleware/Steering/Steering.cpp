@@ -15,7 +15,7 @@ namespace Steering
 	{
 		return DriveEngine::GetSteering()->driveDistance();
 	}
-	void resetDistance()
+	void ResetDistance()
 	{
 		DriveEngine::GetSteering()->resetDriveDistance();
 	}
