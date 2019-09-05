@@ -18,9 +18,7 @@ Standby::Standby() {
       m_tailDegrees.push_back(LookUp_2Deg);
       break;
     case SceneID::Seesaw:
-      m_tailDegrees.push_back(Seesaw_1Deg);
-      m_tailDegrees.push_back(Seesaw_2Deg);
-      m_tailDegrees.push_back(Seesaw_3Deg);
+
       break;
     default:
       EV3_LOG_ERROR("okapeople");
