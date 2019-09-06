@@ -1,7 +1,7 @@
 
 #include <SceneManager.h>
 
-/// ƒKƒŒ[ƒWƒV[ƒ“
+/// ï¿½Kï¿½ï¿½ï¿½[ï¿½Wï¿½Vï¿½[ï¿½ï¿½
 class GarageScene :public IScene
 {
 public:
@@ -11,31 +11,26 @@ public:
 	class garage_in
 	{
 	public:
-		//ŠÖ”’è‹`
-		void blue_line_total_range_calculation();			//Âƒ‰ƒCƒ“‚Ì‘‹——£‚ğ‹‚ß‚é
-		void provision_range_calculation();					//Âƒ‰ƒCƒ“I’[‚©‚çƒKƒŒ[ƒWƒCƒ“‚Ü‚Å‚Ì‘‹——£‚ğÂƒ‰ƒCƒ“‚Ì‘‹——£‚©‚ç”ä—¦‚ÅŠù’è‹——£‚ğ‹‚ß‚é
-		void check_up_to_garage_in();						//Âƒ‰ƒCƒ“I’[‚©‚çƒKƒŒ[ƒW‚Ü‚Å‚ÌŠù’è‹——£‚ğ‘–s‚µ‚½‚©‚ğƒ`ƒFƒbƒN
+		//ï¿½Öï¿½ï¿½ï¿½`
+		void Start_Process();			//ï¿½Âƒï¿½ï¿½Cï¿½ï¿½ï¿½Ì‘ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
+
 	private:
-		//•Ï”’è‹`
-		int Judgment;										//”»’f•Ï”
-		float Distance_initia;								//‰Šú‹——£’l
-		float current_range_value;							//Œ»İ‚Ì‹——£’l
-		float range_up_to_garage;							//Âƒ‰ƒCƒ“I’[‚©‚çƒKƒŒ[ƒW‚Ü‚Å‚Ì‹——£’l
-		float measuring_range_value;						//‘ª’è’†‚Ì‹——£’l
+		//ï¿½Ïï¿½ï¿½ï¿½`
+		float Initial_Distance;								//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½l
 	};
 	///
 	/// @fn bool init()
-	/// @brief ƒKƒŒ[ƒWƒV[ƒ“‚ğ‰Šú‰»‚·‚éB‘O‚ÌƒV[ƒ“‚©‚ç‚Ìó‚¯“n‚µ’¼Œã‚ÉŒÄ‚Î‚ê‚éBArduino‚Ìsetup‚Æ“¯‚¶ì—p
-	/// @retval true ¬Œ÷
-	/// @retval false ¸”s
+	/// @brief ï¿½Kï¿½ï¿½ï¿½[ï¿½Wï¿½Vï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Bï¿½Oï¿½ÌƒVï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ìó‚¯“nï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÉŒÄ‚Î‚ï¿½ï¿½BArduinoï¿½ï¿½setupï¿½Æ“ï¿½ï¿½ï¿½ï¿½ï¿½p
+	/// @retval true ï¿½ï¿½ï¿½ï¿½
+	/// @retval false ï¿½ï¿½ï¿½s
 	///
 	bool init()override;
 
 	///
 	/// @fn bool run()
-	/// @brief ƒKƒŒ[ƒWƒV[ƒ“‚ğÀs‚·‚éBinit()’¼Œã‚ÉŒÄ‚Î‚ê‚éB
-	/// @retval true ¬Œ÷
-	/// @retval false ¸”s
+	/// @brief ï¿½Kï¿½ï¿½ï¿½[ï¿½Wï¿½Vï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½Binit()ï¿½ï¿½ï¿½ï¿½ÉŒÄ‚Î‚ï¿½ï¿½B
+	/// @retval true ï¿½ï¿½ï¿½ï¿½
+	/// @retval false ï¿½ï¿½ï¿½s
 	///
 	bool run()override;
 };

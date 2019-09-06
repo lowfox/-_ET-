@@ -36,6 +36,8 @@ public:
 
 	float driveDistance();
 
+	void resetDriveDistance();
+
 	bool update();
 
 private:

@@ -2,6 +2,7 @@
 #include "../DriveEngine/DriveEngine.h"
 #include "../Steering/SteeringManager.h"
 #include "DriveManager.h"
+#include "Detect.h"
 
 bool LineTraceDrive::init()
 {
@@ -67,27 +68,39 @@ void LineTraceDrive::update()
 {
 	const RGB rgb = RyujiEv3Engine::GetColorSensor()->getRGB();
 
-	// PIDêßå‰
-	// RGBÇÃêFÇÃïΩãœÇéÊìæ
-	const float rgbAverage = (static_cast<float>(rgb.r + rgb.g + rgb.b) / 3.0f);
+	// PID????
+	// RGB??F???????èÔ
+	float rgbAverage;
+
+	// ???C???????????????l?????????????l???i?[????
+	if (Detect::GetColor() == ReadColor::BLUE) {
+          m_threshold = static_cast<float>(m_blueGray + m_traceColor.white) / 2.0f;
+          rgbAverage = static_cast<float>(rgb.b);
+          m_limitVal = static_cast<float>(m_blueGray - m_traceColor.white);
+    } else if (Detect::GetColor() == ReadColor::BLACK) {
+          m_threshold = m_gray;
+          rgbAverage = (static_cast<float>(rgb.r + rgb.g + rgb.b) / 3.0f);
+          m_limitVal = static_cast<float>(m_traceColor.black - m_traceColor.white);
+    }
+
 
 	m_integral += (rgbAverage + m_rgbAverageTemp / 2.0 * m_deltaTime);
 
 	loc_mtx(PID_MTX);
 
-	// Pêßå‰
-	const float p_control = m_pid.kp * (rgbAverage - m_gray) * (100.0f / static_cast<float>(m_traceColor.black - m_traceColor.white));
-	// Iêßå‰
-	const float i_control = m_pid.ki * m_integral * (100.0f / static_cast<float>(m_traceColor.black - m_traceColor.white));
-	// Dêßå‰
-	const float d_control = m_pid.kd * (rgbAverage - m_rgbAverageTemp) * (100.0f / static_cast<float>(m_traceColor.black - m_traceColor.white));
+	// P????
+	const float p_control = m_pid.kp * (rgbAverage - m_threshold) * (100.0f / m_limitVal);
+	// I????
+	const float i_control = m_pid.ki * m_integral * (100.0f / m_limitVal);
+	// D????
+	const float d_control = m_pid.kd * (rgbAverage - m_rgbAverageTemp) * (100.0f / m_limitVal);
 
 	unl_mtx(PID_MTX);
 
-	// êßå‰ílÇäiî[
+	// ????l???i?[
 	m_turn = p_control + i_control + d_control;
 	
-	// ç°âÒÇÃRGBÇéÊìæÇµÇƒÇ®Ç≠
+	// ?????RGB???èÔ???????
 	m_rgbAverageTemp = rgbAverage;
 
 	if (m_side == Side::Left) {
@@ -123,7 +136,8 @@ Side LineTraceDrive::getSize()
 void LineTraceDrive::setTraceColor(const TraceColor& traceColor)
 {
 	m_traceColor = traceColor;
-	m_gray = (m_traceColor.black + m_traceColor.white) / 2.0f;
+	m_gray = ((m_traceColor.black + m_traceColor.white) / 2.0f) * 0.7f;
+    m_blueGray = (m_traceColor.blue.r + m_traceColor.blue.g + m_traceColor.blue.b) / 3.0f;
 }
 
 TraceColor LineTraceDrive::getTraceColor()

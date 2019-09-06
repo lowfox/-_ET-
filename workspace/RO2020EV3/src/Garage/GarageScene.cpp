@@ -15,8 +15,8 @@
 #include <Detect.h>
 #include <Steering.h>
 #include <Logger.h>
+#include "Standby.h"
 #endif // DEBUG
-
 
 GarageScene::GarageScene(ISceneChanger* sceneChanger) : IScene(sceneChanger)
 {
@@ -25,6 +25,9 @@ GarageScene::GarageScene(ISceneChanger* sceneChanger) : IScene(sceneChanger)
 
 bool GarageScene::init()
 {
+	Standby stanby;       //for test only
+	stanby.traceMain();   //for test only
+	RyujiEv3Engine::GetTailMotor()->setCounts(80, 50, true); //for test only
 	return true;
 }
 
@@ -32,111 +35,98 @@ bool GarageScene::run()
 {
 	// GarageCode
 	garage_in garage;
-
-	garage.blue_line_total_range_calculation();
-	garage.provision_range_calculation();
-	garage.check_up_to_garage_in();
-
+	garage.Start_Process();
 	return change(SceneID::End);
 }
 
-void GarageScene::garage_in::blue_line_total_range_calculation()
+void GarageScene::garage_in::Start_Process()
 {
 #ifdef test
-	//K”öŠp“xÝ’è
+	//ï¿½Kï¿½ï¿½ï¿½pï¿½xï¿½Ý’ï¿½
 	//RyujiEv3Engine::GetTailMotor()->setCounts(-90, 50, true);
-	RyujiEv3Engine::GetTailMotor()->setCounts(80, 50, true);      //Takeuchi(80“x‰º‚°‚éA‰º‚°‚éƒXƒs[ƒhA‚Æ‚è‚ ‚¸true)
+	//RyujiEv3Engine::GetTailMotor()->setCounts(80, 50, true);      //Takeuchi(80ï¿½xï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Xï¿½sï¿½[ï¿½hï¿½Aï¿½Æ‚è‚ ï¿½ï¿½true)
 #endif // test
 
-	RyujiEv3Engine::GetLeftMotor()->stop(true);
-	RyujiEv3Engine::GetRightMotor()->stop(true);
+	if (!RyujiEv3Engine::GetLeftMotor()->stop(true)) {
+		EV3_LOG("GET_LEFT_ERR");
+	}
+	if (!RyujiEv3Engine::GetRightMotor()->stop(true)) {
+		EV3_LOG("GET_RIGHT_ERR");
+	}
 
-	//‘–sƒ‚[ƒhÝ’è
-	Drive::SetDriveMode(DriveMode::LineTrace);
-	
-	//SetTraceColor’Ç‰Á//Takeuchi
 	TraceColor traceColor;                      //Takeuchi
-	
-	//traceColor = Drive::ColorCalibrate::GetTraceColor(80);    //Takeuchi(Nomal Degree‚ªÅ‰‚É“o˜^‚³‚ê‚Ä‚¢‚é‚Ì‚Å0”Ô–Ú‚É“o˜^‚³‚ê‚½ƒgƒŒ[ƒXƒJƒ‰[‚ðŒÄ‚Ño‚µ)
-	traceColor = { 6.3f, 70.12f, {0,0,128} };
-	Drive::LineTrace::SetTraceColor(traceColor);//Takeuchid
 
-	Drive::LineTrace::SetPID({ 0.3f, 0.0f, 0.1f }); 
+	/*RGB RGB_COLOR;  //only used for test
+	while (1) {
+		RGB_COLOR=RyujiEv3Engine::GetColorSensor()->getRGB();
 
-	Drive::Drive(10);
-	
-	//Âƒ‰ƒCƒ“‚É“ž’B‚µ‚½‚©”»’f
-	
-	while ( 1 )
-	{
-		//‘–sŠJŽn
 		if (Detect::GetColor() == ReadColor::BLUE)
 		{
-			/* ‚±‚±‚Å‰¹‚ð–Â‚ç‚· */
-			traceColor = { 0f, 0f,{ 0,0,128 } };
-			Drive::LineTrace::SetTraceColor(traceColor);//Takeuchid
-			RyujiEv3Engine::GetSpeaker()->setVolume(100);
-			RyujiEv3Engine::GetSpeaker()->playTone(500, 500);
-		
-			break;
+			EV3_LOG("BLUE");
 		}
-	}
 
-	//Å‰‚Ì‹——£’l‚Ì•Û‘¶
-	Distance_initia = Steering::GetDistance();
-
-	//Â¨•ƒ‰ƒCƒ“‚Ö‚Ì•Ï‰»‚ðŽæ‚é
-	while ( 1 ) {
-
-		if (Detect::GetColor() == ReadColor::BLACK)
+		else if (Detect::GetColor() == ReadColor::BLACK)
 		{
-			/* Â¨•‚Ö•Ï‰»‚µ‚½ŽžAŽÀ‹——£‚ÆŽÀ‹@‚Ì‹——£·‚ð‹‚ß‚é */
-			current_range_value = Steering::GetDistance();
-			measuring_range_value = current_range_value - Distance_initia;
-			/* ‚±‚±‚Å‰¹‚ð–Â‚ç‚· */
-			traceColor = { 6.3f, 70.12f,{ 0,0,128 } };
-			Drive::LineTrace::SetTraceColor(traceColor);//Takeuchid
-			RyujiEv3Engine::GetSpeaker()->setVolume(100);
-			RyujiEv3Engine::GetSpeaker()->playTone(500,500);
-			break;
+			EV3_LOG("BLACK");
 		}
+
+		else {
+			EV3_LOG("WHITE");
+		}
+	}*/
+	
+	//ï¿½ï¿½ï¿½sï¿½ï¿½ï¿½[ï¿½hï¿½Ý’ï¿½
+	if (!Drive::SetDriveMode(DriveMode::LineTrace)) {
+		EV3_LOG("SetDriveMode...false");
 	}
 
-	EV3_LOG("%f‘‹——£", measuring_range_value);
-}
+	traceColor = Drive::ColorCalibrate::GetTraceColor(80);    //Takeuchi(Nomal Degreeï¿½ï¿½ï¿½Åï¿½ï¿½É“oï¿½^ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½Ì‚ï¿½0ï¿½Ô–Ú‚É“oï¿½^ï¿½ï¿½ï¿½ê‚½ï¿½gï¿½ï¿½ï¿½[ï¿½Xï¿½Jï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Ä‚Ñoï¿½ï¿½)
+	EV3_LOG("BLACK=%f \n WHITE%f\n BLUE.R=%d\n BLUE.G=%d\n BLUE.B=%d",traceColor.black,traceColor.white, traceColor.blue.r, traceColor.blue.g, traceColor.blue.b);
+	Drive::LineTrace::SetTraceColor(traceColor);//Takeuchid
+	
+	Drive::LineTrace::SetPID({ 0.2f, 0.0f, 0.1f });
 
-void GarageScene::garage_in::provision_range_calculation()
-{
-	//”ä—¦’è”
-	const static int ratio = 0.5;
-	//‹——£”ä—¦ŒvŽZ
-	range_up_to_garage = measuring_range_value * ratio;
-
-	EV3_LOG("%f”ä—¦", range_up_to_garage);
-}
-
-void GarageScene::garage_in::check_up_to_garage_in()
-{
-
-
-	//Šù’è‹——£‘ª’è
-	Distance_initia = Steering::GetDistance();
-	measuring_range_value = 0;
-
-	while (range_up_to_garage == measuring_range_value) {
-		current_range_value = Steering::GetDistance();
-		measuring_range_value = current_range_value - Distance_initia;
+	if (!Drive::Drive(5)) {
+		EV3_LOG("SetDriveSet...false");
 	}
 	
+	if (!RyujiEv3Engine::GetSpeaker()->setVolume(100)) {
+		EV3_LOG("SetGetSpeaker...false");
+	}
+	//ï¿½Âƒï¿½ï¿½Cï¿½ï¿½ï¿½É“ï¿½ï¿½Bï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½f
+	while (1)
+	{
+		EV3_LOG("NOT_BLUE");
+		//ï¿½ï¿½ï¿½sï¿½Jï¿½n
+		if (Detect::GetColor() == ReadColor::BLUE)
+		{
+			EV3_LOG("BLUE_GET");
+			/* ï¿½ï¿½ï¿½ï¿½ï¿½Å‰ï¿½ï¿½ï¿½Â‚ç‚· */
+			if (!RyujiEv3Engine::GetSpeaker()->playTone(500, 500)) {
+				EV3_LOG("SPEAKER_ERR");
+			}
+			break;
+		}
+	}
+	
+	//ï¿½Åï¿½ï¿½Ì‹ï¿½ï¿½ï¿½ï¿½lï¿½Ì•Û‘ï¿½	//ï¿½Âï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½Ö‚Ì•Ï‰ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	while ( 1 ) {
+		EV3_LOG("NOT_BLACK");
+		/* ï¿½Âï¿½ï¿½ï¿½ï¿½Ö•Ï‰ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½ï¿½ï¿½ÆŽï¿½ï¿½@ï¿½Ì‹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½ */
+		if (Detect::GetColor() == ReadColor::BLACK)
+		{
+			EV3_LOG("BLACK_GET");
+			/* ï¿½ï¿½ï¿½ï¿½ï¿½Å‰ï¿½ï¿½ï¿½Â‚ç‚· */
+			if (!RyujiEv3Engine::GetSpeaker()->playTone(500, 500)) {
+				EV3_LOG("SPEAKER_ERR");
+			}
+			Initial_Distance = Steering::GetDistance();
+			break;
+		}
+	}
+
+	while ((Initial_Distance + 150.0f) > Steering::GetDistance()) {}
 	Drive::Stop();
+	EV3_LOG("FINISHED");
+	RyujiEv3Engine::GetSpeaker()->playTone(500, 1000);
 }
-
-
-
-
-
-
-
-
-
-
