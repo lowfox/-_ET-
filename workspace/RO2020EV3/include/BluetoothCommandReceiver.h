@@ -128,7 +128,9 @@ public:
 
 		while (m_bluetooth->read(data));
 		// コマンドコールバック実行
+		EV3_LOG("Command Run");
+
 		itr->second(arg);
-		EV3_LOG("Command Run %s", itr->first.c_str());
+		EV3_LOG("Command RunEnd");
 	}
 };
