@@ -124,10 +124,10 @@ public:
 				EV3_LOG("Command Arg = %s",receiveString);
 			}
 		}
-		EV3_LOG("Command Run %s",itr->first.c_str());
 
 		while (m_bluetooth->read(data));
 		// コマンドコールバック実行
 		itr->second(arg);
+		EV3_LOG("Command Run %s", itr->first.c_str());
 	}
 };

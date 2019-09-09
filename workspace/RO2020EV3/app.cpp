@@ -73,6 +73,7 @@ void bt_task(intptr_t unused)
 
 	while (true)
 	{
+		dly_tsk(1);
 		BluetoothCommandReceiver::update();
 	}
 

@@ -9,6 +9,12 @@ LineTraceScene::LineTraceScene(ISceneChanger* sceneChanger)
 
 bool LineTraceScene::init() { return true; }
 
+void setspeed(std::vector<String>& arg)
+{
+	EV3_LOG("SetSpeed(%d)", static_cast<int32>(std::atoi(arg[0].c_str())));
+	Drive::Drive(std::atoi(arg[0].c_str()));
+}
+
 bool LineTraceScene::run() {
 	// SetPIDコマンドを登録
 	BluetoothCommandReceiver::add("SetPID", [](std::vector<String>& arg) {
@@ -23,7 +29,7 @@ bool LineTraceScene::run() {
 		Drive::Drive(std::atoi(arg[0].c_str()));
 	});
 
-
+	BluetoothCommandReceiver::add("II", setspeed);
   // LineTraceCode
   Standby stanby;       //Stanbyクラスのインスタンス生成
 
