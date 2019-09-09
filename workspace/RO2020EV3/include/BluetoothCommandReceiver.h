@@ -51,7 +51,7 @@ public:
 		::memset(receiveString, '\0', RECEIVE_BUFFER);
 		bool argflg = false;
 
-		receiveString[0] = c;
+		receiveString[0] = static_cast<char>(data);
 
 		// コマンド受信
 		for (int32 i = 1; i < RECEIVE_BUFFER; i++)
