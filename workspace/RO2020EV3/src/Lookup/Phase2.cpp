@@ -12,17 +12,13 @@ bool Phase2::run()
         m_ctrl.SetOffset();
 
         // ゲートを通過処理  
-        // 本番
-        //auto tracecolor = Drive::ColorCalibrate::GetTraceColor(55);
-        TraceColor traceColor;
-        traceColor = {6.6f, 23.0f, 0};
-
+        auto tracecolor = Drive::ColorCalibrate::GetTraceColor(MIN_TARGET);
         Drive::SetDriveMode(DriveMode::LineTrace);
-        Drive::LineTrace::SetTraceColor(traceColor);
-        Drive::LineTrace::SetPID({ 0.5f, 0.0f, 0.3f });
+        Drive::LineTrace::SetTraceColor(tracecolor);
+        Drive::LineTrace::SetPID({ 0.3f, 0.0f, 0.1f });
 
         //Drive::SetDriveMode(DriveMode::Nomal); //テスト用(後でLineTraceに変更)
-        if(!Drive::Drive(10))
+        if(!Drive::Drive(15))
         {
             return false;
         }
@@ -46,15 +42,7 @@ bool Phase2::run()
         {
             return false;
         }
-
-        
-        /*if(!Drive::Rotate())
-        {
-           return false;
-        }
-        */
        
-        // テスト用コード「Drive::Stopまで」(後でRotate()に変更)
         RyujiEv3Engine::GetLeftMotor()->setCounts(324,30,false);
         RyujiEv3Engine::GetRightMotor()->setCounts(-324,30,true);
 
@@ -80,16 +68,14 @@ bool Phase2::run()
         SonarControl::GetInstance()->SonarRun();
         tslp_tsk(1500);
 
-        //tracecolor = Drive::ColorCalibrate::GetTraceColor(MAX_TARGET);
-        traceColor = {6.3f, 78.3f, 0};
         Drive::SetDriveMode(DriveMode::LineTrace);
-        Drive::LineTrace::SetTraceColor(traceColor);
-        
-        Drive::LineTrace::SetPID({ 0.5f, 0.0f, 0.3f });
-        // (テスト用後で上のコード追加)    
+        tracecolor = Drive::ColorCalibrate::GetTraceColor(MAX_TARGET);
+        Drive::LineTrace::SetTraceColor(tracecolor);
+
+        Drive::LineTrace::SetPID({ 0.3f, 0.0f, 0.1f });
 
         // 前進指示       
-        if(!Drive::Drive(10))
+        if(!Drive::Drive(15))
         {
             return false;
         }
