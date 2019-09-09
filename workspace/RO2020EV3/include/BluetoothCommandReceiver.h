@@ -11,7 +11,8 @@ class BluetoothCommandReceiver
 {
 public:
 
-	using CommandCallback = void(*)(std::vector<String>&);
+	typedef void(*CommandCallback)(std::vector<String>& arg);
+
 private:
 
 	static std::map<String, CommandCallback> m_commandMap;
