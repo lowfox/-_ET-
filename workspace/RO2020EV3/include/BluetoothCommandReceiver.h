@@ -3,6 +3,7 @@
 #include <map>
 #include <RyujiEv3.h>
 #include <vector>
+#include <Logger.h>
 
 using namespace ZhanU;
 
@@ -39,6 +40,8 @@ public:
 		constexpr int32 RECEIVE_BUFFER = 256;
 		uint8 data;
 
+		EV3_LOG("BluetoothUpdate");
+
 		// 受信データなし
 		if (!m_bluetooth->read(data))
 		{
@@ -72,6 +75,7 @@ public:
 
 			receiveString[i] = c;
 		}
+		EV3_LOG("Command %s", receiveString);
 
 		//コマンド検索
 		auto itr = m_commandMap.find(receiveString);
@@ -115,12 +119,10 @@ public:
 
 				// コマンド引数を追加
 				arg.push_back(receiveString);
+
+				EV3_LOG("Command Arg = %s",receiveString);
 			}
 		}
-
-		// 受信バッファクリア
-		while (m_bluetooth->read(data));
-
 		// コマンドコールバック実行
 		itr->second(arg);
 	}
