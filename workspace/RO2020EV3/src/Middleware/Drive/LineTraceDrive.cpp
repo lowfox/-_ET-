@@ -68,39 +68,38 @@ void LineTraceDrive::update()
 {
 	const RGB rgb = RyujiEv3Engine::GetColorSensor()->getRGB();
 
-	// PID????
-	// RGB??F???????ï
-	float rgbAverage;
+	// PID§Œä
+	// RGB‚ÌF‚Ì•½‹Ï‚ğæ“¾
+	float rgbAverage = (static_cast<float>(rgb.r + rgb.g + rgb.b) / 3.0f);
 
-	// ???C???????????????l?????????????l???i?[????
+	// ‚µ‚«‚¢’l‚ğŠi”[‚·‚é
 	if (Detect::GetColor() == ReadColor::BLUE) {
-          m_threshold = static_cast<float>(m_blueGray + m_traceColor.white) / 2.0f;
-          rgbAverage = static_cast<float>(rgb.b);
+          // ƒ‰ƒCƒ“‚ªÂ‚Ìê‡‚µ‚«‚¢’l‚ÉÂ‚Æ”’‚Ì‚µ‚«‚¢’l‚ğŠi”[‚·‚é
+          m_threshold = static_cast<float>(m_blueGray + m_traceColor.white * 0.7) / 2.0f;
           m_limitVal = static_cast<float>(m_blueGray - m_traceColor.white);
     } else if (Detect::GetColor() == ReadColor::BLACK) {
+          // ƒ‰ƒCƒ“‚ª•‚Ìê‡‚µ‚«‚¢’l‚É•‚Æ”’‚Ì‚µ‚«‚¢’l‚ğŠi”[‚·‚é
           m_threshold = m_gray;
-          rgbAverage = (static_cast<float>(rgb.r + rgb.g + rgb.b) / 3.0f);
           m_limitVal = static_cast<float>(m_traceColor.black - m_traceColor.white);
     }
-
 
 	m_integral += (rgbAverage + m_rgbAverageTemp / 2.0 * m_deltaTime);
 
 	loc_mtx(PID_MTX);
 
-	// P????
+	// P§Œä
 	const float p_control = m_pid.kp * (rgbAverage - m_threshold) * (100.0f / m_limitVal);
-	// I????
+	// I§Œä
 	const float i_control = m_pid.ki * m_integral * (100.0f / m_limitVal);
-	// D????
+	// D§Œä
 	const float d_control = m_pid.kd * (rgbAverage - m_rgbAverageTemp) * (100.0f / m_limitVal);
 
 	unl_mtx(PID_MTX);
 
-	// ????l???i?[
+	// §Œä’l‚ğŠi”[
 	m_turn = p_control + i_control + d_control;
 	
-	// ?????RGB???ï???????
+	// ¡‰ñ‚ÌRGB‚ğæ“¾‚µ‚Ä‚¨‚­
 	m_rgbAverageTemp = rgbAverage;
 
 	if (m_side == Side::Left) {
@@ -137,7 +136,10 @@ void LineTraceDrive::setTraceColor(const TraceColor& traceColor)
 {
 	m_traceColor = traceColor;
 	m_gray = ((m_traceColor.black + m_traceColor.white) / 2.0f) * 0.7f;
-    m_blueGray = (m_traceColor.blue.r + m_traceColor.blue.g + m_traceColor.blue.b) / 3.0f;
+    m_blueGray = ((m_traceColor.blue.r + m_traceColor.blue.g + m_traceColor.blue.b) / 3.0f) * 0.7f;
+
+	m_threshold = m_gray;
+	m_limitVal = static_cast<float>(m_traceColor.black - m_traceColor.white);
 }
 
 TraceColor LineTraceDrive::getTraceColor()

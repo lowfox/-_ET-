@@ -84,7 +84,7 @@ void GarageScene::garage_in::Start_Process()
 	EV3_LOG("BLACK=%f \n WHITE%f\n BLUE.R=%d\n BLUE.G=%d\n BLUE.B=%d",traceColor.black,traceColor.white, traceColor.blue.r, traceColor.blue.g, traceColor.blue.b);
 	Drive::LineTrace::SetTraceColor(traceColor);//Takeuchid
 	
-	Drive::LineTrace::SetPID({ 0.2f, 0.0f, 0.1f });
+	Drive::LineTrace::SetPID({ 0.4f, 0.0f, 0.2f });
 
 	if (!Drive::Drive(5)) {
 		EV3_LOG("SetDriveSet...false");
@@ -125,7 +125,7 @@ void GarageScene::garage_in::Start_Process()
 		}
 	}
 
-	while ((Initial_Distance + 150.0f) > Steering::GetDistance()) {}
+	while ((Initial_Distance + 120.0f) > Steering::GetDistance());
 	Drive::Stop();
 	EV3_LOG("FINISHED");
 	RyujiEv3Engine::GetSpeaker()->playTone(500, 1000);
