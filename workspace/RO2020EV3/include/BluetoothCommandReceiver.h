@@ -65,7 +65,7 @@ public:
 				argflg = true;
 				break;
 			}
-			else if (c == '\0')
+			else if (c == ';')
 			{
 				break;
 			}
@@ -104,7 +104,7 @@ public:
 					{
 						break;
 					}
-					else if (c == '\0')
+					else if (c == ';')
 					{
 						EV3_LOG("Arg End", receiveString);
 
@@ -125,6 +125,8 @@ public:
 			}
 		}
 		EV3_LOG("Command Run %s",itr->first.c_str());
+
+		while (m_bluetooth->read(data));
 		// コマンドコールバック実行
 		itr->second(arg);
 	}
