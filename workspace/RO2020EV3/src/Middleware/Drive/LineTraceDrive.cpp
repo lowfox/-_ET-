@@ -70,19 +70,18 @@ void LineTraceDrive::update()
 
 	// PID制御
 	// RGBの色の平均を取得
-	float rgbAverage;
+	float rgbAverage = (static_cast<float>(rgb.r + rgb.g + rgb.b) / 3.0f);
 
-	// ラインが青の場合しきい値に青と白のしきい値を格納する
+	// しきい値を格納する
 	if (Detect::GetColor() == ReadColor::BLUE) {
-          m_threshold = static_cast<float>(m_blueGray + m_traceColor.white) / 2.0f;
-          rgbAverage = static_cast<float>(rgb.b);
+          // ラインが青の場合しきい値に青と白のしきい値を格納する
+          m_threshold = static_cast<float>(m_blueGray + m_traceColor.white * 0.7) / 2.0f;
           m_limitVal = static_cast<float>(m_blueGray - m_traceColor.white);
     } else if (Detect::GetColor() == ReadColor::BLACK) {
+          // ラインが黒の場合しきい値に黒と白のしきい値を格納する
           m_threshold = m_gray;
-          rgbAverage = (static_cast<float>(rgb.r + rgb.g + rgb.b) / 3.0f);
           m_limitVal = static_cast<float>(m_traceColor.black - m_traceColor.white);
     }
-
 
 	m_integral += (rgbAverage + m_rgbAverageTemp / 2.0 * m_deltaTime);
 
@@ -137,7 +136,10 @@ void LineTraceDrive::setTraceColor(const TraceColor& traceColor)
 {
 	m_traceColor = traceColor;
 	m_gray = ((m_traceColor.black + m_traceColor.white) / 2.0f) * 0.7f;
-    m_blueGray = (m_traceColor.blue.r + m_traceColor.blue.g + m_traceColor.blue.b) / 3.0f;
+    m_blueGray = ((m_traceColor.blue.r + m_traceColor.blue.g + m_traceColor.blue.b) / 3.0f) * 0.7f;
+
+	m_threshold = m_gray;
+	m_limitVal = static_cast<float>(m_traceColor.black - m_traceColor.white);
 }
 
 TraceColor LineTraceDrive::getTraceColor()
