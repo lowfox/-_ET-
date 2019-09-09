@@ -70,11 +70,33 @@ void bt_task(intptr_t unused)
 	EV3_LOG_INFO("bt_task Start");
 
 	BluetoothCommandReceiver::init();
+	IBluetooth* bluetooth = RyujiEv3Engine::GetBluetooth();
 
 	while (true)
 	{
-		dly_tsk(1);
-		BluetoothCommandReceiver::update();
+		char buf[256];
+		::memset(buf, '\0', 256);
+
+		for (int32 i = 0; i < 255; i++)
+		{
+			uint8 data;
+
+			while (!bluetooth->read(data))
+			{
+				dly_tsk(50);
+			}
+
+			char c = static_cast<char>(data);
+
+			if (c == '\n')
+			{
+				break;
+			}
+
+			buf[i] = c;
+		}
+
+		BluetoothCommandReceiver::analyze(buf);
 	}
 
 	EV3_LOG_INFO("bt_task End");

@@ -36,43 +36,33 @@ public:
 		m_commandMap.erase(commandName);
 	}
 
-	static void update()
+	static void analyze(const char* commandString)
 	{
-		constexpr int32 RECEIVE_BUFFER = 256;
-		uint8 data;
+		constexpr int32_t RECEIVE_BUFFER = 256;
 
-		// 受信データなし
-		if (!m_bluetooth->read(data))
-		{
-			return;
-		}
-		EV3_LOG("Command Receive");
 		// 受信文字列
 		char receiveString[RECEIVE_BUFFER];
 		::memset(receiveString, '\0', RECEIVE_BUFFER);
+
 		bool argflg = false;
 
-		receiveString[0] = static_cast<char>(data);
+		int32_t pos = 0;
 
-		// コマンド受信
-		for (int32 i = 1; i < RECEIVE_BUFFER; i++)
+		for (; ; pos++)
 		{
-			while (!m_bluetooth->read(data));
-
-			char c = static_cast<char>(data);
-
-			if (c == ' ')
+			if (commandString[i] == ' ')
 			{
 				argflg = true;
 				break;
 			}
-			else if (c == ';')
+			else if (commandString[i] == '\0')
 			{
 				break;
 			}
-
-			receiveString[i] = c;
 		}
+
+		::memcpy(receiveString, commandString.c_str(), pos);
+
 		EV3_LOG("Command %s", receiveString);
 
 		//コマンド検索
@@ -85,52 +75,43 @@ public:
 
 		// コマンド引数配列
 		std::vector<String> arg;
-		
+
 		if (argflg)
 		{
+			pos++;
+
 			// コマンド引数受信
 			for (bool receiving = true; receiving;)
 			{
 				::memset(receiveString, '\0', RECEIVE_BUFFER);
 
-				for (int32 i = 0; i < RECEIVE_BUFFER; i++)
+				int32_t head = pos;
+
+				for (;; pos++)
 				{
-					while (!m_bluetooth->read(data))
-					{
-					}
-
-					const char c = static_cast<char>(data);
-
-					if (c == ' ')
+					if (commandString[pos] == ' ')
 					{
 						break;
 					}
-					else if (c == ';')
+					else if (commandString[pos] == '\0')
 					{
-						EV3_LOG("Arg End", receiveString);
-
 						receiving = false;
 						break;
 					}
-
-					if (c != '\n')
-					{
-						receiveString[i] = c;
-					}
 				}
+
+				pos++;
+
+				::memcpy(receiveString, commandString + head, pos - head);
+				EV3_LOG("Arg = %s", receiveString);
 
 				// コマンド引数を追加
 				arg.push_back(receiveString);
-
-				EV3_LOG("Command Arg = %s",receiveString);
 			}
 		}
-
-		while (m_bluetooth->read(data));
-		// コマンドコールバック実行
+		
 		EV3_LOG("Command Run");
-
 		itr->second(arg);
-		EV3_LOG("Command RunEnd");
+		EV3_LOG("Command Return");
 	}
 };

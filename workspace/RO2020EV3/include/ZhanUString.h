@@ -174,6 +174,12 @@ namespace ZhanU
 			return ::memcmp(c_str(), right.c_str(), sizeof(Char) * length) > 0;
 		}
 
+
+		Char operator[](size_t index)const
+		{
+			return m_string[index];
+		}
+
 		void copy(const Basic_string<Char>& src)
 		{
 			if (m_size != 0) { delete[] m_string; };

@@ -32,7 +32,7 @@ uint8 CBluetooth::read() {
 bool CBluetooth::read(uint8& data) {
   uint8 readData = read();
 
-  if (readData == EOF) {
+  if (readData == static_cast<uint8>(EOF)) {
     return false;
   }
 

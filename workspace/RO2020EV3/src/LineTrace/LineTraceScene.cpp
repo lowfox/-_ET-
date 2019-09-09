@@ -29,7 +29,7 @@ bool LineTraceScene::run() {
 		Drive::Drive(std::atoi(arg[0].c_str()));
 	});
 
-	BluetoothCommandReceiver::add("II", setspeed);
+	BluetoothCommandReceiver::add("Test", setspeed);
   // LineTraceCode
   Standby stanby;       //Stanbyクラスのインスタンス生成
 
