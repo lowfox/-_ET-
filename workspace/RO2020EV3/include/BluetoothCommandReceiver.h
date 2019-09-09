@@ -60,7 +60,7 @@ public:
 
 			char c = static_cast<char>(data);
 
-			if (c == ' ')
+			if (c == ',')
 			{
 				argflg = true;
 				break;
@@ -100,7 +100,7 @@ public:
 
 					const char c = static_cast<char>(data);
 
-					if (c == ' ')
+					if (c == ',')
 					{
 						break;
 					}
