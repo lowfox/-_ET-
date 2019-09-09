@@ -56,10 +56,7 @@ public:
 		// コマンド受信
 		for (int32 i = 1; i < RECEIVE_BUFFER; i++)
 		{
-			while (!m_bluetooth->read(data))
-			{
-				tslp_tsk(10);
-			}
+			while (!m_bluetooth->read(data));
 
 			char c = static_cast<char>(data);
 
@@ -99,7 +96,6 @@ public:
 				{
 					while (!m_bluetooth->read(data))
 					{
-						tslp_tsk(10);
 					}
 
 					const char c = static_cast<char>(data);
@@ -126,6 +122,7 @@ public:
 				EV3_LOG("Command Arg = %s",receiveString);
 			}
 		}
+		EV3_LOG("Command Run %s",itr->first.c_str());
 		// コマンドコールバック実行
 		itr->second(arg);
 	}
