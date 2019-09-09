@@ -14,13 +14,15 @@ RUN apt-get update && apt-get install -y \
 && unzip /ev3rt-beta7-2-release.zip \
 && tar Jxfv /ev3rt-beta7-2-release/hrp2.tar.xz
 
+# これを継ぎ足さないとbuildできないらしい(@ZhanU-bmp)
 WORKDIR /hrp2/cfg
 RUN make \
 && echo 'APPL_DIR += $(foreach dir,$(shell find $(APPLDIR) -type d),$(dir))' >> /hrp2/sdk/common/Makefile.prj.common
 
-COPY docker/home /home
-COPY library/RyujiEv3 /hrp2/sdk/common/library/RyujiEv3
-COPY workspace/RO2020EV3 /hrp2/sdk/workspace/RO2020EV3
+COPY library/RyujiEv3/ /hrp2/sdk/common/library/RyujiEv3/
+COPY workspace/RO2020EV3/ /hrp2/sdk/workspace/RO2020EV3/
+COPY docker/build.sh /
 
-WORKDIR /home
-CMD ["python3", "/home/build.py"]
+WORKDIR /
+CMD ["./build.sh"]
+
