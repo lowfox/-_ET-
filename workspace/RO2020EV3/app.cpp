@@ -74,7 +74,6 @@ void bt_task(intptr_t unused)
 	while (true)
 	{
 		BluetoothCommandReceiver::update();
-		tslp_tsk(100);
 	}
 
 	EV3_LOG_INFO("bt_task End");
