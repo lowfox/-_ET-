@@ -40,14 +40,12 @@ public:
 		constexpr int32 RECEIVE_BUFFER = 256;
 		uint8 data;
 
-		EV3_LOG("BluetoothUpdate");
-
 		// 受信データなし
 		if (!m_bluetooth->read(data))
 		{
 			return;
 		}
-
+		EV3_LOG("Command Receive");
 		// 受信文字列
 		char receiveString[RECEIVE_BUFFER];
 		::memset(receiveString, '\0', RECEIVE_BUFFER);
@@ -114,7 +112,10 @@ public:
 						break;
 					}
 
-					receiveString[i] = c;
+					if (c != '\n')
+					{
+						receiveString[i] = c;
+					}
 				}
 
 				// コマンド引数を追加
