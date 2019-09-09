@@ -60,7 +60,7 @@ public:
 
 			char c = static_cast<char>(data);
 
-			if (c == ',')
+			if (c == ' ')
 			{
 				argflg = true;
 				break;
@@ -100,12 +100,14 @@ public:
 
 					const char c = static_cast<char>(data);
 
-					if (c == ',')
+					if (c == ' ')
 					{
 						break;
 					}
 					else if (c == '\0')
 					{
+						EV3_LOG("Arg End", receiveString);
+
 						receiving = false;
 						break;
 					}
