@@ -31,8 +31,6 @@ bool Phase1::run()
   traceColor = {6.3f, 78.3f, 0};  //練習用
   // 本番
 	//auto tracecolor = Drive::ColorCalibrate::GetTraceColor(MAX_TARGET);
-
-
     Drive::SetDriveMode(DriveMode::LineTrace);
     Drive::LineTrace::SetTraceColor(traceColor);
     Drive::LineTrace::SetPID({ 0.5f, 0.0f, 0.3f });
