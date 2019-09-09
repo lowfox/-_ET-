@@ -76,7 +76,7 @@ namespace ZhanU
 
 		~Basic_string()
 		{
-			if (m_size != 0) { delete[] m_string };
+			if (m_size != 0) { delete[] m_string; };
 		}
 
 		size_t size()const
@@ -176,7 +176,7 @@ namespace ZhanU
 
 		void copy(const Basic_string<Char>& src)
 		{
-			if (m_size != 0) { delete[] m_string };
+			if (m_size != 0) { delete[] m_string; };
 			m_string = new Char[src.capacity() + 1];
 			m_size = src.size();
 			m_capacity = src.capacity();
