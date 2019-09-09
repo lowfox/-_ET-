@@ -5,7 +5,7 @@
 #include <Logger.h>
 #include <SceneManager.h>
 #include <Config.h>
-
+#include <BluetoothCommandReceiver.h>
 
 // main Task
 void main_task(intptr_t unused)
@@ -69,8 +69,11 @@ void bt_task(intptr_t unused)
 {
 	EV3_LOG_INFO("bt_task Start");
 
+	BluetoothCommandReceiver::init();
+
 	while (true)
 	{
+		BluetoothCommandReceiver::update();
 		tslp_tsk(100);
 	}
 

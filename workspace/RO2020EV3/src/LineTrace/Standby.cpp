@@ -3,14 +3,13 @@
 #include <Drive.h>
 #include <Logger.h>  //Takeuchi
 #include "Run.h"
-
 //追加変更その他ざっくり by Takeuchi
 //ログを吐くように追加
 //キャリブレーション時、毎回尻尾位置をリセットするように変更
 
 Standby::Standby() {
   m_tailDegrees.push_back(NomalDeg);
-
+ 
   // L,R,各コースで必要な角度をキャリブレーションする
   switch (LINETRACE_NEXT_SCENE) {
     case SceneID::Lookup:
@@ -34,7 +33,7 @@ void Standby::traceMain() {
   EV3_LOG("SetUp End\n");  // Takeuchi
 
   do {
-	  while (!bluetoothDetection() && !buttonDetection());
+	  while (/*!bluetoothDetection() && */!buttonDetection());
   } while (!runStart());
 }
 
