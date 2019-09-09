@@ -51,8 +51,10 @@ public:
 		::memset(receiveString, '\0', RECEIVE_BUFFER);
 		bool argflg = false;
 
+		receiveString[0] = c;
+
 		// コマンド受信
-		for (int32 i = 0; i < RECEIVE_BUFFER; i++)
+		for (int32 i = 1; i < RECEIVE_BUFFER; i++)
 		{
 			while (!m_bluetooth->read(data))
 			{

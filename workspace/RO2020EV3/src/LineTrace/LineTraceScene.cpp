@@ -18,7 +18,7 @@ bool LineTraceScene::run() {
 	});
 
 	BluetoothCommandReceiver::add("SetSpeed", [](std::vector<String>& arg) {
-		EV3_LOG("SetSpeed(%d)", static_cast<int32>(std::atoi(arg[0].c_str()));
+		EV3_LOG("SetSpeed(%d);", static_cast<int32>(std::atoi(arg[0].c_str()));
 		Drive::Drive(std::atoi(arg[0].c_str()));
 	});
 
