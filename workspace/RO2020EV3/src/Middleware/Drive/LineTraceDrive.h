@@ -2,57 +2,54 @@
 #include "IDrive.h"
 #include <Drive.h>
 
-class LineTraceDrive : public IDrive
-{
-private:
+class LineTraceDrive : public IDrive {
+ private:
+  PID m_pid;
 
-	PID m_pid;
+  TraceColor m_traceColor;
 
-	TraceColor m_traceColor;
+  float m_threshold;
 
-	float m_threshold;
+  float m_limitVal;
 
-	float m_limitVal;
+  float m_gray;
 
-	float m_gray;
+  float m_blueGray;
 
-	float m_blueGray;
+  float m_rgbAverageTemp = 0;
 
-	float m_rgbAverageTemp = 0;
+  float m_deltaTime = 0.004f;
 
-	float m_deltaTime = 0.004f;
+  float m_integral = 0;
 
-	float m_integral = 0;
+  int32 m_speed = 0;
 
-	int32 m_speed = 0;
+  int32 m_turn = 0;
 
-	int32 m_turn = 0;
+  ReadColor m_color;
 
-	ReadColor m_color;
+  Side m_side = Side::Right;
 
-	Side m_side = Side::Right;
+ public:
+  bool init() override;
 
-public:
+  bool drive(int32 speed, int32 turn) override;
 
-	bool init()override;
+  bool stop() override;
 
-	bool drive(int32 speed, int32 turn)override;
+  bool rotate() override;
 
-	bool stop()override;
+  void update() override;
 
-	bool rotate()override;
+  void setTraceColor(const TraceColor& traceColor);
 
-	void update()override;
+  TraceColor getTraceColor();
 
-	void setTraceColor(const TraceColor& traceColor);
+  void setPID(const PID& pid);
 
-	TraceColor getTraceColor();
+  PID getPID();
 
-	void setPID(const PID& pid);
+  void setSide(Side side);
 
-	PID getPID();
-
-	void setSide(Side side);
-
-	Side getSize();
+  Side getSize();
 };
