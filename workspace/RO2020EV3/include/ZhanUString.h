@@ -142,38 +142,23 @@ namespace ZhanU
 
 		bool operator==(const Basic_string<Char>& right)const
 		{
-			if (size() != right.size())
-			{
-				return false;
-			}
-
-			return ::memcmp(m_string, right.c_str(), sizeof(Char) * size()) == 0;
+			return ::strcmp(m_string, right.c_str()) == 0;
 		}
 
 		bool operator!=(const Basic_string<Char>& right)const
 		{
-			if (size() != right.size())
-			{
-				return true;
-			}
-
-			return ::memcmp(m_string, right.c_str(), sizeof(Char) * size()) != 0;
+			return ::strcmp(m_string, right.c_str()) != 0;
 		}
 
 		bool operator<(const Basic_string<Char>& right)const
 		{
-			size_t length = std::min(size(), right.size());
-
-			return ::memcmp(c_str(), right.c_str(), sizeof(Char) * length) < 0;
+			return ::strcmp(m_string, right.c_str()) < 0;
 		}
 
 		bool operator>(const Basic_string<Char>& right)const
 		{
-			size_t length = std::min(size(), right.size());
-
-			return ::memcmp(c_str(), right.c_str(), sizeof(Char) * length) > 0;
+			return ::strcmp(m_string, right.c_str()) > 0;
 		}
-
 
 		Char operator[](size_t index)const
 		{
