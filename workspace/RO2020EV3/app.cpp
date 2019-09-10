@@ -117,6 +117,7 @@ void bt_task(intptr_t unused)
 			static_cast<float>(std::atof(arg[1])),
 			static_cast<float>(std::atof(arg[2])) });
 		//BluetoothCommandReceiver::analyze(buf);
+		EV3_LOG("SetPID kp=%f ki=%f kd=%f", static_cast<float>(std::atof(arg[0])), static_cast<float>(std::atof(arg[1])), static_cast<float>(std::atof(arg[2])));
 	}
 
 	EV3_LOG_INFO("bt_task End");
