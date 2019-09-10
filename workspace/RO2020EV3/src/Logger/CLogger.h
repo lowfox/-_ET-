@@ -2,49 +2,38 @@
 #include <RyujiEv3.h>
 #include <Logger.h>
 
-class CLogger
-{
-private:
+class CLogger {
+ private:
+  LogOutLevel m_outLevel = LogOutLevel::All;
 
-	LogOutLevel m_outLevel = LogOutLevel::All;
+  static CLogger* m_instance;
 
-	static CLogger* m_instance;
+ public:
+  static void Create() {
+    if (m_instance) {
+      return;
+    }
 
-public:
+    m_instance = new CLogger;
+  }
 
-	static void Create()
-	{
-		if (m_instance)
-		{
-			return;
-		}
+  static void Destroy() {
+    if (m_instance) {
+      delete m_instance;
+      m_instance = nullptr;
+    }
+  }
 
-		m_instance = new CLogger;
-	}
+  static CLogger* GetInstance() { return m_instance; }
 
-	static void Destroy()
-	{
-		if (m_instance)
-		{
-			delete m_instance;
-			m_instance = nullptr;
-		}
-	}
+  void writeLog(LogDesc desc, const char* log);
 
-	static CLogger* GetInstance()
-	{
-		return m_instance;
-	}
+  void setOutLevel(LogOutLevel outLevel);
 
-	void writeLog(LogDesc desc, const char* log);
+ private:
+  CLogger();
 
-	void setOutLevel(LogOutLevel outLevel);
+  ~CLogger();
 
-private:
-
-	CLogger();
-
-	~CLogger();
-
-	bool checkLevel(LogDesc desc);
+  bool checkLevel(LogDesc desc);
 };

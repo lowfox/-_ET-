@@ -1,20 +1,27 @@
 EV3開発頑張ろうな。
 
-## 🐳BUILD DOCUMENTATION🐳
-⚠️プロジェクトのルートディレクトリでコマンドを実行してください。
-⚠️GitBash を使ってください！！
-
-- 実行するコマンド
+## このプロジェクトはじめてのかたへ
+以下のコマンドを実行してね💓
 ```
-./build.sh
+$ make init
 ```
 
-これでproductionディレクトリにバイナリが生成されます。
+## 🐳ビルドのやり方🐳
+### 初回時
+Dockerイメージを生成する必要があるので、以下を実行
+```
+$ make dk/build
+```
 
-## プレフィックスを`app`から`iikanji_app`に変更したい場合
+### 以降
 ```
-./build.sh iikanji_app
+$ make dk/run
 ```
+- `releases`ディレクトリ以下に`app`が生成される
+```
+$ make dk/run APP_NAME=ryuji
+```
+- `releases`ディレクトリ以下に`ryuji`が生成される
 
 ## キャリブレーションとスタートのやりかた
 1. 実行ファイルを選択する

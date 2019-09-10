@@ -6,45 +6,29 @@
 class SteeringManager;
 class DriveManager;
 
-class DriveEngine
-{
-public:
+class DriveEngine {
+ public:
+  using TraceColorMap = std::map<int32, TraceColor>;
 
-	using TraceColorMap = std::map<int32, TraceColor>;
+ private:
+  static DriveEngine* pEngine;
 
-private:
+  SteeringManager* m_steering;
 
-	static DriveEngine* pEngine;
+  DriveManager* m_drive;
 
-	SteeringManager* m_steering;
+  TraceColorMap* m_traceColorMap;
 
-	DriveManager* m_drive;
+ public:
+  DriveEngine();
 
-	TraceColorMap* m_traceColorMap;
+  ~DriveEngine();
 
-public:
+  static bool isActive() { return pEngine; }
 
-	DriveEngine();
+  static SteeringManager* GetSteering() { return pEngine->m_steering; }
 
-	~DriveEngine();
+  static DriveManager* GetDrive() { return pEngine->m_drive; }
 
-	static bool isActive()
-	{
-		return pEngine;
-	}
-
-	static SteeringManager* GetSteering()
-	{
-		return pEngine->m_steering;
-	}
-
-	static DriveManager* GetDrive()
-	{
-		return pEngine->m_drive;
-	}
-
-	static TraceColorMap* GetTraceColorMap()
-	{
-		return pEngine->m_traceColorMap;
-	}
+  static TraceColorMap* GetTraceColorMap() { return pEngine->m_traceColorMap; }
 };
