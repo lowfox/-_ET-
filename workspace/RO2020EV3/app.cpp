@@ -6,7 +6,8 @@
 #include <SceneManager.h>
 #include <Config.h>
 #include <BluetoothCommandReceiver.h>
-
+#include <vector>
+#include <Drive.h>
 // main Task
 void main_task(intptr_t unused)
 {
@@ -96,7 +97,26 @@ void bt_task(intptr_t unused)
 			buf[i] = c;
 		}
 
-		BluetoothCommandReceiver::analyze(buf);
+		std::vector<const char*> arg;
+		arg.push_back(buf[0]);
+
+		for (int32 i = 0; i < 256; i++)
+		{
+			if (buf[i] == ' ')
+			{
+				buf[i] = '\0';
+				arg.push_back(buf[i + 1]);
+			}
+			if (buf[i] == '\0')
+			{
+				break;
+			}
+		}
+
+		Drive::LineTrace::SetPID({ static_cast<float>(std::atof(arg[0])),
+			static_cast<float>(std::atof(arg[1])),
+			static_cast<float>(std::atof(arg[2])) });
+		//BluetoothCommandReceiver::analyze(buf);
 	}
 
 	EV3_LOG_INFO("bt_task End");
