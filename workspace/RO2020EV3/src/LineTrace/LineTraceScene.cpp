@@ -11,8 +11,8 @@ bool LineTraceScene::init() { return true; }
 
 void setspeed(std::vector<String>& arg)
 {
-	EV3_LOG("SetSpeed", static_cast<int32>(std::atoi(arg[0].c_str())));
-	Drive::Drive(std::atoi(arg[0].c_str()));
+	EV3_LOG("SetSpeed arg = %d", static_cast<int32>(std::atoi(arg[0].c_str())));
+	Drive::Drive(static_cast<int32>(std::atoi(arg[0].c_str())));
 }
 
 bool LineTraceScene::run() {
