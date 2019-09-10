@@ -2,6 +2,7 @@
 // includeファイル
 #include "MapStateControl.h"
 #include <Logger.h>
+#include <RyujiEv3.h>
 
 // 定数定義
 #define ERROR -1
