@@ -16,16 +16,17 @@ void setspeed(std::vector<const char*>& arg)
 }
 
 bool LineTraceScene::run() {
+	String pid("pid");
 	// SetPIDƒRƒ}ƒ“ƒh‚ð“o˜^
-	BluetoothCommandReceiver::add("SetPID", [](std::vector<const char*>& arg) {
-		EV3_LOG("SetPID");
+	BluetoothCommandReceiver::add(pid, [](std::vector<const char*>& arg) {
+		EV3_LOG("SetPID,%d,%d,%d", static_cast<float>(std::atof(arg[0]), static_cast<float>(std::atof(arg[1]), static_cast<float>(std::atof(arg[2])));
 		Drive::LineTrace::SetPID({ static_cast<float>(std::atof(arg[0])), 
 			static_cast<float>(std::atof(arg[1])), 
 			static_cast<float>(std::atof(arg[2])) });
 	});
-
-	BluetoothCommandReceiver::add("SetSpeed", [](std::vector<const char*>& arg) {
-		EV3_LOG("SetSpeed");
+	String set("speed");
+	BluetoothCommandReceiver::add(set, [](std::vector<const char*>& arg) {
+		EV3_LOG("SetSpeed %d", std::atoi(arg[0]));
 		Drive::Drive(std::atoi(arg[0]));
 	});
 
