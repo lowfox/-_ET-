@@ -29,9 +29,9 @@ MapState MapStateControl::drivePosition() {
     if (milage > m_stateLeft[nowState].Distance && milage <= STATE_END) {
       ++nowState;
 
-      //走行状態切り替え時の距離をログに吐く
+      //走行状態切り替え時の距離をログに吐いて音を鳴らす。
       EV3_LOG("State chenge nowState = %d\n Now milage  = %f\n", nowState, milage);//Takeuchi
-
+      RyujiEv3Engine::GetSpeaker()->playTone(500, 1000);//Takeuchi 音を鳴らす
 
 
     }

@@ -7,7 +7,7 @@
 
 //定数定義
 #define STATE_MAX 16              //走行状態変移の最大数
-#define STATE_END 9632.1f         // GOALまでの距離//仮
+#define STATE_END 9372.1f  // GOALまでの距離//仮
 #define LEFT_COURSE 0
 #define RIGHT_COURSE 1
 #define COURSE_MODE LEFT_COURSE   //走行コース設定
