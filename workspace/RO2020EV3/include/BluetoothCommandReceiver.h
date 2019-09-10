@@ -50,18 +50,18 @@ public:
 
 		for (; ; pos++)
 		{
-			if (commandString[i] == ' ')
+			if (commandString[pos] == ' ')
 			{
 				argflg = true;
 				break;
 			}
-			else if (commandString[i] == '\0')
+			else if (commandString[pos] == '\0')
 			{
 				break;
 			}
 		}
 
-		::memcpy(receiveString, commandString.c_str(), pos);
+		::memcpy(receiveString, commandString, pos);
 
 		EV3_LOG("Command %s", receiveString);
 
