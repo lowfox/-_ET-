@@ -19,8 +19,6 @@ WORKDIR /hrp2/cfg
 RUN make \
 && echo 'APPL_DIR += $(foreach dir,$(shell find $(APPLDIR) -type d),$(dir))' >> /hrp2/sdk/common/Makefile.prj.common
 
-COPY library/RyujiEv3/ /hrp2/sdk/common/library/RyujiEv3/
-COPY workspace/RO2020EV3/ /hrp2/sdk/workspace/RO2020EV3/
 COPY docker/build.sh /
 
 WORKDIR /
