@@ -1,14 +1,23 @@
-docker-build:
-	docker build . -t ev3dev:v1
+CONTENA_NAME := ro2020/ev3dev:v1
+RELEASE_DIR_NAME := releases
 
-shell:
-	docker run -e EV3_APP_NAME=og3 -v $(shell pwd):/gateway -it ev3dev:v1 sh
+dk/build:
+	docker build -t $(CONTENA_NAME) --rm=true .
 
-run:
-	docker run -d -e EV3_APP_NAME=og3 -v $(shell pwd):/gateway -it ev3dev:v1
+dk/run:
+ifdef APP_NAME
+	docker run -it --rm -e RELEASE_DIR_NAME=$(RELEASE_DIR_NAME) -e APP_NAME=$(APP_NAME) -v $(shell pwd):/host $(CONTENA_NAME)
+else
+	docker run -it --rm -e RELEASE_DIR_NAME=$(RELEASE_DIR_NAME) -e APP_NAME=app -v $(shell pwd):/host $(CONTENA_NAME)
+endif
 
-# TODO: v1に依存しないように修正
-save:
-	docker save ev3dev:v1 ev3dev_v1.tar
-	zip ev3dev_v1.tar.zip ev3dev_v1.tar
-	rm -rf ev3dev_v1.tar
+dk/brun: dk/build dk/run
+
+dk/sh:
+	docker run -it --rm -e RELEASE_DIR_NAME=$(RELEASE_DIR_NAME) -e APP_NAME=app -v $(shell pwd):/host $(CONTENA_NAME) sh
+
+init: __vol
+	echo 'we will win, you know?'
+
+__vol:
+	mkdir $(RELEASE_DIR_NAME)
