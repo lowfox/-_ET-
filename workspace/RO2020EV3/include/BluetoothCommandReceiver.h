@@ -36,7 +36,7 @@ public:
 		m_commandMap.erase(commandName);
 	}
 
-	static void analyze(const char* commandString)
+	static void analyze(char* commandString)
 	{
 		constexpr int32_t RECEIVE_BUFFER = 256;
 
@@ -74,7 +74,7 @@ public:
 		}
 
 		// コマンド引数配列
-		std::vector<String> arg;
+		std::vector<const char*> arg;
 
 		if (argflg)
 		{
@@ -108,7 +108,7 @@ public:
 
 				//String a{ receiveString };
 				// コマンド引数を追加
-				arg.emplace_back(commandString + head);
+				arg.push_back(commandString + head);
 			}
 		}
 		
