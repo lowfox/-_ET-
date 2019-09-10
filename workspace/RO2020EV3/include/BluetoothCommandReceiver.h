@@ -105,8 +105,9 @@ public:
 				::memcpy(receiveString, commandString + head, pos - head);
 				EV3_LOG("Arg = %s", receiveString);
 
+				String a{ receiveString };
 				// ƒRƒ}ƒ“ƒhˆø”‚ğ’Ç‰Á
-				arg.push_back(receiveString);
+				arg.emplace_back(a);
 			}
 		}
 		
