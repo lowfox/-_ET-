@@ -11,7 +11,7 @@ class BluetoothCommandReceiver
 {
 public:
 
-	typedef void(*CommandCallback)(std::vector<String>& arg);
+	typedef void(*CommandCallback)(std::vector<const char*>& arg);
 
 private:
 
@@ -91,6 +91,7 @@ public:
 				{
 					if (commandString[pos] == ' ')
 					{
+						commandString[pos] = '\0';
 						break;
 					}
 					else if (commandString[pos] == '\0')
@@ -102,12 +103,12 @@ public:
 
 				pos++;
 
-				::memcpy(receiveString, commandString + head, pos - head);
+				//::memcpy(receiveString, commandString + head, pos - head);
 				EV3_LOG("Arg = %s", receiveString);
 
-				String a{ receiveString };
+				//String a{ receiveString };
 				// ÉRÉ}ÉìÉhà¯êîÇí«â¡
-				arg.emplace_back(a);
+				arg.emplace_back(commandString + head);
 			}
 		}
 		

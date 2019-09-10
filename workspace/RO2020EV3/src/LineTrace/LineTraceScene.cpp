@@ -9,24 +9,24 @@ LineTraceScene::LineTraceScene(ISceneChanger* sceneChanger)
 
 bool LineTraceScene::init() { return true; }
 
-void setspeed(std::vector<String>& arg)
+void setspeed(std::vector<const char*>& arg)
 {
-	EV3_LOG("SetSpeed arg = %d", static_cast<int32>(std::atoi(arg[0].c_str())));
-	Drive::Drive(static_cast<int32>(std::atoi(arg[0].c_str())));
+	EV3_LOG("SetSpeed arg = %d", static_cast<int32>(std::atoi(arg[0])));
+	Drive::Drive(static_cast<int32>(std::atoi(arg[0])));
 }
 
 bool LineTraceScene::run() {
 	// SetPIDƒRƒ}ƒ“ƒh‚ð“o˜^
-	BluetoothCommandReceiver::add("SetPID", [](std::vector<String>& arg) {
+	BluetoothCommandReceiver::add("SetPID", [](std::vector<const char*>& arg) {
 		EV3_LOG("SetPID");
-		Drive::LineTrace::SetPID({ static_cast<float>(std::atof(arg[0].c_str())), 
-			static_cast<float>(std::atof(arg[1].c_str())), 
-			static_cast<float>(std::atof(arg[2].c_str())) });
+		Drive::LineTrace::SetPID({ static_cast<float>(std::atof(arg[0])), 
+			static_cast<float>(std::atof(arg[1])), 
+			static_cast<float>(std::atof(arg[2])) });
 	});
 
-	BluetoothCommandReceiver::add("SetSpeed", [](std::vector<String>& arg) {
+	BluetoothCommandReceiver::add("SetSpeed", [](std::vector<const char*>& arg) {
 		EV3_LOG("SetSpeed");
-		Drive::Drive(std::atoi(arg[0].c_str()));
+		Drive::Drive(std::atoi(arg[0]));
 	});
 
 	BluetoothCommandReceiver::add("Test", setspeed);
