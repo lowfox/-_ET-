@@ -33,7 +33,7 @@ MapState MapStateControl::drivePosition() {
       //‘–só‘ÔØ‚è‘Ö‚¦Žž‚Ì‹——£‚ðƒƒO‚É“f‚¢‚Ä‰¹‚ð–Â‚ç‚·B
       EV3_LOG("State chenge nowState = %d\n Now milage  = %f\n", nowState, milage);//Takeuchi
       RyujiEv3Engine::GetSpeaker()->setVolume(100);
-      RyujiEv3Engine::GetSpeaker()->playTone(500, 1000);//Takeuchi ‰¹‚ð–Â‚ç‚·
+      RyujiEv3Engine::GetSpeaker()->playTone(500, 500);//Takeuchi ‰¹‚ð–Â‚ç‚·
 
 
     }
