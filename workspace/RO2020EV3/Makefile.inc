@@ -20,7 +20,35 @@ SceneManager.o\
 LineTraceScene.o\
 LookupScene.o\
 GarageScene.o\
-SeesawScene.o
+SeesawScene.o\
+seesawCapture.o\
+gotoSeesaw.o\
+seesawClimber.o\
+seesawDouble.o\
+seesawDesc.o\
+garageInit.o\
+straightRunner.o\
+distanceRunner.o\
+modeSwitcher.o\
+wheelClimber.o\
+wheelAligner.o\
+braker.o\
+bodyAngleChanger.o\
+lineTracer.o\
+getUp.o\
+seesawRunner.o\
+angleDetector.o\
+angularVelocityDetector.o\
+tailPositioner.o\
+seesawTest.o\
+tailPositionerTest.o\
+angleDetectorTest.o\
+angularVelocityDetectorTest.o\
+distanceRunnerTest.o\
+lineTracerTest.o\
+seesawRunnerTest.o\
+straightRunnerTest.o
+
 
 SRCLANG := c++
 
