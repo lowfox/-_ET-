@@ -14,7 +14,7 @@ public:
     bool run(void);
 private:
     /* data */
-    InfoTail m_initTail = {90,70,true};
+    InfoTail m_initTail = {92,70,true};
     infoDistanceRun m_modeSwitchRun1 = {6,40.0f};
     infoDistanceRun m_modeSwitchRun2 = {3,20.0f};
     InfoTail m_asobiHoseiTail = {-20,10,false};

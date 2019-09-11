@@ -45,10 +45,17 @@ bool gotoSeesaw::run(void){
     };//1秒間スリープ
     ev3_stp_cyc(CNT_TEN_MS);
     */
-    dly_tsk(1000);
+    dly_tsk(700);
     if(!RyujiEv3Engine::GetGyroSensor()->reset()){return false;}
     RyujiEv3Engine::GetGyroSensor()->setOffset(0);
     //if(!i_angularVelocityDetector.setOffsetValue(m_seesawDetectValue)){return false;}
+
+    //ライン復帰処理
+    if(!RyujiEv3Engine::GetRightMotor()->setPWM(5)){return false;}
+    if(!RyujiEv3Engine::GetLeftMotor()->stop(true)){return false;}
+    dly_tsk(m_lineReturnTime);
+    if(!RyujiEv3Engine::GetRightMotor()->stop(true));
+
     if(!i_lineTracer.run(m_pwm)){return false;}
     //while(!i_angularVelocityDetector.detect()){}
     seesawGlobal::cntValue10ms=0;
