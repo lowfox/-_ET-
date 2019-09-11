@@ -17,7 +17,7 @@ bool garageInit::run(void){
         m_lineTraseTail1.angle = nowCounts+6;
         if(!i_getUp.run(&m_lineTraseTail1,m_runUpDistance1)){return false;}
         if(!i_braker.run()){return false;}
-        dly_tsk(600);
+        dly_tsk(700);
         
         if(!i_distanceRunner.run(&m_safeRun1)){return false;}
         nowCounts = RyujiEv3Engine::GetTailMotor()->getCounts();

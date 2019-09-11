@@ -16,10 +16,9 @@ class garageInit{
         InfoTail m_lineTraseTail4={80,40,true};
         InfoDistanceRun m_safeRun1= {5,12.0f};
         InfoDistanceRun m_safeRun2= {6,7.0f};
-        float m_runUpDistance1=-8.0;
-        float m_runUpDistance2=-2.0;
-        float m_runUpDistance3=-3.0;
-        int m_lineReturnTime=1000;
+        float m_runUpDistance1=-7.0;
+        float m_runUpDistance3=-2.4;
+        int m_lineReturnTime=900;
         int m_lineReturnPwm=4;
 
         float m_firstDistance;
