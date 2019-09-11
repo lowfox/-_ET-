@@ -5,6 +5,9 @@
 # ホストマシンで実行するようではないので注意！
 # ==============================================================================
 
+# clang-format
+./cfw.py
+
 # ホストのlibrary/workspaceをコンテナ内に移動
 rm -rf /hrp2/sdk/common/library/RyujiEv3
 rm -rf /hrp2/sdk/workspace/RO2020EV3
