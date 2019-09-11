@@ -10,6 +10,8 @@ private:
 
 	TraceColor m_traceColor;
 
+	BlueLineMode m_lineMode;
+
 	float m_threshold;
 
 	float m_limitVal;
@@ -55,4 +57,8 @@ public:
 	void setSide(Side side);
 
 	Side getSize();
+
+	void setLineMode(BlueLineMode lineMode);
+
+	BlueLineMode getLineMode();
 };

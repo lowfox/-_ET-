@@ -98,6 +98,15 @@ namespace Drive
 		{
 			return DriveEngine::GetDrive()->getLineTraceDrive()->getSize();
 		}
+
+		void SetLineMode(BlueLineMode lineMode) 
+		{
+            DriveEngine::GetDrive()->getLineTraceDrive()->setLineMode(lineMode);
+		}
+
+		BlueLineMode GetLineMode() {
+            return DriveEngine::GetDrive()->getLineTraceDrive()->getLineMode();
+        }
 	}
 }
 

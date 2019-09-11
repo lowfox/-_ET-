@@ -15,6 +15,16 @@ enum class DriveMode
 	Nomal
 };
 
+/// ラインの色
+enum class BlueLineMode 
+{
+	/// 青色ライントレース
+	Blue,
+
+	/// 通常ライントレース
+	Nomal
+};
+
 /// 黒ラインをトレースする側
 enum class Side
 {
@@ -167,5 +177,19 @@ namespace Drive
 		/// @return トレースしている側
 		///
 		Side GetSide();
+
+		///
+		/// @fn void setLineMode(BlueLineMode lineMode)
+		/// @brief 青色のライントレースをするか否か
+		/// @return ブルーラインモードのオンオフ
+		///
+		void SetLineMode(BlueLineMode lineMode);
+
+		///
+		/// @fn  BlueLineMode getLineMode()
+		/// @brief 現在、ブルーラインモードの取得
+		/// @param BlueLineMode 青色をライントレースのオンオフ
+		///
+        BlueLineMode GetLineMode();
 	}
 }
