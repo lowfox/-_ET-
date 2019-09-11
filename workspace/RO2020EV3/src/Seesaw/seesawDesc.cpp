@@ -34,9 +34,9 @@ bool seesawDesc::run(void){
     */
 
 
-    if(!i_distanceRunner.run(&m_safeStopRun)){return false;}
+    if(!i_distanceRunner.run(&m_preRun)){return false;}
     if(!i_tailPositioner.run(&m_descTail)){return false;}
-    dly_tsk(2000);
+    dly_tsk(600);
     RyujiEv3Engine::GetGyroSensor()->setOffset(0);
     if(!i_angularvelocityDetector.setOffsetValue(m_wheelDescOffset)){return false;}
   
@@ -49,27 +49,27 @@ bool seesawDesc::run(void){
     EV3_LOG("WHEEL DESC!");//スピーカー鳴らす
 
     if(!i_distanceRunner.run(&m_wheelAfterRun)){return false;}
+    if(!i_braker.run()){return false;}
+    dly_tsk(300);
     RyujiEv3Engine::GetLED()->setColor(LED_Color::OFF);
-
-    if(!i_braker.run()){return false;}
-    dly_tsk(1000);
-    if(!i_getUp.run(&m_tailDescTail,-1.0f)){return false;}
-    if(!i_braker.run()){return false;}
-     dly_tsk(1500);
+   
+    if(!i_tailPositioner.run(&m_tailDescTail)){return false;}
     // if(!i_distanceRunner.run(&m_tailDescRun)){return false;}
+   /*
     if(!i_straightRunner.run(m_tailDescPwm)){return false;}
     if(!i_angularvelocityDetector.setOffsetValue(m_tailDescOffset)){return false;}
     while(!i_angularvelocityDetector.detect()){}
-    
+   */ 
+    if(!i_distanceRunner.run(&m_tailDescRun)){return false;}
     EV3_LOG("TAIL DESC!");
-    /*if(!RyujiEv3Engine::GetSpeaker()->playTone(400,50)){
+    if(!RyujiEv3Engine::GetSpeaker()->playTone(400,50)){
         EV3_LOG("ERROR:playTone();");
         return false;}
-    */
+    
     RyujiEv3Engine::GetLED()->setColor(LED_Color::GREEN);
     //if(!i_braker.run()){return false;}
     //dly_tsk(1000);
-    if(!i_distanceRunner.run(&m_safeStopRun)){return false;}
+    //if(!i_distanceRunner.run(&m_safeStopRun)){return false;}
     if(!i_braker.run()){return false;}
 
     return true;

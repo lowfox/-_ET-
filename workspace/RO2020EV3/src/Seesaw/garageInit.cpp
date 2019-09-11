@@ -12,35 +12,24 @@ bool garageInit::run(void){
 
     //Å‘å55“x
     nowCounts = RyujiEv3Engine::GetTailMotor()->getCounts();
-    while(nowCounts<70){
+    while(nowCounts<75){
         
-        m_lineTraseTail1.angle = nowCounts+5;
+        m_lineTraseTail1.angle = nowCounts+6;
         if(!i_getUp.run(&m_lineTraseTail1,m_runUpDistance1)){return false;}
         if(!i_braker.run()){return false;}
-        dly_tsk(500);
+        dly_tsk(600);
         
         if(!i_distanceRunner.run(&m_safeRun1)){return false;}
         nowCounts = RyujiEv3Engine::GetTailMotor()->getCounts();
     }
     RyujiEv3Engine::GetSpeaker()->playTone(300,100);    
 
-    while(nowCounts<80){
-        m_lineTraseTail2.angle = nowCounts+3;
-        if(!i_getUp.run(&m_lineTraseTail2,m_runUpDistance2)){return false;}
-        if(!i_braker.run()){return false;}
-        dly_tsk(500);
-        if(!i_distanceRunner.run(&m_safeRun2)){return false;}
-        nowCounts = RyujiEv3Engine::GetTailMotor()->getCounts();
-    }
-    
-    
-    RyujiEv3Engine::GetSpeaker()->playTone(400,200);
     if(!i_getUp.run(&m_lineTraseTail3,m_runUpDistance3)){return false;}
     if(!i_braker.run()){return false;}
     
     RyujiEv3Engine::GetSpeaker()->playTone(500,300);
-    dly_tsk(500);
-    if(!i_distanceRunner.run(&m_safeRun2)){return false;}
+    dly_tsk(600);
+    
 
     
    // if(!i_getUp.run(&m_lineTraseTail4,m_runUpDistance3)){return false;}

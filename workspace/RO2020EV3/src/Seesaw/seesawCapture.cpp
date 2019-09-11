@@ -10,7 +10,7 @@ bool  seesawCapture::run(void){
     seesawDesc i_seesawDesc;
     garageInit i_garageInit;
 
-    RyujiEv3Engine::GetSpeaker()->setVolume(150);
+    RyujiEv3Engine::GetSpeaker()->setVolume(1);
     if(!i_gotoSeesaw.run()){
     EV3_LOG_ERROR("gotoSeesaw__false\n");
     return false;}

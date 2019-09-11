@@ -33,7 +33,7 @@ class seesawRunner{
     int16 m_forwardBentOffset=31;
     int16 m_backBentOffset=-30;
     int32 m_forwardPwm=3;
-    int32 m_backPwm=-3;
+    int32 m_backPwm=-4;
     int m_detectCnt=4;
     int m_cnt=0;
     int m_rigidTime=150;

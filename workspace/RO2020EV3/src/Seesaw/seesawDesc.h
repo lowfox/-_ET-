@@ -20,12 +20,13 @@ class seesawDesc{
         int16 m_wheelDescOffset=30;
         int16 m_tailDescOffset=-100;
         InfoTail m_descTail={45,30,true};
-        InfoTail m_tailDescTail={60,20,false};
+        InfoTail m_tailDescTail={60,25,false};
        
         int32 m_wheelDescPwm=1;
-        int32 m_tailDescPwm=3;
-        InfoDistanceRun m_wheelAfterRun={10,50.0f};
-        InfoDistanceRun m_tailDescRun={10,60.0f};
-        InfoDistanceRun m_safeStopRun={17,150.0f};
-        InfoDistanceRun m_preRun={2,40.0f};
+        int32 m_tailDescPwm=12;
+        InfoDistanceRun m_wheelAfterRun={10,25.0f};
+        InfoDistanceRun m_tailDescRun={20,90.0f};
+        InfoDistanceRun m_safeStopRun={12,80.0f};
+        InfoDistanceRun m_preRun={12,160.0f};
+        InfoDistanceRun m_Run={12,150.0f};
 };
