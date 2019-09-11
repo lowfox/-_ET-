@@ -126,4 +126,7 @@ void GarageScene::garage_in::Start_Process()
 	Drive::Stop();
 	EV3_LOG("FINISHED");
 	RyujiEv3Engine::GetSpeaker()->playTone(500, 1000);
+	if (!Drive::SetDriveMode(DriveMode::Nomal)){
+		EV3_LOG("Set_NORMAL_ERR");
+	}
 }
