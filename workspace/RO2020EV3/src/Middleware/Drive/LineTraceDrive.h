@@ -8,7 +8,9 @@ class LineTraceDrive : public IDrive {
 
   TraceColor m_traceColor;
 
-  float m_threshold;
+	BlueLineMode m_lineMode;
+
+	float m_threshold;
 
   float m_limitVal;
 
@@ -47,9 +49,13 @@ class LineTraceDrive : public IDrive {
 
   void setPID(const PID& pid);
 
-  PID getPID();
+	PID getPID();
 
-  void setSide(Side side);
+	void setSide(Side side);
 
-  Side getSize();
+	Side getSize();
+
+	void setLineMode(BlueLineMode lineMode);
+
+	BlueLineMode getLineMode();
 };
