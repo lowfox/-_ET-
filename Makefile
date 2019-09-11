@@ -20,6 +20,9 @@ else
 	winpty docker run -it --rm -e RELEASE_DIR_NAME=$(RELEASE_DIR_NAME) -e APP_NAME=app -v $(shell pwd):/host $(CONTENA_NAME) sh
 endif
 
+branch/deleteAll:
+	git branch | grep -v 'develop\|master\|gh-pages' | grep -v '*' | xargs git branch -D
+
 init: __vol
 	echo 'we will win, you know?'
 
