@@ -1,5 +1,5 @@
 //#define DEBUG
-#define test
+//#define test
 //#define nagisakun
 //#define color_test
 
