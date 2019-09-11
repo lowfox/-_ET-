@@ -14,7 +14,11 @@ endif
 dk/brun: dk/build dk/run
 
 dk/sh:
+ifeq  ($(shell uname),Darwin)
 	docker run -it --rm -e RELEASE_DIR_NAME=$(RELEASE_DIR_NAME) -e APP_NAME=app -v $(shell pwd):/host $(CONTENA_NAME) sh
+else
+	winpty docker run -it --rm -e RELEASE_DIR_NAME=$(RELEASE_DIR_NAME) -e APP_NAME=app -v $(shell pwd):/host $(CONTENA_NAME) sh
+endif
 
 init: __vol
 	echo 'we will win, you know?'
