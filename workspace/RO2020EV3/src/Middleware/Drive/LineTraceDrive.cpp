@@ -8,6 +8,7 @@ bool LineTraceDrive::init()
 {
 	m_rgbAverageTemp = 0;
 	m_integral = 0;
+	m_lineMode = BlueLineMode::Nomal;
 
 	return true;
 }
