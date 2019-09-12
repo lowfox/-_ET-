@@ -56,7 +56,7 @@ bool gotoSeesaw::run(void){
     dly_tsk(m_lineReturnTime);
     if(!RyujiEv3Engine::GetRightMotor()->stop(true));
 
-    if(!i_lineTracer.run(m_pwm)){return false;}
+    if(!i_lineTracer.run(m_pwm,m_initAngle)){return false;}
     //while(!i_angularVelocityDetector.detect()){}
     seesawGlobal::cntValue10ms=0;
     /*

@@ -1,6 +1,5 @@
 #pragma once
 #include"seesawRunner.h"
-#include"bodyAngleChanger.h"
 #include"angleDetector.h"
 #include"infoTail.h"
 #include"getUp.h"

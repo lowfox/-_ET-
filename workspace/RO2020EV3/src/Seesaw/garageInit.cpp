@@ -24,17 +24,11 @@ bool garageInit::run(void){
     }
     RyujiEv3Engine::GetSpeaker()->playTone(300,100);    
 
-    if(!i_getUp.run(&m_lineTraseTail3,m_runUpDistance3)){return false;}
+    if(!i_getUp.run(&m_lineTraseTail4,m_runUpDistance3)){return false;}
     if(!i_braker.run()){return false;}
     
     RyujiEv3Engine::GetSpeaker()->playTone(500,300);
     dly_tsk(600);
-    
-
-    
-   // if(!i_getUp.run(&m_lineTraseTail4,m_runUpDistance3)){return false;}
-
-    RyujiEv3Engine::GetSpeaker()->playTone(600,500);
 
     if(!RyujiEv3Engine::GetLeftMotor()->stop(true)){return false;}
     if(!RyujiEv3Engine::GetRightMotor()->setPWM(m_lineReturnPwm)){return false;}
@@ -44,7 +38,7 @@ bool garageInit::run(void){
     if(!RyujiEv3Engine::GetLeftMotor()->stop(true)){return false;}
     RyujiEv3Engine::GetSpeaker()->playTone(700,500);
 
-    if(!m_garageInitlineTracer.run(m_lineReturnPwm)){return false;}
+    if(!m_garageInitlineTracer.run(m_lineReturnPwm,m_garageInitAngle)){return false;}
     
     m_firstDistance=Steering::GetDistance();
 
@@ -52,7 +46,6 @@ bool garageInit::run(void){
     
     if(!i_braker.run()){return false;}
     RyujiEv3Engine::GetSpeaker()->playTone(800,500);
-    if(!i_tailPositioner.run(&m_lineTraseTail4)){return false;}
-RyujiEv3Engine::GetSpeaker()->playTone(900,1000);
+
     return true;
 }

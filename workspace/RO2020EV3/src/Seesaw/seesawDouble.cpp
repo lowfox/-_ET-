@@ -2,7 +2,6 @@
 
 bool seesawDouble::run(void){
     seesawRunner i_seesawRunner;
-    bodyAngleChanger i_bodyAngleChanger;
     angleDetector i_angleDetector;
     getUp i_getUp;
     braker i_braker;
@@ -17,7 +16,6 @@ bool seesawDouble::run(void){
     //if(!i_angleDetector.setTargetValue(m_onSeesawTargetValue)){return false;}
     //if(!i_angleDetector.detect()){return true;}//シーソーシングルに移行
     if(!i_seesawRunner.run(direction::back)){return false;}
-    //if(!i_bodyAngleChanger.run(&m_lineTraceTail)){return false;}
     EV3_LOG("seesawRUnner_back_finish");
     if(!i_distanceRunner.run(&m_twiceForwardRun)){return false;}
     if(!i_seesawRunner.run(direction::forward)){return false;}

@@ -42,7 +42,7 @@ bool seesawRunner::run(direction dir){
 
         
         if(!i_angularVelocityDetector.setOffsetValue(m_forwardBentOffset)){return false;}
-        if(!i_lineTracer.run(m_forwardPwm)){return false;}
+        if(!i_lineTracer.run(m_forwardPwm,m_lineTraceAngle)){return false;}
         m_preDistance=Steering::GetDistance();
         while(Steering::GetDistance() - m_preDistance < 20.0f){}
         RyujiEv3Engine::GetLED()->setColor(LED_Color::GREEN);

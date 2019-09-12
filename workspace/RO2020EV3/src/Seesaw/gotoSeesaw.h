@@ -28,6 +28,7 @@ class gotoSeesaw{
         float m_gotoPeriodDistance=100.0f;
         float m_detectDistance=10.0f;
         int m_lineReturnTime=600;
+        int16 m_initAngle=90;
        
 };
 

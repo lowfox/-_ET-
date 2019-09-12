@@ -33,7 +33,6 @@ modeSwitcher.o\
 wheelClimber.o\
 wheelAligner.o\
 braker.o\
-bodyAngleChanger.o\
 lineTracer.o\
 getUp.o\
 seesawRunner.o\

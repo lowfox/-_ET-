@@ -2,7 +2,7 @@
 
 bool seesawClimber::run(void){
     EV3_LOG("seesawClimber__start\n");
-    bodyAngleChanger i_bodyAngleChanger;
+
     wheelAligner i_wheelAligner;
     wheelClimber i_wheelClimber;
     distanceRunner i_distanceRunner;
@@ -11,7 +11,6 @@ bool seesawClimber::run(void){
     braker i_braker;
     straightRunner i_straightRunner;
 
-    //if(!i_bodyAngleChanger.run(&m_initTail)){return false;}
 /*
     if(!i_getUp.run(&m_alignTail,-3.0)){return false;}
     if(!i_braker.run()){return false;}

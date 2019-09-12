@@ -43,6 +43,7 @@ class seesawRunner{
     //InfoDistanceRun m_preRunForward={-10,-24.0f};
     InfoDistanceRun m_preRunBack={6,20.0f};
 
+    int16 m_lineTraceAngle=90;
     float m_preDistance;
    
 };

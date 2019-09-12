@@ -4,7 +4,7 @@
 #include<RyujiEv3.h>
 class lineTracer{
     public:
-        bool run(int32);
+        bool run(int32,int16);
     private:
-        int32 m_angle=70;
+        
 };
