@@ -23,32 +23,37 @@ extern "C" {
 
 /* Macros for accessing real-time model data structure */
 #ifndef rtmGetErrorStatus
-# define rtmGetErrorStatus(rtm)        ((void*) 0)
+#define rtmGetErrorStatus(rtm) ((void*)0)
 #endif
 
 #ifndef rtmSetErrorStatus
-# define rtmSetErrorStatus(rtm, val)   ((void) 0)
+#define rtmSetErrorStatus(rtm, val) ((void)0)
 #endif
 
 #ifndef rtmGetStopRequested
-# define rtmGetStopRequested(rtm)      ((void*) 0)
+#define rtmGetStopRequested(rtm) ((void*)0)
 #endif
 
-#define CMD_MAX                        100.0F                    /* 前進/旋回命令絶対最大値 */
-#define DEG2RAD                        0.01745329238F            /* 角度単位変換係数(=pi/180) */
-//#define EXEC_PERIOD                    0.00450000000F            /* バランス制御実行周期(秒) *//* sample_c4の処理時間考慮 */
-#define EXEC_PERIOD                  0.00400000000F            /* バランス制御実行周期(秒) *//* 周期タスクでタイミングをとる場合はこちらに変更してください */
+#define CMD_MAX 100.0F         /* 前進/旋回命令絶対最大値 */
+#define DEG2RAD 0.01745329238F /* 角度単位変換係数(=pi/180) */
+//#define EXEC_PERIOD                    0.00450000000F            /*
+//バランス制御実行周期(秒) *//* sample_c4の処理時間考慮 */
+#define EXEC_PERIOD                                                                                                                        \
+  0.00400000000F /* バランス制御実行周期(秒) */ /* 周期タスクでタイミングをとる場合はこちらに変更してください \
+                                                 */
 
 /* Model entry point functions */
 extern void balance_init(void);
 
 /* Customized model step function */
 extern void balance_control(float args_cmd_forward, float args_cmd_turn,
-  float args_gyro, float args_gyro_offset, float args_theta_m_l,
-  float args_theta_m_r, float args_battery, signed char *ret_pwm_l, signed char
-  *ret_pwm_r);
+                            float args_gyro, float args_gyro_offset,
+                            float args_theta_m_l, float args_theta_m_r,
+                            float args_battery, signed char* ret_pwm_l,
+                            signed char* ret_pwm_r);
 
-extern void backlash_cancel(signed char lpwm, signed char rpwm, int32_t *lenc, int32_t *renc);
+extern void backlash_cancel(signed char lpwm, signed char rpwm, int32_t* lenc,
+                            int32_t* renc);
 /*-
  * The generated code includes comments that allow you to trace directly
  * back to the appropriate location in the model.  The basic format

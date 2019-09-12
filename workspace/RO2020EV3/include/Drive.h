@@ -26,16 +26,15 @@ enum class Side
 };
 
 /// PID
-struct PID
-{
-	/// P
-	float kp;
+struct PID {
+  /// P
+  float kp;
 
-	/// I
-	float ki;
+  /// I
+  float ki;
 
-	/// D
-	float kd;
+  /// D
+  float kd;
 };
 
 /// �g���[�X�J���[
@@ -167,5 +166,19 @@ namespace Drive
 		/// @return �g���[�X���Ă��鑤
 		///
 		Side GetSide();
+
+		///
+		/// @fn void setLineMode(BlueLineMode lineMode)
+		/// @brief �F�̃��C���g���[�X�����邩�ۂ�
+		/// @return �u���[���C�����[�h�̃I���I�t
+		///
+		void SetLineMode(BlueLineMode lineMode);
+
+		///
+		/// @fn  BlueLineMode getLineMode()
+		/// @brief ���݁A�u���[���C�����[�h�̎擾
+		/// @param BlueLineMode �F�����C���g���[�X�̃I���I�t
+		///
+        BlueLineMode GetLineMode();
 	}
 }

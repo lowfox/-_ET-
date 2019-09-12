@@ -55,14 +55,14 @@ bool MasterControl::LookUp()
     {
         EV3_LOG_INFO("Phase3End");
         return false;
-    }
+    }  
+    
 #endif
     return true;
 }
 
 MasterControl::~MasterControl()
 {
- 
     // シングルトンを解放
     SonarControl::GetInstance()->Destroy();
     SonarFilter::GetInstance()->Destroy();

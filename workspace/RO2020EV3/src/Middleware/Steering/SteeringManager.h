@@ -4,41 +4,39 @@
 #include "ISteering.h"
 #include <Steering.h>
 
-class SteeringManager
-{
-private:
+class SteeringManager {
+ private:
+  std::array<ISteering*, 2> m_sterring;
 
-	std::array<ISteering*, 2> m_sterring;
+  SteeringMode m_mode;
 
-	SteeringMode m_mode;
+  ISteering* pSterring;
 
-	ISteering* pSterring;
+  int32 m_leftCountOffset = 0;
 
-	int32 m_leftCountOffset = 0;
+  int32 m_rightCountOffset = 0;
 
-	int32 m_rightCountOffset = 0;
+  float m_driveDistance = 0.0f;
 
-	float m_driveDistance = 0.0f;
+ public:
+  SteeringManager();
 
-public:
+  ~SteeringManager();
 
-	SteeringManager();
+  bool setMode(SteeringMode mode);
 
-	~SteeringManager();
+  SteeringMode getMode();
 
-	bool setMode(SteeringMode mode);
+  bool drive(int32 speed, int32 turn);
 
-	SteeringMode getMode();
+  bool stop();
 
-	bool drive(int32 speed, int32 turn);
+  float driveDistance();
 
-	bool stop();
+  void resetDriveDistance();
 
-	float driveDistance();
+  bool update();
 
-	bool update();
-
-private:
-
-	void driveDistanceUpdate();
+ private:
+  void driveDistanceUpdate();
 };

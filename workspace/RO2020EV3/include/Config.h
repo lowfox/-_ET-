@@ -18,21 +18,20 @@ constexpr PortData ROBOCON_PORT =
 	// ColorSensor
 	SensorPort::PORT_3,
 
-	// TouchSensor
-	SensorPort::PORT_1,
+    // TouchSensor
+    SensorPort::PORT_1,
 
-	// GyroSensor
-	SensorPort::PORT_4,
+    // GyroSensor
+    SensorPort::PORT_4,
 
-	// SonarSensor
-	SensorPort::PORT_2,
+    // SonarSensor
+    SensorPort::PORT_2,
 
-	// LeftMotor
-	MotorPort::PORT_C,
+    // LeftMotor
+    MotorPort::PORT_C,
 
-	// RightMotor
-	MotorPort::PORT_B,
+    // RightMotor
+    MotorPort::PORT_B,
 
-	// TailMotor
-	MotorPort::PORT_A
-};
+    // TailMotor
+    MotorPort::PORT_A};

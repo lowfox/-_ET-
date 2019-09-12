@@ -14,7 +14,9 @@ class MasterControl
 {
 private:
 		Phase1 phase1;
+
 		Phase2 phase2;
+		
 		Phase3 phase3;
 
 public:
