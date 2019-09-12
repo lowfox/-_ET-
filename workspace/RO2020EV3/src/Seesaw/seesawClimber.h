@@ -25,7 +25,7 @@ class seesawClimber{
        // InfoDistanceRun m_postRun2={10,30.0f};//—¼—Öæ‚èã‚°ŒãAK”ö‚ğ•£‚É‚Â‚¯‚é‚½‚ß
         //InfoDistanceRun m_tailClimbRun={30,65.0f};
         //InfoDistanceRun m_tailClimbPreRun={40,80.0f};
-         InfoDistanceRun m_postRun={12,75.0f};//‚±‚ÌI‚í‚è‚ÉK”ö‚ª‚¿ã‚ª‚é
+         InfoDistanceRun m_postRun={15,105.0f};//‚±‚ÌI‚í‚è‚ÉK”ö‚ª‚¿ã‚ª‚é
         InfoDistanceRun m_tailClimbPostRun1={30,130.0f};
         InfoDistanceRun m_tailClimbPostRun2={13,70.0f};
         float m_runUpDistance=-5.0f;

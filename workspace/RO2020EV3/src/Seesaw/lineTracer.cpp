@@ -11,7 +11,7 @@ bool lineTracer::run(int32 pwm){
     //traceColor = Drive::ColorCalibrate::GetTraceColor(90);    //本番はこっち使う
     traceColor = {5.6f,123.0f,rgb};                             //練習用
     Drive::LineTrace::SetTraceColor(traceColor);
-    Drive::LineTrace::SetPID({ 0.2f, 0.0f, 0.1f });//PIDセット
+    Drive::LineTrace::SetPID({ 0.24f, 0.0f, 0.2f });//PIDセット
     Drive::LineTrace::SetSide(Side::Left);
     //トレースカラーがセットされてるかの確認//Takeuchi
     //セットしたはずのトレースカラー//Takeuchi
@@ -23,7 +23,7 @@ bool lineTracer::run(int32 pwm){
     if(!Drive::Drive(pwm)){
         EV3_LOG("ERROR_LINETRACER_DRIVE\n");
         return false;
-        }
+    }
     
   // straightRunner i_straightRunner;
   // if(!i_straightRunner.run(pwm)){return false;}

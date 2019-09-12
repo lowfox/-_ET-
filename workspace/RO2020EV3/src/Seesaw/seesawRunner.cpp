@@ -14,18 +14,20 @@ bool seesawRunner::run(direction dir){
     if(dir == direction::forward){
         EV3_LOG("seesawRunner.run(forward)\n");
         if(!i_getUp.run(&m_forwadPreTail,forwardRunUpDistance)){return false;}
+        dly_tsk(500);
         //if(!i_distanceRunner.run(&m_preRunForward)){return false;}
     
         //ライン復帰処理
         //左と右どちらにいるか判定
         //RGBが小から大ならライン右、大から小になったらライン左       
-        
+      /*  
         if(!RyujiEv3Engine::GetLeftMotor()->stop(true)){return false;}
         if(!RyujiEv3Engine::GetRightMotor()->setPWM(m_lineReturnPwm)){return false;}
         dly_tsk(m_lineReturnTime);
    
         if(!RyujiEv3Engine::GetRightMotor()->stop(true)){return false;}
         if(!RyujiEv3Engine::GetLeftMotor()->stop(true)){return false;}
+     */   
         // dly_tsk(1000);
       /* 
         rgb = Drive::ColorCalibrate::RGBAverage1Sec();

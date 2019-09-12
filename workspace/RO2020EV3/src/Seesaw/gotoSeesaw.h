@@ -26,7 +26,7 @@ class gotoSeesaw{
         int32 m_pwm = 4;
         int16 m_seesawDetectValue =6;
         float m_gotoPeriodDistance=100.0f;
-        float m_detectDistance=8.0f;
+        float m_detectDistance=10.0f;
         int m_lineReturnTime=600;
        
 };
