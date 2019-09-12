@@ -1,95 +1,101 @@
 ///
 /// @file Drive.h
-/// @brief ƒhƒ‰ƒCƒu
+/// @brief ï¿½hï¿½ï¿½ï¿½Cï¿½u
 ///
 #pragma once
 #include <RyujiEv3.h>
 
-/// ƒhƒ‰ƒCƒuƒ‚[ƒh
-enum class DriveMode
-{
-	/// ƒ‰ƒCƒ“ƒgƒŒ[ƒXƒ‚[ƒh
-	LineTrace,
+/// ï¿½hï¿½ï¿½ï¿½Cï¿½uï¿½ï¿½ï¿½[ï¿½h
+enum class DriveMode {
+  /// ï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½gï¿½ï¿½ï¿½[ï¿½Xï¿½ï¿½ï¿½[ï¿½h
+  LineTrace,
 
-	/// ’Êíƒ‚[ƒh
+  /// ï¿½Êíƒ‚ï¿½[ï¿½h
+  Nomal
+};
+
+/// ï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½ÌF
+enum class BlueLineMode 
+{
+	/// ï¿½ÂFï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½gï¿½ï¿½ï¿½[ï¿½X
+	Blue,
+
+	/// ï¿½Êíƒ‰ï¿½Cï¿½ï¿½ï¿½gï¿½ï¿½ï¿½[ï¿½X
 	Nomal
 };
 
-/// •ƒ‰ƒCƒ“‚ğƒgƒŒ[ƒX‚·‚é‘¤
-enum class Side
-{
-	/// ¶‘¤
-	Left,
+/// ï¿½ï¿½ï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½gï¿½ï¿½ï¿½[ï¿½Xï¿½ï¿½ï¿½é‘¤
+enum class Side {
+  /// ï¿½ï¿½ï¿½ï¿½
+  Left,
 
-	/// ‰E‘¤
-	Right
+  /// ï¿½Eï¿½ï¿½
+  Right
 };
 
 /// PID
-struct PID
-{
-	/// P
-	float kp;
+struct PID {
+  /// P
+  float kp;
 
-	/// I
-	float ki;
+  /// I
+  float ki;
 
-	/// D
-	float kd;
+  /// D
+  float kd;
 };
 
-/// ƒgƒŒ[ƒXƒJƒ‰[
-struct TraceColor
-{
-	/// •F
-	float black;
+/// ï¿½gï¿½ï¿½ï¿½[ï¿½Xï¿½Jï¿½ï¿½ï¿½[
+struct TraceColor {
+  /// ï¿½ï¿½ï¿½F
+  float black;
 
-	/// ”’F
-	float white;
+  /// ï¿½ï¿½ï¿½F
+  float white;
 
-	///ÂF
-	float blue;
+  ///ï¿½ÂF
+  RGB blue;
 };
 
 namespace Drive 
 {
 	///
 	/// @fn void Drive(int32 speed,int32 turn = 0)
-	/// @brief ‘–s‚·‚é
-	/// @param speed ‘¬“x(0`100)
-	/// @param turn ù‰ñ’l(-100`100)¦ƒ‰ƒCƒ“ƒgƒŒ[ƒXƒ‚[ƒh‚Í–³Œø
-	/// @retval true ¬Œ÷
-	/// @retval false ¸”s
+	/// @brief ï¿½ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½
+	/// @param speed ï¿½ï¿½ï¿½x(0ï¿½`100)
+	/// @param turn ï¿½ï¿½ï¿½ï¿½l(-100ï¿½`100)ï¿½ï¿½ï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½gï¿½ï¿½ï¿½[ï¿½Xï¿½ï¿½ï¿½[ï¿½hï¿½ï¿½ï¿½Í–ï¿½ï¿½ï¿½
+	/// @retval true ï¿½ï¿½ï¿½ï¿½
+	/// @retval false ï¿½ï¿½ï¿½s
 	///
 	bool Drive(int32 speed,int32 turn = 0);
 
 	///
 	/// @fn void Stop()
-	/// @brief ’â~‚·‚é
-	/// @retval true ¬Œ÷
-	/// @retval false ¸”s
+	/// @brief ï¿½ï¿½~ï¿½ï¿½ï¿½ï¿½
+	/// @retval true ï¿½ï¿½ï¿½ï¿½
+	/// @retval false ï¿½ï¿½ï¿½s
 	///
 	bool Stop();
 
 	///
 	/// @fn void Rotate()
-	/// @brief ”½“]‚·‚é@O“_“|—§‚ğ‚µ‚Ä‚¢‚È‚¢ó‘Ô‚Å‚ÍA‚±‚ÌŠÖ”‚Í•K‚¸¸”s‚·‚é
-	/// @retval true ¬Œ÷
-	/// @retval false ¸”s
+	/// @brief ï¿½ï¿½ï¿½]ï¿½ï¿½ï¿½ï¿½@ï¿½Oï¿½_ï¿½|ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½È‚ï¿½ï¿½ï¿½Ô‚Å‚ÍAï¿½ï¿½ï¿½ÌŠÖï¿½ï¿½Í•Kï¿½ï¿½ï¿½ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½
+	/// @retval true ï¿½ï¿½ï¿½ï¿½
+	/// @retval false ï¿½ï¿½ï¿½s
 	///
 	bool Rotate();
 
 	///
 	/// @fn void SetDriveMode(DriveMode mode)
-	/// @brief ƒhƒ‰ƒCƒuƒ‚[ƒh‚ğw’è‚·‚é
-	/// @param mode ƒhƒ‰ƒCƒuƒ‚[ƒh
+	/// @brief ï¿½hï¿½ï¿½ï¿½Cï¿½uï¿½ï¿½ï¿½[ï¿½hï¿½ï¿½ï¿½wï¿½è‚·ï¿½ï¿½
+	/// @param mode ï¿½hï¿½ï¿½ï¿½Cï¿½uï¿½ï¿½ï¿½[ï¿½h
 	///
 	bool SetDriveMode(DriveMode mode);
 
 	///
 	/// @fn DriveMode GetDriveMode()
-	/// @brief Œ»İg—p‚µ‚Ä‚¢‚éƒhƒ‰ƒCƒuƒ‚[ƒh‚ğæ“¾‚·‚é
-	/// @return Œ»İg—p‚µ‚Ä‚¢‚éƒhƒ‰ƒCƒuƒ‚[ƒh
+	/// @brief ï¿½ï¿½ï¿½İgï¿½pï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½hï¿½ï¿½ï¿½Cï¿½uï¿½ï¿½ï¿½[ï¿½hï¿½ï¿½ï¿½æ“¾ï¿½ï¿½ï¿½ï¿½
+	/// @return ï¿½ï¿½ï¿½İgï¿½pï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½hï¿½ï¿½ï¿½Cï¿½uï¿½ï¿½ï¿½[ï¿½h
 	///
 	DriveMode GetDriveMode();
 
@@ -99,26 +105,26 @@ namespace Drive
 	{
 		///
 		/// @fn RGB RGBAverage1Sec()
-		/// @brief 1•bŠÔ‚ÌRGB‚Ì•½‹Ï‚ğ•Ô‚·
-		/// @return 1•bŠÔ‚ÌRGB‚Ì•½‹Ï’l
+		/// @brief 1ï¿½bï¿½Ô‚ï¿½RGBï¿½Ì•ï¿½ï¿½Ï‚ï¿½Ô‚ï¿½
+		/// @return 1ï¿½bï¿½Ô‚ï¿½RGBï¿½Ì•ï¿½ï¿½Ï’l
 		///
 		RGB RGBAverage1Sec();
 
 		///
 		/// @fn bool AddTraceColor(int32 count,const TraceColor& traceColor)
-		/// @brief count‚ÌƒgƒŒ[ƒXƒJƒ‰[‚ğ’Ç‰Á‚·‚é
-		/// @param count Šp“x(“x)
-		/// @param traceColor ƒgƒŒ[ƒXƒJƒ‰[
-		/// @retval true ¬Œ÷
-		/// @retval false ¸”s
+		/// @brief countï¿½Ìƒgï¿½ï¿½ï¿½[ï¿½Xï¿½Jï¿½ï¿½ï¿½[ï¿½ï¿½Ç‰ï¿½ï¿½ï¿½ï¿½ï¿½
+		/// @param count ï¿½pï¿½x(ï¿½x)
+		/// @param traceColor ï¿½gï¿½ï¿½ï¿½[ï¿½Xï¿½Jï¿½ï¿½ï¿½[
+		/// @retval true ï¿½ï¿½ï¿½ï¿½
+		/// @retval false ï¿½ï¿½ï¿½s
 		///
 		bool AddTraceColor(int32 count,const TraceColor& traceColor);
 
 		///
 		/// @fn TraceColor& GetTraceColor(int32 count)
-		/// @brief count‚É‘Î‰‚·‚éƒgƒŒ[ƒXƒJƒ‰[‚ğ•Ô‚·Bcount‚É‘Î‰‚·‚éƒgƒŒ[ƒXƒJƒ‰[‚ª‚È‚¢ê‡‚ÍƒfƒtƒHƒ‹ƒg\’z‚µ‚ÄQÆ‚ğ•Ô‚·B
-		/// @param count Ô‘Ì‚ÌŠp“x
-		/// @return count‚É‘Î‰‚·‚éƒgƒŒ[ƒXƒJƒ‰[
+		/// @brief countï¿½É‘Î‰ï¿½ï¿½ï¿½ï¿½ï¿½gï¿½ï¿½ï¿½[ï¿½Xï¿½Jï¿½ï¿½ï¿½[ï¿½ï¿½Ô‚ï¿½ï¿½Bcountï¿½É‘Î‰ï¿½ï¿½ï¿½ï¿½ï¿½gï¿½ï¿½ï¿½[ï¿½Xï¿½Jï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½È‚ï¿½ï¿½ê‡ï¿½Íƒfï¿½tï¿½Hï¿½ï¿½ï¿½gï¿½\ï¿½zï¿½ï¿½ï¿½ÄQï¿½Æ‚ï¿½Ô‚ï¿½ï¿½B
+		/// @param count ï¿½Ô‘Ì‚ÌŠpï¿½x
+		/// @return countï¿½É‘Î‰ï¿½ï¿½ï¿½ï¿½ï¿½gï¿½ï¿½ï¿½[ï¿½Xï¿½Jï¿½ï¿½ï¿½[
 		///
 		TraceColor& GetTraceColor(int32 count);
 	}
@@ -128,44 +134,58 @@ namespace Drive
 	{
 		///
 		/// @fn void SetPID(const PID& pid)
-		/// @brief ƒ‰ƒCƒ“ƒgƒŒ[ƒX‚Ég—p‚·‚éPID‚Ì’l‚ğİ’è‚·‚é
-		/// @param pid ƒZƒbƒg‚·‚éPID’l
+		/// @brief ï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½gï¿½ï¿½ï¿½[ï¿½Xï¿½Égï¿½pï¿½ï¿½ï¿½ï¿½PIDï¿½Ì’lï¿½ï¿½İ’è‚·ï¿½ï¿½
+		/// @param pid ï¿½Zï¿½bï¿½gï¿½ï¿½ï¿½ï¿½PIDï¿½l
 		///
 		void SetPID(const PID& pid);
 
 		///
 		/// @fn PID GetPID()
-		/// @brief Œ»İg—p‚µ‚Ä‚¢‚éPID’l‚ğæ“¾‚·‚é
-		/// @return Œ»İg—p‚µ‚Ä‚¢‚éPID’l
+		/// @brief ï¿½ï¿½ï¿½İgï¿½pï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½PIDï¿½lï¿½ï¿½ï¿½æ“¾ï¿½ï¿½ï¿½ï¿½
+		/// @return ï¿½ï¿½ï¿½İgï¿½pï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½PIDï¿½l
 		///
 		PID GetPID();
 
 		///
 		/// @fn void SetTraceColor(const TraceColor& traceColor)
-		/// @brief ƒ‰ƒCƒ“ƒgƒŒ[ƒX‚Ég—p‚·‚éƒgƒŒ[ƒXƒJƒ‰[‚ğİ’è‚·‚é
-		/// @param traceColor ƒZƒbƒg‚·‚éƒgƒŒ[ƒXƒJƒ‰[
+		/// @brief ï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½gï¿½ï¿½ï¿½[ï¿½Xï¿½Égï¿½pï¿½ï¿½ï¿½ï¿½gï¿½ï¿½ï¿½[ï¿½Xï¿½Jï¿½ï¿½ï¿½[ï¿½ï¿½İ’è‚·ï¿½ï¿½
+		/// @param traceColor ï¿½Zï¿½bï¿½gï¿½ï¿½ï¿½ï¿½gï¿½ï¿½ï¿½[ï¿½Xï¿½Jï¿½ï¿½ï¿½[
 		///
 		void SetTraceColor(const TraceColor& traceColor);
 
 		///
 		/// @fn TraceColor GetTraceColor()
-		/// @brief Œ»İg—p‚µ‚Ä‚¢‚éƒgƒŒ[ƒXƒJƒ‰[‚ğæ“¾‚·‚é
-		/// @return Œ»İg—p‚µ‚Ä‚¢‚éƒgƒŒ[ƒXƒJƒ‰[
+		/// @brief ï¿½ï¿½ï¿½İgï¿½pï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½gï¿½ï¿½ï¿½[ï¿½Xï¿½Jï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½æ“¾ï¿½ï¿½ï¿½ï¿½
+		/// @return ï¿½ï¿½ï¿½İgï¿½pï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½gï¿½ï¿½ï¿½[ï¿½Xï¿½Jï¿½ï¿½ï¿½[
 		///
 		TraceColor GetTraceColor();
 
 		///
 		/// @fn void SetSide(Side side)
-		/// @brief •ƒ‰ƒCƒ“‚Ì‚Ç‚¿‚ç‘¤‚ğƒgƒŒ[ƒX‚·‚é‚©İ’è‚·‚é
-		/// @param side •ƒ‰ƒCƒ“‚Ì‘¤
+		/// @brief ï¿½ï¿½ï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½Ì‚Ç‚ï¿½ï¿½ç‘¤ï¿½ï¿½ï¿½gï¿½ï¿½ï¿½[ï¿½Xï¿½ï¿½ï¿½é‚©ï¿½İ’è‚·ï¿½ï¿½
+		/// @param side ï¿½ï¿½ï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½Ì‘ï¿½
 		///
 		void SetSide(Side side);
 
 		///
 		/// @fn Side GetSide()
-		/// @brief Œ»İA•ƒ‰ƒCƒ“‚Ì‚Ç‚¿‚ç‘¤‚ğƒgƒŒ[ƒX‚µ‚Ä‚¢‚é‚©æ“¾‚·‚é
-		/// @return ƒgƒŒ[ƒX‚µ‚Ä‚¢‚é‘¤
+		/// @brief ï¿½ï¿½ï¿½İAï¿½ï¿½ï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½Ì‚Ç‚ï¿½ï¿½ç‘¤ï¿½ï¿½ï¿½gï¿½ï¿½ï¿½[ï¿½Xï¿½ï¿½ï¿½Ä‚ï¿½ï¿½é‚©ï¿½æ“¾ï¿½ï¿½ï¿½ï¿½
+		/// @return ï¿½gï¿½ï¿½ï¿½[ï¿½Xï¿½ï¿½ï¿½Ä‚ï¿½ï¿½é‘¤
 		///
 		Side GetSide();
+
+		///
+		/// @fn void setLineMode(BlueLineMode lineMode)
+		/// @brief ï¿½ÂFï¿½Ìƒï¿½ï¿½Cï¿½ï¿½ï¿½gï¿½ï¿½ï¿½[ï¿½Xï¿½ï¿½ï¿½ï¿½ï¿½é‚©ï¿½Û‚ï¿½
+		/// @return ï¿½uï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½hï¿½ÌƒIï¿½ï¿½ï¿½Iï¿½t
+		///
+		void SetLineMode(BlueLineMode lineMode);
+
+		///
+		/// @fn  BlueLineMode getLineMode()
+		/// @brief ï¿½ï¿½ï¿½İAï¿½uï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½hï¿½Ìæ“¾
+		/// @param BlueLineMode ï¿½ÂFï¿½ï¿½ï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½gï¿½ï¿½ï¿½[ï¿½Xï¿½ÌƒIï¿½ï¿½ï¿½Iï¿½t
+		///
+        BlueLineMode GetLineMode();
 	}
 }
