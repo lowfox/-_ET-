@@ -6,23 +6,31 @@
 #include <RyujiEv3.h>
 
 /// �h���C�u���[�h
-enum class DriveMode
-{
-	/// ���C���g���[�X���[�h
-	LineTrace,
+enum class DriveMode {
+  /// ���C���g���[�X���[�h
+  LineTrace,
 
-	/// �ʏ탂�[�h
+  /// �ʏ탂�[�h
+  Nomal
+};
+
+/// ���C���̐F
+enum class BlueLineMode 
+{
+	/// �F���C���g���[�X
+	Blue,
+
+	/// �ʏ탉�C���g���[�X
 	Nomal
 };
 
 /// �����C�����g���[�X���鑤
-enum class Side
-{
-	/// ����
-	Left,
+enum class Side {
+  /// ����
+  Left,
 
-	/// �E��
-	Right
+  /// �E��
+  Right
 };
 
 /// PID
@@ -38,16 +46,15 @@ struct PID {
 };
 
 /// �g���[�X�J���[
-struct TraceColor
-{
-	/// ���F
-	float black;
+struct TraceColor {
+  /// ���F
+  float black;
 
-	/// ���F
-	float white;
+  /// ���F
+  float white;
 
-	///�F
-	float blue;
+  ///�F
+  RGB blue;
 };
 
 namespace Drive 
