@@ -8,6 +8,7 @@ bool LineTraceDrive::init()
 {
 	m_rgbAverageTemp = 0;
 	m_integral = 0;
+	m_lineMode = BlueLineMode::Nomal;
 
 	return true;
 }
@@ -72,16 +73,23 @@ void LineTraceDrive::update()
 	// RGB‚ÌF‚Ì•½‹Ï‚ğæ“¾
 	float rgbAverage = (static_cast<float>(rgb.r + rgb.g + rgb.b) / 3.0f);
 
-	// ‚µ‚«‚¢’l‚ğŠi”[‚·‚é
-	if (Detect::GetColor() == ReadColor::BLUE) {
+
+	if (m_lineMode == BlueLineMode::Blue) {
+	  // ‚µ‚«‚¢’l‚ğŠi”[‚·‚é
+	  if (Detect::GetColor() == ReadColor::BLUE) {
           // ƒ‰ƒCƒ“‚ªÂ‚Ìê‡‚µ‚«‚¢’l‚ÉÂ‚Æ”’‚Ì‚µ‚«‚¢’l‚ğŠi”[‚·‚é
           m_threshold = static_cast<float>(m_blueGray + m_traceColor.white * 0.7) / 2.0f;
           m_limitVal = static_cast<float>(m_blueGray - m_traceColor.white);
-    } else if (Detect::GetColor() == ReadColor::BLACK) {
+      } else if (Detect::GetColor() == ReadColor::BLACK) {
           // ƒ‰ƒCƒ“‚ª•‚Ìê‡‚µ‚«‚¢’l‚É•‚Æ”’‚Ì‚µ‚«‚¢’l‚ğŠi”[‚·‚é
           m_threshold = m_gray;
           m_limitVal = static_cast<float>(m_traceColor.black - m_traceColor.white);
+      }
+    } else if (m_lineMode == BlueLineMode::Nomal) {
+		m_threshold = m_gray;
+        m_limitVal = static_cast<float>(m_traceColor.black - m_traceColor.white);
     }
+	
 
 	m_integral += (rgbAverage + m_rgbAverageTemp / 2.0 * m_deltaTime);
 
@@ -145,4 +153,12 @@ void LineTraceDrive::setTraceColor(const TraceColor& traceColor)
 TraceColor LineTraceDrive::getTraceColor()
 {
 	return m_traceColor;
+}
+
+void LineTraceDrive::setLineMode(BlueLineMode lineMode) {
+  m_lineMode = lineMode;
+}
+
+BlueLineMode LineTraceDrive::getLineMode() { 
+	return m_lineMode;
 }

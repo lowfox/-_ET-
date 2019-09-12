@@ -1,5 +1,5 @@
 //#define DEBUG
-//#define test
+#define test
 //#define nagisakun
 //#define color_test
 
@@ -45,7 +45,7 @@ bool GarageScene::run()
 
 void GarageScene::garage_in::Start_Process()
 {
-
+	Drive::LineTrace::SetLineMode(BlueLineMode::Blue);
 	if (!RyujiEv3Engine::GetLeftMotor()->stop(true)) {
 		EV3_LOG("GET_LEFT_ERR");
 	}
