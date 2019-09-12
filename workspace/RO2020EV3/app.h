@@ -107,7 +107,10 @@ extern void gpio_irq_dispatcher(intptr_t exinf);
 // extern void	ev3_uart_daemon(intptr_t exinf);
 // extern void	ev3_uart_port2_irq(void);
 //
-// extern void initialize_ev3(intptr_t exinf);
+//extern void initialize_ev3(intptr_t exinf);
+
+extern void sonar_cyc(intptr_t exinf);
+extern void color_cyc(intptr_t exinf);
 #endif /* TOPPERS_MACRO_ONLY */
 
 #ifdef __cplusplus
