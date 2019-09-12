@@ -8,7 +8,7 @@
 #include <Drive.h>
 #include "Debug.h"
 
-#define THRESHOLD 340
+#define THRESHOLD 360
 
 class MotorControl
 {

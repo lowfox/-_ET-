@@ -5,7 +5,12 @@
 bool Phase1::run()
 {
     EV3_LOG_INFO("DriveStart");
-    
+
+    //あそびをなくす
+    RyujiEv3Engine::GetTailMotor()->setCounts(-15,30,false);
+    tslp_tsk(1000);
+    RyujiEv3Engine::GetTailMotor()->resetCounts();
+
     // 走行体brakemodeに変更指示 
     if(!RyujiEv3Engine::GetLeftMotor()->stop(true))
     {
@@ -26,13 +31,17 @@ bool Phase1::run()
     {
         return false;
     }  
-
+    
     Drive::SetDriveMode(DriveMode::LineTrace);
+
     auto tracecolor = Drive::ColorCalibrate::GetTraceColor(MAX_TARGET);
+
     Drive::LineTrace::SetTraceColor(tracecolor);
+
     Drive::LineTrace::SetPID({ 0.3f, 0.0f, 0.1f });
 
-    if(!Drive::Drive(17))
+
+    if(!Drive::Drive(15))
     {
         EV3_LOG_ERROR("DriveError");
         return false;

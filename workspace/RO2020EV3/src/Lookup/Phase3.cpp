@@ -2,13 +2,6 @@
 
 bool Phase3::run()
 {
-    Drive::LineTrace::SetSide(Side::Right);
-
-    if(!t_ctrl.StageAngle(MAX_TARGET))
-    {
-        return false;
-    }
-
     //　ラインチェック 
     if(e_ctrl.LineCheck()){
         return true;

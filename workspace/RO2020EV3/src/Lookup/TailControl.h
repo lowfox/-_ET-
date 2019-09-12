@@ -9,8 +9,8 @@
 #include <Steering.h>
 #include "Debug.h"
 
-#define MIN_TARGET  58
-#define MAX_TARGET  80
+#define MIN_TARGET  62
+#define MAX_TARGET  83
 #define MAX_TARGET_BOUNDARY 2
 #define ANGLE_ADJUST_1 2
 #define ANGLE_ADJUST_2 3

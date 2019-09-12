@@ -13,11 +13,13 @@ bool Phase2::run()
 
         // ゲートを通過処理  
         auto tracecolor = Drive::ColorCalibrate::GetTraceColor(MIN_TARGET);
+
         Drive::SetDriveMode(DriveMode::LineTrace);
+
         Drive::LineTrace::SetTraceColor(tracecolor);
+        
         Drive::LineTrace::SetPID({ 0.3f, 0.0f, 0.1f });
 
-        //Drive::SetDriveMode(DriveMode::Nomal); //テスト用(後でLineTraceに変更)
         if(!Drive::Drive(15))
         {
             return false;
@@ -33,7 +35,8 @@ bool Phase2::run()
         // ゲート通過回数カウントアップ
         m_ctrl.UpPassCnt();
 
-        if(m_ctrl.GetPassCount() >= 5){
+        if(m_ctrl.GetPassCount() >= 5)
+        {
             return true;
         }
 
@@ -69,10 +72,12 @@ bool Phase2::run()
         tslp_tsk(1500);
 
         Drive::SetDriveMode(DriveMode::LineTrace);
+
         tracecolor = Drive::ColorCalibrate::GetTraceColor(MAX_TARGET);
+
         Drive::LineTrace::SetTraceColor(tracecolor);
 
-        Drive::LineTrace::SetPID({ 0.3f, 0.0f, 0.1f });
+        Drive::LineTrace::SetPID({ 0.4f, 0.0f, 0.1f });
 
         // 前進指示       
         if(!Drive::Drive(15))

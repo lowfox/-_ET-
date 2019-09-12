@@ -2,10 +2,12 @@
 #include <SceneManager.h>
 #include "MasterControl.h"
 
-/// ���b�N�A�b�v�V�[��
-class LookupScene : public IScene {
- public:
-  LookupScene(ISceneChanger* sceneChanger);
+/// ルックアップシーン
+class LookupScene :public IScene
+{
+public:
+
+	LookupScene(ISceneChanger* sceneChanger);
 
 	///
 	/// @fn bool init()

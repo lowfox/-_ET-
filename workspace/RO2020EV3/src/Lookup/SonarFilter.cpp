@@ -1,4 +1,6 @@
 #include "SonarFilter.h"
+#include <Logger.h>
+#include <Drive.h>
 
 /// Public
 SonarFilter* SonarFilter::instance = nullptr;
@@ -6,15 +8,18 @@ SonarFilter* SonarFilter::instance = nullptr;
 int16 SonarFilter::GetAvg()
 {
     int16 avg_val = 0;
-
-    for(auto i=0;i<3;i++){
-       if(this->GetInstance()->avg_datas[i] == 0){
+    EV3_LOG("%d ,%d ,%d",this->GetInstance()->avg_datas[0],this->GetInstance()->avg_datas[1],this->GetInstance()->avg_datas[2]);
+    for(auto i=0;i<3;i++)
+    {
+       if(this->GetInstance()->avg_datas[i] == 0)
+       {
           return OUT_OF_RANGE;
        }
     }
 
     // 平均値を返す
-    for(auto i=0;i <3;i++){
+    for(auto i=0;i <3;i++)
+    {
       avg_val += this->GetInstance()->avg_datas[i];
     }
 
@@ -29,15 +34,20 @@ bool SonarFilter::FilterInput()
     #else
     tavg = RyujiEv3Engine::GetSonarSensor()->getDistance();
     #endif
+     EV3_LOG("value= %d",tavg);
 
     if( tavg > MAX_SONER || tavg < MIN_SONER)
     {
+        if(tavg>=200){
+            flag_err++;
+        }
         return false;
     }
         this->GetInstance()->avg_datas[this->GetInstance()->data_pointer] = tavg;
         this->GetInstance()->data_pointer++;
 
-    if( this->GetInstance()->data_pointer >= 3){
+    if( this->GetInstance()->data_pointer >= 3)
+    {
         this->GetInstance()->data_pointer = 0;
     }
 
@@ -47,6 +57,7 @@ bool SonarFilter::FilterInput()
 void SonarFilter::RestartData()
 {
     avg_datas = {0,0,0};
+    flag_err = 0;
 }
 
 #ifdef __LOOKUP_DEBUG__

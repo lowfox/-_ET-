@@ -39,31 +39,34 @@ bool TailControl::StageAngle(int32 target_val)
     
     if(target_val == MIN_TARGET)
     {
-    if(!RyujiEv3Engine::GetTailMotor()->setCounts(-5,1,true)){
+    if(!RyujiEv3Engine::GetTailMotor()->setCounts(-2,1,true))
+    {
         return false;
     }
 
     tslp_tsk(250);
     diff_val = RyujiEv3Engine::GetTailMotor()->getCounts();
-    diff_val = 75 - diff_val;
+    diff_val = 76 - diff_val;
 
     if(diff_val >= ANGLE_ADJUST_1){
     diff_val += ANGLE_ADJUST_VAL_1;
     }
 
-    if(!RyujiEv3Engine::GetTailMotor()->setCounts(-8 + diff_val,1,true)){
+    if(!RyujiEv3Engine::GetTailMotor()->setCounts(-6 + diff_val,1,true))
+    {
         return false;
     }
 
     tslp_tsk(250);
     diff_val = RyujiEv3Engine::GetTailMotor()->getCounts();
-    diff_val = 67 - diff_val;
+    diff_val = 69 - diff_val;
 
     if(diff_val >= ANGLE_ADJUST_2 ){
     diff_val += ANGLE_ADJUST_VAL_2;
     }
 
-    if(!RyujiEv3Engine::GetTailMotor()->setCounts(-12 + diff_val,1,true)){
+    if(!RyujiEv3Engine::GetTailMotor()->setCounts(-10 + diff_val,1,true))
+    {
         return false;
     }
 
@@ -74,14 +77,15 @@ bool TailControl::StageAngle(int32 target_val)
     // Phase2中に態勢を戻すとき使用する。
     else if(target_val == MAX_TARGET)
     {
-    diff_val = (60-diff_val);
+    diff_val = (64-diff_val);
 
     if(!Drive::Drive(-10)){
         return false;
     }
 
     while(Steering::GetDistance() - now_dist > -5 ){}
-    if(!RyujiEv3Engine::GetTailMotor()->setCounts(diff_val,100,true)){
+    if(!RyujiEv3Engine::GetTailMotor()->setCounts(diff_val,100,true))
+    {
         return false;
     }
 
@@ -90,7 +94,7 @@ bool TailControl::StageAngle(int32 target_val)
 
     now_dist = Steering::GetDistance();
     diff_val = RyujiEv3Engine::GetTailMotor()->getCounts();
-    diff_val = (71-diff_val);
+    diff_val = (72-diff_val);
     
     if(!Drive::Drive(-10)){
         return false;
@@ -98,7 +102,8 @@ bool TailControl::StageAngle(int32 target_val)
 
     while(Steering::GetDistance() - now_dist > -5 ){}
 
-    if(!RyujiEv3Engine::GetTailMotor()->setCounts(diff_val,70,true)){
+    if(!RyujiEv3Engine::GetTailMotor()->setCounts(diff_val,70,true))
+    {
         return false;
     }
 
@@ -107,7 +112,7 @@ bool TailControl::StageAngle(int32 target_val)
   
     now_dist = Steering::GetDistance();
     diff_val = RyujiEv3Engine::GetTailMotor()->getCounts();
-    diff_val = (78-diff_val);
+    diff_val = (79-diff_val);
     if(diff_val <= MAX_TARGET_BOUNDARY){
         return true;
     }
@@ -117,7 +122,8 @@ bool TailControl::StageAngle(int32 target_val)
     }
 
     while(Steering::GetDistance() - now_dist > -5 ){}
-    if(!RyujiEv3Engine::GetTailMotor()->setCounts(diff_val,20,true)){
+    if(!RyujiEv3Engine::GetTailMotor()->setCounts(diff_val,20,true))
+    {
         return false;
     }
 

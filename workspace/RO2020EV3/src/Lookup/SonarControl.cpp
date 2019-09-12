@@ -33,6 +33,16 @@ void SonarControl::SetAvg(int16 avg)
 
 bool SonarControl::CheckAvg()
 {
+
+    if(SonarFilter::GetInstance()->GetAvg() <= STOP_DISTANCE + 10)    
+    {
+        Drive::Drive(10);
+    }
+    else if(SonarFilter::GetInstance()->GetAvg() <= STOP_DISTANCE + 5)    
+    {
+        Drive::Drive(5);
+    }
+
     // 5以下追加
     if( SonarFilter::GetInstance()->GetAvg() <= STOP_DISTANCE )
     {    
@@ -41,14 +51,7 @@ bool SonarControl::CheckAvg()
         return true;
     }
     // ゲート停止位置の少し前で速度を緩める
-    else if(SonarFilter::GetInstance()->GetAvg() <= STOP_DISTANCE + 10)    
-    {
-        Drive::Drive(10);
-    }
-    else if(SonarFilter::GetInstance()->GetAvg() <= STOP_DISTANCE + 5)    
-    {
-        Drive::Drive(5);
-    }
+
 
     return false;
 }
