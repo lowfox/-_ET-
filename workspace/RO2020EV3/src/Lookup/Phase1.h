@@ -14,6 +14,7 @@ class Phase1{
 private:
 
         TailControl t_ctrl;
+
 public:
         ///
   	    /// @fn bool run()

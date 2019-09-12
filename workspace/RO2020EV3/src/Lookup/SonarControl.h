@@ -6,6 +6,7 @@
 #pragma once
 #include "SonarFilter.h"
 #include <RyujiEv3.h>
+#include <Drive.h>
 #define STOP_DISTANCE 15
 #include "Debug.h"
 
