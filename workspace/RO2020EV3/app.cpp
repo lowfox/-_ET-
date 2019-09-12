@@ -72,16 +72,8 @@ void bt_task(intptr_t unused) {
 
   EV3_LOG_INFO("bt_task End");
 
-<<<<<<< HEAD
-  // ���^�X�N���I��
-  ext_tsk();
-
-  // clang-format off
-}]
-=======
 	// ???^?X?N???I??
 	ext_tsk();
 
 // clang-format off
 }
->>>>>>> e6399f5eb79f39b31edd6f8096711d113fe856f5

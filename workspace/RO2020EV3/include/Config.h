@@ -1,22 +1,21 @@
 ///
 /// @file Config.h
-/// @brief ETï¿½ï¿½ï¿½{ï¿½Rï¿½ï¿½ï¿½vï¿½ï¿½ï¿½Wï¿½Fï¿½Nï¿½gï¿½ÌÝ’ï¿½
+/// @brief ETƒƒ{ƒRƒ“ƒvƒƒWƒFƒNƒg‚ÌÝ’è
 ///
 #pragma once
 #include <RyujiEv3.h>
 #include <SceneManager.h>
 
-/// ï¿½Åï¿½ï¿½É‹Nï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Vï¿½[ï¿½ï¿½
+/// Å‰‚É‹N“®‚·‚éƒV[ƒ“
 constexpr SceneID START_SCENE_ID = SceneID::LineTrace;
 
-/// ï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½gï¿½ï¿½ï¿½[ï¿½Xï¿½Ç‚ÌŽï¿½ï¿½ÉŒÄ‚Î‚ï¿½ï¿½Vï¿½[ï¿½ï¿½
+/// ƒ‰ƒCƒ“ƒgƒŒ[ƒX”Ç‚ÌŽŸ‚ÉŒÄ‚Î‚ê‚éƒV[ƒ“
 constexpr SceneID LINETRACE_NEXT_SCENE = SceneID::Lookup;
 
-/// EV3ï¿½ÌŠeï¿½Zï¿½ï¿½ï¿½Tï¿½[,ï¿½ï¿½ï¿½[ï¿½^ï¿½[ï¿½ÌÚ‘ï¿½ï¿½|ï¿½[ï¿½g
-constexpr PortData ROBOCON_PORT =
-{
-	// ColorSensor
-	SensorPort::PORT_3,
+/// EV3‚ÌŠeƒZƒ“ƒT[,ƒ‚[ƒ^[‚ÌÚ‘±ƒ|[ƒg
+constexpr PortData ROBOCON_PORT = {
+    // ColorSensor
+    SensorPort::PORT_3,
 
     // TouchSensor
     SensorPort::PORT_1,
