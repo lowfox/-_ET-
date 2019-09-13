@@ -10,5 +10,5 @@ enum MapState {
   LargeRightTurn,
   LargeLeftTurn,
   Goal,
-  StateEnd
+  StateEnd = 15
 };
