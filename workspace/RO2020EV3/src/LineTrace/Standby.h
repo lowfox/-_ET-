@@ -3,19 +3,19 @@
 #include <vector>
 
 constexpr int32 NomalDeg    = 90;
-constexpr int32 LookUp_1Deg = 80;
-constexpr int32 LookUp_2Deg = 55;
+constexpr int32 LookUp_1Deg = 83;
+constexpr int32 LookUp_2Deg = 62;
 
 //#define LINETRACE_BLUETOOTH_START
 
-//ƒ‰ƒCƒ“ƒgƒŒ[ƒXƒXƒ^ƒ“ƒoƒC
+//ï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½gï¿½ï¿½ï¿½[ï¿½Xï¿½Xï¿½^ï¿½ï¿½ï¿½oï¿½C
 class Standby {
  private:
   std::vector<int32> m_tailDegrees;
 
-  const int32 TAIL_SPEED = 50;  //‚µ‚Á‚Ûƒ‚[ƒ^‰ñ“]‘¬“x
+  const int32 TAIL_SPEED = 50;  //ï¿½ï¿½ï¿½ï¿½ï¿½Ûƒï¿½ï¿½[ï¿½^ï¿½ï¿½]ï¿½ï¿½ï¿½x
 
-  const int32 STANDBY_COUNT = 90;  //‘Ò‹@‚Ì‚µ‚Á‚ÛŠp“x
+  const int32 STANDBY_COUNT = 90;  //ï¿½Ò‹@ï¿½ï¿½ï¿½Ì‚ï¿½ï¿½ï¿½ï¿½ÛŠpï¿½x
 
  public:
   Standby();
