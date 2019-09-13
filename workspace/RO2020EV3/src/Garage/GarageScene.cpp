@@ -53,7 +53,7 @@ void GarageScene::garage_in::Start_Process()
 		EV3_LOG("GET_RIGHT_ERR");
 	}
 
-	TraceColor traceColor;                      
+	TraceColor traceColor;                
 
 #ifdef color_test
 	while (1) {
