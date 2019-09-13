@@ -8,7 +8,7 @@ public:
 	StartDash();//コンストラクタ
 	~StartDash();//デストラクタ
 
-	void tailOperation();
+	void startRun();
 
 private:
 //	int m_motorSpeed;

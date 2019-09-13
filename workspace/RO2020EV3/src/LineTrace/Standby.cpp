@@ -10,15 +10,12 @@
 
 Standby::Standby() {
   m_tailDegrees.push_back(NomalDeg);
-
   // L,R,各コースで必要な角度をキャリブレーションする
+  m_tailDegrees.push_back(LookUp_1Deg);
+
   switch (LINETRACE_NEXT_SCENE) {
     case SceneID::Lookup:
-      m_tailDegrees.push_back(LookUp_1Deg);
       m_tailDegrees.push_back(LookUp_2Deg);
-      break;
-    case SceneID::Seesaw:
-
       break;
     default:
       EV3_LOG_ERROR("okapeople");
@@ -42,6 +39,7 @@ void Standby::setup() {
   auto* tail                    = RyujiEv3Engine::GetTailMotor();
 
   //尻尾角度のリセット
+  tail->setCounts(-5, 50, true);  //遊びをなくす処理
   tail->resetCounts();  //尻尾を上にあげきった状態で実行
 
   int32 prevCount = 0;
