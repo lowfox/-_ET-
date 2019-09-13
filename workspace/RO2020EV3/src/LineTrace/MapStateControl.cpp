@@ -1,49 +1,63 @@
 // MapStateControl.cpp
-// includeƒtƒ@ƒCƒ‹
+// includeãƒ•ã‚¡ã‚¤ãƒ«
 #include "MapStateControl.h"
 #include <Logger.h>
 
-// ’è”’è‹`
+// å®šæ•°å®šç¾©
 #define ERROR -1
 
-MapStateControl::MapStateControl()
-{
+MapStateControl::MapStateControl() {
 }
 
-MapStateControl::~MapStateControl()
-{
+MapStateControl::~MapStateControl() {
 }
 
-MapState MapStateControl::drivePosition() {
-  static int nowState = 0;      //Œ»İ‚Ì‘–só‘Ô
-  float milage = 0.0f;          //—İŒv‹——£
+int MapStateControl::drivePosition() {
+  float milage = 0.0f;  //ç´¯è¨ˆè·é›¢
 
-
-
-  //—İŒv‹——£æ“¾
+  //ç´¯è¨ˆè·é›¢å–å¾—
   milage = DistanceMeasure::getDistance();
 
-  //ƒR[ƒX‚ªL‚©R‚É‚æ‚Á‚Äˆ—‚ğØ‚è‘Ö‚¦(İ’è‚³‚ê‚Ä‚¢‚È‚¯‚ê‚ÎƒGƒ‰[I—¹)
+  //ã‚³ãƒ¼ã‚¹ãŒLã‹Rã«ã‚ˆã£ã¦å‡¦ç†ã‚’åˆ‡ã‚Šæ›¿ãˆ(è¨­å®šã•ã‚Œã¦ã„ãªã‘ã‚Œã°ã‚¨ãƒ©ãƒ¼çµ‚äº†)
   if (COURSE_MODE == LEFT_COURSE) {
-    //Œ»İ‚Ì‹——£‚ªŒ»İ‚Ì‹K’è‹——£‚ğ’´‚¦AƒS[ƒ‹(STATE_END)‚ğ’´‚¦‚Ä‚¢‚È‚¯‚ê‚Î”z—ñ‚Ì“Y‚¦š‚ğƒCƒ“ƒNƒŠƒƒ“ƒg
+    //ç¾åœ¨ã®è·é›¢ãŒç¾åœ¨ã®è¦å®šè·é›¢ã‚’è¶…ãˆã€ã‚´ãƒ¼ãƒ«(STATE_END)ã‚’è¶…ãˆã¦ã„ãªã‘ã‚Œã°é…åˆ—ã®æ·»ãˆå­—ã‚’ã‚¤ãƒ³ã‚¯ãƒªãƒ¡ãƒ³ãƒˆ
     if (milage > m_stateLeft[nowState].Distance && milage <= STATE_END) {
       ++nowState;
 
-      //‘–só‘ÔØ‚è‘Ö‚¦‚Ì‹——£‚ğƒƒO‚É“f‚­
-      EV3_LOG("State chenge nowState = %d\n Now milage  = %f\n", nowState, milage);//Takeuchi
+      //èµ°è¡ŒçŠ¶æ…‹åˆ‡ã‚Šæ›¿ãˆæ™‚ã®è·é›¢ã‚’ãƒ­ã‚°ã«åã
+
+      EV3_LOG("State chenge nowState = %d\n Now milage  = %f\n", nowState,
+              milage);  // Takeuchi
+      RyujiEv3Engine::GetSpeaker()->setVolume(500);
+      RyujiEv3Engine::GetSpeaker()->playTone(500, 10);
+    } else if (milage > STATE_END) {
+      //ã‚´ãƒ¼ãƒ«ã—ãŸãªã‚‰nowStateã‚’-1ã«ã™ã‚‹
+      nowState = -1;
+
     }
-    return m_stateLeft[nowState].State;
+    return nowState;
 
   } else if (COURSE_MODE == RIGHT_COURSE) {
-    
     if (milage > m_stateRight[nowState].Distance && milage <= STATE_END) {
       ++nowState;
+      //èµ°è¡ŒçŠ¶æ…‹åˆ‡ã‚Šæ›¿ãˆæ™‚ã®è·é›¢ã‚’ãƒ­ã‚°ã«åã
+      EV3_LOG("State chenge nowState = %d\n Now milage  = %f\n", nowState,
+              milage);  // Takeuchi
+      RyujiEv3Engine::GetSpeaker()->setVolume(500);
+      RyujiEv3Engine::GetSpeaker()->playTone(900, 10);
+    } else if (milage > STATE_END) {
+      //ã‚´ãƒ¼ãƒ«ã—ãŸãªã‚‰nowStateã‚’-1ã«ã™ã‚‹
+      nowState = -1;
     }
-    return m_stateRight[nowState].State;
+    return nowState;
 
   } else {
-    return (MapState)ERROR;
+    return (int)ERROR;
   }
+}
+
+void MapStateControl::drivePositionReset() {
+  nowState = 0;
 }
 
 int MapStateControl::errorCorrection() { return 0; }

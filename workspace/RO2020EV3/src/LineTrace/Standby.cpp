@@ -3,21 +3,18 @@
 #include <Drive.h>
 #include <Logger.h>  //Takeuchi
 #include "Run.h"
-//’Ç‰Á•ÏX‚»‚Ì‘¼‚´‚Á‚­‚è by Takeuchi
-//ƒƒO‚ð“f‚­‚æ‚¤‚É’Ç‰Á
-//ƒLƒƒƒŠƒuƒŒ[ƒVƒ‡ƒ“ŽžA–ˆ‰ñK”öˆÊ’u‚ðƒŠƒZƒbƒg‚·‚é‚æ‚¤‚É•ÏX
+//è¿½åŠ å¤‰æ›´ãã®ä»–ã–ã£ãã‚Š by Takeuchi
+//ãƒ­ã‚°ã‚’åãã‚ˆã†ã«è¿½åŠ 
+//ã‚­ãƒ£ãƒªãƒ–ãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³æ™‚ã€æ¯Žå›žå°»å°¾ä½ç½®ã‚’ãƒªã‚»ãƒƒãƒˆã™ã‚‹ã‚ˆã†ã«å¤‰æ›´
 
 Standby::Standby() {
   m_tailDegrees.push_back(NomalDeg);
- 
-  // L,R,ŠeƒR[ƒX‚Å•K—v‚ÈŠp“x‚ðƒLƒƒƒŠƒuƒŒ[ƒVƒ‡ƒ“‚·‚é
+  // L,R,å„ã‚³ãƒ¼ã‚¹ã§å¿…è¦ãªè§’åº¦ã‚’ã‚­ãƒ£ãƒªãƒ–ãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³ã™ã‚‹
+  m_tailDegrees.push_back(LookUp_1Deg);
+
   switch (LINETRACE_NEXT_SCENE) {
     case SceneID::Lookup:
-      m_tailDegrees.push_back(LookUp_1Deg);
       m_tailDegrees.push_back(LookUp_2Deg);
-      break;
-    case SceneID::Seesaw:
-
       break;
     default:
       EV3_LOG_ERROR("okapeople");
@@ -40,12 +37,13 @@ void Standby::traceMain() {
 void Standby::setup() {
   auto* tail                    = RyujiEv3Engine::GetTailMotor();
 
-  //K”öŠp“x‚ÌƒŠƒZƒbƒg
-  tail->resetCounts();  //K”ö‚ðã‚É‚ ‚°‚«‚Á‚½ó‘Ô‚ÅŽÀs
+  //å°»å°¾è§’åº¦ã®ãƒªã‚»ãƒƒãƒˆ
+  tail->setCounts(-5, 50, true);  //éŠã³ã‚’ãªãã™å‡¦ç†
+  tail->resetCounts();  //å°»å°¾ã‚’ä¸Šã«ã‚ã’ãã£ãŸçŠ¶æ…‹ã§å®Ÿè¡Œ
 
   int32 prevCount = 0;
 
-  // ƒLƒƒƒŠƒuƒŒ[ƒVƒ‡ƒ“‚·‚é•K—v‚Ì‚ ‚éŠp“x‚ð‚·‚×‚ÄŽÀs
+  // ã‚­ãƒ£ãƒªãƒ–ãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³ã™ã‚‹å¿…è¦ã®ã‚ã‚‹è§’åº¦ã‚’ã™ã¹ã¦å®Ÿè¡Œ
   for (const auto& itr : m_tailDegrees) {
     tail->setCounts(itr - prevCount, TAIL_SPEED, true);
 
@@ -54,7 +52,7 @@ void Standby::setup() {
     prevCount = itr;
   }
 
-  // ƒXƒ^[ƒg‘Ò‹@ó‘Ô‚É‚µ‚Á‚Û‚ðÝ’è
+  // ã‚¹ã‚¿ãƒ¼ãƒˆå¾…æ©ŸçŠ¶æ…‹ã«ã—ã£ã½ã‚’è¨­å®š
   tail->setCounts(STANDBY_COUNT - prevCount, TAIL_SPEED, true);
 }
 
@@ -65,8 +63,8 @@ void Standby::Calibration(int32 degree) {
 
   TraceColor countColor;
 
-  //•
-  lcd->drawString(0, 0, "GetColor : Black : %d", degree);  // Takeuchi(’Ô‚è’ù³)
+  //é»’
+  lcd->drawString(0, 0, "GetColor : Black : %d", degree);  // Takeuchi(ç¶´ã‚Šè¨‚æ­£)
 
   do {
     touch->update();
@@ -74,9 +72,10 @@ void Standby::Calibration(int32 degree) {
 
   RGB rgb          = Drive::ColorCalibrate::RGBAverage1Sec();
   countColor.black = (static_cast<float>(rgb.r + rgb.g + rgb.b) / 3.0f);
-  speaker->playTone(600, 1);
+  RyujiEv3Engine::GetSpeaker()->setVolume(500);
+  speaker->playTone(500, 10);
 
-  //”’
+  //ç™½
   lcd->drawString(0, 0, "GetColor : White : %d", degree);
 
   do {
@@ -84,15 +83,15 @@ void Standby::Calibration(int32 degree) {
   } while (!touch->clicked());
   rgb              = Drive::ColorCalibrate::RGBAverage1Sec();
   countColor.white = (static_cast<float>(rgb.r + rgb.g + rgb.b) / 3.0f);
-  speaker->playTone(600, 1);
+  speaker->playTone(500, 10);
 
-  //Â
-  lcd->drawString(0, 0, "GetColor : Blue : %d", degree);  // Takeuchi(’Ô‚è’ù³)
+  //é’
+  lcd->drawString(0, 0, "GetColor : Blue : %d", degree);  // Takeuchi(ç¶´ã‚Šè¨‚æ­£)
   do {
     touch->update();
   } while (!touch->clicked());
   countColor.blue = Drive::ColorCalibrate::RGBAverage1Sec();
-  speaker->playTone(600, 1);
+  speaker->playTone(1000, 15);
 
   EV3_LOG(
       "degree = %d\nAdd Trace Color black = %f\nAdd Trace Color blue = "
@@ -109,7 +108,7 @@ bool Standby::bluetoothDetection() {
     return false;
   }
 
-  // ƒXƒ^[ƒgŽ¯•ÊM†
+  // ã‚¹ã‚¿ãƒ¼ãƒˆè­˜åˆ¥ä¿¡å·
   constexpr uint8 START_SIGNAL = '1';
 
   return bluetooth->read() == START_SIGNAL;

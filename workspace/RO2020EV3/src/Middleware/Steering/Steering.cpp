@@ -4,26 +4,17 @@
 #include "..//Drive/DriveManager.h"
 #include "../app.h"
 
-namespace Steering
-{
-	bool SetMode(SteeringMode mode)
-	{
-		return DriveEngine::GetSteering()->setMode(mode);
-	}
-
-	float GetDistance()
-	{
-		return DriveEngine::GetSteering()->driveDistance();
-	}
-	void ResetDistance()
-	{
-		DriveEngine::GetSteering()->resetDriveDistance();
-	}
+namespace Steering {
+bool SetMode(SteeringMode mode) {
+  return DriveEngine::GetSteering()->setMode(mode);
 }
 
-// ステアリング周期ハンドラ
-void drive_cyc(intptr_t unused)
-{
-	DriveEngine::GetDrive()->update();
-	DriveEngine::GetSteering()->update();
+float GetDistance() { return DriveEngine::GetSteering()->driveDistance(); }
+void ResetDistance() { DriveEngine::GetSteering()->resetDriveDistance(); }
+}  // namespace Steering
+
+// 繧ｹ繝�繧｢繝ｪ繝ｳ繧ｰ蜻ｨ譛溘ワ繝ｳ繝峨Λ
+void drive_cyc(intptr_t unused) {
+  DriveEngine::GetDrive()->update();
+  DriveEngine::GetSteering()->update();
 }

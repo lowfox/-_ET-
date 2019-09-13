@@ -4,37 +4,34 @@
 #include "IDrive.h"
 #include "LineTraceDrive.h"
 
-class DriveManager
-{
-private:
+class DriveManager {
+ private:
+  std::array<IDrive*, 2> m_drive;
 
-	std::array<IDrive*, 2> m_drive;
+  DriveMode m_mode;
 
-	DriveMode m_mode;
+  IDrive* pDrive = nullptr;
 
-	IDrive* pDrive = nullptr;
+  int32 m_speed = 0;
 
-	int32 m_speed = 0;
+  int32 m_turn = 0;
 
-	int32 m_turn = 0;
+ public:
+  DriveManager();
 
-public:
+  ~DriveManager();
 
-	DriveManager();
+  bool drive(int32 speed, int32 turn);
 
-	~DriveManager();
+  bool stop();
 
-	bool drive(int32 speed, int32 turn);
+  bool rotate();
 
-	bool stop();
+  void update();
 
-	bool rotate();
+  bool setDriveMode(DriveMode mode);
 
-	void update();
+  DriveMode getDriveMode();
 
-	bool setDriveMode(DriveMode mode);
-
-	DriveMode getDriveMode();
-
-	LineTraceDrive* getLineTraceDrive();
+  LineTraceDrive* getLineTraceDrive();
 };

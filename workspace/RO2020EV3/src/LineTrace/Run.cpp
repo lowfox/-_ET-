@@ -34,10 +34,8 @@ bool Run::driveStart() {
 
 
   // StartDash
-  Steering::SetMode(SteeringMode::Balance);  //“|—§ƒ‚[ƒh
-  dash.tailOperation();                      //K”öã‚°
+  dash.startRun();
 
-  Drive::Drive(50);
 
   auto* touch = RyujiEv3Engine::GetTouchSensor();
 

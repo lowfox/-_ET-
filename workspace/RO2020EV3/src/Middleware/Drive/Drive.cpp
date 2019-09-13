@@ -4,7 +4,6 @@
 #include "LineTraceDrive.h"
 #include "../app.h"
 
-
 namespace Drive
 {
 	bool Drive(int32 speed, int32 turn)
@@ -98,6 +97,14 @@ namespace Drive
 		{
 			return DriveEngine::GetDrive()->getLineTraceDrive()->getSize();
 		}
+
+		void SetLineMode(BlueLineMode lineMode) 
+		{
+            DriveEngine::GetDrive()->getLineTraceDrive()->setLineMode(lineMode);
+		}
+
+		BlueLineMode GetLineMode() {
+            return DriveEngine::GetDrive()->getLineTraceDrive()->getLineMode();
+        }
 	}
 }
-

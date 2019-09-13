@@ -11,7 +11,7 @@ LineTrace::LineTrace() {}
 
 LineTrace::~LineTrace() {}
 
-int LineTrace::lineTraceDrive(MapState runState) {
+int LineTrace::lineTraceDrive(int runState) {
   //エラーチェック
   if (0 > runState || StateEnd <= runState) {
     return ERROR;
@@ -19,5 +19,6 @@ int LineTrace::lineTraceDrive(MapState runState) {
 
   // runStateによって指定されたPID値をセット
   Drive::LineTrace::SetPID(m_PID[runState]);
+  Drive::Drive(m_Speed[runState]);
   return SUCCESSFUL;
 }
