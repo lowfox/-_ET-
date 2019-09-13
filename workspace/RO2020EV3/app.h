@@ -108,7 +108,7 @@ extern void gpio_irq_dispatcher(intptr_t exinf);
 // extern void	ev3_uart_port2_irq(void);
 //
 // extern void initialize_ev3(intptr_t exinf);
-extern void get_distance(intptr_t exinf);
+//extern void get_distance(intptr_t exinf);
 extern void cnt_ten_ms(intptr_t exinf);
 extern void tail_cnt_ten_ms(intptr_t exinf);
 extern void goto_get_distance(intptr_t exinf);

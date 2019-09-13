@@ -13,6 +13,6 @@ public:
 private:
     int16 m_stableOffset = 3;
     int m_cnt=0;
-    int m_delayCnt=25;
+    int m_delayCnt=20;
 
 };
