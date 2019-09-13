@@ -5,6 +5,7 @@
 #include <Logger.h>
 #include <SceneManager.h>
 #include <Config.h>
+
 #include "src/Lookup/SonarFilter.h"
 
 // main Task
@@ -65,6 +66,7 @@ void robocon_task(intptr_t exinf) {
 // Bluetooth Task
 void bt_task(intptr_t unused) {
   EV3_LOG_INFO("bt_task Start");
+
 
   while (true) {
     tslp_tsk(100);

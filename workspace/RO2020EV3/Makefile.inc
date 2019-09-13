@@ -21,6 +21,13 @@ LineTraceScene.o\
 LookupScene.o\
 GarageScene.o\
 SeesawScene.o\
+LineTrace.o\
+ColorDetection.o\
+MapStateControl.o\
+DistanceMeasure.o\
+Run.o\
+Standby.o\
+StartDash.o\
 MasterControl.o\
 Phase1.o\
 Phase2.o\
