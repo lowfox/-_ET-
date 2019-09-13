@@ -31,12 +31,16 @@ bool Phase1::run()
     {
         return false;
     }  
+
+    TraceColor tr;
+    RGB rgb = {0,0,0};
+    tr = {7.0f,68.0f,rgb};
     
     Drive::SetDriveMode(DriveMode::LineTrace);
 
-    auto tracecolor = Drive::ColorCalibrate::GetTraceColor(MAX_TARGET);
+    //auto tracecolor = Drive::ColorCalibrate::GetTraceColor(MAX_TARGET);
 
-    Drive::LineTrace::SetTraceColor(tracecolor);
+    Drive::LineTrace::SetTraceColor(tr);
 
     Drive::LineTrace::SetPID({ 0.3f, 0.0f, 0.1f });
 

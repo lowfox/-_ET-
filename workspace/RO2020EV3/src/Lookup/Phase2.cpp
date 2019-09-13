@@ -12,11 +12,16 @@ bool Phase2::run()
         m_ctrl.SetOffset();
 
         // ゲートを通過処理  
-        auto tracecolor = Drive::ColorCalibrate::GetTraceColor(MIN_TARGET);
+
+            TraceColor tr;
+        RGB rgb = {0,0,0};
+    tr = {9.6f,42.0f,rgb};
+
+        //auto tracecolor = Drive::ColorCalibrate::GetTraceColor(MIN_TARGET);
 
         Drive::SetDriveMode(DriveMode::LineTrace);
 
-        Drive::LineTrace::SetTraceColor(tracecolor);
+        Drive::LineTrace::SetTraceColor(tr);
         
         Drive::LineTrace::SetPID({ 0.3f, 0.0f, 0.1f });
 
@@ -37,9 +42,12 @@ bool Phase2::run()
 
         if(m_ctrl.GetPassCount() >= 5)
         {
+            if(!t_ctrl.StageAngle(MAX_TARGET))
+            {
+                return false;
+            }
             return true;
         }
-
 
         if(!t_ctrl.StageAngle(MAX_TARGET))
         {
@@ -71,11 +79,13 @@ bool Phase2::run()
         SonarControl::GetInstance()->SonarRun();
         tslp_tsk(1500);
 
+    tr = {7.0f,105.0f,rgb};
+
         Drive::SetDriveMode(DriveMode::LineTrace);
 
-        tracecolor = Drive::ColorCalibrate::GetTraceColor(MAX_TARGET);
+        //tracecolor = Drive::ColorCalibrate::GetTraceColor(MAX_TARGET);
 
-        Drive::LineTrace::SetTraceColor(tracecolor);
+        Drive::LineTrace::SetTraceColor(tr);
 
         Drive::LineTrace::SetPID({ 0.4f, 0.0f, 0.1f });
 

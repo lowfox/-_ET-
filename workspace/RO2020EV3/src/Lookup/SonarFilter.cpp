@@ -8,7 +8,6 @@ SonarFilter* SonarFilter::instance = nullptr;
 int16 SonarFilter::GetAvg()
 {
     int16 avg_val = 0;
-    EV3_LOG("%d ,%d ,%d",this->GetInstance()->avg_datas[0],this->GetInstance()->avg_datas[1],this->GetInstance()->avg_datas[2]);
     for(auto i=0;i<3;i++)
     {
        if(this->GetInstance()->avg_datas[i] == 0)
@@ -38,9 +37,6 @@ bool SonarFilter::FilterInput()
 
     if( tavg > MAX_SONER || tavg < MIN_SONER)
     {
-        if(tavg>=200){
-            flag_err++;
-        }
         return false;
     }
         this->GetInstance()->avg_datas[this->GetInstance()->data_pointer] = tavg;
@@ -57,7 +53,6 @@ bool SonarFilter::FilterInput()
 void SonarFilter::RestartData()
 {
     avg_datas = {0,0,0};
-    flag_err = 0;
 }
 
 #ifdef __LOOKUP_DEBUG__

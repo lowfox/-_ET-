@@ -16,7 +16,6 @@ class SonarFilter
 private:
 
         int16 data_pointer = 0;
-        int16 flag_err = 0;
 
         std::array<int16, 3> avg_datas {0, 0, 0};
         
