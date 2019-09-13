@@ -14,10 +14,8 @@ bool LookupScene::run()
 	MasterControl m_ctrl;
 
 	// LookupCode
-	if(!m_ctrl.LookUp())
-	{
-		return false;
-	}
+	m_ctrl.LookUp();
+	
 	//�󂯓n�����ɌĂ�
 	return change(SceneID::Garage);
 }
