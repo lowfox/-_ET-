@@ -46,7 +46,8 @@ angularVelocityDetectorTest.o\
 distanceRunnerTest.o\
 lineTracerTest.o\
 seesawRunnerTest.o\
-straightRunnerTest.o
+straightRunnerTest.o\
+standby.o
 
 
 SRCLANG := c++
