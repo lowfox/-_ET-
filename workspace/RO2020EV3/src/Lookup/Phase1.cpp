@@ -32,6 +32,20 @@ bool Phase1::run()
         return false;
     }  
     
+    if(!Steering::SetMode(SteeringMode::Nomal))
+    {
+        EV3_LOG_ERROR("Steering::setmode normal\n");
+    }
+
+    float oneDistance = Steering::GetDistance();
+    if(!Drive::Drive(3)){return false;}
+    while((Steering::GetDistance() - oneDistance) < 40.0f);
+
+    if(!Drive::Stop())
+    {
+        return false;
+    } 
+
     Drive::SetDriveMode(DriveMode::LineTrace);
 
     auto tracecolor = Drive::ColorCalibrate::GetTraceColor(MAX_TARGET);

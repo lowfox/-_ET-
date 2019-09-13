@@ -12,6 +12,7 @@ bool Phase2::run()
         m_ctrl.SetOffset();
 
         // ゲートを通過処理  
+
         auto tracecolor = Drive::ColorCalibrate::GetTraceColor(MIN_TARGET);
 
         Drive::SetDriveMode(DriveMode::LineTrace);
@@ -39,7 +40,6 @@ bool Phase2::run()
         {
             return true;
         }
-
 
         if(!t_ctrl.StageAngle(MAX_TARGET))
         {

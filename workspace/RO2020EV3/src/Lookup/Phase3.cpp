@@ -2,6 +2,11 @@
 
 bool Phase3::run()
 {
+    if(!t_ctrl.StageAngle(MAX_TARGET))
+    {
+        return false;
+    }
+    
     //　ラインチェック 
     if(e_ctrl.LineCheck()){
         return true;
