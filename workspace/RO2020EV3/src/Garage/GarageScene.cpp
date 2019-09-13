@@ -1,23 +1,10 @@
-//#define DEBUG
-//#define test
-//#define nagisakun
-//#define color_test
-
-#ifdef DEBUG
-#include "GarageScene.h"
-#include "Detect_mock.h"
-#include "Steering_mock.h"
-#include <RyujiEv3.h>
-#include <Drive.h>
-#else
 #include "GarageScene.h"
 #include <RyujiEv3.h>
 #include <Drive.h>
 #include <Detect.h>
 #include <Steering.h>
 #include <Logger.h>
-#include "Standby.h"
-#endif // DEBUG
+
 
 GarageScene::GarageScene(ISceneChanger* sceneChanger) : IScene(sceneChanger)
 {
@@ -26,11 +13,6 @@ GarageScene::GarageScene(ISceneChanger* sceneChanger) : IScene(sceneChanger)
 
 bool GarageScene::init()
 {
-#ifdef test
-	Standby stanby;       //for test only
-	stanby.traceMain();   //for test only
-	RyujiEv3Engine::GetTailMotor()->setCounts(80, 50, true); //for test only
-#endif // test
 
 	return true;
 }
@@ -55,25 +37,7 @@ void GarageScene::garage_in::Start_Process()
 
 	TraceColor traceColor;                
 
-#ifdef color_test
-	while (1) {
-		RGB_COLOR = RyujiEv3Engine::GetColorSensor()->getRGB();
 
-		if (Detect::GetColor() == ReadColor::BLUE)
-		{
-			EV3_LOG("BLUE");
-		}
-
-		else if (Detect::GetColor() == ReadColor::BLACK)
-		{
-			EV3_LOG("BLACK");
-		}
-
-		else {
-			EV3_LOG("WHITE");
-		}
-}
-#endif // color_test
 
 	
 	if (!Drive::SetDriveMode(DriveMode::LineTrace)) {
