@@ -15,21 +15,6 @@ bool Phase3::run()
     // カラーセンサースレッド開始 
     e_ctrl.StartColor();
     
-    // 左ラインチェック 
-    if(e_ctrl.LeftTurn()){
-        return true;
-    }
-
-    //　元の位置に戻る処理
-    if(!RyujiEv3Engine::GetLeftMotor()->setCounts(108,1,false)){
-        return false;
-    }
-
-    if(!RyujiEv3Engine::GetRightMotor()->setCounts(-108,1,true))
-    {
-        return false;
-    }
-
     // 右ラインチェック 
     if(e_ctrl.RightTurn()){
         return true;
@@ -41,6 +26,21 @@ bool Phase3::run()
     }
 
     if(!RyujiEv3Engine::GetRightMotor()->setCounts(108,1,true))
+    {
+        return false;
+    }
+
+    // 左ラインチェック 
+    if(e_ctrl.LeftTurn()){
+        return true;
+    }
+
+    //　元の位置に戻る処理
+    if(!RyujiEv3Engine::GetLeftMotor()->setCounts(108,1,false)){
+        return false;
+    }
+
+    if(!RyujiEv3Engine::GetRightMotor()->setCounts(-108,1,true))
     {
         return false;
     }
