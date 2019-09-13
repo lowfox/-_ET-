@@ -37,6 +37,7 @@ class SteeringManager {
 
   bool update();
 
+
  private:
   void driveDistanceUpdate();
 };

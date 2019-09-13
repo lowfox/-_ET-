@@ -20,6 +20,8 @@ RUN make \
 && echo 'APPL_DIR += $(foreach dir,$(shell find $(APPLDIR) -type d),$(dir))' >> /hrp2/sdk/common/Makefile.prj.common
 
 COPY docker/build.sh /
+COPY docker/.clang-format /
+COPY docker/cfw.py /
 
 WORKDIR /
 CMD ["./build.sh"]
