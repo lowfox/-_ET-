@@ -122,7 +122,7 @@ void GarageScene::garage_in::Start_Process()
 		}
 	}
 
-	while ((Initial_Distance + 110.0f) > Steering::GetDistance());
+	while ((Initial_Distance + 100.0f) > Steering::GetDistance());
 	Drive::Stop();
 	EV3_LOG("FINISHED");
 	RyujiEv3Engine::GetSpeaker()->playTone(500, 1000);
