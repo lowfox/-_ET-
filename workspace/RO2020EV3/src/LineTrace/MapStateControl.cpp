@@ -31,9 +31,6 @@ MapState MapStateControl::drivePosition() {
 
       //‘–só‘ÔØ‚è‘Ö‚¦‚Ì‹——£‚ğƒƒO‚É“f‚­
       EV3_LOG("State chenge nowState = %d\n Now milage  = %f\n", nowState, milage);//Takeuchi
-
-
-
     }
     return m_stateLeft[nowState].State;
 

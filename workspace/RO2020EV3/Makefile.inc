@@ -27,7 +27,8 @@ MapStateControl.o\
 DistanceMeasure.o\
 Run.o\
 Standby.o\
-StartDash.o
+StartDash.o\
+BluetoothCommandReceiver.o
 
 SRCLANG := c++
 
