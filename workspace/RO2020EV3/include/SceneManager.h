@@ -1,112 +1,99 @@
 ///
 /// @file SceneManager.h
-/// @brief ƒV[ƒ“ŠÇ—
+/// @brief ï¿½Vï¿½[ï¿½ï¿½ï¿½Ç—ï¿½
 ///
 #pragma once
 #include <map>
 
-/// ƒV[ƒ“¯•ÊID
-enum class SceneID
-{
-	/// ƒ‰ƒCƒ“ƒgƒŒ[ƒX
-	LineTrace,
+/// ï¿½Vï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ID
+enum class SceneID {
+  /// ï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½gï¿½ï¿½ï¿½[ï¿½X
+  LineTrace,
 
-	/// ƒKƒŒ[ƒW
-	Garage,
+  /// ï¿½Kï¿½ï¿½ï¿½[ï¿½W
+  Garage,
 
-	/// ƒV[ƒ\[
-	Seesaw,
+  /// ï¿½Vï¿½[ï¿½\ï¿½[
+  Seesaw,
 
-	/// ƒ‹ƒbƒNƒAƒbƒv
-	Lookup,
+  /// ï¿½ï¿½ï¿½bï¿½Nï¿½Aï¿½bï¿½v
+  Lookup,
 
-	/// I—¹
-	End
+  /// ï¿½Iï¿½ï¿½
+  End
 };
 
-/// ƒV[ƒ“•ÏXƒCƒ“ƒ^[ƒtƒF[ƒX
-class ISceneChanger
-{
-public:
-
-	virtual bool change(SceneID nextSceneID) = 0;
+/// ï¿½Vï¿½[ï¿½ï¿½ï¿½ÏXï¿½Cï¿½ï¿½ï¿½^ï¿½[ï¿½tï¿½Fï¿½[ï¿½X
+class ISceneChanger {
+ public:
+  virtual bool change(SceneID nextSceneID) = 0;
 };
 
-/// ƒV[ƒ“
-class IScene
-{
-private:
+/// ï¿½Vï¿½[ï¿½ï¿½
+class IScene {
+ private:
+  ISceneChanger* m_sceneChanger = nullptr;
 
-	ISceneChanger* m_sceneChanger = nullptr;
+ public:
+  IScene(ISceneChanger* sceneChanger) : m_sceneChanger(sceneChanger){};
 
-public:
+  virtual ~IScene() {}
 
-	IScene(ISceneChanger* sceneChanger) :m_sceneChanger(sceneChanger) {};
+  ///
+  /// @fn bool init()
+  /// @brief
+  /// ï¿½Vï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Bï¿½Oï¿½ÌƒVï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ìó‚¯“nï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÉŒÄ‚Î‚ï¿½ï¿½BArduinoï¿½ï¿½setupï¿½Æ“ï¿½ï¿½ï¿½ï¿½ï¿½p
+  /// @retval true ï¿½ï¿½ï¿½ï¿½
+  /// @retval false ï¿½ï¿½ï¿½s
+  ///
+  virtual bool init() { return true; }
 
-	virtual ~IScene() {}
+  ///
+  /// @fn bool run()
+  /// @brief ï¿½Vï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½Binit()ï¿½ï¿½ï¿½ï¿½ÉŒÄ‚Î‚ï¿½ï¿½BArduinoï¿½ï¿½loopï¿½Æ“ï¿½ï¿½ï¿½ï¿½ï¿½p
+  /// @retval true ï¿½ï¿½ï¿½ï¿½
+  /// @retval false ï¿½ï¿½ï¿½s
+  ///
+  virtual bool run() = 0;
 
-	///
-	/// @fn bool init()
-	/// @brief ƒV[ƒ“‚ğ‰Šú‰»‚·‚éB‘O‚ÌƒV[ƒ“‚©‚ç‚Ìó‚¯“n‚µ’¼Œã‚ÉŒÄ‚Î‚ê‚éBArduino‚Ìsetup‚Æ“¯‚¶ì—p
-	/// @retval true ¬Œ÷
-	/// @retval false ¸”s
-	///
-	virtual bool init() { return true; }
-
-	///
-	/// @fn bool run()
-	/// @brief ƒV[ƒ“‚ğÀs‚·‚éBinit()’¼Œã‚ÉŒÄ‚Î‚ê‚éBArduino‚Ìloop‚Æ“¯‚¶ì—p
-	/// @retval true ¬Œ÷
-	/// @retval false ¸”s
-	///
-	virtual bool run() = 0;
-
-	///
-	/// @fn bool change(SceneID nextSceneID)
-	/// @brief ƒV[ƒ“‚ğ•ÏX‚·‚éBŸ‚ÌƒV[ƒ“(“ïŠ)‚Ö‚Ìˆø‚«“n‚µ‚ÉŒÄ‚ÔB
-	/// @param nextSceneID Ÿ‚ÌƒV[ƒ“(“ïŠ)‚ÌID
-	/// @retval true ¬Œ÷
-	/// @retval false ¸”s
-	///
-	bool change(SceneID nextSceneID)
-	{
-		return m_sceneChanger->change(nextSceneID);
-	}
+  ///
+  /// @fn bool change(SceneID nextSceneID)
+  /// @brief ï¿½Vï¿½[ï¿½ï¿½ï¿½ï¿½ÏXï¿½ï¿½ï¿½ï¿½Bï¿½ï¿½ï¿½ÌƒVï¿½[ï¿½ï¿½(ï¿½ïŠ)ï¿½Ö‚Ìˆï¿½ï¿½ï¿½ï¿½nï¿½ï¿½ï¿½ï¿½ï¿½ÉŒÄ‚ÔB
+  /// @param nextSceneID ï¿½ï¿½ï¿½ÌƒVï¿½[ï¿½ï¿½(ï¿½ïŠ)ï¿½ï¿½ID
+  /// @retval true ï¿½ï¿½ï¿½ï¿½
+  /// @retval false ï¿½ï¿½ï¿½s
+  ///
+  bool change(SceneID nextSceneID) {
+    return m_sceneChanger->change(nextSceneID);
+  }
 };
 
-class SceneManager :public ISceneChanger
-{
-private:
+class SceneManager : public ISceneChanger {
+ private:
+  struct SceneData {
+    SceneID id;
 
-	struct SceneData
-	{
-		SceneID id;
+    IScene* scene;
+  };
 
-		IScene* scene;
-	};
+  SceneData m_scene;
 
-	SceneData m_scene;
+  SceneData m_nextScene;
 
-	SceneData m_nextScene;
+  std::map<SceneID, IScene*> m_sceneMap;
 
-	std::map<SceneID,IScene*> m_sceneMap;
+  bool m_isEnable = false;
 
-	bool m_isEnable = false;
+ public:
+  SceneManager();
 
-public:
+  ~SceneManager();
 
-	SceneManager();
+  bool init(SceneID startID);
 
-	~SceneManager();
+  bool run();
 
-	bool init(SceneID startID);
+  bool change(SceneID nextSceneID) override;
 
-	bool run();
-
-	bool change(SceneID nextSceneID)override;
-
-	bool isEnable()
-	{
-		return m_isEnable;
-	}
+  bool isEnable() { return m_isEnable; }
 };

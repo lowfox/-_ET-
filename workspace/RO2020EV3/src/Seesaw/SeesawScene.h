@@ -1,14 +1,20 @@
 #pragma once
-#pragma once
 #include <SceneManager.h>
+#include"seesawCapture.h"
+#include"seesawTest.h"
 
+#include<Drive.h>
+#include<RyujiEv3.h>
+#include<Logger.h>
+
+#include"lineTracer.h"
 ///　シーソーシーン
 class SeesawScene :public IScene
 {
 public:
 
 	SeesawScene(ISceneChanger* sceneChanger);
-
+	
 	///
 	/// @fn bool init()
 	/// @brief シーソーシーンを初期化する。前のシーンからの受け渡し直後に呼ばれる。Arduinoのsetupと同じ作用

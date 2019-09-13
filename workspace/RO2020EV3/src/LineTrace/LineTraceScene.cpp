@@ -1,7 +1,6 @@
 #include "LineTraceScene.h"
 #include <Config.h>
 #include "Standby.h"
-#include <BluetoothCommandReceiver.h>
 #include <Drive.h>
 #include <Logger.h>
 LineTraceScene::LineTraceScene(ISceneChanger* sceneChanger)
@@ -9,32 +8,11 @@ LineTraceScene::LineTraceScene(ISceneChanger* sceneChanger)
 
 bool LineTraceScene::init() { return true; }
 
-void setspeed(std::vector<const char*>& arg)
-{
-	EV3_LOG("SetSpeed arg = %d", static_cast<int32>(std::atoi(arg[0])));
-	Drive::Drive(static_cast<int32>(std::atoi(arg[0])));
-}
-
 bool LineTraceScene::run() {
-	String pid("pid");
-	// SetPIDƒRƒ}ƒ“ƒh‚ğ“o˜^
-	BluetoothCommandReceiver::add(pid, [](std::vector<const char*>& arg) {
-		EV3_LOG("SetPID,%d,%d,%d", static_cast<float>(std::atof(arg[0]), static_cast<float>(std::atof(arg[1]), static_cast<float>(std::atof(arg[2])));
-		Drive::LineTrace::SetPID({ static_cast<float>(std::atof(arg[0])), 
-			static_cast<float>(std::atof(arg[1])), 
-			static_cast<float>(std::atof(arg[2])) });
-	});
-	String set("speed");
-	BluetoothCommandReceiver::add(set, [](std::vector<const char*>& arg) {
-		EV3_LOG("SetSpeed %d",std::atoi(arg[0]));
-		Drive::Drive(std::atoi(arg[0]));
-	});
-
-	BluetoothCommandReceiver::add("Test", setspeed);
   // LineTraceCode
-  Standby stanby;       //StanbyƒNƒ‰ƒX‚ÌƒCƒ“ƒXƒ^ƒ“ƒX¶¬
+  Standby stanby;       //Stanbyï¿½Nï¿½ï¿½ï¿½Xï¿½ÌƒCï¿½ï¿½ï¿½Xï¿½^ï¿½ï¿½ï¿½Xï¿½ï¿½ï¿½ï¿½
 
-  stanby.traceMain();       //setupŠÖ”ŠJn
+  stanby.traceMain();       //setupï¿½Öï¿½ï¿½Jï¿½n
 
   return change(LINETRACE_NEXT_SCENE);
 }
