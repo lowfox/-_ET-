@@ -17,7 +17,7 @@ namespace Detect
 			return ReadColor::BLUE;
 		}
 		/// 白検知
-		else if ((rgb.r + rgb.g + rgb.b) / 3 > gray)
+		else if ((static_cast<float>(rgb.r + rgb.g + rgb.b) / 3.0f) > gray)
 		{
 			return ReadColor::WHITE;
 		}

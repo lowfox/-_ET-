@@ -10,7 +10,13 @@ private:
 
 	TraceColor m_traceColor;
 
+	float m_threshold;
+
+	float m_limitVal;
+
 	float m_gray;
+
+	float m_blueGray;
 
 	float m_rgbAverageTemp = 0;
 

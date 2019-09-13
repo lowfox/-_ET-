@@ -1,6 +1,7 @@
 // MapStateControl.cpp
 // includeファイル
 #include "MapStateControl.h"
+#include <Logger.h>
 
 // 定数定義
 #define ERROR -1
@@ -27,6 +28,12 @@ MapState MapStateControl::drivePosition() {
     //現在の距離が現在の規定距離を超え、ゴール(STATE_END)を超えていなければ配列の添え字をインクリメント
     if (milage > m_stateLeft[nowState].Distance && milage <= STATE_END) {
       ++nowState;
+
+      //走行状態切り替え時の距離をログに吐く
+      EV3_LOG("State chenge nowState = %d\n Now milage  = %f\n", nowState, milage);//Takeuchi
+
+
+
     }
     return m_stateLeft[nowState].State;
 

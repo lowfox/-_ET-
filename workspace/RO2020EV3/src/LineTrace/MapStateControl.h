@@ -7,7 +7,7 @@
 
 //定数定義
 #define STATE_MAX 16              //走行状態変移の最大数
-#define STATE_END 150.1f          // GOALまでの距離//仮
+#define STATE_END 9632.1f         // GOALまでの距離//仮
 #define LEFT_COURSE 0
 #define RIGHT_COURSE 1
 #define COURSE_MODE LEFT_COURSE   //走行コース設定
@@ -45,39 +45,39 @@ class MapStateControl {
 
   //Lコースの走行手順
   const std::array<DriveState, STATE_MAX> m_stateLeft = {
-      {{10.0f, Straight},//(仮)
-       {20.0f, LargeLeftTurn},//(仮)
-       {30.0f, Straight},//(仮)
-       {40.0f, LargeLeftTurn},//(仮)
-       {50.0f, Straight},//(仮)
-       {60.0f, SmallLeftTurn},//(仮)
-       {70.0f, SmallRightTurn},//(仮)
-       {80.0f, Straight},//(仮)
-       {90.0f, LargeRightTurn},//(仮)
-       {100.0f, Straight},//(仮)
-       {110.0f, LargeRightTurn},//(仮)
-       {120.0f, Straight},//(仮)
-       {130.0f, SmallRightTurn},//(仮)
-       {140.0f, SmallLeftTurn},//(仮)
-       {150.0f, Straight},//(仮)
-       {150.1f, Goal}}};//(仮)
+      {{620.0f, Straight},
+       {1240.0f, LargeLeftTurn},
+       {1836.0f, Straight},
+       {2592.0f, LargeLeftTurn},
+       {2722.0f, Straight},
+       {3388.0f, SmallLeftTurn},
+       {4704.0f, SmallRightTurn},
+       {4894.0f, Straight},
+       {5694.0f, LargeRightTurn},
+       {6604.0f, Straight},
+       {7240.0f, LargeRightTurn},
+       {7400.0f, Straight},
+       {7782.0f, SmallRightTurn},
+       {9192.0f, SmallLeftTurn},
+       {9372.0f, Straight},
+       {9372.1f, Goal}}};
 
   //Rコースの走行手順
   const std::array<DriveState, STATE_MAX> m_stateRight = {
-      {{10.0f, Straight},//(仮)
-       {20.0f, LargeRightTurn},//(仮)
-       {30.0f, Straight},//(仮)
-       {40.0f, LargeRightTurn},//(仮)
-       {50.0f, Straight},//(仮)
-       {60.0f, SmallRightTurn},//(仮)
-       {70.0f, SmallLeftTurn},//(仮)
-       {80.0f, Straight},//(仮)
-       {90.0f, LargeLeftTurn},//(仮)
-       {100.0f, Straight},//(仮)
-       {110.0f, LargeLeftTurn},//(仮)
-       {120.0f, Straight},//(仮)
-       {130.0f, SmallLeftTurn},//(仮)
-       {140.0f, SmallRightTurn},//(仮)
-       {150.0f, Straight},//(仮)
-       {150.1f, Goal}}};//(仮)
+      {{620.0f, Straight},
+       {1240.0f, LargeRightTurn},
+       {1836.0f, Straight},
+       {2592.0f, LargeRightTurn},
+       {2722.0f, Straight},
+       {3388.0f, SmallRightTurn},
+       {4704.0f, SmallLeftTurn},
+       {4894.0f, Straight},
+       {5694.0f, LargeLeftTurn},
+       {6604.0f, Straight},
+       {7240.0f, LargeLeftTurn},
+       {7400.0f, Straight},
+       {7782.0f, SmallLeftTurn},
+       {9192.0f, SmallRightTurn},
+       {9372.0f, Straight},
+       {9372.1f, Goal}}};
 };

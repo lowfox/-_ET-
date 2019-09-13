@@ -9,7 +9,7 @@ public:
 	Run();      //コンストラクタ
 	~Run();     //デストラクタ
 
-	void driveStart();
+	bool driveStart();
 
 private:
 
