@@ -31,16 +31,26 @@ bool Phase1::run()
     {
         return false;
     }  
-
-    TraceColor tr;
-    RGB rgb = {0,0,0};
-    tr = {7.0f,68.0f,rgb};
     
+    if(!Steering::SetMode(SteeringMode::Nomal))
+    {
+        EV3_LOG_ERROR("Steering::setmode normal\n");
+    }
+
+    float oneDistance = Steering::GetDistance();
+    if(!Drive::Drive(3)){return false;}
+    while((Steering::GetDistance() - oneDistance) < 40.0f);
+
+    if(!Drive::Stop())
+    {
+        return false;
+    } 
+
     Drive::SetDriveMode(DriveMode::LineTrace);
 
-    //auto tracecolor = Drive::ColorCalibrate::GetTraceColor(MAX_TARGET);
+    auto tracecolor = Drive::ColorCalibrate::GetTraceColor(MAX_TARGET);
 
-    Drive::LineTrace::SetTraceColor(tr);
+    Drive::LineTrace::SetTraceColor(tracecolor);
 
     Drive::LineTrace::SetPID({ 0.3f, 0.0f, 0.1f });
 
