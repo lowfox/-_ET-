@@ -13,7 +13,7 @@ public:
 
 private:
 
-	MapState m_runState;
+	int m_runState;
 
 	const int m_lowSpeed = 30;
 };

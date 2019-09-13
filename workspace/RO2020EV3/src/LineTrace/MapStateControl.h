@@ -1,16 +1,16 @@
 // MapStateControl.h
 #pragma once
 // includeファイル
+#include <array>
 #include "DistanceMeasure.h"
 #include "MapStateDefinition.h"
-#include <array>
 
 //定数定義
-#define STATE_MAX 16              //走行状態変移の最大数
-#define STATE_END 9372.1f  // GOALまでの距離
+#define STATE_MAX 16       //走行状態変移の最大数
+#define STATE_END 9372.1f  // GOALまでの距離//仮
 #define LEFT_COURSE 0
 #define RIGHT_COURSE 1
-#define COURSE_MODE LEFT_COURSE   //走行コース設定
+#define COURSE_MODE RIGHT_COURSE  //走行コース設定
 
 //構造体定義
 //走行状態管理構造体
@@ -29,21 +29,23 @@ struct DriveState {
 
 class MapStateControl {
  public:
-  MapStateControl();          //コンストラクタ
-  ~MapStateControl();         //デストラクタ
+  MapStateControl();   //コンストラクタ
+  ~MapStateControl();  //デストラクタ
   //関数名   :drivePosition
   //機能名   :走行位置判断
   //機能概要 :走行距離から走行状態(直線、右カーブ等)を判断する
   //引数     :無し
-  //戻り値   :MapState        :走行状態
-  MapState drivePosition();
+  //戻り値   :int        :走行状態
+  int drivePosition();
+  void drivePositionReset();
 
  private:
-  int errorCorrection();      //実際の走行状態とマップステータスの誤差検知
-  int m_rightNumRotation;     //右モーター回転数
-  int m_leftNumRotation;      //左モーター回転数
+  int errorCorrection();  //実際の走行状態とマップステータスの誤差検知
+  int m_rightNumRotation;  //右モーター回転数
+  int m_leftNumRotation;   //左モーター回転数
+  int nowState = 0;        //現在の走行状態
 
-  //Lコースの走行手順
+  // Lコースの走行手順
   const std::array<DriveState, STATE_MAX> m_stateLeft = {
       {{620.0f, Straight},
        {1240.0f, LargeLeftTurn},
@@ -62,7 +64,7 @@ class MapStateControl {
        {9372.0f, Straight},
        {9372.1f, Goal}}};
 
-  //Rコースの走行手順
+  // Rコースの走行手順
   const std::array<DriveState, STATE_MAX> m_stateRight = {
       {{620.0f, Straight},
        {1240.0f, LargeRightTurn},

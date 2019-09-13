@@ -75,7 +75,8 @@ void Standby::Calibration(int32 degree) {
 
   RGB rgb          = Drive::ColorCalibrate::RGBAverage1Sec();
   countColor.black = (static_cast<float>(rgb.r + rgb.g + rgb.b) / 3.0f);
-  speaker->playTone(600, 1);
+  RyujiEv3Engine::GetSpeaker()->setVolume(500);
+  speaker->playTone(500, 10);
 
   //”’
   lcd->drawString(0, 0, "GetColor : White : %d", degree);
@@ -85,7 +86,7 @@ void Standby::Calibration(int32 degree) {
   } while (!touch->clicked());
   rgb              = Drive::ColorCalibrate::RGBAverage1Sec();
   countColor.white = (static_cast<float>(rgb.r + rgb.g + rgb.b) / 3.0f);
-  speaker->playTone(600, 1);
+  speaker->playTone(500, 10);
 
   //Â
   lcd->drawString(0, 0, "GetColor : Blue : %d", degree);  // Takeuchi(’Ô‚è’ù³)
@@ -93,7 +94,7 @@ void Standby::Calibration(int32 degree) {
     touch->update();
   } while (!touch->clicked());
   countColor.blue = Drive::ColorCalibrate::RGBAverage1Sec();
-  speaker->playTone(600, 1);
+  speaker->playTone(1000, 15);
 
   EV3_LOG(
       "degree = %d\nAdd Trace Color black = %f\nAdd Trace Color blue = "

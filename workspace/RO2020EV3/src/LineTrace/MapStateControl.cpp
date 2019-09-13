@@ -2,24 +2,18 @@
 // includeファイル
 #include "MapStateControl.h"
 #include <Logger.h>
-#include <RyujiEv3.h>
 
 // 定数定義
 #define ERROR -1
 
-MapStateControl::MapStateControl()
-{
+MapStateControl::MapStateControl() {
 }
 
-MapStateControl::~MapStateControl()
-{
+MapStateControl::~MapStateControl() {
 }
 
-MapState MapStateControl::drivePosition() {
-  static int nowState = 0;      //現在の走行状態
-  float milage = 0.0f;          //累計距離
-
-
+int MapStateControl::drivePosition() {
+  float milage = 0.0f;  //累計距離
 
   //累計距離取得
   milage = DistanceMeasure::getDistance();
@@ -30,25 +24,38 @@ MapState MapStateControl::drivePosition() {
     if (milage > m_stateLeft[nowState].Distance && milage <= STATE_END) {
       ++nowState;
 
-      //走行状態切り替え時の距離をログに吐いて音を鳴らす。
-      EV3_LOG("State chenge nowState = %d\n Now milage  = %f\n", nowState, milage);//Takeuchi
-      RyujiEv3Engine::GetSpeaker()->setVolume(100);
-      RyujiEv3Engine::GetSpeaker()->playTone(500, 500);//Takeuchi 音を鳴らす
-
-
+      //走行状態切り替え時の距離をログに吐く
+      EV3_LOG("State chenge nowState = %d\n Now milage  = %f\n", nowState,
+              milage);  // Takeuchi
+      RyujiEv3Engine::GetSpeaker()->setVolume(500);
+      RyujiEv3Engine::GetSpeaker()->playTone(500, 10);
+    } else if (milage > STATE_END) {
+      //ゴールしたならnowStateを-1にする
+      nowState = -1;
     }
-    return m_stateLeft[nowState].State;
+    return nowState;
 
   } else if (COURSE_MODE == RIGHT_COURSE) {
-    
     if (milage > m_stateRight[nowState].Distance && milage <= STATE_END) {
       ++nowState;
+      //走行状態切り替え時の距離をログに吐く
+      EV3_LOG("State chenge nowState = %d\n Now milage  = %f\n", nowState,
+              milage);  // Takeuchi
+      RyujiEv3Engine::GetSpeaker()->setVolume(500);
+      RyujiEv3Engine::GetSpeaker()->playTone(900, 10);
+    } else if (milage > STATE_END) {
+      //ゴールしたならnowStateを-1にする
+      nowState = -1;
     }
-    return m_stateRight[nowState].State;
+    return nowState;
 
   } else {
-    return (MapState)ERROR;
+    return (int)ERROR;
   }
+}
+
+void MapStateControl::drivePositionReset() {
+  nowState = 0;
 }
 
 int MapStateControl::errorCorrection() { return 0; }
