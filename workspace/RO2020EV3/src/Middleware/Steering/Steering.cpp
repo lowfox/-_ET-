@@ -13,7 +13,7 @@ float GetDistance() { return DriveEngine::GetSteering()->driveDistance(); }
 void ResetDistance() { DriveEngine::GetSteering()->resetDriveDistance(); }
 }  // namespace Steering
 
-// ステアリング周期ハンドラ
+// 繧ｹ繝�繧｢繝ｪ繝ｳ繧ｰ蜻ｨ譛溘ワ繝ｳ繝峨Λ
 void drive_cyc(intptr_t unused) {
   DriveEngine::GetDrive()->update();
   DriveEngine::GetSteering()->update();

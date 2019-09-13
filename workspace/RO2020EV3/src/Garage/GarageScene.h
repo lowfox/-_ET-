@@ -1,25 +1,36 @@
-#pragma once
+
 #include <SceneManager.h>
 
-/// ƒKƒŒ[ƒWƒV[ƒ“
-class GarageScene : public IScene {
- public:
-  GarageScene(ISceneChanger* sceneChanger);
+/// ï¿½ï½½Kï¿½ï½½ï¿½ï½½ï¿½ï½½[ï¿½ï½½Wï¿½ï½½Vï¿½ï½½[ï¿½ï½½ï¿½ï½½
+class GarageScene :public IScene
+{
+public:
 
-  ///
-  /// @fn bool init()
-  /// @brief
-  /// ƒKƒŒ[ƒWƒV[ƒ“‚ğ‰Šú‰»‚·‚éB‘O‚ÌƒV[ƒ“‚©‚ç‚Ìó‚¯“n‚µ’¼Œã‚ÉŒÄ‚Î‚ê‚éBArduino‚Ìsetup‚Æ“¯‚¶ì—p
-  /// @retval true ¬Œ÷
-  /// @retval false ¸”s
-  ///
-  bool init() override;
+	GarageScene(ISceneChanger* sceneChanger);
+	
+	class garage_in
+	{
+	public:
+		//ï¿½ï½½ï¾–æ’°ï½¿ï½½ï¿½ï½½ï¿½ï½½`
+		void Start_Process();			//ï¿½ï½½ï¾‚ï¿½ï½¿ï½½ï¿½ï½½Cï¿½ï½½ï¿½ï½½ï¿½ï½½ï¾Œæ‰˜ï½¿ï½½ï¿½ï½½ï¿½ï½½ï¿½ï½½ï¿½ï½½ï¿½ï½½ï¿½ï½½ï¿½ï½½ï¿½ï½½ï¿½ï½½ï¾Ÿã‚‘ï½¿ï½½
 
-  ///
-  /// @fn bool run()
-  /// @brief ƒKƒŒ[ƒWƒV[ƒ“‚ğÀs‚·‚éBinit()’¼Œã‚ÉŒÄ‚Î‚ê‚éB
-  /// @retval true ¬Œ÷
-  /// @retval false ¸”s
-  ///
-  bool run() override;
+	private:
+		//ï¿½ï½½ï¾æ’°ï½¿ï½½ï¿½ï½½ï¿½ï½½`
+		float Initial_Distance;								//ï¿½ï½½ï¿½ï½½ï¿½ï½½ï¿½ï½½ï¿½ï½½ï¿½ï½½ï¿½ï½½ï¿½ï½½ï¿½ï½½l
+	};
+	///
+	/// @fn bool init()
+	/// @brief ï¿½ï½½Kï¿½ï½½ï¿½ï½½ï¿½ï½½[ï¿½ï½½Wï¿½ï½½Vï¿½ï½½[ï¿½ï½½ï¿½ï½½ï¿½ï½½ï¿½ï½½ï¿½ï½½ï¿½ï½½ï¿½ï½½ï¿½ï½½ï¿½ï½½ï¿½ï½½ï¿½ï½½ï¿½ï½½ï¿½ï½½ï¿½ï½½Bï¿½ï½½Oï¿½ï½½ï¾Œã‚·ï¿½ï½½[ï¿½ï½½ï¿½ï½½ï¿½ï½½ï¿½ï½½ï¿½ï½½ï¿½ï½½ï¾Œå—ã‘æ¸¡ï¿½ï½½ï¿½ï½½ï¿½ï½½ï¿½ï½½ï¿½ï½½ï¿½ï½½ï¾‰å‘¼ã°ã‚‘ï½¿ï½½ï¿½ï½½BArduinoï¿½ï½½ï¿½ï½½setupï¿½ï½½ï¾†é›£ï½¿ï½½ï¿½ï½½ï¿½ï½½ï¿½ï½½ï¿½ï½½p
+	/// @retval true ï¿½ï½½ï¿½ï½½ï¿½ï½½ï¿½ï½½
+	/// @retval false ï¿½ï½½ï¿½ï½½ï¿½ï½½s
+	///
+	bool init()override;
+
+	///
+	/// @fn bool run()
+	/// @brief ï¿½ï½½Kï¿½ï½½ï¿½ï½½ï¿½ï½½[ï¿½ï½½Wï¿½ï½½Vï¿½ï½½[ï¿½ï½½ï¿½ï½½ï¿½ï½½ï¿½ï½½ï¿½ï½½ï¿½ï½½ï¿½ï½½sï¿½ï½½ï¿½ï½½ï¿½ï½½ï¿½ï½½Binit()ï¿½ï½½ï¿½ï½½ï¿½ï½½ï¿½ï½½ï¾‰å‘¼ã°ã‚‘ï½¿ï½½ï¿½ï½½B
+	/// @retval true ï¿½ï½½ï¿½ï½½ï¿½ï½½ï¿½ï½½
+	/// @retval false ï¿½ï½½ï¿½ï½½ï¿½ï½½s
+	///
+	bool run()override;
 };

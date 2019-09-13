@@ -20,7 +20,10 @@ SceneManager.o\
 LineTraceScene.o\
 LookupScene.o\
 GarageScene.o\
-SeesawScene.o
+Detect_mock.o\
+Steering_mock.o\
+SeesawScene.o\
+Standby.o
 
 SRCLANG := c++
 
