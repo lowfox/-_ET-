@@ -1,25 +1,27 @@
 #pragma once
 #include <SceneManager.h>
+#include "MasterControl.h"
 
-/// ƒ‹ƒbƒNƒAƒbƒvƒV[ƒ“
-class LookupScene : public IScene {
- public:
-  LookupScene(ISceneChanger* sceneChanger);
+/// ãƒ«ãƒƒã‚¯ã‚¢ãƒƒãƒ—ã‚·ãƒ¼ãƒ³
+class LookupScene :public IScene
+{
+public:
 
-  ///
-  /// @fn bool init()
-  /// @brief
-  /// ƒ‹ƒbƒNƒAƒbƒvƒV[ƒ“‚ğ‰Šú‰»‚·‚éB‘O‚ÌƒV[ƒ“‚©‚ç‚Ìó‚¯“n‚µ’¼Œã‚ÉŒÄ‚Î‚ê‚éBArduino‚Ìsetup‚Æ“¯‚¶ì—p
-  /// @retval true ¬Œ÷
-  /// @retval false ¸”s
-  ///
-  bool init() override;
+	LookupScene(ISceneChanger* sceneChanger);
 
-  ///
-  /// @fn bool run()
-  /// @brief ƒ‹ƒbƒNƒAƒbƒvƒV[ƒ“‚ğÀs‚·‚éBinit()’¼Œã‚ÉŒÄ‚Î‚ê‚éB
-  /// @retval true ¬Œ÷
-  /// @retval false ¸”s
-  ///
-  bool run() override;
+	///
+	/// @fn bool init()
+	/// @brief ãƒ«ãƒƒã‚¯ã‚¢ãƒƒãƒ—ã‚·ãƒ¼ãƒ³ã‚’åˆæœŸåŒ–ã™ã‚‹ã€‚å‰ã®ã‚·ãƒ¼ãƒ³ã‹ã‚‰ã®å—ã‘æ¸¡ã—ç›´å¾Œã«å‘¼ã°ã‚Œã‚‹ã€‚Arduinoã®setupã¨åŒã˜ä½œç”¨
+	/// @retval true æˆåŠŸ
+	/// @retval false å¤±æ•—
+	///
+	bool init()override;
+
+	///
+	/// @fn bool run()
+	/// @brief ãƒ«ãƒƒã‚¯ã‚¢ãƒƒãƒ—ã‚·ãƒ¼ãƒ³ã‚’å®Ÿè¡Œã™ã‚‹ã€‚init()ç›´å¾Œã«å‘¼ã°ã‚Œã‚‹ã€‚
+	/// @retval true æˆåŠŸ
+	/// @retval false å¤±æ•—
+	///
+	bool run()override;
 };
