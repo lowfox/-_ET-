@@ -3,7 +3,7 @@
 bool seesawClimber::run(void){
     EV3_LOG("seesawClimber__start\n");
 
-    wheelAligner i_wheelAligner;
+   
     wheelClimber i_wheelClimber;
     distanceRunner i_distanceRunner;
     tailPositioner i_tailPositioner;

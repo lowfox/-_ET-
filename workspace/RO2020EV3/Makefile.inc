@@ -31,7 +31,6 @@ straightRunner.o\
 distanceRunner.o\
 modeSwitcher.o\
 wheelClimber.o\
-wheelAligner.o\
 braker.o\
 lineTracer.o\
 getUp.o\
@@ -47,6 +46,7 @@ distanceRunnerTest.o\
 lineTracerTest.o\
 seesawRunnerTest.o\
 straightRunnerTest.o
+
 
 
 SRCLANG := c++
