@@ -10,7 +10,6 @@ bool wheelClimber::run(){
     angularVelocityDetector i_angVelDetector;
     getUp i_getUp;
     tailPositioner i_tailPositioner;
-    distanceRunner i_distanceRunner;
     
     RyujiEv3Engine::GetLED()->setColor(LED_Color::GREEN);
     /*
@@ -25,7 +24,7 @@ bool wheelClimber::run(){
     RyujiEv3Engine::GetGyroSensor()->setOffset(0);
     
     //while(1){}
-   // —¼—Ö‚Å¸‚éƒAƒ‹ƒSƒŠƒYƒ€ 
+   // ï¿½ï¿½ï¿½Ö‚Åï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½Sï¿½ï¿½ï¿½Yï¿½ï¿½ 
    // if(!i_angleDetector.setTargetValue(m_wheelClimbTargetValue)){return false;}
     //distanceRunner i_distanceRunner;
     //InfoTail climbTail={90,100,false};
@@ -45,7 +44,7 @@ bool wheelClimber::run(){
     if(!i_braker.run()){return false;}
 
 
-    //•Ğ—Ö‚¸‚Â¸‚é‚ÌƒAƒ‹ƒSƒŠƒYƒ€
+    //ï¿½Ğ—Ö‚ï¿½ï¿½Âï¿½ï¿½ï¿½ÌƒAï¿½ï¿½ï¿½Sï¿½ï¿½ï¿½Yï¿½ï¿½
 /*
     EV3_LOG("wheelClimber__leftMoter\n");
     //if(!i_angVelDetector.setOffsetValue(m_leftClimbOffsetValue)){return false;}

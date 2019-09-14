@@ -10,7 +10,6 @@ bool gotoSeesaw::run(void){
     braker i_braker;
     angularVelocityDetector i_angularVelocityDetector;
     lineTracer i_lineTracer;
-    tailPositioner i_tailPositioner;
 
     //�X�^�[�g����D�F���m��
     /*
