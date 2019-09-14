@@ -1,6 +1,10 @@
 #include"gotoSeesaw.h"
 
 
+// å‘¨æœŸãƒãƒ³ãƒ‰ãƒ©ãƒ¼ã®ã›ã„ã§ã‚°ãƒ­ãƒ¼ãƒãƒ«å¤‰æ•°å®£è¨€ã‚’è¡Œã†å¿…è¦ãŒã‚ã‚‹
+float gotoNowDistance = 0.0f;
+float gotoLastDistance = 0.0f;
+
 bool gotoSeesaw::run(void){
     modeSwitcher i_modeSwitcher;
     braker i_braker;
@@ -8,7 +12,7 @@ bool gotoSeesaw::run(void){
     lineTracer i_lineTracer;
     tailPositioner i_tailPositioner;
 
-    //ƒXƒ^[ƒg‚©‚çŠDFŒŸ’m‚Ü
+    //ï¿½Xï¿½^ï¿½[ï¿½gï¿½ï¿½ï¿½ï¿½Dï¿½Fï¿½ï¿½ï¿½mï¿½ï¿½
     /*
     EV3_LOG("testRun__Start\n");
     RyujiEv3Engine::GetGyroSensor()->setOffset(0);
@@ -43,7 +47,7 @@ bool gotoSeesaw::run(void){
     RyujiEv3Engine::GetGyroSensor()->setOffset(0);
     //if(!i_angularVelocityDetector.setOffsetValue(m_seesawDetectValue)){return false;}
 
-    //ƒ‰ƒCƒ“•œ‹Aˆ—
+    //ï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½ï¿½
     if(!RyujiEv3Engine::GetRightMotor()->setPWM(5)){return false;}
     if(!RyujiEv3Engine::GetLeftMotor()->stop(true)){return false;}
     dly_tsk(m_lineReturnTime);
@@ -54,10 +58,10 @@ bool gotoSeesaw::run(void){
 
     dly_tsk(1500);
     ev3_sta_cyc(GOTO_GET_DISTANCE);
-    seesawGlobal::gotoLastDistance=Steering::GetDistance();
+    gotoLastDistance = Steering::GetDistance();
     do{
-         m_gotoPeriodDistance = seesawGlobal::gotoNowDistance - seesawGlobal::gotoLastDistance;//660ms–ˆ‚Éalign,last‚ðXV
-        EV3_LOG("GOTO!:get_distance__NowDistance=%f, lastdistance=%f ,",seesawGlobal::gotoNowDistance,seesawGlobal::gotoLastDistance);              
+         m_gotoPeriodDistance = gotoNowDistance - gotoLastDistance;//660msï¿½ï¿½ï¿½ï¿½align,lastï¿½ï¿½ï¿½Xï¿½V
+        EV3_LOG("GOTO!:get_distance__NowDistance=%f, lastdistance=%f ,", gotoNowDistance, gotoLastDistance);              
         EV3_LOG("GOTO!:periodDistance=%f\n", m_gotoPeriodDistance);
     }while( m_gotoPeriodDistance > m_detectDistance ||  m_gotoPeriodDistance < 0 );//500ms
     
@@ -76,7 +80,7 @@ bool gotoSeesaw::run(void){
 
 
 void goto_get_distance(intptr_t exinf){
-    seesawGlobal::gotoLastDistance = seesawGlobal::gotoNowDistance;
-    seesawGlobal::gotoNowDistance =  Steering::GetDistance();
+    gotoLastDistance = gotoNowDistance;
+    gotoNowDistance = Steering::GetDistance();
     EV3_LOG("4ms!!__get_distance!!!");
 }
