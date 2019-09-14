@@ -3,13 +3,14 @@
 #include <Drive.h>
 #include <Logger.h>  //Takeuchi
 #include "Run.h"
-//追�?変更そ�?�他ざっくり by Takeuchi
-//ログを吐くよ�?に追�?
-//キャリブレーション時、毎回尻尾位置をリセ�?トするよ�?に変更
+//追�?変更そ�?�他ざっくり by Takeuchi
+//ログを吐くよ�?に追�?
+//キャリブレーション時、毎回尻尾位置をリセ�?トするよ�?に変更
 
 Standby::Standby() {
   m_tailDegrees.push_back(NomalDeg);
-  // L,R,�?コースで�?要な角度をキャリブレーションする
+
+  // L,R,各コースで必要な角度をキャリブレーションする
   m_tailDegrees.push_back(LookUp_1Deg);
 
   switch (LINETRACE_NEXT_SCENE) {
@@ -41,14 +42,14 @@ void Standby::traceMain() {
 void Standby::setup() {
   auto* tail = RyujiEv3Engine::GetTailMotor();
 
-  //尻尾角度のリセ�?�?
-  tail->setCounts(-7, 50, false);  //遊�?�をなくす処�?
+  //尻尾角度のリセ�?�?
+  tail->setCounts(-7, 50, false);  //遊�?�をなくす処�?
   dly_tsk(1000);
-  tail->resetCounts();  //尻尾を上にあげきった状態で実�?
+  tail->resetCounts();  //尻尾を上にあげきった状態で実�?
 
   int32 prevCount = 0;
 
-  // キャリブレーションする�?要�?�ある角度をすべて実�?
+  // キャリブレーションする�?要�?�ある角度をすべて実�?
   for (const auto& itr : m_tailDegrees) {
     tail->setCounts(itr - prevCount, TAIL_SPEED, true);
 
@@ -57,7 +58,7 @@ void Standby::setup() {
     prevCount = itr;
   }
 
-  // スタート�?機状態にしっぽを設�?
+  // スタート�?機状態にしっぽを設�?
   tail->setCounts(STANDBY_COUNT - prevCount, TAIL_SPEED, true);
 }
 
@@ -68,7 +69,7 @@ void Standby::Calibration(int32 degree) {
 
   TraceColor countColor;
 
-  //�?
+  //�?
   lcd->drawString(0, 0, "GetColor : Black : %d", degree);  // Takeuchi(綴り訂正)
 
   do {
@@ -90,7 +91,7 @@ void Standby::Calibration(int32 degree) {
   countColor.white = (static_cast<float>(rgb.r + rgb.g + rgb.b) / 3.0f);
   speaker->playTone(500, 10);
 
-  //�?
+  //�?
   lcd->drawString(0, 0, "GetColor : Blue : %d", degree);  // Takeuchi(綴り訂正)
   do {
     touch->update();
@@ -131,9 +132,9 @@ bool Standby::runStart() {
   Run start;
 
   if (!start.driveStart()) {
-    RyujiEv3Engine::GetTailMotor()->setCounts(-5, 50, false);  //遊�?�をなくす処�?
+    RyujiEv3Engine::GetTailMotor()->setCounts(-5, 50, false);  //遊�?�をなくす処�?
     dly_tsk(500);
-    RyujiEv3Engine::GetTailMotor()->resetCounts();  //尻尾を上にあげきった状態で実�?
+    RyujiEv3Engine::GetTailMotor()->resetCounts();  //尻尾を上にあげきった状態で実�?
     RyujiEv3Engine::GetTailMotor()->setCounts(STANDBY_COUNT, TAIL_SPEED, true);
     return false;
   }
