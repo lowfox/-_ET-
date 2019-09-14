@@ -37,7 +37,6 @@ void GarageScene::garage_in::Start_Process()
 		RyujiEv3Engine::GetLeftMotor()->setCounts(45,50,false);
 		RyujiEv3Engine::GetRightMotor()->setCounts(-45,50,true);
 	}
-	dly_tsk(1000);
 
 	if (!Drive::SetDriveMode(DriveMode::LineTrace)) {
 		EV3_LOG("SetDriveMode...false");
