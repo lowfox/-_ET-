@@ -1,6 +1,6 @@
 #include "LineTraceScene.h"
 #include <Config.h>
-#include "Standby.h"
+#include "seesawTestStandby.h"
 #include <Drive.h>
 #include <Logger.h>
 LineTraceScene::LineTraceScene(ISceneChanger* sceneChanger)
@@ -10,9 +10,9 @@ bool LineTraceScene::init() { return true; }
 
 bool LineTraceScene::run() {
   // LineTraceCode
-  Standby stanby;       //Stanbyï¿½Nï¿½ï¿½ï¿½Xï¿½ÌƒCï¿½ï¿½ï¿½Xï¿½^ï¿½ï¿½ï¿½Xï¿½ï¿½ï¿½ï¿½
+  seesawTestStandby stanby;       //Stanby?¿½N?¿½?¿½?¿½X?¿½ÌƒC?¿½?¿½?¿½X?¿½^?¿½?¿½?¿½X?¿½?¿½?¿½?¿½
 
-  stanby.traceMain();       //setupï¿½Öï¿½ï¿½Jï¿½n
+  stanby.traceMain();       //setup?¿½Öï¿½?¿½J?¿½n
 
   return change(LINETRACE_NEXT_SCENE);
 }
