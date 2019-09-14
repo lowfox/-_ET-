@@ -48,16 +48,21 @@ bool Run::driveStart() {
     }
 
     //走行状態取得
-    m_runState = control.drivePosition();
+//    m_runState = control.drivePosition();       //****************************旧PID&スピード状態遷移（コメントアウト！）
 
     if (m_runState == -1) {
       break;
     }
     //走行状態でPIDを切り替える
-    trace.lineTraceDrive(m_runState);
+//    trace.lineTraceDrive(m_runState);            //****************************旧PID&スピード動的セット（コメントアウト！）
+    Drive::LineTrace::SetPID({0.4f, 0.0f, 0.3f});  //****************************一律セットPID（経験則から最も多くのカーブに対応するもの）
+    Drive::Drive(65);                              //****************************一律セットスピード(0～100)
+
 
   } while (true);
   EV3_LOG("GOOOOOOL");
+
+
   
   Drive::LineTrace::SetPID({0.4f, 0.0f, 0.2f});
   Drive::Drive(30);
