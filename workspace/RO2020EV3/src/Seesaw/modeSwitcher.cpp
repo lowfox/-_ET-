@@ -4,7 +4,6 @@
 bool modeSwitcher::run(void){
     EV3_LOG("modeSwitcher__start\n");
     tailPositioner i_tailPositioner;
-    distanceRunner i_distanceRunner;
     braker i_braker;
 /*
     EV3_LOG("Asobi nakusi tyuu ...\n");
@@ -26,7 +25,7 @@ bool modeSwitcher::run(void){
     EV3_LOG("delay...15sec");
     dly_tsk(15000);
 */
-    //—V‚Ñ‚Ì•â³ƒvƒƒOƒ‰ƒ€B
+    //ï¿½Vï¿½Ñ‚Ì•â³ï¿½vï¿½ï¿½ï¿½Oï¿½ï¿½ï¿½ï¿½ï¿½B
     if(!i_tailPositioner.run(&m_asobiHoseiTail)){return false;}
     dly_tsk(1000);
     if(!RyujiEv3Engine::GetTailMotor()->stop(false)){

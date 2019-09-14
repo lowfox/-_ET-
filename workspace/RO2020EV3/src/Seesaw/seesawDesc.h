@@ -25,7 +25,7 @@ class seesawDesc{
         int32 m_wheelDescPwm=1;
         int32 m_tailDescPwm=12;
         InfoDistanceRun m_wheelAfterRun={10,25.0f};
-        InfoDistanceRun m_tailDescRun={20,90.0f};
+        InfoDistanceRun m_tailDescRun={20,100.0f};
         InfoDistanceRun m_safeStopRun={12,80.0f};
         InfoDistanceRun m_preRun={12,150.0f};
         

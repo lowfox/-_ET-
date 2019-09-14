@@ -7,7 +7,6 @@
 #include"straightRunner.h"
 #include<RyujiEv3.h>
 #include<Logger.h>
-#include"seesawGlobal.h"
 #include"distanceRunner.h"
 #include<Drive.h>
 #include"getUp.h"
@@ -24,7 +23,7 @@ class seesawRunner{
     private:
     int32 m_lineReturnPwm=6;
     int m_lineReturnTime=800;
-    float forwardRunUpDistance=-20.0f;
+    float forwardRunUpDistance=-22.0f;
     //float backRunUpDistance=-23.0f;
     InfoTail m_forwadPreTail={102,100,true};
     InfoTail m_forwardBentTail={50,90,true};

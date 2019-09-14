@@ -16,14 +16,14 @@ bool angleDetector::detect(){
         return false;
     }
     int16 value;
-    //4“x‚ÌŒë·–ñ+-‚P“‹–—e
+    //4ï¿½xï¿½ÌŒë·ï¿½ï¿½+-ï¿½Pï¿½ï¿½ï¿½ï¿½ï¿½e
     #ifdef TESTMODE
         value = testValue;
     #else
        value = RyujiEv3Engine::GetGyroSensor()->getAngle();
     #endif
     if((value - m_targetValue) < 2 && (value - m_targetValue) > -2){
-        ("angleDetector__detect!!!!\n");
+        EV3_LOG("angleDetector__detect!!!!\n");
         return true;
     }
     //EV3_LOG("targetValue=%d, angleValue=%d",m_targetValue,value);

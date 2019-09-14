@@ -30,7 +30,7 @@ int MapStateControl::drivePosition() {
 
       EV3_LOG("State chenge nowState = %d\n Now milage  = %f\n", nowState,
               milage);  // Takeuchi
-      RyujiEv3Engine::GetSpeaker()->setVolume(500);
+      RyujiEv3Engine::GetSpeaker()->setVolume(255);
       RyujiEv3Engine::GetSpeaker()->playTone(500, 10);
     } 
     if (milage > STATE_END) {

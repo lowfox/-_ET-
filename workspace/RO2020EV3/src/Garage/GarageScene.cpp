@@ -27,6 +27,21 @@ bool GarageScene::run()
 
 void GarageScene::garage_in::Start_Process()
 {
+
+	Drive::SetDriveMode(DriveMode::Nomal);
+
+	if(Drive::LineTrace::GetSide() == Side::Left){
+		RyujiEv3Engine::GetRightMotor()->setCounts(45,50,false);
+		RyujiEv3Engine::GetLeftMotor()->setCounts(-45,50,true);
+	} else {
+		RyujiEv3Engine::GetLeftMotor()->setCounts(45,50,false);
+		RyujiEv3Engine::GetRightMotor()->setCounts(-45,50,true);
+	}
+
+	if (!Drive::SetDriveMode(DriveMode::LineTrace)) {
+		EV3_LOG("SetDriveMode...false");
+	}
+
 	Drive::LineTrace::SetLineMode(BlueLineMode::Blue);
 	if (!RyujiEv3Engine::GetLeftMotor()->stop(true)) {
 		EV3_LOG("GET_LEFT_ERR");
@@ -37,18 +52,11 @@ void GarageScene::garage_in::Start_Process()
 
 	TraceColor traceColor;                
 
-
-
-	
-	if (!Drive::SetDriveMode(DriveMode::LineTrace)) {
-		EV3_LOG("SetDriveMode...false");
-	}
-
-	traceColor = Drive::ColorCalibrate::GetTraceColor(80);    
+	traceColor = Drive::ColorCalibrate::GetTraceColor(83);    
 	EV3_LOG("BLACK=%f \n WHITE%f\n BLUE.R=%d\n BLUE.G=%d\n BLUE.B=%d",traceColor.black,traceColor.white, traceColor.blue.r, traceColor.blue.g, traceColor.blue.b);
 	Drive::LineTrace::SetTraceColor(traceColor);
 	
-	Drive::LineTrace::SetPID({ 0.7f, 0.0f, 0.4f });
+	Drive::LineTrace::SetPID({ 0.8f, 0.0f, 0.0f });
 
 	if (!Drive::Drive(8)) {
 		EV3_LOG("SetDriveSet...false");
@@ -67,6 +75,8 @@ void GarageScene::garage_in::Start_Process()
 			
 			if (!RyujiEv3Engine::GetSpeaker()->playTone(500, 500)) {
 				EV3_LOG("SPEAKER_ERR");
+				//青検知のスタート位置
+				Initial_Distance = Steering::GetDistance();
 			}
 			break;
 		}
@@ -75,13 +85,15 @@ void GarageScene::garage_in::Start_Process()
 	while ( 1 ) {
 		EV3_LOG("NOT_BLACK");
 		
-		if (Detect::GetColor() == ReadColor::BLACK)
+		if (Detect::GetColor() == ReadColor::BLACK && ((Initial_Distance + 60.0f) < Steering::GetDistance()))
 		{
 			EV3_LOG("BLACK_GET");
 			if (!RyujiEv3Engine::GetSpeaker()->playTone(500, 500)) {
 				EV3_LOG("SPEAKER_ERR");
 			}
+			//黒検知のスタート位置
 			Initial_Distance = Steering::GetDistance();
+			Drive::LineTrace::SetPID({ 0.5f, 0.0f, 0.3f });
 			break;
 		}
 	}

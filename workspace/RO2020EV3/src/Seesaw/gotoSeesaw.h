@@ -6,7 +6,6 @@
 #include "lineTracer.h"
 #include <RyujiEv3.h>
 #include<Logger.h>
-#include"seesawGlobal.h"
 
 
 #include"tailPositioner.h"
@@ -21,13 +20,13 @@
 class gotoSeesaw{
     public:
         bool run(void);
- 
+
     private:
         int32 m_pwm = 4;
         int16 m_seesawDetectValue =6;
         float m_gotoPeriodDistance=100.0f;
         float m_detectDistance=10.0f;
-        int m_lineReturnTime=600;
+        int m_lineReturnTime=300;
         int16 m_initAngle=90;
        
 };

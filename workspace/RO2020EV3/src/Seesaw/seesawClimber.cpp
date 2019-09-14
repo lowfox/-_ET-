@@ -9,7 +9,6 @@ bool seesawClimber::run(void){
     tailPositioner i_tailPositioner;
     getUp i_getUp;
     braker i_braker;
-    straightRunner i_straightRunner;
 
 /*
     if(!i_getUp.run(&m_alignTail,-3.0)){return false;}
@@ -22,7 +21,7 @@ bool seesawClimber::run(void){
     
     if(!i_distanceRunner.run(&m_postRun)){return false;}
  
-    //K”öæ‚èã‚°
+    //ï¿½Kï¿½ï¿½ï¿½ï¿½ï¿½ã‚°
     if(!i_getUp.run(&m_bodyClimbTail3,m_runUpDistance)){return false;}
     //if(!i_straightRunner.run(60)){return false;}
     if(!i_tailPositioner.run(&m_tailClimbTail)){return false;}

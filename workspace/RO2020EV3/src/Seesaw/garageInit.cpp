@@ -4,13 +4,9 @@ bool garageInit::run(void){
     getUp i_getUp;
     braker i_braker;
     distanceRunner i_distanceRunner;
-    lineTracer i_lineTracer;
-    int firstCounts;
-    int secondCounts;
     int nowCounts;
-    tailPositioner i_tailPositioner;
 
-    //Å‘å55“x
+    //?¿½Å‘ï¿½55?¿½x
     nowCounts = RyujiEv3Engine::GetTailMotor()->getCounts();
     while(nowCounts<75){
         
@@ -36,8 +32,7 @@ bool garageInit::run(void){
 
     if(!RyujiEv3Engine::GetRightMotor()->stop(true)){return false;}
     if(!RyujiEv3Engine::GetLeftMotor()->stop(true)){return false;}
-    RyujiEv3Engine::GetSpeaker()->playTone(700,500);
-
+    
     if(!m_garageInitlineTracer.run(m_lineReturnPwm,m_garageInitAngle)){return false;}
     
     m_firstDistance=Steering::GetDistance();
@@ -45,7 +40,12 @@ bool garageInit::run(void){
     while(Steering::GetDistance() - m_firstDistance < m_lineReturnDistance){}
     
     if(!i_braker.run()){return false;}
-    RyujiEv3Engine::GetSpeaker()->playTone(800,500);
+    if(!RyujiEv3Engine::GetRightMotor()->stop(true)){return false;}
+    if(!RyujiEv3Engine::GetLeftMotor()->stop(true)){return false;}
+    
+    RyujiEv3Engine::GetSpeaker()->playTone(800,2000);
+    dly_tsk(1000);
+
 
     return true;
 }
