@@ -86,7 +86,7 @@ void LineTraceDrive::update()
           m_limitVal = static_cast<float>(m_traceColor.black - m_traceColor.white);
       }
     } else if (m_lineMode == BlueLineMode::Nomal) {
-		m_threshold = m_gray;
+		m_threshold = m_gray*1.3;
         m_limitVal = static_cast<float>(m_traceColor.black - m_traceColor.white);
     }
 	

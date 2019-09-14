@@ -25,17 +25,10 @@ bool Run::driveStart() {
 
   //トレースカラーがセットされてるかの確認//Takeuchi
   //セットしたはずのトレースカラー//Takeuchi
-  EV3_LOG(
-      "Set Trace Color black = %f\nSet Trace Color blue = %f\nSet Trace Color "
-      "white = %f\n",
-      traceColor.black, traceColor.blue, traceColor.white);  // Takeuchi
+
   //実際にセットされているセットカラー//Takeuchi
   traceColor = Drive::LineTrace::
       GetTraceColor();  // Takeuchi(現在セットされているトレースカラーを取得)//Takeuchi
-  EV3_LOG(
-      "Now Trace Color black = %f\nNow Trace Color blue = %f\nNow Trace Color "
-      "white = %f\n",
-      traceColor.black, traceColor.blue, traceColor.white);  // Takeuchi
 
   // StartDash
   dash.startRun();
@@ -57,24 +50,34 @@ bool Run::driveStart() {
     //走行状態取得
     m_runState = control.drivePosition();
 
+    if (m_runState == -1) {
+      break;
+    }
     //走行状態でPIDを切り替える
     trace.lineTraceDrive(m_runState);
 
-  } while (m_runState != -1);
-
-//  RyujiEv3Engine::GetSpeaker()->playTone(1000, 1000);
+  } while (true);
+  EV3_LOG("GOOOOOOL");
+  
+  Drive::LineTrace::SetPID({0.4f, 0.0f, 0.2f});
+  Drive::Drive(30);
+  //  RyujiEv3Engine::GetSpeaker()->playTone(1000, 1000);
   Drive::LineTrace::SetLineMode(BlueLineMode::Blue);
-      // 青線検知
-      while (!color.getBlueColor());
-//  RyujiEv3Engine::GetSpeaker()->playTone(700, 1000);
+
+  // 青線検知
+  while (!color.getBlueColor()) {
+    dly_tsk(100);
+  };
+  //  RyujiEv3Engine::GetSpeaker()->playTone(700, 1000);
 
   // 30%走行
-  Drive::Drive(m_lowSpeed);
+  // Drive::Drive(m_lowSpeed);
   EV3_LOG("Im blue now");  // Takeuchi
   // ラインが黒色になったら難所へ引き渡し
-  while (!color.getBlackColor())
-    ;
-  RyujiEv3Engine::GetSpeaker()->playTone(500, 1000);
+  while (!color.getBlackColor()) {
+    dly_tsk(100);
+  };
+  EV3_LOG("LineTrace End");
   /* 難所引き渡し */
   return true;
 }

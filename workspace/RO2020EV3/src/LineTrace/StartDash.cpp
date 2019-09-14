@@ -29,14 +29,16 @@ void StartDash::startRun() {
   EV3_LOG("Tail 5 20 false\n");
   Steering::SetMode(SteeringMode::Balance);  // 倒立モード
   EV3_LOG("SteeringMode Balance\n");
-  RyujiEv3Engine::GetTailMotor()->setCounts(-95, 10, false);
+  RyujiEv3Engine::GetTailMotor()->setCounts(-88, 10, true);
   EV3_LOG("Tail -90 10 false\n");
-  dly_tsk(1200);
+
   Drive::SetDriveMode(DriveMode::LineTrace);
   EV3_LOG("LineTraceMode ON\n");
   Drive::LineTrace::SetPID({0.1f, 0.0f, 0.05f});
-  dly_tsk(1000);
+  Drive::Drive(30);
+  dly_tsk(800);
+  Drive::Drive(50);
+  dly_tsk(300);
   EV3_LOG("Set PID And Deley 1000\n");
-  Drive::Drive(100);
   EV3_LOG("StartDash_End\n");
 }

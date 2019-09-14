@@ -130,6 +130,9 @@ bool Standby::runStart() {
   Run start;
 
   if (!start.driveStart()) {
+    RyujiEv3Engine::GetTailMotor()->setCounts(-5, 50, false);  //遊びをなくす処理
+    dly_tsk(500);
+    RyujiEv3Engine::GetTailMotor()->resetCounts();  //尻尾を上にあげきった状態で実行
     RyujiEv3Engine::GetTailMotor()->setCounts(STANDBY_COUNT, TAIL_SPEED, true);
     return false;
   }
