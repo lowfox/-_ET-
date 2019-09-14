@@ -63,7 +63,6 @@ distanceRunnerTest.o\
 lineTracerTest.o\
 seesawRunnerTest.o\
 straightRunnerTest.o\
-seesawTestStandby.o
 
 
 
