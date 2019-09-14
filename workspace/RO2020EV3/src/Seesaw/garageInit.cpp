@@ -4,13 +4,9 @@ bool garageInit::run(void){
     getUp i_getUp;
     braker i_braker;
     distanceRunner i_distanceRunner;
-    lineTracer i_lineTracer;
-    int firstCounts;
-    int secondCounts;
     int nowCounts;
-    tailPositioner i_tailPositioner;
 
-    //Å‘å55“x
+    //ï¿½Å‘ï¿½55ï¿½x
     nowCounts = RyujiEv3Engine::GetTailMotor()->getCounts();
     while(nowCounts<75){
         

@@ -78,18 +78,7 @@ bool seesawRunner::run(direction dir){
     }
     
     if(!i_braker.run()){return false;}
-    seesawGlobal::cntValue10ms=0;
-    ev3_sta_cyc(SEESAWRUNNER_CNT_TEN_MS);
-    while(seesawGlobal::cntValue10ms<m_rigidTime){
-        seesawGlobal::cntValue10ms++;
-    }
-    ev3_stp_cyc(SEESAWRUNNER_CNT_TEN_MS);
-    dly_tsk(2000);
+
     return true;
 }
 
-
-void seesawrunner_cnt_ten_ms(intptr_t exinf){
-    seesawGlobal::cntValue10ms++;
-    EV3_LOG("10msCNT=%d\n",seesawGlobal::cntValue10ms);
-}

@@ -11,13 +11,10 @@ bool tailPositioner::run(InfoTail* info){
     int32 nowAngle= (RyujiEv3Engine::GetTailMotor()->getCounts());
     int32 inputAngle=(info->angle) - nowAngle;
     EV3_LOG("tailPositioner__inputAngle=%d, info->Angle=%d, nowAngle=%d\n",inputAngle,info->angle,nowAngle);
-    seesawGlobal::cntValue10ms=0;
-    //ev3_sta_cyc(TAIL_CNT_TEN_MS);
     if(!RyujiEv3Engine::GetTailMotor()->setCounts(inputAngle,info->speed,info->blocking)){
         return false;
     }
     if(info->blocking==false){return true;}
-    //ev3_stp_cyc(TAIL_CNT_TEN_MS);
 
     if(!RyujiEv3Engine::GetTailMotor()->stop(true)){
         return false;
@@ -26,10 +23,3 @@ bool tailPositioner::run(InfoTail* info){
     return true;
 }
 
-void tail_cnt_ten_ms(intptr_t exinf){
-    seesawGlobal::cntValue10ms++;
-    if(seesawGlobal::cntValue10ms>250){
-        //尻尾タスク終了処理
-    }
-    EV3_LOG("10msCNT=%d\n",seesawGlobal::cntValue10ms);
-}
