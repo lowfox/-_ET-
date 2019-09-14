@@ -10,11 +10,11 @@
 Standby::Standby() {
   m_tailDegrees.push_back(NomalDeg);
   // L,R,各コースで必要な角度をキャリブレーションする
-  //m_tailDegrees.push_back(LookUp_1Deg);
+  m_tailDegrees.push_back(LookUp_1Deg);
 
   switch (LINETRACE_NEXT_SCENE) {
     case SceneID::Lookup:
-      //m_tailDegrees.push_back(LookUp_2Deg);
+      m_tailDegrees.push_back(LookUp_2Deg);
       Drive::LineTrace::SetSide(Side::Right);
       break;
     case SceneID::Seesaw:
