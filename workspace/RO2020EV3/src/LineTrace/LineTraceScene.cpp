@@ -13,6 +13,6 @@ bool LineTraceScene::run() {
   Standby stanby;       //Stanby?øΩN?øΩ?øΩ?øΩX?øΩÃÉC?øΩ?øΩ?øΩX?øΩ^?øΩ?øΩ?øΩX?øΩ?øΩ?øΩ?øΩ
 
   stanby.traceMain();       //setup?øΩ÷êÔøΩ?øΩJ?øΩn
-
+  
   return change(LINETRACE_NEXT_SCENE);
 }
