@@ -8,14 +8,14 @@ constexpr int32 LookUp_2Deg = 62;
 
 //#define LINETRACE_BLUETOOTH_START
 
-//ï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½gï¿½ï¿½ï¿½[ï¿½Xï¿½Xï¿½^ï¿½ï¿½ï¿½oï¿½C
+//?¿½?¿½?¿½C?¿½?¿½?¿½g?¿½?¿½?¿½[?¿½X?¿½X?¿½^?¿½?¿½?¿½o?¿½C
 class Standby {
  private:
   std::vector<int32> m_tailDegrees;
 
-  const int32 TAIL_SPEED = 50;  //ï¿½ï¿½ï¿½ï¿½ï¿½Ûƒï¿½ï¿½[ï¿½^ï¿½ï¿½]ï¿½ï¿½ï¿½x
+  const int32 TAIL_SPEED = 50;  //?¿½?¿½?¿½?¿½?¿½Û??¿½?¿½[?¿½^?¿½?¿½]?¿½?¿½?¿½x
 
-  const int32 STANDBY_COUNT = 90;  //ï¿½Ò‹@ï¿½ï¿½ï¿½Ì‚ï¿½ï¿½ï¿½ï¿½ÛŠpï¿½x
+  const int32 STANDBY_COUNT = 91;  //?¿½Ò‹@?¿½?¿½?¿½Ì‚ï¿½?¿½?¿½?¿½ÛŠp?¿½x
 
  public:
   Standby();

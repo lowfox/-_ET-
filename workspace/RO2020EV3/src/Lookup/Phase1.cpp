@@ -5,13 +5,26 @@
 bool Phase1::run()
 {
     EV3_LOG_INFO("DriveStart");
+    //RyujiEv3Engine::GetTailMotor()->setCounts(-80,30,true);
 
     //あそびをなくす
     RyujiEv3Engine::GetTailMotor()->setCounts(-15,30,false);
     tslp_tsk(1000);
     RyujiEv3Engine::GetTailMotor()->resetCounts();
 
-    // 走行体brakemodeに変更指示 
+    // Sideの検知
+    if(Drive::LineTrace::GetSide() == Side::Left)
+    {
+        Drive::LineTrace::SetSide(Side::Left);
+    }
+    else{
+        Drive::LineTrace::SetSide(Side::Right);
+    }
+
+    // bluelinemode
+    Drive::LineTrace::SetLineMode(BlueLineMode::Blue);
+    
+    // 走行体brakemodeに変更�?示 
     if(!RyujiEv3Engine::GetLeftMotor()->stop(true))
     {
         return false;
@@ -61,10 +74,10 @@ bool Phase1::run()
         return false;
     }                   
 
-    // 超音波非同期スタート
+    // �?音波非同期スター�?
     SonarControl::GetInstance()->SonarRun();
 
-    // 停止位置まで比較
+    // 停止位置まで比�?
     while(1){
         if(SonarControl::GetInstance()->CheckAvg())
         {
