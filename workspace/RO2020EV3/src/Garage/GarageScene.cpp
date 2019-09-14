@@ -27,6 +27,22 @@ bool GarageScene::run()
 
 void GarageScene::garage_in::Start_Process()
 {
+
+	Drive::SetDriveMode(DriveMode::Nomal);
+
+	if(Drive::LineTrace::GetSide() == Side::Left){
+		RyujiEv3Engine::GetRightMotor()->setCounts(45,50,false);
+		RyujiEv3Engine::GetLeftMotor()->setCounts(-45,50,true);
+	} else {
+		RyujiEv3Engine::GetLeftMotor()->setCounts(45,50,false);
+		RyujiEv3Engine::GetRightMotor()->setCounts(-45,50,true);
+	}
+	dly_tsk(1000);
+
+	if (!Drive::SetDriveMode(DriveMode::LineTrace)) {
+		EV3_LOG("SetDriveMode...false");
+	}
+
 	Drive::LineTrace::SetLineMode(BlueLineMode::Blue);
 	if (!RyujiEv3Engine::GetLeftMotor()->stop(true)) {
 		EV3_LOG("GET_LEFT_ERR");
@@ -37,18 +53,11 @@ void GarageScene::garage_in::Start_Process()
 
 	TraceColor traceColor;                
 
-
-
-	
-	if (!Drive::SetDriveMode(DriveMode::LineTrace)) {
-		EV3_LOG("SetDriveMode...false");
-	}
-
-	traceColor = Drive::ColorCalibrate::GetTraceColor(80);    
+	traceColor = Drive::ColorCalibrate::GetTraceColor(83);    
 	EV3_LOG("BLACK=%f \n WHITE%f\n BLUE.R=%d\n BLUE.G=%d\n BLUE.B=%d",traceColor.black,traceColor.white, traceColor.blue.r, traceColor.blue.g, traceColor.blue.b);
 	Drive::LineTrace::SetTraceColor(traceColor);
 	
-	Drive::LineTrace::SetPID({ 0.7f, 0.0f, 0.4f });
+	Drive::LineTrace::SetPID({ 0.8f, 0.0f, 0.0f });
 
 	if (!Drive::Drive(8)) {
 		EV3_LOG("SetDriveSet...false");
@@ -85,6 +94,7 @@ void GarageScene::garage_in::Start_Process()
 			}
 			//黒検知のスタート位置
 			Initial_Distance = Steering::GetDistance();
+			Drive::LineTrace::SetPID({ 0.5f, 0.0f, 0.3f });
 			break;
 		}
 	}
