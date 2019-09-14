@@ -67,6 +67,8 @@ void GarageScene::garage_in::Start_Process()
 			
 			if (!RyujiEv3Engine::GetSpeaker()->playTone(500, 500)) {
 				EV3_LOG("SPEAKER_ERR");
+				//青検知のスタート位置
+				Initial_Distance = Steering::GetDistance();
 			}
 			break;
 		}
@@ -75,12 +77,13 @@ void GarageScene::garage_in::Start_Process()
 	while ( 1 ) {
 		EV3_LOG("NOT_BLACK");
 		
-		if (Detect::GetColor() == ReadColor::BLACK)
+		if (Detect::GetColor() == ReadColor::BLACK && ((Initial_Distance + 60.0f) < Steering::GetDistance()))
 		{
 			EV3_LOG("BLACK_GET");
 			if (!RyujiEv3Engine::GetSpeaker()->playTone(500, 500)) {
 				EV3_LOG("SPEAKER_ERR");
 			}
+			//黒検知のスタート位置
 			Initial_Distance = Steering::GetDistance();
 			break;
 		}
