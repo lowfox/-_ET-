@@ -62,7 +62,8 @@ angularVelocityDetectorTest.o\
 distanceRunnerTest.o\
 lineTracerTest.o\
 seesawRunnerTest.o\
-straightRunnerTest.o
+straightRunnerTest.o\
+seesawTestStandby.o
 
 
 

@@ -25,11 +25,11 @@ class wheelClimber{
     //int16 m_rightClimbOffsetValue=-35;
     //int32 m_climbPwm=10;
     //int32 m_subClimbPwm=1;
-    int32 m_wheelClimbPwm=15;
+    int32 m_wheelClimbPwm=17;
     //float m_getUpDistance=-5.0f;
     InfoTail m_climbTail={104,100,true};
     //InfoTail m_climbTail2={104,100,true};
-    InfoTail m_climbTail_pre={102,15,true};
+    InfoTail m_climbTail_pre={102,18,true};
     float m_runUpDistance=-2.5f;
     //InfoDistanceRun m_climbDisRun={15,100.0f};
     InfoDistanceRun m_climbBeforeRun={-5,-8.0f};
