@@ -37,14 +37,7 @@ bool gotoSeesaw::run(void){
 
     if(!i_modeSwitcher.run()){return false;}
     if(!i_braker.run()){return false;}
-    seesawGlobal::cntValue10ms=0;
-    /*
-    ev3_sta_cyc(CNT_TEN_MS);
-    while(seesawGlobal::cntValue10ms<100){
-        EV3_LOG("sleep...");
-    };//1秒間スリープ
-    ev3_stp_cyc(CNT_TEN_MS);
-    */
+ 
     dly_tsk(700);
     if(!RyujiEv3Engine::GetGyroSensor()->reset()){return false;}
     RyujiEv3Engine::GetGyroSensor()->setOffset(0);
@@ -58,14 +51,7 @@ bool gotoSeesaw::run(void){
 
     if(!i_lineTracer.run(m_pwm,m_initAngle)){return false;}
     //while(!i_angularVelocityDetector.detect()){}
-    seesawGlobal::cntValue10ms=0;
-    /*
-    ev3_sta_cyc(CNT_TEN_MS);
-    while(seesawGlobal::cntValue10ms<150){
-        EV3_LOG("sleep...");
-    };//1.5秒間スリープ
-    ev3_stp_cyc(CNT_TEN_MS);
-    */
+
     dly_tsk(1500);
     ev3_sta_cyc(GOTO_GET_DISTANCE);
     seesawGlobal::gotoLastDistance=Steering::GetDistance();
@@ -81,7 +67,6 @@ bool gotoSeesaw::run(void){
 
     EV3_LOG("gotoSeesaw__finesh\n");
     RyujiEv3Engine::GetLED()->setColor(LED_Color::RED);
-    //while(1){}
     
     return true;
     
@@ -89,10 +74,6 @@ bool gotoSeesaw::run(void){
    
 }
 
-void cnt_ten_ms(intptr_t exinf){
-    seesawGlobal::cntValue10ms++;
-    EV3_LOG("10msCNT=%d\n",seesawGlobal::cntValue10ms);
-}
 
 void goto_get_distance(intptr_t exinf){
     seesawGlobal::gotoLastDistance = seesawGlobal::gotoNowDistance;

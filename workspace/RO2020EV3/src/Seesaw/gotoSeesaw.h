@@ -21,7 +21,9 @@
 class gotoSeesaw{
     public:
         bool run(void);
- 
+        //static float gotoNowDistance=0.0f;
+        //static float gotoLastDistance;
+
     private:
         int32 m_pwm = 4;
         int16 m_seesawDetectValue =6;
