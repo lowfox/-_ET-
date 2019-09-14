@@ -2,6 +2,7 @@
 
 // includeファイル
 #include "LineTrace.h"
+#include <Logger.h>
 
 // 定数定義
 #define ERROR -1

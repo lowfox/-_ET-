@@ -3,6 +3,7 @@
 #include "MapStateControl.h"
 #include <Logger.h>
 #include <RyujiEv3.h>
+#include <Config.h>
 
 // 定数定義
 #define ERROR -1
@@ -20,9 +21,9 @@ int MapStateControl::drivePosition() {
   milage = DistanceMeasure::getDistance();
 
   //コースがLかRによって処理を切り替え(設定されていなければエラー終了)
-  if (COURSE_MODE == LEFT_COURSE) {
+  if (LINETRACE_NEXT_SCENE == SceneID::Seesaw) {
     //現在の距離が現在の規定距離を超え、ゴール(STATE_END)を超えていなければ配列の添え字をインクリメント
-    if (milage > m_stateLeft[nowState].Distance && milage <= STATE_END) {
+    if (milage > m_stateLeft[nowState].Distance) {
       ++nowState;
 
       //走行状態切り替え時の距離をログに吐く
@@ -31,22 +32,24 @@ int MapStateControl::drivePosition() {
               milage);  // Takeuchi
       RyujiEv3Engine::GetSpeaker()->setVolume(255);
       RyujiEv3Engine::GetSpeaker()->playTone(500, 10);
-    } else if (milage > STATE_END) {
+    } 
+    if (milage > STATE_END) {
       //ゴールしたならnowStateを-1にする
       nowState = -1;
 
     }
     return nowState;
 
-  } else if (COURSE_MODE == RIGHT_COURSE) {
-    if (milage > m_stateRight[nowState].Distance && milage <= STATE_END) {
+  } else if (LINETRACE_NEXT_SCENE == SceneID::Lookup) {
+    if (milage > m_stateRight[nowState].Distance) {
       ++nowState;
       //走行状態切り替え時の距離をログに吐く
       EV3_LOG("State chenge nowState = %d\n Now milage  = %f\n", nowState,
               milage);  // Takeuchi
-      RyujiEv3Engine::GetSpeaker()->setVolume(255);
-      RyujiEv3Engine::GetSpeaker()->playTone(900, 10);
-    } else if (milage > STATE_END) {
+      //RyujiEv3Engine::GetSpeaker()->setVolume(500);
+      //RyujiEv3Engine::GetSpeaker()->playTone(900, 10);
+    } 
+    if (milage > STATE_END) {
       //ゴールしたならnowStateを-1にする
       nowState = -1;
     }

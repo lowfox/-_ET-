@@ -10,7 +10,7 @@
 constexpr SceneID START_SCENE_ID = SceneID::LineTrace;
 
 /// ライントレース班の次に呼ばれるシーン
-constexpr SceneID LINETRACE_NEXT_SCENE = SceneID::Seesaw;
+constexpr SceneID LINETRACE_NEXT_SCENE = SceneID::Lookup;
 
 /// EV3の各センサー,モーターの接続ポート
 constexpr PortData ROBOCON_PORT = {
