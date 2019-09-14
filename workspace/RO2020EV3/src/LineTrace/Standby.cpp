@@ -72,7 +72,7 @@ void Standby::Calibration(int32 degree) {
 
   RGB rgb          = Drive::ColorCalibrate::RGBAverage1Sec();
   countColor.black = (static_cast<float>(rgb.r + rgb.g + rgb.b) / 3.0f);
-  RyujiEv3Engine::GetSpeaker()->setVolume(500);
+  RyujiEv3Engine::GetSpeaker()->setVolume(255);
   speaker->playTone(500, 10);
 
   //白

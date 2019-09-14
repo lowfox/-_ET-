@@ -29,7 +29,7 @@ int MapStateControl::drivePosition() {
 
       EV3_LOG("State chenge nowState = %d\n Now milage  = %f\n", nowState,
               milage);  // Takeuchi
-      RyujiEv3Engine::GetSpeaker()->setVolume(500);
+      RyujiEv3Engine::GetSpeaker()->setVolume(255);
       RyujiEv3Engine::GetSpeaker()->playTone(500, 10);
     } else if (milage > STATE_END) {
       //ゴールしたならnowStateを-1にする
@@ -44,7 +44,7 @@ int MapStateControl::drivePosition() {
       //走行状態切り替え時の距離をログに吐く
       EV3_LOG("State chenge nowState = %d\n Now milage  = %f\n", nowState,
               milage);  // Takeuchi
-      RyujiEv3Engine::GetSpeaker()->setVolume(500);
+      RyujiEv3Engine::GetSpeaker()->setVolume(255);
       RyujiEv3Engine::GetSpeaker()->playTone(900, 10);
     } else if (milage > STATE_END) {
       //ゴールしたならnowStateを-1にする
