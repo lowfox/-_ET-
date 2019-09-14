@@ -10,12 +10,15 @@
 Standby::Standby() {
   m_tailDegrees.push_back(NomalDeg);
   // L,R,各コースで必要な角度をキャリブレーションする
-  m_tailDegrees.push_back(LookUp_1Deg);
+  //m_tailDegrees.push_back(LookUp_1Deg);
 
   switch (LINETRACE_NEXT_SCENE) {
     case SceneID::Lookup:
-      m_tailDegrees.push_back(LookUp_2Deg);
+      //m_tailDegrees.push_back(LookUp_2Deg);
+      Drive::LineTrace::SetSide(Side::Right);
       break;
+    case SceneID::Seesaw:
+      Drive::LineTrace::SetSide(Side::Left);
     default:
       EV3_LOG_ERROR("okapeople");
       break;
@@ -30,12 +33,13 @@ void Standby::traceMain() {
   EV3_LOG("SetUp End\n");  // Takeuchi
 
   do {
-	  while (!bluetoothDetection() && !buttonDetection());
+    while (!bluetoothDetection() && !buttonDetection())
+      ;
   } while (!runStart());
 }
 
 void Standby::setup() {
-  auto* tail                    = RyujiEv3Engine::GetTailMotor();
+  auto* tail = RyujiEv3Engine::GetTailMotor();
 
   //尻尾角度のリセット
   tail->setCounts(-5, 50, true);  //遊びをなくす処理
@@ -126,8 +130,8 @@ bool Standby::runStart() {
   Run start;
 
   if (!start.driveStart()) {
-	  RyujiEv3Engine::GetTailMotor()->setCounts(STANDBY_COUNT, TAIL_SPEED, true);
-	  return false;
+    RyujiEv3Engine::GetTailMotor()->setCounts(STANDBY_COUNT, TAIL_SPEED, true);
+    return false;
   }
 
   return true;

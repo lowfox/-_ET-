@@ -13,21 +13,30 @@ void StartDash::startRun() {
   EV3_LOG("StartDash_Start\n");
   speaker->setVolume(100);
   
+  EV3_LOG("Tail01 %d \n", RyujiEv3Engine::GetTailMotor()->getCounts());
+
+
   Drive::LineTrace::SetLineMode(BlueLineMode::Nomal);
   Drive::SetDriveMode(DriveMode::Nomal); // ライントレースモードオフ
-
+  EV3_LOG("Trace Off\n");
   // スタートが安定するまでライントレースをせずに前進する
   Drive::LineTrace::SetPID({0.0f, 0.0f, 0.0f});
   // 速度0でも前傾姿勢のため走る
   Drive::Drive(0);
+  EV3_LOG("No Trace Go\n");
   // 尻尾を少し下ろし前傾姿勢にする
   RyujiEv3Engine::GetTailMotor()->setCounts(5, 20, false);
+  EV3_LOG("Tail 5 20 false\n");
   Steering::SetMode(SteeringMode::Balance);  // 倒立モード
-  RyujiEv3Engine::GetTailMotor()->setCounts(-90, 10, true);
-
-  dly_tsk(400);
+  EV3_LOG("SteeringMode Balance\n");
+  RyujiEv3Engine::GetTailMotor()->setCounts(-95, 10, false);
+  EV3_LOG("Tail -90 10 false\n");
+  dly_tsk(1200);
   Drive::SetDriveMode(DriveMode::LineTrace);
+  EV3_LOG("LineTraceMode ON\n");
   Drive::LineTrace::SetPID({0.1f, 0.0f, 0.05f});
   dly_tsk(1000);
+  EV3_LOG("Set PID And Deley 1000\n");
   Drive::Drive(100);
+  EV3_LOG("StartDash_End\n");
 }
