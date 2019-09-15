@@ -40,7 +40,7 @@ bool LineTraceScene::run() {
 
   // LineTraceƒNƒ‰ƒX¶¬
   LineTrace lineTrace;
-  int result = 0;
+  int result  = 0;
   int loopCnt = 0;
   for (auto& cnt : testCase) {
     result = lineTrace.lineTraceDrive(testCase[loopCnt].state);

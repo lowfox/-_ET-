@@ -132,9 +132,11 @@ bool Standby::runStart() {
   Run start;
 
   if (!start.driveStart()) {
-    RyujiEv3Engine::GetTailMotor()->setCounts(-5, 50, false);  //遊�?�をなくす処�?
+    RyujiEv3Engine::GetTailMotor()->setCounts(-5, 50,
+                                              false);  //遊�?�をなくす処�?
     dly_tsk(500);
-    RyujiEv3Engine::GetTailMotor()->resetCounts();  //尻尾を上にあげきった状態で実�?
+    RyujiEv3Engine::GetTailMotor()
+        ->resetCounts();  //尻尾を上にあげきった状態で実�?
     RyujiEv3Engine::GetTailMotor()->setCounts(STANDBY_COUNT, TAIL_SPEED, true);
     return false;
   }

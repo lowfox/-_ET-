@@ -19,7 +19,8 @@ bool Run::driveStart() {
 
   // SetTraceColor追加//Takeuchi
   TraceColor traceColor;  // Takeuchi
-  traceColor = Drive::ColorCalibrate::GetTraceColor(90);  // Takeuchi(Nomal Degree(90°)で登録されたトレースカラーを呼び出し)
+  traceColor = Drive::ColorCalibrate::GetTraceColor(
+      90);  // Takeuchi(Nomal Degree(90°)で登録されたトレースカラーを呼び出し)
   Drive::LineTrace::SetTraceColor(traceColor);  // Takeuchi
 
   //トレースカラーがセットされてるかの確認//Takeuchi
@@ -32,11 +33,11 @@ bool Run::driveStart() {
   // StartDash
   dash.startRun();
 
-  auto* touch = RyujiEv3Engine::GetTouchSensor();
-  float m_firstDistance=Steering::GetDistance();
-  
+  auto* touch           = RyujiEv3Engine::GetTouchSensor();
+  float m_firstDistance = Steering::GetDistance();
+
   do {
-   touch->update();
+    touch->update();
 
     // ?{?^???N???b?N????X?^?[?g
     if (touch->clicked()) {
@@ -48,46 +49,51 @@ bool Run::driveStart() {
     }
 
     //???s???擾
-   m_runState = control.drivePosition();       //****************************??PID&?X?s?[?h???J??i?R?????g?A?E?g?I?j
+    m_runState =
+        control
+            .drivePosition();  //****************************??PID&?X?s?[?h???J??i?R?????g?A?E?g?I?j
 
     if (m_runState == -1) {
       break;
     }
     //???s????PID????????
-    if(m_runState > 0){
-      trace.lineTraceDrive(m_runState);            //****************************??PID&?X?s?[?h???I?Z?b?g?i?R?????g?A?E?g?I?j
+    if (m_runState > 0) {
+      trace.lineTraceDrive(
+          m_runState);  //****************************??PID&?X?s?[?h???I?Z?b?g?i?R?????g?A?E?g?I?j
     }
-    EV3_LOG("m_runstate = %d",m_runState);
-    //auto now_distance = Steering::GetDistance();
-    if(m_runState == 0 ){
-    // while(m_runState <= 1){
-      Drive::LineTrace::SetPID({0.3f, 0.0f, 0.2f});  //****************************???Z?b?gPID?i?o????????????????J?[?u???????????j
-      Drive::Drive(1);                              //****************************???Z?b?g?X?s?[?h(0?`100)
+    EV3_LOG("m_runstate = %d", m_runState);
+    // auto now_distance = Steering::GetDistance();
+    if (m_runState == 0) {
+      // while(m_runState <= 1){
+      Drive::LineTrace::SetPID(
+          {0.3f, 0.0f,
+           0.2f});  //****************************???Z?b?gPID?i?o????????????????J?[?u???????????j
+      Drive::Drive(1);  //****************************???Z?b?g?X?s?[?h(0?`100)
       dly_tsk(25);
-      Drive::Drive(5);                              //****************************???Z?b?g?X?s?[?h(0?`100)
+      Drive::Drive(5);  //****************************???Z?b?g?X?s?[?h(0?`100)
       dly_tsk(100);
-      Drive::Drive(10);                              //****************************???Z?b?g?X?s?[?h(0?`100)
+      Drive::Drive(10);  //****************************???Z?b?g?X?s?[?h(0?`100)
       dly_tsk(500);
-      Drive::Drive(35);                              //****************************???Z?b?g?X?s?[?h(0?`100)
+      Drive::Drive(35);  //****************************???Z?b?g?X?s?[?h(0?`100)
       dly_tsk(1500);
     }
 
   } while (true);
-  float goalDistance=Steering::GetDistance();
+  float goalDistance = Steering::GetDistance();
 
   EV3_LOG("GOOOOOOL");
-  
-  
-  //Drive::LineTrace::SetPID({0.4f, 0.0f, 0.2f});
-  //Drive::SetDriveMode(DriveMode::Nomal);
+
+  // Drive::LineTrace::SetPID({0.4f, 0.0f, 0.2f});
+  // Drive::SetDriveMode(DriveMode::Nomal);
   Drive::Drive(40);
   //  RyujiEv3Engine::GetSpeaker()->playTone(1000, 1000);
-  //Drive::LineTrace::SetLineMode(BlueLineMode::Blue);
+  // Drive::LineTrace::SetLineMode(BlueLineMode::Blue);
 
-  while(Steering::GetDistance() - goalDistance < 1000.0f){}
+  while (Steering::GetDistance() - goalDistance < 1000.0f) {
+  }
   Drive::Drive(10);
 
-  //Drive::Stop();
+  // Drive::Stop();
   // 青線検知
   /*
   while (!color.getBlueColor()) {
@@ -98,7 +104,7 @@ bool Run::driveStart() {
 
   // 30%走行
   // Drive::Drive(m_lowSpeed);
- // EV3_LOG("Im blue now");  // Takeuchi
+  // EV3_LOG("Im blue now");  // Takeuchi
   // ラインが黒色になったら難所へ引き渡し
   /*
   while (!color.getBlackColor()) {

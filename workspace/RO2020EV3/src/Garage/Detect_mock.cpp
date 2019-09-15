@@ -4,27 +4,22 @@
 #include "Detect_mock.h"
 //#include <Detect.h>
 
+namespace Detect_mock {
+ReadColor GetColor(float blueCorr, float rgbCorr) {
+  static int j = 0;
 
+  j++;
 
-namespace Detect_mock
-{
-	ReadColor GetColor(float blueCorr, float rgbCorr)
-	{
-		static int j = 0;
-
-		j++;
-
-		switch (j)
-		{
-		case 1:
-			return ReadColor::BLUE;
-			break;
-		case 2:
-			return ReadColor::BLACK;
-			break;
-		default :
-			return ReadColor::NONE;
-			break;
-		}
-	}
+  switch (j) {
+    case 1:
+      return ReadColor::BLUE;
+      break;
+    case 2:
+      return ReadColor::BLACK;
+      break;
+    default:
+      return ReadColor::NONE;
+      break;
+  }
 }
+}  // namespace Detect_mock

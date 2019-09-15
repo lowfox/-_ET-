@@ -8,11 +8,9 @@
 // 定数定義
 #define ERROR -1
 
-MapStateControl::MapStateControl() {
-}
+MapStateControl::MapStateControl() {}
 
-MapStateControl::~MapStateControl() {
-}
+MapStateControl::~MapStateControl() {}
 
 int MapStateControl::drivePosition() {
   float milage = 0.0f;  //累計距離
@@ -32,11 +30,10 @@ int MapStateControl::drivePosition() {
               milage);  // Takeuchi
       RyujiEv3Engine::GetSpeaker()->setVolume(255);
       RyujiEv3Engine::GetSpeaker()->playTone(500, 10);
-    } 
+    }
     if (milage > STATE_END) {
       //ゴールしたならnowStateを-1にする
       nowState = -1;
-
     }
     return nowState;
 
@@ -46,9 +43,9 @@ int MapStateControl::drivePosition() {
       //走行状態切り替え時の距離をログに吐く
       EV3_LOG("State chenge nowState = %d\n Now milage  = %f\n", nowState,
               milage);  // Takeuchi
-      //RyujiEv3Engine::GetSpeaker()->setVolume(500);
-      //RyujiEv3Engine::GetSpeaker()->playTone(900, 10);
-    } 
+      // RyujiEv3Engine::GetSpeaker()->setVolume(500);
+      // RyujiEv3Engine::GetSpeaker()->playTone(900, 10);
+    }
     if (milage > STATE_END) {
       //ゴールしたならnowStateを-1にする
       nowState = -1;
@@ -60,8 +57,6 @@ int MapStateControl::drivePosition() {
   }
 }
 
-void MapStateControl::drivePositionReset() {
-  nowState = 0;
-}
+void MapStateControl::drivePositionReset() { nowState = 0; }
 
 int MapStateControl::errorCorrection() { return 0; }

@@ -6,65 +6,59 @@
 #endif
 
 /// Public
-bool MasterControl::LookUp()
-{
-    #ifdef __LOOKUP_DEBUG__
+bool MasterControl::LookUp() {
+#ifdef __LOOKUP_DEBUG__
 
-        LookUpTest lookuptest;
+  LookUpTest lookuptest;
 
-        //lookuptest.TestSonarFilterGetAvg();        //OK
-        //lookuptest.TestSonarFilterFilterInput();   //OK
-        //lookuptest.TestSonarControlCheckAvg();     //OK
-        //lookuptest.TestSonarControlGetAvg();       //OK
+  // lookuptest.TestSonarFilterGetAvg();        //OK
+  // lookuptest.TestSonarFilterFilterInput();   //OK
+  // lookuptest.TestSonarControlCheckAvg();     //OK
+  // lookuptest.TestSonarControlGetAvg();       //OK
 
-        //lookuptest.TestTailAngle();                //OK
+  // lookuptest.TestTailAngle();                //OK
 
-        //lookuptest.TestTailStageAngle();           //OK
+  // lookuptest.TestTailStageAngle();           //OK
 
-        //lookuptest.TestMotorSetStartDistance();    //OK
+  // lookuptest.TestMotorSetStartDistance();    //OK
 
-        //lookuptest.TestMotorSetOffset();           //OK
+  // lookuptest.TestMotorSetOffset();           //OK
 
-        //lookuptest.TestMotorCompareVal();          //OK
-        
-        //lookuptest.TestMotorGetPassCount();        //OK
+  // lookuptest.TestMotorCompareVal();          //OK
 
-        //lookuptest.TestEmergencyLineCheck();       //OK
+  // lookuptest.TestMotorGetPassCount();        //OK
 
-        //lookuptest.TestEmergencyLeftTurn();        //OK
+  // lookuptest.TestEmergencyLineCheck();       //OK
 
-        //lookuptest.TestEmergencyRightTurn();       //OK
-        
-    return true;
+  // lookuptest.TestEmergencyLeftTurn();        //OK
+
+  // lookuptest.TestEmergencyRightTurn();       //OK
+
+  return true;
 #else
-    EV3_LOG_INFO("DriveStart");
+  EV3_LOG_INFO("DriveStart");
 
-    if(!phase1.run())
-    {
-        EV3_LOG_INFO("Phase1End");
-        return false;
-    }
+  if (!phase1.run()) {
+    EV3_LOG_INFO("Phase1End");
+    return false;
+  }
 
-    if(!phase2.run())
-    {
-        EV3_LOG_INFO("Phase2End");
-        return false;
-    }
+  if (!phase2.run()) {
+    EV3_LOG_INFO("Phase2End");
+    return false;
+  }
 
-    if(!phase3.run())
-    {
-        EV3_LOG_INFO("Phase3End");
-        return false;
-    }  
-    
+  if (!phase3.run()) {
+    EV3_LOG_INFO("Phase3End");
+    return false;
+  }
+
 #endif
-    return true;
+  return true;
 }
 
-MasterControl::~MasterControl()
-{
-    // シングルトンを解放
-    SonarControl::GetInstance()->Destroy();
-    SonarFilter::GetInstance()->Destroy();
-    
+MasterControl::~MasterControl() {
+  // シングルトンを解放
+  SonarControl::GetInstance()->Destroy();
+  SonarFilter::GetInstance()->Destroy();
 }

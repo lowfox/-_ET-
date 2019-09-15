@@ -12,12 +12,11 @@ void StartDash::startRun() {
   auto* speaker = RyujiEv3Engine::GetSpeaker();
   EV3_LOG("StartDash_Start\n");
   speaker->setVolume(100);
-  
+
   EV3_LOG("Tail01 %d \n", RyujiEv3Engine::GetTailMotor()->getCounts());
 
-
   Drive::LineTrace::SetLineMode(BlueLineMode::Nomal);
-  Drive::SetDriveMode(DriveMode::Nomal); // ライントレースモードオフ
+  Drive::SetDriveMode(DriveMode::Nomal);  // ライントレースモードオフ
   EV3_LOG("Trace Off\n");
   // スタートが安定するまでライントレースをせずに前進する
   Drive::LineTrace::SetPID({0.0f, 0.0f, 0.0f});

@@ -9,7 +9,7 @@
 #include "ColorDetection.h"
 
 LineTraceScene::LineTraceScene(ISceneChanger* sceneChanger)
-  : IScene(sceneChanger) {}
+    : IScene(sceneChanger) {}
 
 bool LineTraceScene::init() { return true; }
 
@@ -25,11 +25,9 @@ bool LineTraceScene::run() {
   while (1) {
     if (colorDetection.getBlackColor() == true) {
       EV3_LOG("Now Black\n");
-    }
-    else if (colorDetection.getBlueColor() == true) {
+    } else if (colorDetection.getBlueColor() == true) {
       EV3_LOG("Now Blue\n");
-    }
-    else {
+    } else {
       EV3_LOG("No Color\n");
     }
   }
