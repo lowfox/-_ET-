@@ -4,3 +4,4 @@ BasedOnStyle: Google
 DerivePointerAlignment: false
 
 AlignConsecutiveAssignments: true
+SortIncludes: false
