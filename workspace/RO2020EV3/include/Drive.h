@@ -1,35 +1,35 @@
 ///
 /// @file Drive.h
-/// @brief �h���C�u
+/// @brief ドライブ
 ///
 #pragma once
 #include <RyujiEv3.h>
 
-/// �h���C�u���[�h
+/// ドライブモード
 enum class DriveMode {
-  /// ���C���g���[�X���[�h
+  /// ライントレースモード
   LineTrace,
 
-  /// �ʏ탂�[�h
+  /// 通常モード
   Nomal
 };
 
-/// ���C���̐F
+/// ラインの色
 enum class BlueLineMode 
 {
-	/// �F���C���g���[�X
+	/// 青色ライントレース
 	Blue,
 
-	/// �ʏ탉�C���g���[�X
+	/// 通常ライントレース
 	Nomal
 };
 
-/// �����C�����g���[�X���鑤
+/// 黒ラインをトレースする側
 enum class Side {
-  /// ����
+  /// 左側
   Left,
 
-  /// �E��
+  /// 右側
   Right
 };
 
@@ -45,15 +45,15 @@ struct PID {
   float kd;
 };
 
-/// �g���[�X�J���[
+/// トレースカラー
 struct TraceColor {
-  /// ���F
+  /// 黒色
   float black;
 
-  /// ���F
+  /// 白色
   float white;
 
-  ///�F
+  ///青色
   RGB blue;
 };
 
@@ -61,41 +61,41 @@ namespace Drive
 {
 	///
 	/// @fn void Drive(int32 speed,int32 turn = 0)
-	/// @brief ���s����
-	/// @param speed ���x(0�`100)
-	/// @param turn ����l(-100�`100)�����C���g���[�X���[�h���͖���
-	/// @retval true ����
-	/// @retval false ���s
+	/// @brief 走行する
+	/// @param speed 速度(0～100)
+	/// @param turn 旋回値(-100～100)※ライントレースモード時は無効
+	/// @retval true 成功
+	/// @retval false 失敗
 	///
 	bool Drive(int32 speed,int32 turn = 0);
 
 	///
 	/// @fn void Stop()
-	/// @brief ��~����
-	/// @retval true ����
-	/// @retval false ���s
+	/// @brief 停止する
+	/// @retval true 成功
+	/// @retval false 失敗
 	///
 	bool Stop();
 
 	///
 	/// @fn void Rotate()
-	/// @brief ���]����@�O�_�|�������Ă��Ȃ���Ԃł́A���̊֐��͕K�����s����
-	/// @retval true ����
-	/// @retval false ���s
+	/// @brief 反転する　三点倒立をしていない状態では、この関数は必ず失敗する
+	/// @retval true 成功
+	/// @retval false 失敗
 	///
 	bool Rotate();
 
 	///
 	/// @fn void SetDriveMode(DriveMode mode)
-	/// @brief �h���C�u���[�h���w�肷��
-	/// @param mode �h���C�u���[�h
+	/// @brief ドライブモードを指定する
+	/// @param mode ドライブモード
 	///
 	bool SetDriveMode(DriveMode mode);
 
 	///
 	/// @fn DriveMode GetDriveMode()
-	/// @brief ���ݎg�p���Ă���h���C�u���[�h���擾����
-	/// @return ���ݎg�p���Ă���h���C�u���[�h
+	/// @brief 現在使用しているドライブモードを取得する
+	/// @return 現在使用しているドライブモード
 	///
 	DriveMode GetDriveMode();
 
@@ -105,26 +105,26 @@ namespace Drive
 	{
 		///
 		/// @fn RGB RGBAverage1Sec()
-		/// @brief 1�b�Ԃ�RGB�̕��ς�Ԃ�
-		/// @return 1�b�Ԃ�RGB�̕��ϒl
+		/// @brief 1秒間のRGBの平均を返す
+		/// @return 1秒間のRGBの平均値
 		///
 		RGB RGBAverage1Sec();
 
 		///
 		/// @fn bool AddTraceColor(int32 count,const TraceColor& traceColor)
-		/// @brief count�̃g���[�X�J���[��ǉ�����
-		/// @param count �p�x(�x)
-		/// @param traceColor �g���[�X�J���[
-		/// @retval true ����
-		/// @retval false ���s
+		/// @brief countのトレースカラーを追加する
+		/// @param count 角度(度)
+		/// @param traceColor トレースカラー
+		/// @retval true 成功
+		/// @retval false 失敗
 		///
 		bool AddTraceColor(int32 count,const TraceColor& traceColor);
 
 		///
 		/// @fn TraceColor& GetTraceColor(int32 count)
-		/// @brief count�ɑΉ�����g���[�X�J���[��Ԃ��Bcount�ɑΉ�����g���[�X�J���[���Ȃ��ꍇ�̓f�t�H���g�\�z���ĎQ�Ƃ�Ԃ��B
-		/// @param count �ԑ̂̊p�x
-		/// @return count�ɑΉ�����g���[�X�J���[
+		/// @brief countに対応するトレースカラーを返す。countに対応するトレースカラーがない場合はデフォルト構築して参照を返す。
+		/// @param count 車体の角度
+		/// @return countに対応するトレースカラー
 		///
 		TraceColor& GetTraceColor(int32 count);
 	}
@@ -134,57 +134,57 @@ namespace Drive
 	{
 		///
 		/// @fn void SetPID(const PID& pid)
-		/// @brief ���C���g���[�X�Ɏg�p����PID�̒l��ݒ肷��
-		/// @param pid �Z�b�g����PID�l
+		/// @brief ライントレースに使用するPIDの値を設定する
+		/// @param pid セットするPID値
 		///
 		void SetPID(const PID& pid);
 
 		///
 		/// @fn PID GetPID()
-		/// @brief ���ݎg�p���Ă���PID�l���擾����
-		/// @return ���ݎg�p���Ă���PID�l
+		/// @brief 現在使用しているPID値を取得する
+		/// @return 現在使用しているPID値
 		///
 		PID GetPID();
 
 		///
 		/// @fn void SetTraceColor(const TraceColor& traceColor)
-		/// @brief ���C���g���[�X�Ɏg�p����g���[�X�J���[��ݒ肷��
-		/// @param traceColor �Z�b�g����g���[�X�J���[
+		/// @brief ライントレースに使用するトレースカラーを設定する
+		/// @param traceColor セットするトレースカラー
 		///
 		void SetTraceColor(const TraceColor& traceColor);
 
 		///
 		/// @fn TraceColor GetTraceColor()
-		/// @brief ���ݎg�p���Ă���g���[�X�J���[���擾����
-		/// @return ���ݎg�p���Ă���g���[�X�J���[
+		/// @brief 現在使用しているトレースカラーを取得する
+		/// @return 現在使用しているトレースカラー
 		///
 		TraceColor GetTraceColor();
 
 		///
 		/// @fn void SetSide(Side side)
-		/// @brief �����C���̂ǂ��瑤���g���[�X���邩�ݒ肷��
-		/// @param side �����C���̑�
+		/// @brief 黒ラインのどちら側をトレースするか設定する
+		/// @param side 黒ラインの側
 		///
 		void SetSide(Side side);
 
 		///
 		/// @fn Side GetSide()
-		/// @brief ���݁A�����C���̂ǂ��瑤���g���[�X���Ă��邩�擾����
-		/// @return �g���[�X���Ă��鑤
+		/// @brief 現在、黒ラインのどちら側をトレースしているか取得する
+		/// @return トレースしている側
 		///
 		Side GetSide();
 
 		///
 		/// @fn void setLineMode(BlueLineMode lineMode)
-		/// @brief �F�̃��C���g���[�X�����邩�ۂ�
-		/// @return �u���[���C�����[�h�̃I���I�t
+		/// @brief 青色のライントレースをするか否か
+		/// @return ブルーラインモードのオンオフ
 		///
 		void SetLineMode(BlueLineMode lineMode);
 
 		///
 		/// @fn  BlueLineMode getLineMode()
-		/// @brief ���݁A�u���[���C�����[�h�̎擾
-		/// @param BlueLineMode �F�����C���g���[�X�̃I���I�t
+		/// @brief 現在、ブルーラインモードの取得
+		/// @param BlueLineMode 青色をライントレースのオンオフ
 		///
         BlueLineMode GetLineMode();
 	}
