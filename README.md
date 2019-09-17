@@ -18,5 +18,9 @@ $ make build
 $ make build APP_NAME=ryuji
 ```
 
-## 📕MORE
-wikiを見てください。
+## 📕MORE DOCUMENTATION
+- [キャリブレーションのやり方](https://github.com/ro-2020/ev3/wiki/キャリブレーションのやりかた)
+- [設計書](https://drive.google.com/open?id=1QK9dzCpPZQRGEiy5_4RNghSTpjTgAZdR)
+
+## 💎OUR ASSETS
+- [Google Drive](https://drive.google.com/drive/folders/1a1knzy-GcUPn5zDRJMRQbKI72f41hlah)
