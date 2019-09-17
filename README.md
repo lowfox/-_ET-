@@ -24,3 +24,4 @@ $ make build APP_NAME=ryuji
 
 ## 💎OUR ASSETS
 - [Google Drive](https://drive.google.com/drive/folders/1a1knzy-GcUPn5zDRJMRQbKI72f41hlah)
+- [モデル図](https://photos.google.com/share/AF1QipM6v0QbZTXuSJDzrzIyyUDQT_DTeHuXffkSFEas46enyTDDaJdeatMVDnlahTTSZw?key=cktyN0ZOUnppN1hWYWlXbndhODY0NUt5NlU3STNR)
