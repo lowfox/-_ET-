@@ -37,8 +37,6 @@ void main_task(intptr_t unused) {
   // API,ミドルウェア 終了処理
   System::Exit();
 
-  // API,ミドルウェア 終了処理
-  System::Exit();
 }
 
 // robocon_task
