@@ -1,35 +1,35 @@
 ///
 /// @file SceneManager.h
-/// @brief �V�[���Ǘ�
+/// @brief シーン管理
 ///
 #pragma once
 #include <map>
 
-/// �V�[������ID
+/// シーン識別ID
 enum class SceneID {
-  /// ���C���g���[�X
+  /// ライントレース
   LineTrace,
 
-  /// �K���[�W
+  /// ガレージ
   Garage,
 
-  /// �V�[�\�[
+  /// シーソー
   Seesaw,
 
-  /// ���b�N�A�b�v
+  /// ルックアップ
   Lookup,
 
-  /// �I��
+  /// 終了
   End
 };
 
-/// �V�[���ύX�C���^�[�t�F�[�X
+/// シーン変更インターフェース
 class ISceneChanger {
  public:
   virtual bool change(SceneID nextSceneID) = 0;
 };
 
-/// �V�[��
+/// シーン
 class IScene {
  private:
   ISceneChanger* m_sceneChanger = nullptr;
@@ -42,26 +42,26 @@ class IScene {
   ///
   /// @fn bool init()
   /// @brief
-  /// �V�[��������������B�O�̃V�[������̎󂯓n������ɌĂ΂��BArduino��setup�Ɠ�����p
-  /// @retval true ����
-  /// @retval false ���s
+  /// @brief シーンを初期化する。前のシーンからの受け渡し直後に呼ばれる。Arduinoのsetupと同じ作用
+	/// @retval true 成功
+	/// @retval false 失敗
   ///
   virtual bool init() { return true; }
 
   ///
   /// @fn bool run()
-  /// @brief �V�[�������s����Binit()����ɌĂ΂��BArduino��loop�Ɠ�����p
-  /// @retval true ����
-  /// @retval false ���s
+  /// @brief シーンを実行する。init()直後に呼ばれる。Arduinoのloopと同じ作用
+	/// @retval true 成功
+	/// @retval false 失敗
   ///
   virtual bool run() = 0;
 
   ///
   /// @fn bool change(SceneID nextSceneID)
-  /// @brief �V�[����ύX����B���̃V�[��(�)�ւ̈����n�����ɌĂԁB
-  /// @param nextSceneID ���̃V�[��(�)��ID
-  /// @retval true ����
-  /// @retval false ���s
+  /// @brief シーンを変更する。次のシーン(難所)への引き渡し時に呼ぶ。
+	/// @param nextSceneID 次のシーン(難所)のID
+	/// @retval true 成功
+	/// @retval false 失敗
   ///
   bool change(SceneID nextSceneID) {
     return m_sceneChanger->change(nextSceneID);
