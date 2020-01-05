@@ -4,16 +4,30 @@ RUN apt-get update && apt-get install -y \
     wget \
     sudo \
     unzip \
+    cmake \
+    make \
+    tree \
+    git \
     gcc-arm-none-eabi \
     libboost-all-dev \
     clang-format \
     python3 \
 && apt-get clean \
 && rm -rf /var/lib/apt/lists/* \
-&& wget http://www.toppers.jp/download.cgi/ev3rt-beta7-2-release.zip \
+&& wget https://www.toppers.jp/download.cgi/ev3rt-beta7-2-release.zip \
 && unzip /ev3rt-beta7-2-release.zip \
-&& tar Jxfv /ev3rt-beta7-2-release/hrp2.tar.xz
-
+&& tar Jxfv /ev3rt-beta7-2-release/hrp2.tar.xz \
+#ルートにhrp2フォルダができる
+&& wget 'https://github.com/google/googletest/archive/release-1.10.0.tar.gz' \
+&& tar zxvf release-1.10.0.tar.gz \
+&& cd googletest-release-1.10.0/ \
+&& mkdir build \
+&& cd build \
+&& cmake .. \
+&& make \
+&& cp /googletest-release-1.10.0/build/lib/*.a /usr/local/lib/ \
+&& cp -r /googletest-release-1.10.0/googletest/include/gtest/ /usr/local/include/gtest \
+&& tree /host
 # これを継ぎ足さないとbuildできないらしい(@ZhanU-bmp)
 WORKDIR /hrp2/cfg
 RUN make \
@@ -24,5 +38,5 @@ COPY .clang-format /
 COPY cfw.py /
 
 WORKDIR /
-CMD ["./build.sh"]
-
+#CMD ["./build.sh"]
+#CMD echo this is CMD

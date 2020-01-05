@@ -11,10 +11,10 @@ import glob
 import os
 import subprocess
 
-lib_cpp_list = glob.glob('/host/library/**/*.cpp', recursive=True)
-lib_header_list = glob.glob('/host/library/**/*.h', recursive=True)
-ws_cpp_list = glob.glob('/host/workspace/**/*.cpp', recursive=True)
-ws_header_list = glob.glob('/host/workspcase/library/**/*.h', recursive=True)
+lib_cpp_list = glob.glob('/myhost/library/**/*.cpp', recursive=True)
+lib_header_list = glob.glob('/myhost/library/**/*.h', recursive=True)
+ws_cpp_list = glob.glob('/myhost/workspace/**/*.cpp', recursive=True)
+ws_header_list = glob.glob('/myhost/workspcase/library/**/*.h', recursive=True)
 cmd = "clang-format -style=file -i {}"
 
 for cpp in lib_cpp_list:

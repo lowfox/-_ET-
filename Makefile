@@ -10,11 +10,13 @@ __docker-build:
 
 build:
 ifdef APP_NAME
-	@docker run --rm -e RELEASE_DIR_NAME=$(RELEASE_DIR_NAME) -e APP_NAME=$(APP_NAME) -v $(shell pwd):/host $(CONTENA_NAME)
+	@docker run -e RELEASE_DIR_NAME=$(RELEASE_DIR_NAME) -e APP_NAME=$(APP_NAME) -v $(shell pwd):/myhost $(CONTENA_NAME)
 else
-	@docker run --rm -e RELEASE_DIR_NAME=$(RELEASE_DIR_NAME) -e APP_NAME=app -v $(shell pwd):/host $(CONTENA_NAME)
+	@docker run -e RELEASE_DIR_NAME=$(RELEASE_DIR_NAME) -e APP_NAME=app -v $(shell pwd):/myhost $(CONTENA_NAME)
 endif
-
+test:
+	@g++ -std=c++11 test.cpp -pthread -lgtest -lgtest_main
+	@$(shell pwd)/a.out
 sh:
 ifeq  ($(shell uname),Darwin)
 	@docker run -it --rm -e RELEASE_DIR_NAME=$(RELEASE_DIR_NAME) -e APP_NAME=app -v $(shell pwd):/host $(CONTENA_NAME) sh
@@ -26,4 +28,4 @@ branch/deleteAll:
 	@git branch | grep -v 'develop\|master\|gh-pages' | grep -v '*' | xargs git branch -D
 
 __vol:
-	@mkdir $(RELEASE_DIR_NAME)
+	@mkdir -p $(RELEASE_DIR_NAME)
