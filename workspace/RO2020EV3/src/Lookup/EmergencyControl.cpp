@@ -1,5 +1,5 @@
-#include "EmergencyControl.h"
 #include "../../app.h"
+#include "EmergencyControl.h"
 
 bool EmergencyControl::LeftTurn() {
 #ifdef __LOOKUP_DEBUG__
@@ -9,7 +9,7 @@ bool EmergencyControl::LeftTurn() {
   }
 #else
 
-  auto left_deg  = RyujiEv3Engine::GetLeftMotor()->getCounts();
+auto			 left_deg = RyujiEv3Engine::GetLeftMotor()->getCounts();
   auto right_deg = RyujiEv3Engine::GetRightMotor()->getCounts();
 
   RyujiEv3Engine::GetRightMotor()->setCounts(108, 1, false);
@@ -31,7 +31,7 @@ bool EmergencyControl::RightTurn() {
     return true;
   }
 #else
-  auto left_deg  = RyujiEv3Engine::GetLeftMotor()->getCounts();
+  auto left_deg = RyujiEv3Engine::GetLeftMotor()->getCounts();
   auto right_deg = RyujiEv3Engine::GetRightMotor()->getCounts();
 
   RyujiEv3Engine::GetRightMotor()->setCounts(-108, 1, false);
@@ -70,12 +70,12 @@ void EmergencyControl::StbGetColor(uint8 ireflect) {
 }
 
 void EmergencyControl::StbLeftTurnAngle(int32 left, int32 right) {
-  this->left_deg  = left;
+  this->left_deg = left;
   this->right_deg = right;
 }
 
 void EmergencyControl::StbRightTurnAngle(int32 left, int32 right) {
-  this->left_deg  = left;
+  this->left_deg = left;
   this->right_deg = right;
 }
 

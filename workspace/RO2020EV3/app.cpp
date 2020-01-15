@@ -1,10 +1,11 @@
+#include <Config.h>
+#include <Couse.h>
+#include <Logger.h>
+#include <RyujiEv3.h>
+#include <SceneManager.h>
+#include <System.h>
 #include <ev3api.h>
 #include "app.h"
-#include <RyujiEv3.h>
-#include <System.h>
-#include <Logger.h>
-#include <SceneManager.h>
-#include <Config.h>
 
 #include "src/Lookup/SonarFilter.h"
 
@@ -24,7 +25,7 @@ void main_task(intptr_t unused) {
   act_tsk(ROBOCON_TASK);
 
   // 中央のボタンを押すと強制終了
-  while (!ev3_button_is_pressed(ENTER_BUTTON)) {
+  while (!ev3_button_is_pressed(ENTER_BUTTON)) 						{
     tslp_tsk(100);
   }
 
@@ -43,10 +44,9 @@ void robocon_task(intptr_t exinf) {
   EV3_LOG_INFO("robocon_task Start");
 
   SceneManager sceneManager;
-
+  Couse couse;
   sceneManager.init(START_SCENE_ID);
-
-  while (sceneManager.isEnable()) {
+  couse.while (sceneManager.isEnable()) {
     if (!sceneManager.run()) {
       break;
     }

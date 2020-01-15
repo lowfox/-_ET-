@@ -38,5 +38,5 @@ COPY .clang-format /
 COPY cfw.py /
 
 WORKDIR /
-#CMD ["./build.sh"]
+CMD ["./build.sh"]
 #CMD echo this is CMD
