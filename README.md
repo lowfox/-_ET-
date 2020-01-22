@@ -32,3 +32,6 @@ $ make build APP_NAME=ryuji
 ## 2019大会提出モデル
 シーソーを通過する↓
 https://drive.google.com/file/d/1ZxkBg-7ys7KK8hdbSAQ2GKAjdZ5JIN4m/view?usp=sharing
+
+## シーソーの動画
+https://youtu.be/ysi-u2mfG6g
