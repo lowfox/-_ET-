@@ -1,5 +1,6 @@
 ## これについて
 以上のURLのアップデート版です。
+https://github.com/ro-2020/ev3
 ## 🌍HELLO WORLD!
 ### ツールをインストールしよう！
 - [各種ツールのインストールについて](https://github.com/ro-2020/ev3/wiki/各種ツールのインストールについて)
@@ -26,4 +27,8 @@ $ make build APP_NAME=ryuji
 
 ## 💎OUR ASSETS
 - [Google Drive](https://drive.google.com/drive/folders/1a1knzy-GcUPn5zDRJMRQbKI72f41hlah)
-- [モデル図](https://photos.google.com/share/AF1QipM6v0QbZTXuSJDzrzIyyUDQT_DTeHuXffkSFEas46enyTDDaJdeatMVDnlahTTSZw?key=cktyN0ZOUnppN1hWYWlXbndhODY0NUt5NlU3STNR)
+- [大会他チームモデル図](https://photos.google.com/share/AF1QipM6v0QbZTXuSJDzrzIyyUDQT_DTeHuXffkSFEas46enyTDDaJdeatMVDnlahTTSZw?key=cktyN0ZOUnppN1hWYWlXbndhODY0NUt5NlU3STNR)
+
+## 2019大会提出モデル
+シーソーを通過する↓
+https://drive.google.com/file/d/1ZxkBg-7ys7KK8hdbSAQ2GKAjdZ5JIN4m/view?usp=sharing
