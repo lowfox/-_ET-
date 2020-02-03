@@ -1,6 +1,6 @@
 ## これについて
-以上のURLのアップデート版です。開発中です。。。
-https://github.com/ro-2020/ev3
+以下のURLのアップデート版です。開発中です。。。
+- https://github.com/ro-2020/ev3
 ## 🌍HELLO WORLD!
 ### ツールをインストールしよう！
 - [各種ツールのインストールについて](https://github.com/ro-2020/ev3/wiki/各種ツールのインストールについて)
