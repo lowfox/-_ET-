@@ -89,8 +89,7 @@ bool Run::driveStart() {
   //  RyujiEv3Engine::GetSpeaker()->playTone(1000, 1000);
   // Drive::LineTrace::SetLineMode(BlueLineMode::Blue);
 
-  //ƒS[ƒ‹ŒŸ’mŒã15cmi‚ñ‚Å“ïŠˆø‚«“n‚µ
-  while (Steering::GetDistance() - goalDistance < 150.0f) {
+  while (Steering::GetDistance() - goalDistance < 1000.0f) {
   }
   Drive::Drive(10);
 
