@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install -y \
     python3 \
 && apt-get clean \
 && rm -rf /var/lib/apt/lists/* \
-&& wget http://www.toppers.jp/download.cgi/ev3rt-beta7-2-release.zip \
+&& wget https://www.toppers.jp/download.cgi/ev3rt-beta7-2-release.zip \
 && unzip /ev3rt-beta7-2-release.zip \
 && tar Jxfv /ev3rt-beta7-2-release/hrp2.tar.xz
 
