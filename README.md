@@ -37,8 +37,8 @@ https://drive.google.com/file/d/1ZxkBg-7ys7KK8hdbSAQ2GKAjdZ5JIN4m/view?usp=shari
 https://youtu.be/ysi-u2mfG6g
 
 
--------------↓開発者向け↓----------------
-バージョン管理の思想
+# -------------↓開発者向け↓----------------  
+バージョン管理の思想  
 https://github.com/lowfox/ev3-v2/issues/16
 
 
