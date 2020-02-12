@@ -4,6 +4,9 @@
 #include <Logger.h>
 #include <Config.h>
 #include "app.h"
+#include <Course.h>
+#include <CourseContent2019Left.h>
+
 // main Task
 void main_task(intptr_t unused) {
   // API,ミドルフェア 初期化
@@ -38,6 +41,11 @@ void main_task(intptr_t unused) {
 void robocon_task(intptr_t exinf) {
   EV3_LOG_INFO("robocon_task Start");
 
+  CourseContent2019Left* course2019left = new CourseContent2019Left;
+
+  // Course course(course2019left->getCourse());
+
+  delete course2019left;
   EV3_LOG_INFO("robocon_task End");
 
   // 自タスクを終了
