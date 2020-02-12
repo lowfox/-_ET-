@@ -1,13 +1,9 @@
 #include <ev3api.h>
-#include "app.h"
 #include <RyujiEv3.h>
 #include <System.h>
 #include <Logger.h>
-#include <SceneManager.h>
 #include <Config.h>
-
-#include "src/Lookup/SonarFilter.h"
-
+#include "app.h"
 // main Task
 void main_task(intptr_t unused) {
   // API,ミドルフェア 初期化
@@ -41,16 +37,6 @@ void main_task(intptr_t unused) {
 // robocon_task
 void robocon_task(intptr_t exinf) {
   EV3_LOG_INFO("robocon_task Start");
-
-  SceneManager sceneManager;
-
-  sceneManager.init(START_SCENE_ID);
-
-  while (sceneManager.isEnable()) {
-    if (!sceneManager.run()) {
-      break;
-    }
-  }
 
   EV3_LOG_INFO("robocon_task End");
 
