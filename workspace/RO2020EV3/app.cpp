@@ -4,8 +4,7 @@
 #include <Logger.h>
 #include <Config.h>
 #include "app.h"
-#include <Course.h>
-#include <CourseContent2019Left.h>
+#include <Course2019Left.h>
 
 // main Task
 void main_task(intptr_t unused) {
@@ -41,11 +40,16 @@ void main_task(intptr_t unused) {
 void robocon_task(intptr_t exinf) {
   EV3_LOG_INFO("robocon_task Start");
 
-  CourseContent2019Left* course2019left = new CourseContent2019Left;
+  std::vector<int> runNo = {1, 2, 3};
 
-  // Course course(course2019left->getCourse());
+  ICourse* course2019left = new Course2019Left;
+
+  course2019left->init(runNo);
+
+  course2019left->run();
 
   delete course2019left;
+
   EV3_LOG_INFO("robocon_task End");
 
   // 自タスクを終了

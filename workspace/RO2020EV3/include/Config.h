@@ -6,6 +6,7 @@
 #include <RyujiEv3.h>
 
 
+//constexpr class COURSE Course2019Left;
 
 
 /// EV3�̊e�Z���T�[,���[�^�[�̐ڑ��|�[�g

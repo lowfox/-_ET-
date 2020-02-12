@@ -1,6 +1,6 @@
-#include <CourseContent2019Left.h>
+#include <Course2019Left.h>
 
-CourseContent2019Left::CourseContent2019Left(void) {
+Course2019Left::Course2019Left(void) {
   m_garageParam = new Garage2019Param;
   m_seesawParam = new Seesaw2019Param;
   m_garageLogic = new GarageScene2019Logic(m_garageParam);
@@ -9,9 +9,22 @@ CourseContent2019Left::CourseContent2019Left(void) {
   m_course.push_back(m_garageLogic);
 }
 
-CourseContent2019Left::~CourseContent2019Left(void) {
+Course2019Left::~Course2019Left(void) {
   delete m_garageParam;
   delete m_seesawParam;
   delete m_garageLogic;
   delete m_seesawLogic;
+}
+
+bool Course2019Left::init(std::vector<int> runSceneNo) {
+  // TODO:ここの実装
+  return 0;
+}
+
+bool Course2019Left::run(void) {
+  for (auto& itr : m_course) {
+    itr->init();
+    itr->run();
+  }
+  return 0;
 }
