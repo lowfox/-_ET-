@@ -16,7 +16,7 @@ Course2019Left::~Course2019Left(void) {
   delete m_seesawLogic;
 }
 
-bool Course2019Left::init(std::vector<int> runSceneNo) {
+bool Course2019Left::init(const int* runSceneNo) {
   // TODO:ここの実装
   return 0;
 }

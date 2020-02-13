@@ -40,15 +40,17 @@ void main_task(intptr_t unused) {
 void robocon_task(intptr_t exinf) {
   EV3_LOG_INFO("robocon_task Start");
 
-  std::vector<int> runNo = {1, 2, 3};
+  //コースの生成
+  ICourse* course = new COURSE;
 
-  ICourse* course2019left = new Course2019Left;
+  //実行するシーンを設定
+  course->init(RUNSCENES);
 
-  course2019left->init(runNo);
+  //コースを実行
+  course->run();
 
-  course2019left->run();
-
-  delete course2019left;
+  //コースを解放
+  delete course;
 
   EV3_LOG_INFO("robocon_task End");
 

@@ -17,6 +17,6 @@ class Course2019Left : public ICourse{
     public:
         Course2019Left(void);
         ~Course2019Left(void);
-        bool init(std::vector<int> runSceneNo) override;
+        bool init(const int* runSceneNo) override;
         bool run(void) override;
 };
