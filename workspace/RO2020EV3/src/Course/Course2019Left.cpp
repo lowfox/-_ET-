@@ -15,16 +15,3 @@ Course2019Left::~Course2019Left(void) {
   delete m_garageLogic;
   delete m_seesawLogic;
 }
-
-bool Course2019Left::init(const int* runSceneNo) {
-  // TODO:ここの実装
-  return 0;
-}
-
-bool Course2019Left::run(void) {
-  for (auto& itr : m_course) {
-    itr->init();
-    itr->run();
-  }
-  return 0;
-}

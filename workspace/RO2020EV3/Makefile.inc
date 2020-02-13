@@ -16,6 +16,7 @@ Drive.o\
 Detect.o\
 Logger.o\
 CLogger.o\
+Course.o\
 Course2019Left.o\
 GarageScene2019Logic.o\
 SeesawScene2019Logic.o\

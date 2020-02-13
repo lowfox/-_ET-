@@ -3,6 +3,7 @@
 #include <System.h>
 #include <Logger.h>
 #include <Config.h>
+#include <Course.h>
 #include "app.h"
 #include <Course2019Left.h>
 
@@ -41,13 +42,10 @@ void robocon_task(intptr_t exinf) {
   EV3_LOG_INFO("robocon_task Start");
 
   //コースの生成
-  ICourse* course = new COURSE;
+  Course* course = new COURSE;
 
-  //実行するシーンを設定
-  course->init(RUNSCENES);
-
-  //コースを実行
-  course->run();
+  //実行するシーンを設定して実行
+  course->run(&RUNSCENES[0]);
 
   //コースを解放
   delete course;
