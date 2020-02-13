@@ -14,5 +14,4 @@ class Course{
 	    /// @retval false 失敗
         ///
         bool run(const int* runSceneNo);
-  
 };

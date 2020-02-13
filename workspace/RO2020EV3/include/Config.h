@@ -16,7 +16,7 @@ constexpr int SECOND_SCENE = 1;
 constexpr int THIRD_SCENE = 2;
 constexpr int FORTH_SCENE = 3;
 constexpr int FIFTH_SCENE = 4;
-constexpr int RUNSCENES[] = {FIRST_SCENE, SECOND_SCENE, THIRD_SCENE, FORTH_SCENE};
+constexpr int RUNSCENES[] = {FIRST_SCENE, SECOND_SCENE};
 
 //パラメータの選択
 

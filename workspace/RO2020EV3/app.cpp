@@ -4,8 +4,8 @@
 #include <Logger.h>
 #include <Config.h>
 #include <Course.h>
+#include "src/Course/2019/Course2019Left.h"
 #include "app.h"
-#include <Course2019Left.h>
 
 // main Task
 void main_task(intptr_t unused) {

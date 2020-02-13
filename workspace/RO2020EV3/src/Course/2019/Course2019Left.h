@@ -2,10 +2,10 @@
 #include <Course.h>
 #include <vector>
 #include <ISceneLogic.h>
-#include "../src/Logic/GarageScene2019Logic.h"
-#include "../src/Logic/SeesawScene2019Logic.h"
-#include "../src/Param/Garage2019Param.h"
-#include "../src/Param/Seesaw2019Param.h"
+#include "../../Logic/Garage/2019/GarageScene2019Logic.h"
+#include "../../Logic/Seesaw/2019/SeesawScene2019Logic.h"
+#include "../../Param/Garage2019Param.h"
+#include "../../Param/Seesaw2019Param.h"
 
 class Course2019Left : public Course{
     private:

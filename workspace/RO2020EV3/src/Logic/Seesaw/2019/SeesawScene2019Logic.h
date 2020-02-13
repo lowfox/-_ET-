@@ -1,7 +1,6 @@
-
 #pragma once
 #include <ISceneLogic.h>
-#include "../Param/Seesaw2019Param.h"
+#include "../../../Param/Seesaw2019Param.h"
 class SeesawScene2019Logic : public ISceneLogic{
     private:
         Seesaw2019Param* m_param;
