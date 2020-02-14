@@ -10,7 +10,7 @@ class GarageScene2019Logic : public ISceneLogic{
         /// @brief コンストラクタ。パラメータを設定する
         ///
         GarageScene2019Logic(Garage2019Param* param);
-
+        ~GarageScene2019Logic();
         bool init() override;
         bool run() override;
 

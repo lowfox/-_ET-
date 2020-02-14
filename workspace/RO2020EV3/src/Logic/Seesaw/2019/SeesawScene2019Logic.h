@@ -10,6 +10,7 @@ class SeesawScene2019Logic : public ISceneLogic{
         /// @brief コンストラクタ。パラメータを設定する
         ///
         SeesawScene2019Logic(Seesaw2019Param* param);
+        ~SeesawScene2019Logic();
         bool init() override;
         bool run() override;
 

@@ -8,12 +8,17 @@ GarageScene2019Logic::GarageScene2019Logic(Garage2019Param* param) {
   }
 }
 
-bool GarageScene2019Logic::init() { return true; }
+bool GarageScene2019Logic::init() {
+  EV3_LOG_DEBUG("GarageScene2019Logic::init() Start !\n");
+  EV3_LOG_DEBUG("GarageScene2019Logic::init() End!\n");
+  return true;
+}
 
 bool GarageScene2019Logic::run() {
-  RyujiEv3Engine::GetLCD()->drawString(20, 20, "HELLO EV3!\n");
-  RyujiEv3Engine::GetSpeaker()->setVolume(50);
-  RyujiEv3Engine::GetSpeaker()->playTone(50, 500);
-  EV3_LOG_INFO("GarageScene2019Logic END !\n");
+  EV3_LOG_INFO("GarageScene2019Logic::run() Start !\n");
+  EV3_LOG_INFO("GarageScene2019Logic::run() END !\n");
   return true;
+}
+GarageScene2019Logic::~GarageScene2019Logic() {
+  EV3_LOG_INFO("GarageScene2019Logic End ! \n");
 }
