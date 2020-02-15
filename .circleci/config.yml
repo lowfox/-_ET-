@@ -5,10 +5,10 @@ jobs: # 1回の実行の基本作業単位
       # CircleCI Go イメージは https://hub.docker.com/r/circleci/golang/ で入手できます
       - image: lowfox2/ro2020ev3dev
     # ステップが実行されるディレクトリ。 パスは Go Workspace の要件に従う必要があります
-    working_directory: ~/
+    working_directory: /
 
     steps: # `build` ジョブを構成するステップ
-      - checkout
+      - checkout 
       - run:
           name: ビルドを実行
           command: |
