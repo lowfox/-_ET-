@@ -11,4 +11,4 @@ jobs: # 1回の実行の基本作業単位
       - run:
           name: ビルドを実行
           command: |
-            echo $(pwd)
+            echo $(ls)
