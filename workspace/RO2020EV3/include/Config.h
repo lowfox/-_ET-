@@ -5,11 +5,15 @@
 #pragma once
 #include <RyujiEv3.h>
 #include <vector>
+//コース
+#include "src/Course/2019/Course2019Left.h"
+#include "src/Course/2019/Course2019Right.h"
+//パラメータ
 #include "../src/Param/Seesaw2019Param.h"
 #include "../src/Param/Garage2019Param.h"
 
 //コースの選択
-#define COURSE Course2019Left
+#define COURSE Course2019Right
 
 //TODO : COUSEの設定、実行するシーンの設定、パラメータの設定
 //実行するシーンの設定
@@ -18,7 +22,6 @@ constexpr int SECOND_SCENE = 1;
 constexpr int THIRD_SCENE = 2;
 constexpr int FORTH_SCENE = 3;
 constexpr int FIFTH_SCENE = 4;
-
 
 constexpr int RUNSCENES[] = {FIRST_SCENE, SECOND_SCENE};
 

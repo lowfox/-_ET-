@@ -1,6 +1,7 @@
 #include "Course2019Left.h"
 #include <Logger.h>
 #include <Config.h>
+#include <vector>
 
 Course2019Left::Course2019Left(void) {
   EV3_LOG_INFO("Course2019Left Start !\n");
