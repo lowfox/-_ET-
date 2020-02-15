@@ -1,6 +1,7 @@
 #pragma once
 #include <ISceneLogic.h>
 #include "../../../Param/Garage2019Param.h"
+
 class GarageScene2019Logic : public ISceneLogic{
     private:
         Garage2019Param* m_param;
