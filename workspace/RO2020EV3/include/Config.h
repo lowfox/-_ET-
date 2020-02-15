@@ -1,18 +1,36 @@
 ///
 /// @file Config.h
-/// @brief ETƒƒ{ƒRƒ“ƒvƒƒWƒFƒNƒg‚Ìİ’è
+/// @brief ETï¿½ï¿½ï¿½{ï¿½Rï¿½ï¿½ï¿½vï¿½ï¿½ï¿½Wï¿½Fï¿½Nï¿½gï¿½Ìİ’ï¿½
 ///
 #pragma once
 #include <RyujiEv3.h>
-#include <SceneManager.h>
+#include <vector>
+//ã‚³ãƒ¼ã‚¹
+#include "src/Course/2019/Course2019Left.h"
+#include "src/Course/2019/Course2019Right.h"
+//ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿
+#include "../src/Param/Seesaw2019Param.h"
+#include "../src/Param/Garage2019Param.h"
 
-/// Å‰‚É‹N“®‚·‚éƒV[ƒ“
-constexpr SceneID START_SCENE_ID = SceneID::LineTrace;
+//ã‚³ãƒ¼ã‚¹ã®é¸æŠ
+#define COURSE Course2019Right
 
-/// ƒ‰ƒCƒ“ƒgƒŒ[ƒX”Ç‚ÌŸ‚ÉŒÄ‚Î‚ê‚éƒV[ƒ“
-constexpr SceneID LINETRACE_NEXT_SCENE = SceneID::Lookup;
+//TODO : COUSEã®è¨­å®šã€å®Ÿè¡Œã™ã‚‹ã‚·ãƒ¼ãƒ³ã®è¨­å®šã€ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã®è¨­å®š
+//å®Ÿè¡Œã™ã‚‹ã‚·ãƒ¼ãƒ³ã®è¨­å®š
+constexpr int FIRST_SCENE = 0;
+constexpr int SECOND_SCENE = 1;
+constexpr int THIRD_SCENE = 2;
+constexpr int FORTH_SCENE = 3;
+constexpr int FIFTH_SCENE = 4;
 
-/// EV3‚ÌŠeƒZƒ“ƒT[,ƒ‚[ƒ^[‚ÌÚ‘±ƒ|[ƒg
+constexpr int RUNSCENES[] = {FIRST_SCENE, SECOND_SCENE};
+
+//ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã®é¸æŠ
+#define GARAGE2019PARAM ParamGarage2019::garage2020Param.pGrageParam
+#define SEESAW2019PARAM ParamSeesaw2019::seesaw2021Param.pSeesawParam
+
+
+/// EV3ï¿½ÌŠeï¿½Zï¿½ï¿½ï¿½Tï¿½[,ï¿½ï¿½ï¿½[ï¿½^ï¿½[ï¿½ÌÚ‘ï¿½ï¿½|ï¿½[ï¿½g
 constexpr PortData ROBOCON_PORT = {
     // ColorSensor
     SensorPort::PORT_3,

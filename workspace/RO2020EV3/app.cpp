@@ -1,12 +1,10 @@
 #include <ev3api.h>
-#include "app.h"
 #include <RyujiEv3.h>
 #include <System.h>
 #include <Logger.h>
-#include <SceneManager.h>
 #include <Config.h>
-
-#include "src/Lookup/SonarFilter.h"
+#include <Course.h>
+#include "app.h"
 
 // main Task
 void main_task(intptr_t unused) {
@@ -42,15 +40,14 @@ void main_task(intptr_t unused) {
 void robocon_task(intptr_t exinf) {
   EV3_LOG_INFO("robocon_task Start");
 
-  SceneManager sceneManager;
+  //コースの生成
+  Course* course = new COURSE;
 
-  sceneManager.init(START_SCENE_ID);
+  //実行するシーンを設定して実行
+  course->run(&RUNSCENES[0]);
 
-  while (sceneManager.isEnable()) {
-    if (!sceneManager.run()) {
-      break;
-    }
-  }
+  //コースを解放
+  delete course;
 
   EV3_LOG_INFO("robocon_task End");
 
