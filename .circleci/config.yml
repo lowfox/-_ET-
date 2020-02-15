@@ -1,0 +1,14 @@
+version: 2 # CircleCI 2.0 を使用します
+jobs: # 1回の実行の基本作業単位
+  build: # Workflows を使用しない実行では、エントリポイントとして `build` ジョブが必要
+    docker: # Docker でステップを実行します
+      # CircleCI Go イメージは https://hub.docker.com/r/circleci/golang/ で入手できます
+      - image: lowfox2/ro2020ev3dev
+    # ステップが実行されるディレクトリ。 パスは Go Workspace の要件に従う必要があります
+    working_directory: /
+
+    steps: # `build` ジョブを構成するステップ
+      - run:
+          name: ビルドを実行
+          command: |
+           make build 
