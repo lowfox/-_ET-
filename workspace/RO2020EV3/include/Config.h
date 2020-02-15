@@ -5,6 +5,8 @@
 #pragma once
 #include <RyujiEv3.h>
 #include <vector>
+#include "../src/Param/Seesaw2019Param.h"
+#include "../src/Param/Garage2019Param.h"
 
 //コースの選択
 #define COURSE Course2019Left
@@ -16,10 +18,13 @@ constexpr int SECOND_SCENE = 1;
 constexpr int THIRD_SCENE = 2;
 constexpr int FORTH_SCENE = 3;
 constexpr int FIFTH_SCENE = 4;
+
+
 constexpr int RUNSCENES[] = {FIRST_SCENE, SECOND_SCENE};
 
 //パラメータの選択
-
+#define GARAGE2019PARAM ParamGarage2019::garage2020Param.pGrageParam
+#define SEESAW2019PARAM ParamSeesaw2019::seesaw2021Param.pSeesawParam
 
 
 /// EV3�̊e�Z���T�[,���[�^�[�̐ڑ��|�[�g
