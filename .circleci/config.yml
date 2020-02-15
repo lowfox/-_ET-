@@ -11,4 +11,4 @@ jobs: # 1回の実行の基本作業単位
       - run:
           name: ビルドを実行
           command: |
-           make build 
+           docker run --rm -e RELEASE_DIR_NAME=$(RELEASE_DIR_NAME) -e APP_NAME=app -v $(shell pwd):/host $(CONTENA_NAME)d 
