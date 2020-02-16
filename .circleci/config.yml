@@ -10,4 +10,9 @@ jobs: # 1回の実行の基本作業単位
       - run:
           name: ビルドを実行
           command: |
-            make build
+            rm -rf /hrp2/sdk/common/library/RyujiEv3 &&
+            rm -rf /hrp2/sdk/workspace/RO2020EV3 &&
+            cp -r /root/project/library/RyujiEv3 /hrp2/sdk/common/library &&
+            cp -r /root/project/workspace/RO2020EV3 /hrp2/sdk/workspace &&
+            cd /hrp2/sdk/workspace &&
+            make app=RO2020EV3
