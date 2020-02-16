@@ -1,0 +1,18 @@
+version: 2 # CircleCI 2.0 を使用します
+jobs: # 1回の実行の基本作業単位
+  build: # Workflows を使用しない実行では、エントリポイントとして `build` ジョブが必要
+    docker: # Docker でステップを実行します
+      # CircleCI Go イメージは https://hub.docker.com/r/circleci/golang/ で入手できます
+      - image: lowfox2/ro2020ev3dev
+    # ステップが実行されるディレクトリ。 パスは Go Workspace の要件に従う必要があります
+    steps: # `build` ジョブを構成するステップ
+      - checkout 
+      - run:
+          name: ビルドを実行
+          command: |
+            rm -rf /hrp2/sdk/common/library/RyujiEv3 &&
+            rm -rf /hrp2/sdk/workspace/RO2020EV3 &&
+            cp -r /root/project/library/RyujiEv3 /hrp2/sdk/common/library &&
+            cp -r /root/project/workspace/RO2020EV3 /hrp2/sdk/workspace &&
+            cd /hrp2/sdk/workspace &&
+            make app=RO2020EV3
