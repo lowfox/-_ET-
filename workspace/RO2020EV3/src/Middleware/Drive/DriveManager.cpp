@@ -50,7 +50,7 @@ bool DriveManager::setDriveMode(DriveMode mode) {
 
   m_mode = mode;
 
-  return true;
+  return drive(m_speed, m_turn);
 }
 
 DriveMode DriveManager::getDriveMode() { return m_mode; }
