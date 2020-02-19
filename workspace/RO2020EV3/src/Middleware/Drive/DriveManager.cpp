@@ -50,7 +50,11 @@ bool DriveManager::setDriveMode(DriveMode mode) {
 
   m_mode = mode;
 
+<<<<<<< HEAD
   return true;
+=======
+  return true; 
+>>>>>>> 347676217aaf8ff72c79758a4037aa16cd208b98
 }
 
 DriveMode DriveManager::getDriveMode() { return m_mode; }
