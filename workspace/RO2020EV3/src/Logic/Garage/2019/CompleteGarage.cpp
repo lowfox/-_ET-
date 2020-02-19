@@ -20,11 +20,12 @@ bool CompleteGarage::moveBlueLine() {
   RyujiEv3Engine::GetTailMotor()->setCounts(-3, 10, false);
   RyujiEv3Engine::GetTailMotor()->resetCounts();
   RyujiEv3Engine::GetTailMotor()->setCounts(83, 20, true);
+  dly_tsk(3000);
   //*/
   EV3_LOG_DEBUG("CompleteGarage::moveBlueLine start !\n");
   m_gLineTrace->configTraceColor(m_param->area1Config.traceColor);
   m_gLineTrace->configPID(m_param->area1Config.pid);
-  // m_gLineTrace->Drive(m_param->area1Config.speed);
+  m_gLineTrace->Drive(m_param->area1Config.speed);
   while (m_recognizeCurrentRocation->getCurrentRocation() == 1) {
   }
 
@@ -38,7 +39,6 @@ bool CompleteGarage::moveBlackLine() {
   m_gLineTrace->Drive(m_param->area2Config.speed);
   while (m_recognizeCurrentRocation->getCurrentRocation() == 2) {
   }
-  m_gLineTrace->stop();
   return true;
 }
 

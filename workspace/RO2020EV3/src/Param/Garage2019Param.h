@@ -18,30 +18,30 @@ struct Garage2019Param{
    ReadColor area1CurrentColor;
    ReadColor area2CurrentColor;
    ReadColor area3CurrentColor;
-   AreaEndTrriger erea1EndTrriger;   
-   AreaEndTrriger erea2EndTrriger;   
-   AreaEndTrriger erea3EndTrriger;   
+   AreaEndTrriger area1EndTrriger;   
+   AreaEndTrriger area2EndTrriger;   
+   AreaEndTrriger area3EndTrriger;   
 };  
 
 namespace ParamGarage2019 {
 static Garage2019Param garage2019Param{
    &garage2019Param,
    {//area1congig
-      {5.6f,123.0f,{11,45,122}},   //TraceColor
+      {5.6f,123.0f,{11,45,122}},   //tracecolor
       30,                  //speed
       {0.24f,0.0f,0.2f}
    },
    {//area2config 青ライントレース
-      {5.6f,123.0f,{11,45,122}},   //TraceColor
+      {5.6f,123.0f,{11,45,122}},   //tracecolor
       30,
       {0.24f,0.0f,0.2f}
    },
    {
-      {5.6f,123.0f,{11,45,122}},   //TraceColor
+      {5.6f,123.0f,{11,45,122}},   //tracecolor
       30,
       {0.24f,0.0f,0.2f}
    },
-   ReadColor::BLACK,//area1currentColor
+   ReadColor::BLACK,//area1currentcolor
    ReadColor::BLUE,
    ReadColor::BLACK,
    {//area1Trriger
@@ -59,20 +59,20 @@ static Garage2019Param garage2019Param{
 };
 static Garage2019Param garage2020Param{
    &garage2020Param,
-   {
-      {23,42,{32,43,5}},
-      30,
-      {0.1,0.3,0}
+   {//area1congig
+      {5.6f,123.0f,{11,45,122}},   //tracecolor
+      5,                  //speed
+      {0.24f,0.0f,0.2f}
+   },
+   {//area2config 青ライントレース
+      {5.6f,123.0f,{11,45,122}},   //tracecolor
+      5,
+      {0.24f,0.0f,0.2f}
    },
    {
-      {23,42,{32,43,5}},
-      30,
-      {0.1,0.3,0}
-   },
-   {
-      {23,42,{32,43,5}},
-      30,
-      {0.1,0.3,0}
+      {5.6f,123.0f,{11,45,122}},   //tracecolor
+      5,
+      {0.24f,0.0f,0.2f}
    },
    ReadColor::BLACK,//area1currentColor
    ReadColor::BLUE,

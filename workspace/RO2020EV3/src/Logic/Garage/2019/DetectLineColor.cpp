@@ -5,7 +5,7 @@ void DetectLineColor::configDetectColor(ReadColor color) {
 }
 
 bool DetectLineColor::detect() {
-  for (m_detectCnt = 0; m_detectCnt < 10; m_detectCnt++) {
+  for (m_detectCnt = 0; m_detectCnt < 5; m_detectCnt++) {
     m_currentColor[m_detectCnt] = RyujiEv3Engine::GetColorSensor()->getColor();
 
     //ここswitch
@@ -48,8 +48,10 @@ bool DetectLineColor::detect() {
       m_trueCnt++;
     }
   }
-  if (m_trueCnt != 10) {
-    return false;
+  if (m_trueCnt == 10) {
+    if (m_currentColor[0] == m_detectColor) {
+      return true;
+    }
   }
-  return true;
+  return false;
 }
