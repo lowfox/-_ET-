@@ -21,6 +21,11 @@ Course2019Left.o\
 Course2019Right.o\
 GarageScene2019Logic.o\
 SeesawScene2019Logic.o\
+CompleteGarage.o\
+GarageLineTrace.o\
+RecognizeCurrentRocation.o\
+DetectLineColor.o\
+DetectMireage.o\
 
 SRCLANG := c++
 

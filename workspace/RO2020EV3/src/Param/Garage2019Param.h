@@ -1,25 +1,93 @@
 #pragma once
-
+#include <RyujiEv3.h>
+#include <Drive.h>
+struct AreaEndTrriger{
+   ReadColor detectLineColor;
+   float distance;
+};
+struct LineTraceConfig{
+   TraceColor traceColor;
+   int32 speed;
+   PID pid;
+};
 struct Garage2019Param{
    Garage2019Param* pGrageParam;
-   int sami;
-   int distance;
-   int ii;
- };  
+   LineTraceConfig area1Config;
+   LineTraceConfig area2Config;
+   LineTraceConfig area3Config;
+   ReadColor area1CurrentColor;
+   ReadColor area2CurrentColor;
+   ReadColor area3CurrentColor;
+   AreaEndTrriger erea1EndTrriger;   
+   AreaEndTrriger erea2EndTrriger;   
+   AreaEndTrriger erea3EndTrriger;   
+};  
 
 namespace ParamGarage2019 {
 static Garage2019Param garage2019Param{
    &garage2019Param,
-    20,  // sami
-    10,  // distance
-    2    // ii
+   {//area1congig
+      {5.6f,123.0f,{11,45,122}},   //TraceColor
+      30,                  //speed
+      {0.24f,0.0f,0.2f}
+   },
+   {//area2config 青ライントレース
+      {5.6f,123.0f,{11,45,122}},   //TraceColor
+      30,
+      {0.24f,0.0f,0.2f}
+   },
+   {
+      {5.6f,123.0f,{11,45,122}},   //TraceColor
+      30,
+      {0.24f,0.0f,0.2f}
+   },
+   ReadColor::BLACK,//area1currentColor
+   ReadColor::BLUE,
+   ReadColor::BLACK,
+   {//area1Trriger
+      ReadColor::BLUE,
+      0
+   },
+   {
+      ReadColor::BLACK,
+      0
+   },
+   {
+      ReadColor::BLACK,
+      100
+   }
 };
-
 static Garage2019Param garage2020Param{
    &garage2020Param,
-    4,  // sami
-    5,  // distance
-    6   // ii
+   {
+      {23,42,{32,43,5}},
+      30,
+      {0.1,0.3,0}
+   },
+   {
+      {23,42,{32,43,5}},
+      30,
+      {0.1,0.3,0}
+   },
+   {
+      {23,42,{32,43,5}},
+      30,
+      {0.1,0.3,0}
+   },
+   ReadColor::BLACK,//area1currentColor
+   ReadColor::BLUE,
+   ReadColor::BLACK,
+   {
+      ReadColor::BLUE,
+      120
+   },
+   {
+      ReadColor::BLACK,
+      265
+   },
+   {
+      ReadColor::BLUE,
+      370
+   }
 };
-
 }  // namespace ParamGarage2019
