@@ -2,6 +2,9 @@
 #include <ISceneLogic.h>
 #include "../../../Param/Garage2019Param.h"
 #include "CompleteGarage.h"
+#include <RyujiEv3.h>
+#include <Logger.h>
+#include <Steering.h>
 
 class GarageScene2019Logic : public ISceneLogic{
     private:

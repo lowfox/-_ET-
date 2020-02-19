@@ -4,6 +4,7 @@
 #include "GarageLineTrace.h"
 #include "RecognizeCurrentRocation.h"
 #include <RyujiEv3.h>
+#include <Logger.h>
 class CompleteGarage{
     private:
         Garage2019Param* m_param;

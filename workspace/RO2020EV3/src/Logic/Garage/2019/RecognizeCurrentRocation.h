@@ -4,6 +4,7 @@
 #include <Detect.h>
 #include <RyujiEv3.h>
 #include <Steering.h>
+#include <Logger.h>
 #include "../../../Param/Garage2019Param.h"
 class RecognizeCurrentRocation{
     private:

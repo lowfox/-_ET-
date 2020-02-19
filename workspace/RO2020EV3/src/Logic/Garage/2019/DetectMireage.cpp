@@ -1,5 +1,4 @@
 #include "DetectMireage.h"
-#include "Logger.h"
 
 void DetectMireage::configDetectDistance(float mireage) {
   m_detectMireage = mireage;

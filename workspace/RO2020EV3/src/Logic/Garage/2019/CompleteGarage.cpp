@@ -1,5 +1,4 @@
 #include "CompleteGarage.h"
-#include <Logger.h>
 CompleteGarage::CompleteGarage(Garage2019Param* param) {
   EV3_LOG_INFO("CompleteGarage start !\n");
   m_param                    = param;

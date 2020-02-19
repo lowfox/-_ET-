@@ -1,5 +1,4 @@
 #include "GarageLineTrace.h"
-#include <Logger.h>
 GarageLineTrace::GarageLineTrace() {
   EV3_LOG_DEBUG("GarageLineTrace Start \n");
   Drive::SetDriveMode(DriveMode::LineTrace);

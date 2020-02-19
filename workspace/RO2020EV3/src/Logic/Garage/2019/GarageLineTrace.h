@@ -2,6 +2,7 @@
 #include <RyujiEv3.h>
 #include <Steering.h>
 #include <Drive.h>
+#include <Logger.h>
 class GarageLineTrace{
 private:
 public:

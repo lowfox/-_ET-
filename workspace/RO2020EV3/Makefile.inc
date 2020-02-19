@@ -19,6 +19,7 @@ CLogger.o\
 Course.o\
 Course2019Left.o\
 Course2019Right.o\
+CalibrationScene2019Logic.o\
 GarageScene2019Logic.o\
 SeesawScene2019Logic.o\
 CompleteGarage.o\

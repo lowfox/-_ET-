@@ -11,6 +11,7 @@
 //パラメータ
 #include "../src/Param/Seesaw2019Param.h"
 #include "../src/Param/Garage2019Param.h"
+#include "../src/Param/Calibration2019Param.h"
 
 //コースの選択
 #define COURSE Course2019Right
@@ -23,13 +24,14 @@ constexpr int THIRD_SCENE = 2;
 constexpr int FORTH_SCENE = 3;
 constexpr int FIFTH_SCENE = 4;
 
-constexpr int RUNSCENES[] = {FIRST_SCENE, SECOND_SCENE};
+constexpr int RUNSCENES[] = {FIRST_SCENE, SECOND_SCENE,THIRD_SCENE};
 
 //パラメータの選択
 #define GARAGE2019PARAM ParamGarage2019::garage2020Param.pGrageParam
 #define SEESAW2019PARAM ParamSeesaw2019::seesaw2021Param.pSeesawParam
+#define CALIBRATION2019PARAM ParamCalibration2019::calibration2019Param.pCalibrationParam
 
-
+//キャリブレーション角度設定
 /// EV3�̊e�Z���T�[,���[�^�[�̐ڑ��|�[�g
 constexpr PortData ROBOCON_PORT = {
     // ColorSensor

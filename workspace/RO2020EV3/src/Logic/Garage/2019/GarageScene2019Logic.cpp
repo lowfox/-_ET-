@@ -1,10 +1,7 @@
 #include "GarageScene2019Logic.h"
-#include <RyujiEv3.h>
-#include <Logger.h>
-#include <Steering.h>
 
 GarageScene2019Logic::GarageScene2019Logic(Garage2019Param* param) {
-  EV3_LOG_INFO("GarageScene2019Logic Start !\n");
+  EV3_LOG_INFO("GarageScene2019Logic Constractar  !\n");
   Steering::SetMode(SteeringMode::Nomal);
   m_param          = param;
   m_completeGarage = new CompleteGarage(param);
@@ -29,6 +26,6 @@ bool GarageScene2019Logic::run() {
 }
 
 GarageScene2019Logic::~GarageScene2019Logic() {
-  EV3_LOG_INFO("GarageScene2019Logic End ! \n");
+  EV3_LOG_INFO("GarageScene2019Logic Detractar  ! \n");
   delete m_completeGarage;
 }

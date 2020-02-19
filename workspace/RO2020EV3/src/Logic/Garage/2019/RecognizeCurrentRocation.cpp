@@ -1,5 +1,4 @@
 #include "RecognizeCurrentRocation.h"
-#include <Logger.h>
 RecognizeCurrentRocation::RecognizeCurrentRocation(Garage2019Param* param) {
   m_param = param;
   EV3_LOG_DEBUG("RecognizeCurrentRocation start\n");

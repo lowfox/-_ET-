@@ -2,7 +2,7 @@
 #include <Logger.h>
 #include <RyujiEv3.h>
 SeesawScene2019Logic::SeesawScene2019Logic(Seesaw2019Param* param) {
-  EV3_LOG_INFO("SeesawScene2019Logic Start !\n");
+  EV3_LOG_INFO("SeesawScene2019Logic Constractar  !\n");
   m_param = param;
 }
 
@@ -18,5 +18,5 @@ bool SeesawScene2019Logic::run() {
   return true;
 }
 SeesawScene2019Logic::~SeesawScene2019Logic() {
-  EV3_LOG_INFO("SeesawScene2019Logic End !\n");
+  EV3_LOG_INFO("SeesawScene2019Logic Detractar  !\n");
 }
