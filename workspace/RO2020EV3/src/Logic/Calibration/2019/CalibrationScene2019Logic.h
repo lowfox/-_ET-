@@ -8,7 +8,7 @@
 class CalibrationScene2019Logic : public ISceneLogic{
     private:
         Calibration2019Param* m_param; 
-        std::vector<int32> m_tailDegree={83,90,78,60};
+        std::vector<int32> m_tailDegree={83};
         TraceColor countColor;
     public:
         ///

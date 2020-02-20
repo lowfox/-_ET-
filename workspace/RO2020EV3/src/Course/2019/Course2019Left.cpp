@@ -1,5 +1,4 @@
 #include "Course2019Left.h"
-#include <Config.h>
 Course2019Left::Course2019Left() {
   EV3_LOG_INFO("Course2019Left Start !\n");
   m_garageLogic = new GarageScene2019Logic(GARAGE2019PARAM);

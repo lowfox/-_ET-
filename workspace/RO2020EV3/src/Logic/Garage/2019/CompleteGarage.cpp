@@ -8,24 +8,32 @@ CompleteGarage::CompleteGarage(Garage2019Param* param) {
 
 bool CompleteGarage::run() {
   EV3_LOG_DEBUG("CompleteGarage::run start !\n");
-  moveBlueLine();
-  // moveBlackLine();
-  // moveGarage();
+  if (moveBlueLine() == false) {
+    EV3_LOG_ERROR("CompleteGarage::moveBlueLine()");
+    return false;
+  }
+  if (moveBlackLine() == false) {
+    EV3_LOG_ERROR("CompleteGarage::moveBlackLine()");
+    return false;
+  }
+  if (moveGarage() == false) {
+    EV3_LOG_ERROR("CompleteGarage::moveGarage()");
+    return false;
+  }
   return true;
 }
 
 bool CompleteGarage::moveBlueLine() {
-  // /* Debug
-  RyujiEv3Engine::GetTailMotor()->setCounts(-3, 10, false);
-  RyujiEv3Engine::GetTailMotor()->resetCounts();
+  EV3_LOG_DEBUG("CompleteGarage::moveBlueLine start !\n");
+  // debug----
   RyujiEv3Engine::GetTailMotor()->setCounts(83, 20, true);
   dly_tsk(3000);
-  //*/
-  EV3_LOG_DEBUG("CompleteGarage::moveBlueLine start !\n");
-  m_gLineTrace->configTraceColor(m_param->area1Config.traceColor);
+  //---------
+  m_gLineTrace->configTraceColor(m_param->area1CurrentColor);
+  m_gLineTrace->configTraceAngle(m_param->traceAngle);
   m_gLineTrace->configPID(m_param->area1Config.pid);
   m_gLineTrace->Drive(m_param->area1Config.speed);
-  while (m_recognizeCurrentRocation->getCurrentRocation() == 1) {
+  while (m_recognizeCurrentRocation->getCurrentRocation(1) == false) {
   }
 
   return true;
@@ -33,20 +41,23 @@ bool CompleteGarage::moveBlueLine() {
 
 bool CompleteGarage::moveBlackLine() {
   EV3_LOG_DEBUG("CompleteGarage::moveBlackLine start !\n");
-  m_gLineTrace->configTraceColor(m_param->area2Config.traceColor);
+  m_gLineTrace->configTraceColor(m_param->area2CurrentColor);
+  m_gLineTrace->configTraceAngle(m_param->traceAngle);
   m_gLineTrace->configPID(m_param->area2Config.pid);
   m_gLineTrace->Drive(m_param->area2Config.speed);
-  while (m_recognizeCurrentRocation->getCurrentRocation() == 2) {
+  while (m_recognizeCurrentRocation->getCurrentRocation(2) == false) {
   }
   return true;
 }
 
 bool CompleteGarage::moveGarage() {
   EV3_LOG_DEBUG("CompleteGarage::moveGarage start !\n");
-  m_gLineTrace->configTraceColor(m_param->area3Config.traceColor);
+  Steering::ResetDistance();
+  m_gLineTrace->configTraceColor(m_param->area3CurrentColor);
+  m_gLineTrace->configTraceAngle(m_param->traceAngle);
   m_gLineTrace->configPID(m_param->area3Config.pid);
   m_gLineTrace->Drive(m_param->area3Config.speed);
-  while (m_recognizeCurrentRocation->getCurrentRocation() == 3) {
+  while (m_recognizeCurrentRocation->getCurrentRocation(3) == false) {
   }
   m_gLineTrace->stop();
   return true;

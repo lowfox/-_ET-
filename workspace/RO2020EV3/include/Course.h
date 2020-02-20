@@ -1,8 +1,11 @@
 #pragma once
 #include <ISceneLogic.h>
+#include <RyujiEv3.h>
 #include <vector>
+#include <Logger.h>
 class Course{
     private:
+        uint8 m_runSceneTotalNum = 0;
     protected:
         std::vector<ISceneLogic*> m_course;
     public:
@@ -13,6 +16,6 @@ class Course{
 	    /// @retval true 成功
 	    /// @retval false 失敗
         ///
-        bool run(const int* runSceneNo);
+        bool run(const uint8* runSceneNo);
         virtual ~Course(){}
 };

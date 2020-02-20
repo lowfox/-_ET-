@@ -20,28 +20,28 @@ struct RGB {
 
 enum class ReadColor {
   /// 識別不能
-  NONE,
+  NONE,  // 0
 
   ///黒
-  BLACK,
+  BLACK,  // 1
 
   ///青
-  BLUE,
+  BLUE,  // 2
 
   /// 緑
-  GREEN,
+  GREEN,  // 3
 
   /// 黄
-  YELLOW,
+  YELLOW,  // 4
 
   /// 赤
-  RED,
+  RED,  // 5
 
   /// 白
-  WHITE,
+  WHITE,  // 6
 
   ///ブラウン
-  BROWN
+  BROWN  // 7
 };
 
 ///

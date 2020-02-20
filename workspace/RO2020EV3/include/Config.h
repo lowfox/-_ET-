@@ -8,23 +8,25 @@
 //コース
 #include "src/Course/2019/Course2019Left.h"
 #include "src/Course/2019/Course2019Right.h"
+#include "src/Course/DebugCourse.h"
 //パラメータ
 #include "../src/Param/Seesaw2019Param.h"
 #include "../src/Param/Garage2019Param.h"
 #include "../src/Param/Calibration2019Param.h"
 
 //コースの選択
-#define COURSE Course2019Right
+#define COURSE DebugCourse
 
 //TODO : COUSEの設定、実行するシーンの設定、パラメータの設定
 //実行するシーンの設定
-constexpr int FIRST_SCENE = 0;
-constexpr int SECOND_SCENE = 1;
-constexpr int THIRD_SCENE = 2;
-constexpr int FORTH_SCENE = 3;
-constexpr int FIFTH_SCENE = 4;
+constexpr uint8 FIRST_SCENE = 0;
+constexpr uint8 SECOND_SCENE = 1;
+constexpr uint8 THIRD_SCENE = 2;
+constexpr uint8 FORTH_SCENE = 3;
+constexpr uint8 FIFTH_SCENE = 4;
+constexpr uint8 END = 255;
 
-constexpr int RUNSCENES[] = {FIRST_SCENE, SECOND_SCENE,THIRD_SCENE};
+constexpr uint8 RUNSCENES[] = {FIRST_SCENE,SECOND_SCENE,END};
 
 //パラメータの選択
 #define GARAGE2019PARAM ParamGarage2019::garage2020Param.pGrageParam

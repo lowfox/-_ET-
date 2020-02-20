@@ -6,35 +6,46 @@ RecognizeCurrentRocation::RecognizeCurrentRocation(Garage2019Param* param) {
   m_detectMireage   = new DetectMireage;
 }
 
-int RecognizeCurrentRocation::getCurrentRocation() {
+bool RecognizeCurrentRocation::getCurrentRocation(int areaNo) {
   bool detectColorResult;
   float detectDistanceResult;
   //エリア１
-  m_detectLineColor->configDetectColor(m_param->area1CurrentColor);
-  detectColorResult = m_detectLineColor->detect();
-  m_detectMireage->configDetectDistance(m_param->area1EndTrriger.distance);
-  detectDistanceResult = m_detectMireage->detect();
-  if (detectColorResult == true && detectDistanceResult == false) {
-    m_currentArea = 1;
+  if (areaNo == 1) {
+    m_detectLineColor->configDetectColor(
+        m_param->area1EndTrriger.detectLineColor);
+    detectColorResult = m_detectLineColor->detect();
+
+    if (detectColorResult == true) {
+      RyujiEv3Engine::GetSpeaker()->setVolume(30);
+      RyujiEv3Engine::GetSpeaker()->playTone(40, 30);
+      EV3_LOG_DEBUG("-------------------Area 1 CLEAR!---------------------\n");
+      return true;
+    }
   }
 
-  m_detectLineColor->configDetectColor(m_param->area2CurrentColor);
-  detectColorResult = m_detectLineColor->detect();
-  m_detectMireage->configDetectDistance(m_param->area1EndTrriger.distance);
-  detectDistanceResult = m_detectMireage->detect();
-  if (detectColorResult == true && detectDistanceResult == true) {
-    m_currentArea = 2;
+  if (areaNo == 2) {
+    m_detectLineColor->configDetectColor(
+        m_param->area2EndTrriger.detectLineColor);
+    detectColorResult = m_detectLineColor->detect();
+    if (detectColorResult == true) {
+      RyujiEv3Engine::GetSpeaker()->setVolume(30);
+      RyujiEv3Engine::GetSpeaker()->playTone(60, 30);
+      EV3_LOG_DEBUG("-------------------Area 2 CLEAR!---------------------\n");
+      return true;
+    }
   }
 
-  m_detectLineColor->configDetectColor(m_param->area3CurrentColor);
-  detectColorResult = m_detectLineColor->detect();
-  m_detectMireage->configDetectDistance(m_param->area2EndTrriger.distance);
-  detectDistanceResult = m_detectMireage->detect();
-  if (detectColorResult == true && detectDistanceResult == true) {
-    m_currentArea = 3;
+  if (areaNo == 3) {
+    m_detectMireage->configDetectDistance(m_param->area3EndTrriger.distance);
+    detectDistanceResult = m_detectMireage->detect();
+    if (detectDistanceResult == true) {
+      RyujiEv3Engine::GetSpeaker()->setVolume(30);
+      RyujiEv3Engine::GetSpeaker()->playTone(90, 30);
+      EV3_LOG_DEBUG("-------------------Area 3 CLEAR!---------------------\n");
+      return true;
+    }
   }
-  EV3_LOG_DEBUG("CurrentArea=%d\n", m_currentArea);
-  return m_currentArea;
+  return false;
 }
 
 bool RecognizeCurrentRocation::endDelete() {

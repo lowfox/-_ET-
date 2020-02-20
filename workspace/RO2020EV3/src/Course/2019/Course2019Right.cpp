@@ -1,5 +1,4 @@
 #include "Course2019Right.h"
-#include <Config.h>
 Course2019Right::Course2019Right(void) {
   EV3_LOG_INFO("Course2019Right Start !\n");
   m_calibrationLogic = new CalibrationScene2019Logic(CALIBRATION2019PARAM);

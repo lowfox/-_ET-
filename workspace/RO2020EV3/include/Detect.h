@@ -4,7 +4,6 @@
 ///
 #pragma once
 #include <RyujiEv3.h>
-
 namespace Detect
 {
 	///
@@ -15,4 +14,11 @@ namespace Detect
 	/// @return 現在のラインの色
 	///
 	ReadColor GetColor(float blueCorr = 0.7f, float rgbCorr = 1.3f);
+
+	///
+	/// @fn ReadColor getColorHSV()
+	/// @brief 現在のラインの色を取得する(現在、青・白・黒のみ)
+	/// @return 現在のラインの色
+	///
+	ReadColor GetColorHSV();
 }

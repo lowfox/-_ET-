@@ -8,10 +8,12 @@ CalibrationScene2019Logic::CalibrationScene2019Logic(
 
 bool CalibrationScene2019Logic::init() {
   EV3_LOG_DEBUG("CalibrationScene2019Logic::init() start\n");
-  if (!RyujiEv3Engine::GetTailMotor()->setCounts(-8, 100, false)) {
+  //尻尾のあそびをなくす
+  if (!RyujiEv3Engine::GetTailMotor()->setCounts(-3, 100, false)) {
     EV3_LOG_ERROR("GetTailMotor()->resetCounts()\n");
     return false;
   }
+  tslp_tsk(1000);
   RyujiEv3Engine::GetTailMotor()->resetCounts();
   EV3_LOG_DEBUG("CalibrationScene2019Logic::init() end\n");
   return true;
@@ -38,7 +40,7 @@ bool CalibrationScene2019Logic::run() {
 
     RGB rgb          = Drive::ColorCalibrate::RGBAverage1Sec();
     countColor.black = (static_cast<float>(rgb.r + rgb.g + rgb.b) / 3.0f);
-    RyujiEv3Engine::GetSpeaker()->setVolume(255);
+    RyujiEv3Engine::GetSpeaker()->setVolume(50);
     RyujiEv3Engine::GetSpeaker()->playTone(500, 10);
 
     //白

@@ -6,7 +6,7 @@ void DetectLineColor::configDetectColor(ReadColor color) {
 
 bool DetectLineColor::detect() {
   for (m_detectCnt = 0; m_detectCnt < 5; m_detectCnt++) {
-    m_currentColor[m_detectCnt] = RyujiEv3Engine::GetColorSensor()->getColor();
+    m_currentColor[m_detectCnt] = Detect::GetColorHSV();
 
     //ここswitch
     if (m_currentColor[m_detectCnt] == ReadColor::BLACK) {
@@ -42,14 +42,19 @@ bool DetectLineColor::detect() {
                     static_cast<int>(m_currentColor[m_detectCnt]));
     }
   }
-  // 10個全部揃ってたら検知
-  for (m_detectCnt = 1; m_detectCnt < 10; m_detectCnt++) {
+  // 5個全部揃ってたら検知
+  m_trueCnt = 1;
+  for (m_detectCnt = 1; m_detectCnt < 5; m_detectCnt++) {
     if (m_currentColor[0] == m_currentColor[m_detectCnt]) {
       m_trueCnt++;
     }
   }
-  if (m_trueCnt == 10) {
+  EV3_LOG_DEBUG("trueCnt=%d", m_trueCnt);
+  if (m_trueCnt == 5) {
     if (m_currentColor[0] == m_detectColor) {
+      EV3_LOG_DEBUG(
+          "------------------------DetectLineColor::Detect TRUE "
+          "!---------------------");
       return true;
     }
   }

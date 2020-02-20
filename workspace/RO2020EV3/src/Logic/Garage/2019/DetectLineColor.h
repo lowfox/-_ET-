@@ -1,12 +1,12 @@
 #pragma once
 #include <Drive.h>
 #include <RyujiEv3.h>
-#include <RyujiEv3Engine.h>
+#include <Detect.h>
 #include <Logger.h>
 class DetectLineColor{
     private:
         ReadColor m_detectColor;
-        ReadColor m_currentColor[10];
+        ReadColor m_currentColor[5];
         int m_detectCnt;
         int m_trueCnt;
     public:

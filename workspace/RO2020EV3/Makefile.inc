@@ -19,9 +19,11 @@ CLogger.o\
 Course.o\
 Course2019Left.o\
 Course2019Right.o\
+DebugCourse.o\
 CalibrationScene2019Logic.o\
 GarageScene2019Logic.o\
 SeesawScene2019Logic.o\
+DebugScene.o\
 CompleteGarage.o\
 GarageLineTrace.o\
 RecognizeCurrentRocation.o\

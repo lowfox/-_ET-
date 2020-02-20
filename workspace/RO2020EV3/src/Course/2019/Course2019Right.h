@@ -1,6 +1,7 @@
 #pragma once
 #include <Course.h>
 #include <ISceneLogic.h>
+#include <Config.h>
 #include "../../Logic/Garage/2019/GarageScene2019Logic.h"
 #include "../../Logic/Seesaw/2019/SeesawScene2019Logic.h"
 #include "../../Logic/Calibration/2019/CalibrationScene2019Logic.h"

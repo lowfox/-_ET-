@@ -21,6 +21,7 @@ struct Garage2019Param{
    AreaEndTrriger area1EndTrriger;   
    AreaEndTrriger area2EndTrriger;   
    AreaEndTrriger area3EndTrriger;   
+   int32 traceAngle;
 };  
 
 namespace ParamGarage2019 {
@@ -79,15 +80,17 @@ static Garage2019Param garage2020Param{
    ReadColor::BLACK,
    {
       ReadColor::BLUE,
-      120
+      0.0f
    },
    {
       ReadColor::BLACK,
-      265
+      0.0f
    },
    {
-      ReadColor::BLUE,
-      370
-   }
+      ReadColor::NONE,
+      100.0f
+   },
+   83
+
 };
 }  // namespace ParamGarage2019
